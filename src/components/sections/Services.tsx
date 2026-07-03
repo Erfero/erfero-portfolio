@@ -20,7 +20,7 @@ export default function Services() {
   const items = t.raw("items") as { title: string; description: string }[];
 
   return (
-    <section id="services" className="relative scroll-mt-28 py-24 sm:py-32">
+    <section id="services" className="relative scroll-mt-28 py-16 sm:py-20">
       <div className="container-page">
         <SectionHeading
           eyebrow={t("eyebrow")}

@@ -10,6 +10,7 @@ import {
 } from "@/lib/blob";
 import type { Project } from "@/data/projects";
 import type { VideoEntry } from "@/data/videos";
+import type { Testimonial } from "@/data/testimonials";
 
 async function requireAdmin() {
   const session = await auth();
@@ -27,6 +28,12 @@ export async function saveProjectsAction(projects: Project[]) {
 export async function saveVideosAction(videos: VideoEntry[]) {
   await requireAdmin();
   await writeJsonBlob("content/videos.json", videos);
+  revalidatePath("/", "layout");
+}
+
+export async function saveTestimonialsAction(testimonials: Testimonial[]) {
+  await requireAdmin();
+  await writeJsonBlob("content/testimonials.json", testimonials);
   revalidatePath("/", "layout");
 }
 

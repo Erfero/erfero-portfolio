@@ -7,7 +7,7 @@ export default function Process() {
   const steps = t.raw("steps") as { title: string; description: string }[];
 
   return (
-    <section id="process" className="relative scroll-mt-28 py-24 sm:py-32">
+    <section id="process" className="relative scroll-mt-28 py-16 sm:py-20">
       <div className="container-page">
         <SectionHeading
           eyebrow={t("eyebrow")}

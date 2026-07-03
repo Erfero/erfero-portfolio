@@ -55,7 +55,14 @@ export default function ProjectCard({
       onMouseEnter={() => setHovering(true)}
       onMouseLeave={reset}
       style={{ rotateX: springX, rotateY: springY, transformPerspective: 1000 }}
-      className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-bg-soft"
+      animate={{
+        borderColor: hovering ? project.accent : "var(--color-border)",
+        boxShadow: hovering
+          ? `0 0 0 1px ${project.accent}55, 0 24px 60px -20px ${project.accent}66`
+          : "0 0 0 0px transparent, 0 0px 0px 0px transparent",
+      }}
+      transition={{ duration: 0.35 }}
+      className="group relative flex h-full flex-col overflow-hidden rounded-2xl border bg-bg-soft"
     >
       <a
         href={project.url}

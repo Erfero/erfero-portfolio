@@ -3,13 +3,12 @@ import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
-import { fontDisplay, fontSans } from "@/lib/fonts";
 import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
 import PageTransition from "@/components/providers/PageTransition";
+import LocaleHtmlSync from "@/components/providers/LocaleHtmlSync";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import CustomCursor from "@/components/ui/CustomCursor";
-import "../globals.css";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -57,22 +56,16 @@ export default async function LocaleLayout({
   const messages = await getMessages();
 
   return (
-    <html
-      lang={locale}
-      className={`${fontSans.variable} ${fontDisplay.variable}`}
-    >
-      <body className="grain min-h-screen bg-bg font-sans text-ink antialiased">
-        <NextIntlClientProvider messages={messages}>
-          <SmoothScrollProvider>
-            <CustomCursor />
-            <Navbar />
-            <main>
-              <PageTransition>{children}</PageTransition>
-            </main>
-            <Footer />
-          </SmoothScrollProvider>
-        </NextIntlClientProvider>
-      </body>
-    </html>
+    <NextIntlClientProvider messages={messages}>
+      <LocaleHtmlSync locale={locale} />
+      <SmoothScrollProvider>
+        <CustomCursor />
+        <Navbar />
+        <main>
+          <PageTransition>{children}</PageTransition>
+        </main>
+        <Footer />
+      </SmoothScrollProvider>
+    </NextIntlClientProvider>
   );
 }

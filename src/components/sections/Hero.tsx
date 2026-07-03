@@ -10,17 +10,19 @@ import type { Project } from "@/data/projects";
 import { getScreenshotUrl } from "@/lib/screenshot";
 
 const floatConfigs = [
-  { x: "2%", y: "4%", rotate: -6, duration: 6, delay: 0 },
-  { x: "34%", y: "20%", rotate: 4, duration: 7, delay: 0.6 },
-  { x: "12%", y: "48%", rotate: -3, duration: 6.5, delay: 1.2 },
+  { x: "0%", y: "2%", rotate: -6, duration: 6, delay: 0 },
+  { x: "38%", y: "6%", rotate: 5, duration: 7, delay: 0.6 },
+  { x: "4%", y: "44%", rotate: -3, duration: 6.5, delay: 1.2 },
+  { x: "44%", y: "50%", rotate: 4, duration: 7.5, delay: 0.3 },
+  { x: "20%", y: "72%", rotate: -5, duration: 6.8, delay: 0.9 },
 ];
 
 function HeroShowcase({ projects }: { projects: Project[] }) {
   const locale = useLocale() as "fr" | "en";
 
   return (
-    <div className="relative hidden h-[520px] w-full lg:block">
-      {projects.slice(0, 3).map((project, i) => {
+    <div className="relative hidden h-[640px] w-full lg:block">
+      {projects.slice(0, 5).map((project, i) => {
         const cfg = floatConfigs[i % floatConfigs.length];
         const item = { name: project.name[locale] };
 
@@ -91,15 +93,33 @@ export default function Hero({ projects }: { projects: Project[] }) {
           </motion.div>
 
           <div>
-            <motion.h1
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="font-display max-w-4xl text-4xl font-medium leading-[1.05] tracking-tight sm:text-6xl lg:text-6xl xl:text-7xl"
-            >
-              {t("titleLine1")}{" "}
-              <span className="text-gradient">{t("titleHighlight")}</span>
-            </motion.h1>
+            <h1 className="font-display max-w-4xl text-4xl font-medium leading-[1.05] tracking-tight sm:text-6xl lg:text-6xl xl:text-7xl">
+              <span className="inline-block overflow-hidden align-bottom">
+                {t("titleLine1").split(" ").map((word, i) => (
+                  <motion.span
+                    key={i}
+                    initial={{ y: "110%" }}
+                    animate={{ y: 0 }}
+                    transition={{
+                      duration: 0.6,
+                      delay: 0.1 + i * 0.07,
+                      ease: [0.16, 1, 0.3, 1],
+                    }}
+                    className="inline-block"
+                  >
+                    {word}&nbsp;
+                  </motion.span>
+                ))}
+              </span>
+              <motion.span
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+                className="text-gradient inline-block"
+              >
+                {t("titleHighlight")}
+              </motion.span>
+            </h1>
 
             <motion.p
               initial={{ opacity: 0, y: 20 }}

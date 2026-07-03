@@ -61,41 +61,45 @@
       },
       {
         "title": "Invisible on Google",
-        "description": "Without a clean technical structure (tags, speed, internal linking) or content actually built to answer your customers' searches, your store stays invisible on Google — even with great products. The result: you depend 100% on paid ads to drive traffic, which eats into your margin over time.",
-        "source": null
+        "description": "Without a clean technical structure (tags, speed, internal linking) or content actually built to answer your customers' searches, your store stays invisible on Google — even with great products. The result: you depend 100% on paid ads to drive traffic, which eats into your margin over time."
       }
     ]
   },
   "services": {
-    "eyebrow": "What I do",
-    "title": "Full Shopify expertise, from design to code",
-    "subtitle": "Full-stack means I handle everything: design, development, performance and SEO — without you juggling three different providers.",
+    "eyebrow": "My method",
+    "title": "Not a free theme. A proven sales structure.",
+    "subtitle": "I build on the premium Story theme, not a default template — and more importantly, I replicate the exact mechanics used by DTC brands that actually sell: immediate social proof, urgency funnels, objection-killing FAQs. Here's concretely what that changes for you.",
     "items": [
       {
-        "title": "Custom store builds",
-        "description": "A unique design in Liquid + Tailwind, built for your brand and built to convert — not a recycled theme."
+        "title": "A page structure that's already sold thousands of units",
+        "description": "High-impact hero → immediate social proof → benefits → objections defused → guarantee → purchase. I've seen this cascade work across dozens of stores — I'm not reinventing the wheel, I'm executing it cleanly for your brand."
       },
       {
-        "title": "Redesign & optimization",
-        "description": "Already running a store? I audit it, fix what's holding back sales, and modernize the design."
+        "title": "Social proof sections that build trust at a glance",
+        "description": "Trustpilot-style review carousels, happy-customer counters, press logos — the same trust levers used by DTC brands that are actually thriving, integrated cleanly instead of slapped on."
       },
       {
-        "title": "Speed & conversion (CRO)",
-        "description": "Faster load times, a simplified checkout flow, and optimization of the elements that actually drive sales."
+        "title": "Urgency funnels that grow order value without feeling pushy",
+        "description": "Countdown timers, bundle offers (\"buy 2, get 50% off\"), tiered packs — built to drive immediate purchases without coming across as aggressive or low-cost."
       },
       {
-        "title": "Custom features & apps",
-        "description": "Liquid sections, private apps, API integrations (payment, ERP, CRM) when off-the-shelf apps aren't enough."
+        "title": "Comparison tables that answer objections before they're raised",
+        "description": "\"Us vs. the alternatives,\" before/after, product comparisons — turning a visitor's hesitation into a purchase decision while they're still on the page."
       },
       {
-        "title": "Technical SEO & content",
-        "description": "Clean structure, internal linking, content written to rank — backed by my background as an SEO copywriter."
+        "title": "An FAQ built objection by objection, not copy-pasted",
+        "description": "Every question answers a real hesitation specific to your market (safety, efficacy, shipping, guarantees) — not a generic FAQ recycled from a Shopify tutorial."
       },
       {
-        "title": "Maintenance & support",
-        "description": "A living site needs upkeep. Fixes, updates and improvements as your business grows."
+        "title": "Mobile-first, real speed — not just \"responsive\"",
+        "description": "Most of your customers buy from their phone. Every section is designed, tested and optimized to load fast on mobile — not just resized as an afterthought."
       }
     ]
+  },
+  "testimonials": {
+    "eyebrow": "They say it better than I could",
+    "title": "What my clients and partners say",
+    "subtitle": "WhatsApp and Instagram feedback, delivery confirmations, and reviews from agencies I work with."
   },
   "metrics": {
     "eyebrow": "By the numbers",
@@ -154,7 +158,7 @@
       { "title": "Direct communication", "description": "You talk directly to the developer building your site, not a middleman project manager." },
       { "title": "Deadlines set, deadlines kept", "description": "A clear timeline from the quote onward, with regular check-ins." },
       { "title": "Clean code, delivered cleanly", "description": "You keep full ownership of your store and its code, with no hidden lock-in." },
-      { "title": "Client reviews coming soon", "description": "My first client reviews will land on this page soon — in the meantime, check out my video showcase." }
+      { "title": "Full ownership, start to finish", "description": "Design, development, SEO and follow-up: one single point of contact from the first brief to launch, no middleman." }
     ]
   },
   "faq": {

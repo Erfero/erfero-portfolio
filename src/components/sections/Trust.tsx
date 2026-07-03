@@ -10,7 +10,7 @@ export default function Trust() {
   const items = t.raw("items") as { title: string; description: string }[];
 
   return (
-    <section className="relative py-24 sm:py-32">
+    <section className="relative py-16 sm:py-20">
       <div className="container-page">
         <SectionHeading
           eyebrow={t("eyebrow")}

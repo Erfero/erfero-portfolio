@@ -66,35 +66,40 @@
     ]
   },
   "services": {
-    "eyebrow": "Ce que je fais",
-    "title": "Une expertise Shopify complète, du design au code",
-    "subtitle": "Full stack veut dire que je gère tout : design, développement, performance et SEO — sans dépendre de trois prestataires différents.",
+    "eyebrow": "Ma méthode",
+    "title": "Pas un thème gratuit. Une structure de vente qui a fait ses preuves.",
+    "subtitle": "Je construis sur le thème premium Story, pas un template par défaut — et surtout, je reproduis les mécaniques exactes des marques DTC qui vendent vraiment : preuve sociale immédiate, tunnels d'urgence, FAQ anti-objections. Voici concrètement ce que ça change pour toi.",
     "items": [
       {
-        "title": "Création de boutique sur-mesure",
-        "description": "Design unique en Liquid + Tailwind, pensé pour ta marque et pour convertir — pas un thème recyclé."
+        "title": "Une structure de page qui a déjà vendu des milliers de produits",
+        "description": "Hero à impact → preuve sociale immédiate → bénéfices → objections désamorcées → garantie → achat. Cette cascade, je l'ai vue fonctionner sur des dizaines de boutiques — je ne réinvente pas la roue, je l'exécute proprement pour ta marque."
       },
       {
-        "title": "Refonte & optimisation",
-        "description": "Ta boutique tourne déjà ? Je l'audite, corrige ce qui freine les ventes et modernise le design."
+        "title": "Des sections de preuve sociale qui rassurent en un coup d'œil",
+        "description": "Carrousels d'avis type Trustpilot, compteurs de clients satisfaits, logos presse — les mêmes leviers de confiance que les marques DTC qui tournent à plein régime, intégrés proprement plutôt que collés en évidence."
       },
       {
-        "title": "Vitesse & conversion (CRO)",
-        "description": "Réduction du temps de chargement, tunnel d'achat simplifié, optimisation des éléments qui font vendre."
+        "title": "Des tunnels d'urgence qui augmentent le panier sans forcer la vente",
+        "description": "Comptes à rebours, offres bundle (\"2 achetés = -50 %\"), packs dégressifs — pensés pour pousser à l'achat immédiat sans donner une impression agressive ou low-cost."
       },
       {
-        "title": "Fonctionnalités sur-mesure",
-        "description": "Sections Liquid, apps privées, intégrations API (paiement, ERP, CRM) quand les apps du store ne suffisent pas."
+        "title": "Des tableaux comparatifs qui répondent aux objections avant qu'elles arrivent",
+        "description": "\"Nous vs les alternatives\", avant/après, comparatifs produit — pour transformer l'hésitation d'un visiteur en décision d'achat pendant qu'il est encore sur la page."
       },
       {
-        "title": "SEO technique & contenu",
-        "description": "Structure propre, maillage interne, contenu rédigé pour ranker — avec ma double casquette de rédacteur SEO."
+        "title": "Une FAQ construite objection par objection, pas copiée-collée",
+        "description": "Chaque question répond à un vrai frein identifié sur ton marché précis (sécurité, efficacité, livraison, garantie) — pas une FAQ générique recyclée d'un tutoriel Shopify."
       },
       {
-        "title": "Maintenance & support",
-        "description": "Un site qui vit demande un suivi. Corrections, mises à jour et évolutions au fil de ta croissance."
+        "title": "Mobile-first, vitesse réelle, pas juste \"responsive\"",
+        "description": "La majorité de tes clients achètent depuis leur téléphone. Chaque section est pensée, testée et optimisée pour charger vite sur mobile — pas juste redimensionnée après coup."
       }
     ]
+  },
+  "testimonials": {
+    "eyebrow": "Ils en parlent mieux que moi",
+    "title": "Ce que mes clients et partenaires en disent",
+    "subtitle": "Retours WhatsApp, Instagram, confirmations de livraison et avis d'agences avec lesquelles je travaille."
   },
   "metrics": {
     "eyebrow": "En chiffres",
@@ -153,7 +158,7 @@
       { "title": "Communication directe", "description": "Tu parles directement au développeur qui code ton site, pas à un chef de projet intermédiaire." },
       { "title": "Délais annoncés, délais tenus", "description": "Un planning clair dès le devis, avec des points d'étape réguliers." },
       { "title": "Code propre, livré proprement", "description": "Tu restes propriétaire de ta boutique et de son code, sans dépendance cachée." },
-      { "title": "Avis clients bientôt disponibles", "description": "Mes premiers avis arrivent prochainement sur cette page — en attendant, découvre mes réalisations en vidéo." }
+      { "title": "Autonomie complète", "description": "Design, développement, SEO et suivi : un seul interlocuteur du premier brief jusqu'à la mise en ligne, sans intermédiaire." }
     ]
   },
   "faq": {

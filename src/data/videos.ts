@@ -9,43 +9,67 @@ export interface VideoEntry {
   accent: string;
 }
 
-// Point de départ avec 6 boutiques en exemple parmi tes 200+ boutiques et vidéos.
-// Ajoute une entrée ici pour chaque vidéo supplémentaire, ou utilise l'admin (/admin/media + /admin/projects).
+// Tes vraies vidéos de réalisations (uploadées dans /public/videos). Ajoute une
+// entrée ici pour chaque nouvelle vidéo, ou utilise l'admin (/admin/videos).
 export const videos: VideoEntry[] = [
   {
-    id: "cisseGlow",
-    src: "/videos/cisse-glow.mp4",
-    caption: { fr: "Cissé Glow", en: "Cissé Glow" },
+    id: "reel-01",
+    src: "/videos/reel-01.mp4",
+    caption: { fr: "Construction boutique — session #1", en: "Store build — session #1" },
     accent: "#E8B4B8",
   },
   {
-    id: "zylvea",
-    src: "/videos/zylvea.mp4",
-    caption: { fr: "Zylvea", en: "Zylvea" },
+    id: "reel-02",
+    src: "/videos/reel-02.mp4",
+    caption: { fr: "Construction boutique — session #2", en: "Store build — session #2" },
     accent: "#A8C8D8",
   },
   {
-    id: "cilvya",
-    src: "/videos/cilvya.mp4",
-    caption: { fr: "Cilvya", en: "Cilvya" },
+    id: "reel-03",
+    src: "/videos/reel-03.mp4",
+    caption: { fr: "Construction boutique — session #3", en: "Store build — session #3" },
     accent: "#D8A8C8",
   },
   {
-    id: "seshellBeauty",
-    src: "/videos/seshell-beauty.mp4",
-    caption: { fr: "Seshell Beauty Label", en: "Seshell Beauty Label" },
+    id: "reel-04",
+    src: "/videos/reel-04.mp4",
+    caption: { fr: "Construction boutique — session #4", en: "Store build — session #4" },
+    accent: "#D8C8A8",
+  },
+  {
+    id: "reel-05",
+    src: "/videos/reel-05.mp4",
+    caption: { fr: "Construction boutique — session #5", en: "Store build — session #5" },
     accent: "#B8D8C8",
   },
   {
-    id: "nexora",
-    src: "/videos/nexora.mp4",
-    caption: { fr: "Nexora", en: "Nexora" },
+    id: "reel-06",
+    src: "/videos/reel-06.mp4",
+    caption: { fr: "Construction boutique — session #6", en: "Store build — session #6" },
     accent: "#C8C8E8",
   },
   {
-    id: "maisonNova",
-    src: "/videos/maison-nova.mp4",
-    caption: { fr: "Maison Nova", en: "Maison Nova" },
+    id: "reel-07",
+    src: "/videos/reel-07.mp4",
+    caption: { fr: "Construction boutique — session #7", en: "Store build — session #7" },
     accent: "#E8D8B8",
+  },
+  {
+    id: "reel-08",
+    src: "/videos/reel-08.mp4",
+    caption: { fr: "Construction boutique — session #8", en: "Store build — session #8" },
+    accent: "#E0D8E8",
+  },
+  {
+    id: "reel-09",
+    src: "/videos/reel-09.mp4",
+    caption: { fr: "Construction boutique — session #9", en: "Store build — session #9" },
+    accent: "#E8DCC0",
+  },
+  {
+    id: "reel-10",
+    src: "/videos/reel-10.mp4",
+    caption: { fr: "Construction boutique — session #10", en: "Store build — session #10" },
+    accent: "#D0D8E0",
   },
 ];

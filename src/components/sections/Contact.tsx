@@ -29,7 +29,7 @@ export default function Contact() {
   ];
 
   return (
-    <section id="contact" className="relative scroll-mt-28 py-24 sm:py-32">
+    <section id="contact" className="relative scroll-mt-28 py-16 sm:py-20">
       <GradientBlob className="left-1/2 top-0 size-[36rem] -translate-x-1/2 bg-violet/15" />
 
       <div className="container-page relative">

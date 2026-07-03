@@ -3,6 +3,10 @@ import frDefault from "@/messages/fr.json";
 import enDefault from "@/messages/en.json";
 import { projects as defaultProjects, type Project } from "@/data/projects";
 import { videos as defaultVideos, type VideoEntry } from "@/data/videos";
+import {
+  testimonials as defaultTestimonials,
+  type Testimonial,
+} from "@/data/testimonials";
 import { readJsonBlob } from "./blob";
 import { deepMerge } from "./deepMerge";
 
@@ -30,4 +34,11 @@ export async function getVisibleProjects(): Promise<Project[]> {
 export async function getVideos(): Promise<VideoEntry[]> {
   const override = await readJsonBlob<VideoEntry[]>("content/videos.json");
   return override && override.length > 0 ? override : defaultVideos;
+}
+
+export async function getTestimonials(): Promise<Testimonial[]> {
+  const override = await readJsonBlob<Testimonial[]>(
+    "content/testimonials.json"
+  );
+  return override && override.length > 0 ? override : defaultTestimonials;
 }

@@ -1,9 +1,15 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { Plus, Trash2, Save, Check } from "lucide-react";
+import { Plus, Trash2, Save, Check, RefreshCw } from "lucide-react";
 import { saveProjectsAction } from "@/lib/actions";
 import type { Project, ProjectStatus } from "@/data/projects";
+
+interface CheckResult {
+  id: string;
+  newStatus: ProjectStatus;
+  changed: boolean;
+}
 
 const emptyProject = (): Project => ({
   id: `boutique-${Date.now()}`,
@@ -47,6 +53,32 @@ export default function ProjectsManager({
   const [projects, setProjects] = useState(initialProjects);
   const [isPending, startTransition] = useTransition();
   const [saved, setSaved] = useState(false);
+  const [checking, setChecking] = useState(false);
+  const [checkSummary, setCheckSummary] = useState<string | null>(null);
+
+  const handleCheckLinks = async () => {
+    setChecking(true);
+    setCheckSummary(null);
+    try {
+      const res = await fetch("/api/check-links", { method: "POST" });
+      const data = (await res.json()) as { results: CheckResult[] };
+      setProjects((prev) =>
+        prev.map((p) => {
+          const result = data.results.find((r) => r.id === p.id);
+          return result ? { ...p, status: result.newStatus } : p;
+        })
+      );
+      const changedCount = data.results.filter((r) => r.changed).length;
+      setCheckSummary(
+        changedCount > 0
+          ? `${changedCount} statut(s) mis à jour.`
+          : "Tous les statuts étaient déjà à jour."
+      );
+    } catch {
+      setCheckSummary("Échec de la vérification, réessaie.");
+    }
+    setChecking(false);
+  };
 
   const update = (index: number, patch: Partial<Project>) => {
     setProjects((prev) =>
@@ -239,7 +271,7 @@ export default function ProjectsManager({
         ))}
       </div>
 
-      <div className="mt-6 flex items-center gap-3">
+      <div className="mt-6 flex flex-wrap items-center gap-3">
         <button
           onClick={addProject}
           className="inline-flex items-center gap-1.5 rounded-full border border-border px-4 py-2 text-sm"
@@ -255,7 +287,24 @@ export default function ProjectsManager({
           {saved ? <Check className="size-4" /> : <Save className="size-4" />}
           {isPending ? "Enregistrement..." : saved ? "Enregistré" : "Enregistrer"}
         </button>
+        <button
+          onClick={handleCheckLinks}
+          disabled={checking}
+          className="inline-flex items-center gap-1.5 rounded-full border border-border px-4 py-2 text-sm disabled:opacity-60"
+        >
+          <RefreshCw className={`size-4 ${checking ? "animate-spin" : ""}`} />
+          {checking ? "Vérification en cours..." : "Vérifier les liens maintenant"}
+        </button>
+        {checkSummary && (
+          <span className="text-xs text-ink-muted">{checkSummary}</span>
+        )}
       </div>
+      <p className="mt-3 text-xs text-ink-muted/70">
+        Une vérification automatique tourne aussi toutes les ~20 minutes en
+        arrière-plan (GitHub Actions) : les statuts se corrigent seuls, ce
+        bouton sert juste à forcer un contrôle immédiat avant d&apos;envoyer
+        ton lien à un client.
+      </p>
     </div>
   );
 }

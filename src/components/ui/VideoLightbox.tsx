@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
 import type { VideoEntry } from "@/data/videos";
@@ -13,6 +14,17 @@ export default function VideoLightbox({
   caption?: string;
   onClose: () => void;
 }) {
+  const audioRef = useRef<HTMLAudioElement>(null);
+
+  useEffect(() => {
+    if (video?.musicSrc) {
+      audioRef.current?.play().catch(() => {});
+    }
+    return () => {
+      audioRef.current?.pause();
+    };
+  }, [video]);
+
   return (
     <AnimatePresence>
       {video && (
@@ -37,11 +49,14 @@ export default function VideoLightbox({
               loop
               muted
               playsInline
-              controls
               className="size-full object-cover"
             />
+            {video.musicSrc && (
+              <audio ref={audioRef} src={video.musicSrc} loop />
+            )}
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
             {caption && (
-              <span className="pointer-events-none absolute bottom-4 left-4 text-sm font-medium text-white drop-shadow">
+              <span className="pointer-events-none absolute bottom-4 left-4 right-4 text-sm font-semibold text-white drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]">
                 {caption}
               </span>
             )}

@@ -2,6 +2,8 @@ import { setRequestLocale } from "next-intl/server";
 import Hero from "@/components/sections/Hero";
 import PainPoints from "@/components/sections/PainPoints";
 import Services from "@/components/sections/Services";
+import Pricing from "@/components/sections/Pricing";
+import ExpertiseCatalog from "@/components/sections/ExpertiseCatalog";
 import Metrics from "@/components/sections/Metrics";
 import FeaturedProjects from "@/components/sections/FeaturedProjects";
 import VideoReels from "@/components/sections/VideoReels";
@@ -34,6 +36,8 @@ export default async function HomePage({
       <VideoReels videos={videos} />
       <Testimonials testimonials={testimonials} />
       <Services />
+      <Pricing />
+      <ExpertiseCatalog projects={projects} />
       <PainPoints />
       <Metrics />
       <Process />

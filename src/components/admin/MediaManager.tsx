@@ -2,7 +2,7 @@
 
 import { useRef, useState, useTransition } from "react";
 import { upload } from "@vercel/blob/client";
-import { Upload, Trash2, Copy, Check } from "lucide-react";
+import { Upload, Trash2, Copy, Check, Music } from "lucide-react";
 import { deleteMediaAction } from "@/lib/actions";
 
 interface MediaItem {
@@ -72,7 +72,7 @@ export default function MediaManager({
           ref={inputRef}
           type="file"
           multiple
-          accept="video/mp4,video/quicktime,image/*"
+          accept="video/mp4,video/quicktime,image/*,audio/mpeg,audio/mp3,audio/wav"
           className="hidden"
           onChange={(e) => handleUpload(e.target.files)}
         />
@@ -85,6 +85,7 @@ export default function MediaManager({
       <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
         {media.map((item) => {
           const isVideo = /\.(mp4|mov)$/i.test(item.pathname);
+          const isAudio = /\.(mp3|wav)$/i.test(item.pathname);
           return (
             <div
               key={item.url}
@@ -92,6 +93,11 @@ export default function MediaManager({
             >
               {isVideo ? (
                 <video src={item.url} muted className="aspect-square w-full object-cover" />
+              ) : isAudio ? (
+                <div className="flex aspect-square w-full flex-col items-center justify-center gap-2 bg-white/[0.03] p-3">
+                  <Music className="size-6 text-lime" />
+                  <audio src={item.url} controls className="w-full" />
+                </div>
               ) : (
                 <img src={item.url} alt="" className="aspect-square w-full object-cover" />
               )}

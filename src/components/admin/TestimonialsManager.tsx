@@ -17,10 +17,15 @@ const emptyTestimonial = (): Testimonial => ({
 const inputClass =
   "w-full rounded-lg border border-border bg-white/[0.02] px-3 py-2 text-sm outline-none focus:border-lime/50";
 
+const needsMedia = (type: TestimonialType) =>
+  type === "screenshot" || type === "video";
+
 export default function TestimonialsManager({
   initialTestimonials,
+  mediaUrls,
 }: {
   initialTestimonials: Testimonial[];
+  mediaUrls: string[];
 }) {
   const [items, setItems] = useState(initialTestimonials);
   const [isPending, startTransition] = useTransition();
@@ -80,6 +85,8 @@ export default function TestimonialsManager({
                 <option value="instagram">Instagram</option>
                 <option value="agency">Avis agence</option>
                 <option value="delivery">Confirmation de livraison</option>
+                <option value="screenshot">Capture d&apos;écran (image)</option>
+                <option value="video">Vidéo client</option>
               </select>
               <button
                 onClick={() => removeItem(i)}
@@ -93,8 +100,25 @@ export default function TestimonialsManager({
               value={item.authorName}
               onChange={(e) => update(i, { authorName: e.target.value })}
               className={inputClass}
-              placeholder="Nom / pseudo"
+              placeholder="Nom / pseudo / légende"
             />
+
+            {needsMedia(item.type) && (
+              <>
+                <input
+                  list={`testimonial-media-${i}`}
+                  value={item.mediaUrl ?? ""}
+                  onChange={(e) => update(i, { mediaUrl: e.target.value })}
+                  className={inputClass}
+                  placeholder="URL image/vidéo (depuis Médiathèque)"
+                />
+                <datalist id={`testimonial-media-${i}`}>
+                  {mediaUrls.map((url) => (
+                    <option key={url} value={url} />
+                  ))}
+                </datalist>
+              </>
+            )}
 
             {item.type === "agency" && (
               <input
@@ -125,20 +149,24 @@ export default function TestimonialsManager({
               </>
             )}
 
-            <textarea
-              value={item.quote.fr}
-              onChange={(e) => updateQuote(i, "fr", e.target.value)}
-              rows={2}
-              className={inputClass}
-              placeholder="Message (FR)"
-            />
-            <textarea
-              value={item.quote.en}
-              onChange={(e) => updateQuote(i, "en", e.target.value)}
-              rows={2}
-              className={inputClass}
-              placeholder="Message (EN)"
-            />
+            {!needsMedia(item.type) && (
+              <>
+                <textarea
+                  value={item.quote.fr}
+                  onChange={(e) => updateQuote(i, "fr", e.target.value)}
+                  rows={2}
+                  className={inputClass}
+                  placeholder="Message (FR)"
+                />
+                <textarea
+                  value={item.quote.en}
+                  onChange={(e) => updateQuote(i, "en", e.target.value)}
+                  rows={2}
+                  className={inputClass}
+                  placeholder="Message (EN)"
+                />
+              </>
+            )}
 
             <input
               type="color"

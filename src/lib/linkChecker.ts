@@ -1,5 +1,5 @@
 import "server-only";
-import type { Project, ProjectStatus } from "@/data/projects";
+import type { ProjectStatus } from "@/data/projects";
 import { getProjects } from "./content";
 import { writeJsonBlob } from "./blob";
 
@@ -65,13 +65,18 @@ export async function checkAndUpdateProjectLinks(): Promise<{
   );
 
   if (changedIds.size > 0) {
-    const updatedProjects: Project[] = projects.map((project) => {
-      const result = results.find((r) => r.id === project.id);
-      return result && result.changed
-        ? { ...project, status: result.newStatus }
-        : project;
-    });
-    await writeJsonBlob("content/projects.json", updatedProjects);
+    // On n'écrase jamais la liste complète : uniquement une table de
+    // correspondance id -> statut, appliquée par-dessus la liste du code
+    // (voir getProjects). Ça évite de "figer" le portfolio à un instantané
+    // périmé chaque fois qu'une boutique est ajoutée ou modifiée dans le code.
+    const statusMap: Record<string, ProjectStatus> = {};
+    for (const project of projects) {
+      statusMap[project.id] = project.status;
+    }
+    for (const result of results) {
+      if (result.changed) statusMap[result.id] = result.newStatus;
+    }
+    await writeJsonBlob("content/project-status.json", statusMap);
   }
 
   return { results, updated: changedIds.size > 0 };

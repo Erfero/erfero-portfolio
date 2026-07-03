@@ -26,7 +26,7 @@ function MarqueeRow({
   return (
     <div className="overflow-hidden">
       <div
-        className="flex w-max gap-4 hover:[animation-play-state:paused]"
+        className="flex w-max gap-7 hover:[animation-play-state:paused]"
         style={{
           animation: `${reverse ? "marquee-x-reverse" : "marquee-x"} ${videos.length * 4}s linear infinite`,
         }}
@@ -72,7 +72,7 @@ export default function VideoReels({ videos }: { videos: VideoEntry[] }) {
         </div>
       </div>
 
-      <Reveal className="mt-10 flex flex-col gap-4">
+      <Reveal className="mt-10 flex flex-col gap-10">
         <MarqueeRow videos={rowA} locale={locale} onOpen={setActive} />
         <MarqueeRow videos={rowB} reverse locale={locale} onOpen={setActive} />
       </Reveal>

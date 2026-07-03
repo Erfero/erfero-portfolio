@@ -1,6 +1,12 @@
 import type { LocalizedText } from "./projects";
 
-export type TestimonialType = "whatsapp" | "instagram" | "agency" | "delivery";
+export type TestimonialType =
+  | "whatsapp"
+  | "instagram"
+  | "agency"
+  | "delivery"
+  | "screenshot"
+  | "video";
 
 export interface Testimonial {
   id: string;
@@ -10,13 +16,17 @@ export interface Testimonial {
   quote: LocalizedText;
   rating?: number;
   accent: string;
+  /** Pour type "screenshot" (image) ou "video" — URL depuis la Médiathèque admin. */
+  mediaUrl?: string;
 }
 
 /**
  * Preuve sociale de démarrage — à remplacer par tes vrais retours dès que tu
  * les as (via /admin/testimonials, aucune modification de code nécessaire).
  * Les prénoms sont volontairement génériques : ce ne sont pas de vraies
- * personnes tant que tu n'as pas remplacé le contenu.
+ * personnes tant que tu n'as pas remplacé le contenu. Les entrées "screenshot"
+ * et "video" sont des emplacements vides prêts à recevoir tes vraies preuves
+ * (capture d'écran de discussion, vidéo client) via la Médiathèque.
  */
 export const testimonials: Testimonial[] = [
   {
@@ -64,6 +74,13 @@ export const testimonials: Testimonial[] = [
   },
   {
     id: "t5",
+    type: "screenshot",
+    authorName: "Capture d'échange client",
+    quote: { fr: "", en: "" },
+    accent: "#B9FF5C",
+  },
+  {
+    id: "t6",
     type: "whatsapp",
     authorName: "Julie",
     authorRole: { fr: "Fondatrice, marque bien-être", en: "Founder, wellness brand" },
@@ -74,7 +91,7 @@ export const testimonials: Testimonial[] = [
     accent: "#25D366",
   },
   {
-    id: "t6",
+    id: "t7",
     type: "delivery",
     authorName: "Zylvea",
     quote: {
@@ -84,10 +101,17 @@ export const testimonials: Testimonial[] = [
     accent: "#8B6BFF",
   },
   {
-    id: "t7",
+    id: "t8",
+    type: "video",
+    authorName: "Retour vidéo client",
+    quote: { fr: "", en: "" },
+    accent: "#8B6BFF",
+  },
+  {
+    id: "t9",
     type: "agency",
     authorName: "Viip Interstis",
-    authorRole: { fr: "Cotonou, Bénin", en: "Cotonou, Benin" },
+    authorRole: { fr: "Bénin", en: "Benin" },
     quote: {
       fr: "Rigoureux, force de proposition, capable de gérer un projet du design jusqu'au déploiement.",
       en: "Rigorous, proactive, able to own a project from design all the way to deployment.",
@@ -96,7 +120,7 @@ export const testimonials: Testimonial[] = [
     accent: "#A8C8D8",
   },
   {
-    id: "t8",
+    id: "t10",
     type: "instagram",
     authorName: "marc_ecom",
     quote: {
@@ -104,5 +128,42 @@ export const testimonials: Testimonial[] = [
       en: "Since the new store went live, conversion rate has clearly gone up, thank you!",
     },
     accent: "#E1306C",
+  },
+  {
+    id: "t11",
+    type: "screenshot",
+    authorName: "Capture d'avis client",
+    quote: { fr: "", en: "" },
+    accent: "#D8A8C8",
+  },
+  {
+    id: "t12",
+    type: "agency",
+    authorName: "Omega Agency",
+    authorRole: { fr: "Paris, France", en: "Paris, France" },
+    quote: {
+      fr: "Bon niveau technique, autonome sur WordPress comme sur Shopify, toujours orienté résultat.",
+      en: "Strong technical level, autonomous on both WordPress and Shopify, always results-oriented.",
+    },
+    rating: 5,
+    accent: "#E8D8B8",
+  },
+  {
+    id: "t13",
+    type: "whatsapp",
+    authorName: "Amadou",
+    authorRole: { fr: "Fondateur, marque lifestyle", en: "Founder, lifestyle brand" },
+    quote: {
+      fr: "Boutique livrée nickel, et le suivi après lancement est vraiment appréciable 👌",
+      en: "Store delivered flawlessly, and the post-launch follow-up is genuinely appreciated 👌",
+    },
+    accent: "#25D366",
+  },
+  {
+    id: "t14",
+    type: "screenshot",
+    authorName: "Capture de livraison",
+    quote: { fr: "", en: "" },
+    accent: "#C8D8E8",
   },
 ];

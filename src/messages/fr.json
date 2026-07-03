@@ -3,8 +3,8 @@
     "videoPending": "Vidéo à venir"
   },
   "meta": {
-    "title": "Erféro Keoula — Développeur Shopify freelance",
-    "description": "Développeur Shopify & Web FullStack. Je conçois des boutiques en ligne rapides, sur-mesure et pensées pour convertir."
+    "title": "Erféro Keoula — Développeur Shopify Freelance | Création de Boutique Shopify Sur-Mesure",
+    "description": "Développeur Shopify freelance expert (5+ ans d'expérience) : création de boutique Shopify sur-mesure, refonte, optimisation de la conversion (CRO) et SEO. Plus de 200 boutiques livrées, prêtes à vendre en quelques jours."
   },
   "nav": {
     "home": "Accueil",
@@ -68,7 +68,7 @@
   "services": {
     "eyebrow": "Ma méthode",
     "title": "Pas un thème gratuit. Une structure de vente qui a fait ses preuves.",
-    "subtitle": "Je construis sur le thème premium Story, pas un template par défaut — et surtout, je reproduis les mécaniques exactes des marques DTC qui vendent vraiment : preuve sociale immédiate, tunnels d'urgence, FAQ anti-objections. Voici concrètement ce que ça change pour toi.",
+    "subtitle": "Ma spécialité, c'est le thème premium Story — mais je construis aussi sur template par défaut ou en partant de zéro, selon ton budget et tes besoins. Et surtout, je reproduis les mécaniques exactes des marques DTC qui vendent vraiment : preuve sociale immédiate, tunnels d'urgence, FAQ anti-objections. Voici concrètement ce que ça change pour toi.",
     "items": [
       {
         "title": "Une structure de page qui a déjà vendu des milliers de produits",
@@ -93,13 +93,86 @@
       {
         "title": "Mobile-first, vitesse réelle, pas juste \"responsive\"",
         "description": "La majorité de tes clients achètent depuis leur téléphone. Chaque section est pensée, testée et optimisée pour charger vite sur mobile — pas juste redimensionnée après coup."
+      },
+      {
+        "title": "N'importe quel thème, à ta convenance",
+        "description": "Story par défaut si tu me laisses carte blanche, mais aussi template Shopify standard, thème tiers de ton choix, ou création d'un thème sur-mesure — c'est ton budget et ton besoin qui décident, pas moi."
+      },
+      {
+        "title": "Gestion complète de boutique, comme un vrai assistant",
+        "description": "Ajout de produits de A à Z, fiches optimisées, suivi et surveillance des ventes, conseils continus pour progresser — au-delà de la création, je peux gérer ta boutique au quotidien."
       }
     ]
+  },
+  "pricing": {
+    "eyebrow": "Tarifs",
+    "title": "Des packs clairs, à partir de 100 €",
+    "subtitle": "Le prix dépend du thème choisi et du périmètre du projet — voici une base de départ, à ajuster ensemble selon ton besoin exact.",
+    "popular": "Le plus choisi",
+    "cta": "Demander un devis",
+    "plans": [
+      {
+        "name": "Boutique Starter",
+        "price": "À partir de 100 €",
+        "description": "Boutique sur template Shopify standard ou thème par défaut. Idéal pour démarrer vite avec un budget maîtrisé.",
+        "features": [
+          "Thème par défaut ou template de ton choix",
+          "Structure de pages essentielles",
+          "Mise en ligne rapide"
+        ]
+      },
+      {
+        "name": "Boutique Story sur-mesure",
+        "price": "Sur devis",
+        "description": "Ma spécialité : boutique complète sur le thème premium Story avec toute la structure de vente qui a fait ses preuves.",
+        "features": [
+          "Thème premium Story (ou thème sur-mesure)",
+          "Preuve sociale, urgence, comparatifs, FAQ",
+          "Optimisation mobile & vitesse",
+          "SEO technique inclus"
+        ]
+      },
+      {
+        "name": "Accompagnement & gestion",
+        "price": "Sur devis, au mois",
+        "description": "Je gère ta boutique au quotidien : ajout de produits, suivi des ventes, conseils pour progresser en continu.",
+        "features": [
+          "Ajout et optimisation de produits",
+          "Surveillance des ventes",
+          "Conseils d'amélioration continue"
+        ]
+      }
+    ]
+  },
+  "catalog": {
+    "eyebrow": "Mes domaines",
+    "title": "Des boutiques dans des dizaines d'univers différents",
+    "subtitle": "Beauté, bien-être, mode, tech, animaux... voici les domaines dans lesquels j'ai déjà construit des boutiques qui vendent.",
+    "storeSingular": "boutique",
+    "storesPlural": "boutiques",
+    "niches": {
+      "beauty": "Beauté",
+      "beauty-tech": "Beauté & high-tech",
+      "wellness": "Bien-être",
+      "hair-care": "Soin des cheveux",
+      "hair-tools": "Outils coiffure",
+      "sleep-health": "Sommeil & santé",
+      "health": "Santé",
+      "pets": "Animaux",
+      "travel": "Voyage",
+      "fashion": "Mode",
+      "tech": "Tech & gadgets",
+      "maison": "Maison",
+      "lifestyle": "Lifestyle",
+      "automotive": "Automobile"
+    }
   },
   "testimonials": {
     "eyebrow": "Ils en parlent mieux que moi",
     "title": "Ce que mes clients et partenaires en disent",
-    "subtitle": "Retours WhatsApp, Instagram, confirmations de livraison et avis d'agences avec lesquelles je travaille."
+    "subtitle": "Retours WhatsApp, Instagram, confirmations de livraison et avis d'agences avec lesquelles je travaille.",
+    "placeholderImage": "Capture à ajouter",
+    "placeholderVideo": "Vidéo à ajouter"
   },
   "metrics": {
     "eyebrow": "En chiffres",
@@ -192,7 +265,7 @@
     "emailCta": "Envoyer un email"
   },
   "footer": {
-    "tagline": "Développeur Shopify freelance basé à Cotonou, disponible partout dans le monde.",
+    "tagline": "Développeur Shopify freelance, disponible partout dans le monde.",
     "rights": "Tous droits réservés.",
     "madeWith": "Conçu et développé avec Next.js, Tailwind, GSAP & Framer Motion."
   },

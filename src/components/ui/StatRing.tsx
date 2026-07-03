@@ -11,7 +11,7 @@ export default function StatRing({
   accent?: string;
 }) {
   const ref = useRef<SVGSVGElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-40px" });
+  const isInView = useInView(ref, { once: false, margin: "-40px" });
   const [display, setDisplay] = useState(0);
 
   const size = 84;

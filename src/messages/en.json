@@ -3,8 +3,8 @@
     "videoPending": "Video coming soon"
   },
   "meta": {
-    "title": "Erféro Keoula — Freelance Shopify Developer",
-    "description": "Shopify & Full-Stack Web Developer. I build fast, custom online stores designed to convert."
+    "title": "Erféro Keoula — Freelance Shopify Developer | Custom Shopify Store Design",
+    "description": "Expert freelance Shopify developer (5+ years of experience): custom Shopify store builds, redesigns, conversion rate optimization (CRO) and SEO. 200+ stores delivered, ready to sell in days."
   },
   "nav": {
     "home": "Home",
@@ -68,7 +68,7 @@
   "services": {
     "eyebrow": "My method",
     "title": "Not a free theme. A proven sales structure.",
-    "subtitle": "I build on the premium Story theme, not a default template — and more importantly, I replicate the exact mechanics used by DTC brands that actually sell: immediate social proof, urgency funnels, objection-killing FAQs. Here's concretely what that changes for you.",
+    "subtitle": "My specialty is the premium Story theme — but I also build on default templates or from scratch, depending on your budget and needs. And more importantly, I replicate the exact mechanics used by DTC brands that actually sell: immediate social proof, urgency funnels, objection-killing FAQs. Here's concretely what that changes for you.",
     "items": [
       {
         "title": "A page structure that's already sold thousands of units",
@@ -93,13 +93,86 @@
       {
         "title": "Mobile-first, real speed — not just \"responsive\"",
         "description": "Most of your customers buy from their phone. Every section is designed, tested and optimized to load fast on mobile — not just resized as an afterthought."
+      },
+      {
+        "title": "Any theme, your call",
+        "description": "Story by default if you give me full creative freedom, but also standard Shopify templates, a third-party theme of your choice, or a fully custom-built theme — your budget and needs decide, not me."
+      },
+      {
+        "title": "Full store management, like a real assistant",
+        "description": "Adding products from A to Z, optimized listings, sales monitoring, ongoing advice to keep improving — beyond the build itself, I can run your store day to day."
       }
     ]
+  },
+  "pricing": {
+    "eyebrow": "Pricing",
+    "title": "Clear packs, starting at €100",
+    "subtitle": "Price depends on the theme and project scope — here's a starting point, to refine together based on your exact needs.",
+    "popular": "Most chosen",
+    "cta": "Request a quote",
+    "plans": [
+      {
+        "name": "Starter store",
+        "price": "From €100",
+        "description": "A store on a standard Shopify template or default theme. Ideal to launch fast on a controlled budget.",
+        "features": [
+          "Default theme or template of your choice",
+          "Essential page structure",
+          "Fast turnaround"
+        ]
+      },
+      {
+        "name": "Custom Story store",
+        "price": "Custom quote",
+        "description": "My specialty: a complete store on the premium Story theme with the full proven sales structure.",
+        "features": [
+          "Premium Story theme (or fully custom theme)",
+          "Social proof, urgency, comparisons, FAQ",
+          "Mobile & speed optimization",
+          "Technical SEO included"
+        ]
+      },
+      {
+        "name": "Ongoing management",
+        "price": "Custom quote, monthly",
+        "description": "I run your store day to day: adding products, monitoring sales, ongoing advice to keep improving.",
+        "features": [
+          "Product uploads & optimization",
+          "Sales monitoring",
+          "Continuous improvement advice"
+        ]
+      }
+    ]
+  },
+  "catalog": {
+    "eyebrow": "My domains",
+    "title": "Stores across dozens of different worlds",
+    "subtitle": "Beauty, wellness, fashion, tech, pets... here are the domains I've already built stores in that sell.",
+    "storeSingular": "store",
+    "storesPlural": "stores",
+    "niches": {
+      "beauty": "Beauty",
+      "beauty-tech": "Beauty tech",
+      "wellness": "Wellness",
+      "hair-care": "Hair care",
+      "hair-tools": "Hair tools",
+      "sleep-health": "Sleep & health",
+      "health": "Health",
+      "pets": "Pets",
+      "travel": "Travel",
+      "fashion": "Fashion",
+      "tech": "Tech & gadgets",
+      "maison": "Home",
+      "lifestyle": "Lifestyle",
+      "automotive": "Automotive"
+    }
   },
   "testimonials": {
     "eyebrow": "They say it better than I could",
     "title": "What my clients and partners say",
-    "subtitle": "WhatsApp and Instagram feedback, delivery confirmations, and reviews from agencies I work with."
+    "subtitle": "WhatsApp and Instagram feedback, delivery confirmations, and reviews from agencies I work with.",
+    "placeholderImage": "Screenshot to add",
+    "placeholderVideo": "Video to add"
   },
   "metrics": {
     "eyebrow": "By the numbers",
@@ -192,7 +265,7 @@
     "emailCta": "Send an email"
   },
   "footer": {
-    "tagline": "Freelance Shopify developer based in Cotonou, available worldwide.",
+    "tagline": "Freelance Shopify developer, available worldwide.",
     "rights": "All rights reserved.",
     "madeWith": "Designed and built with Next.js, Tailwind, GSAP & Framer Motion."
   },

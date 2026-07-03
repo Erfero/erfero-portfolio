@@ -22,7 +22,6 @@ export default function Footer() {
         <div className="max-w-sm">
           <Link href="/" className="font-display text-lg font-semibold">
             {siteConfig.shortName}
-            <span className="text-lime">.</span>
           </Link>
           <p className="mt-3 text-sm text-ink-muted">{t("tagline")}</p>
           <div className="mt-5 flex items-center gap-3">

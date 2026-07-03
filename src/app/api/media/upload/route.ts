@@ -21,6 +21,9 @@ export async function POST(request: Request): Promise<NextResponse> {
             "image/jpeg",
             "image/webp",
             "image/gif",
+            "audio/mpeg",
+            "audio/mp3",
+            "audio/wav",
           ],
           addRandomSuffix: true,
         };

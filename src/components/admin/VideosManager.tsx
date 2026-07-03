@@ -87,6 +87,19 @@ export default function VideosManager({
             </datalist>
 
             <input
+              list={`audio-media-${i}`}
+              value={video.musicSrc ?? ""}
+              onChange={(e) => update(i, { musicSrc: e.target.value })}
+              className={inputClass}
+              placeholder="URL musique de fond (optionnel, Médiathèque)"
+            />
+            <datalist id={`audio-media-${i}`}>
+              {mediaUrls.map((url) => (
+                <option key={url} value={url} />
+              ))}
+            </datalist>
+
+            <input
               value={video.caption.fr}
               onChange={(e) => updateCaption(i, "fr", e.target.value)}
               className={inputClass}

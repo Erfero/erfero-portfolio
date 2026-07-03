@@ -51,7 +51,7 @@ export default function VerticalProjectScroller({
 
   return (
     <div className="grid gap-6 sm:grid-cols-2">
-      <Column projects={colA} videos={videos} pauseSeconds={2.5} durationSeconds={55} />
+      <Column projects={colA} videos={videos} pauseSeconds={2.5} durationSeconds={100} />
       <Column
         projects={colB.length > 0 ? colB : colA}
         videos={videos}

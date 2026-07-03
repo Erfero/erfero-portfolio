@@ -55,8 +55,44 @@ export default async function LocaleLayout({
   setRequestLocale(locale);
   const messages = await getMessages();
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    name: "Erféro Keoula — Développeur Shopify Freelance",
+    description:
+      locale === "fr"
+        ? "Développeur Shopify freelance : création de boutique Shopify sur-mesure, refonte, optimisation de conversion (CRO) et SEO."
+        : "Freelance Shopify developer: custom store builds, redesigns, conversion rate optimization (CRO) and SEO.",
+    url: "https://erfero-portfolio.vercel.app",
+    email: "mailto:erferokam@gmail.com",
+    priceRange: "€€",
+    areaServed: "Worldwide",
+    knowsAbout: [
+      "Shopify",
+      "Shopify development",
+      "E-commerce",
+      "Conversion rate optimization",
+      "SEO",
+      "Liquid",
+    ],
+    founder: {
+      "@type": "Person",
+      name: "Erféro Keoula",
+      jobTitle:
+        locale === "fr" ? "Développeur Shopify freelance" : "Freelance Shopify Developer",
+      sameAs: [
+        "https://www.linkedin.com/in/erfero-keoula-905b7220",
+        "https://www.instagram.com/erfero04",
+      ],
+    },
+  };
+
   return (
     <NextIntlClientProvider messages={messages}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <LocaleHtmlSync locale={locale} />
       <SmoothScrollProvider>
         <CustomCursor />

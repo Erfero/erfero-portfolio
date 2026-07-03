@@ -1,7 +1,11 @@
 import "server-only";
 import frDefault from "@/messages/fr.json";
 import enDefault from "@/messages/en.json";
-import { projects as defaultProjects, type Project } from "@/data/projects";
+import {
+  projects as defaultProjects,
+  type Project,
+  type ProjectStatus,
+} from "@/data/projects";
 import { videos as defaultVideos, type VideoEntry } from "@/data/videos";
 import {
   testimonials as defaultTestimonials,
@@ -21,9 +25,24 @@ export async function getMessages(locale: string) {
   return override ? deepMerge(base, override) : base;
 }
 
+/**
+ * Base = override admin complet (content/projects.json) si présent, sinon la
+ * liste du code. Par-dessus, on applique les corrections automatiques de
+ * statut (content/project-status.json, écrit par le vérificateur de liens)
+ * par id — ainsi, ajouter une boutique dans le code la fait toujours
+ * apparaître, même si le vérificateur automatique a déjà écrit un instantané
+ * plus ancien.
+ */
 export async function getProjects(): Promise<Project[]> {
-  const override = await readJsonBlob<Project[]>("content/projects.json");
-  return override && override.length > 0 ? override : defaultProjects;
+  const [override, statusMap] = await Promise.all([
+    readJsonBlob<Project[]>("content/projects.json"),
+    readJsonBlob<Record<string, ProjectStatus>>("content/project-status.json"),
+  ]);
+  const base = override && override.length > 0 ? override : defaultProjects;
+  if (!statusMap) return base;
+  return base.map((p) =>
+    statusMap[p.id] ? { ...p, status: statusMap[p.id] } : p
+  );
 }
 
 export async function getVisibleProjects(): Promise<Project[]> {

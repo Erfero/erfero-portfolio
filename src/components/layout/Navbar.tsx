@@ -38,7 +38,9 @@ export default function Navbar() {
         <div
           className={cn(
             "flex items-center justify-between rounded-full px-4 py-2.5 transition-all duration-300",
-            scrolled ? "glass" : "bg-transparent"
+            scrolled
+              ? "border border-border bg-bg/90 shadow-lg shadow-black/20 backdrop-blur-xl"
+              : "border border-transparent bg-bg/40 backdrop-blur-md"
           )}
         >
           <Link
@@ -47,7 +49,6 @@ export default function Navbar() {
             onClick={() => setOpen(false)}
           >
             {siteConfig.shortName}
-            <span className="text-lime">.</span>
           </Link>
 
           <nav className="hidden items-center gap-8 md:flex">

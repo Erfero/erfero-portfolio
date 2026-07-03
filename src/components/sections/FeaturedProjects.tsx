@@ -4,7 +4,7 @@ import { Link } from "@/i18n/navigation";
 import Reveal from "@/components/ui/Reveal";
 import SectionHeading from "@/components/ui/SectionHeading";
 import ProjectCard from "@/components/ui/ProjectCard";
-import { projects } from "@/data/projects";
+import { visibleProjects } from "@/data/projects";
 
 export default function FeaturedProjects() {
   const t = useTranslations("projects");
@@ -31,7 +31,7 @@ export default function FeaturedProjects() {
         </div>
 
         <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {projects.map((project, i) => (
+          {visibleProjects.map((project, i) => (
             <Reveal key={project.id} delay={i * 0.06}>
               <ProjectCard project={project} />
             </Reveal>

@@ -8,6 +8,7 @@ import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
 import PageTransition from "@/components/providers/PageTransition";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import CustomCursor from "@/components/ui/CustomCursor";
 import "../globals.css";
 
 export function generateStaticParams() {
@@ -63,6 +64,7 @@ export default async function LocaleLayout({
       <body className="grain min-h-screen bg-bg font-sans text-ink antialiased">
         <NextIntlClientProvider messages={messages}>
           <SmoothScrollProvider>
+            <CustomCursor />
             <Navbar />
             <main>
               <PageTransition>{children}</PageTransition>

@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import Reveal from "@/components/ui/Reveal";
 import SectionHeading from "@/components/ui/SectionHeading";
+import TiltCard from "@/components/ui/TiltCard";
 
 const icons = [TrendingDown, ShoppingCart, Smartphone, Palette, Blocks, SearchX];
 
@@ -34,22 +35,24 @@ export default function PainPoints() {
             const Icon = icons[i % icons.length];
             return (
               <Reveal key={item.title} delay={i * 0.06}>
-                <div className="group h-full rounded-2xl border border-border bg-white/[0.02] p-6 transition-colors hover:border-lime/30 hover:bg-white/[0.04]">
-                  <div className="grid size-10 place-items-center rounded-xl bg-lime/10 text-lime">
-                    <Icon className="size-5" />
-                  </div>
-                  <h3 className="font-display mt-5 text-lg font-medium">
-                    {item.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-ink-muted">
-                    {item.description}
-                  </p>
-                  {item.source && (
-                    <p className="mt-3 text-xs text-ink-muted/50">
-                      {item.source}
+                <TiltCard strength={6}>
+                  <div className="group h-full rounded-2xl border border-border bg-white/[0.02] p-6 transition-colors hover:border-lime/30 hover:bg-white/[0.04]">
+                    <div className="grid size-10 place-items-center rounded-xl bg-lime/10 text-lime">
+                      <Icon className="size-5" />
+                    </div>
+                    <h3 className="font-display mt-5 text-lg font-medium">
+                      {item.title}
+                    </h3>
+                    <p className="mt-2 text-sm leading-relaxed text-ink-muted">
+                      {item.description}
                     </p>
-                  )}
-                </div>
+                    {item.source && (
+                      <p className="mt-3 text-xs text-ink-muted/50">
+                        {item.source}
+                      </p>
+                    )}
+                  </div>
+                </TiltCard>
               </Reveal>
             );
           })}

@@ -1,4 +1,7 @@
 {
+  "common": {
+    "videoPending": "Vidéo à venir"
+  },
   "meta": {
     "title": "Erféro Keoula — Développeur Shopify freelance",
     "description": "Développeur Shopify & Web FullStack. Je conçois des boutiques en ligne rapides, sur-mesure et pensées pour convertir."
@@ -34,29 +37,29 @@
     "items": [
       {
         "title": "Un taux de conversion qui stagne",
-        "description": "Le taux de conversion moyen d'une boutique Shopify tourne autour de 1,4 %. Un design générique et une expérience mal pensée font fuir des clients pourtant prêts à acheter.",
+        "description": "1,4 % de conversion en moyenne sur Shopify. Un design générique fait fuir des clients prêts à acheter.",
         "source": "Source : wearepresta.com"
       },
       {
         "title": "Un panier abandonné presque une fois sur deux",
-        "description": "En moyenne, 70 % des visiteurs abandonnent leur panier avant de payer. Un checkout mal optimisé ou des frais surprises en sont souvent la cause.",
+        "description": "70 % des visiteurs abandonnent leur panier avant de payer — souvent à cause d'un checkout mal optimisé.",
         "source": "Source : Baymard Institute"
       },
       {
         "title": "Un site lent qui fait fuir le mobile",
-        "description": "La majorité du trafic Shopify est mobile. Un site lent ou mal responsive, ce sont des ventes perdues avant même que le visiteur ait vu un produit."
+        "description": "La majorité du trafic Shopify est mobile. Un site lent, ce sont des ventes perdues avant même d'avoir vu un produit."
       },
       {
         "title": "Un design qui n'inspire pas confiance",
-        "description": "Un thème qui ressemble à mille autres boutiques ne rassure pas. Les visiteurs jugent la crédibilité d'un site en quelques secondes à peine."
+        "description": "Un thème qui ressemble à mille autres ne rassure pas. La crédibilité se joue en quelques secondes."
       },
       {
         "title": "Des apps qui ralentissent tout",
-        "description": "Trop d'apps installées sans optimisation alourdissent le site et cassent l'expérience, au lieu de l'améliorer."
+        "description": "Trop d'apps mal optimisées alourdissent le site au lieu d'améliorer l'expérience."
       },
       {
         "title": "Un SEO invisible sur Google",
-        "description": "Sans structure technique propre ni contenu optimisé, ta boutique reste invisible sur les moteurs de recherche, même avec de bons produits."
+        "description": "Sans structure technique propre, ta boutique reste invisible même avec de bons produits."
       }
     ]
   },

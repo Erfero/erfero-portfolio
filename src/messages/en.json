@@ -1,4 +1,7 @@
 {
+  "common": {
+    "videoPending": "Video coming soon"
+  },
   "meta": {
     "title": "Erféro Keoula — Freelance Shopify Developer",
     "description": "Shopify & Full-Stack Web Developer. I build fast, custom online stores designed to convert."
@@ -34,29 +37,29 @@
     "items": [
       {
         "title": "A conversion rate that won't budge",
-        "description": "The average Shopify store conversion rate sits around 1.4%. A generic design and a poorly thought-out experience push away visitors who were ready to buy.",
+        "description": "1.4% average conversion on Shopify. A generic design pushes away visitors who were ready to buy.",
         "source": "Source: wearepresta.com"
       },
       {
         "title": "Almost 1 in 2 carts abandoned",
-        "description": "On average, 70% of visitors abandon their cart before paying. A poorly optimized checkout or surprise fees are often the cause.",
+        "description": "70% of visitors abandon their cart before paying — often because of a poorly optimized checkout.",
         "source": "Source: Baymard Institute"
       },
       {
         "title": "A slow site that loses mobile shoppers",
-        "description": "Most Shopify traffic is mobile. A slow or poorly responsive site means lost sales before a visitor even sees a product."
+        "description": "Most Shopify traffic is mobile. A slow site means lost sales before a visitor even sees a product."
       },
       {
         "title": "A design that doesn't build trust",
-        "description": "A theme that looks like a thousand other stores doesn't reassure anyone. Visitors judge a site's credibility within seconds."
+        "description": "A theme that looks like a thousand others doesn't reassure anyone. Credibility is judged within seconds."
       },
       {
         "title": "Apps that slow everything down",
-        "description": "Too many apps installed without optimization weigh the site down and break the experience instead of improving it."
+        "description": "Too many poorly optimized apps weigh the site down instead of improving it."
       },
       {
         "title": "Invisible on Google",
-        "description": "Without a clean technical structure or optimized content, your store stays invisible on search engines, even with great products."
+        "description": "Without a clean technical structure, your store stays invisible even with great products."
       }
     ]
   },

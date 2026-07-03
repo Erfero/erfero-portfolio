@@ -1,6 +1,12 @@
+"use client";
+
+import { useRef, useState } from "react";
 import { useTranslations } from "next-intl";
-import { ArrowUpRight, Lock, Clock } from "lucide-react";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
 import type { Project } from "@/data/projects";
+import { videos } from "@/data/videos";
+import { getScreenshotUrl } from "@/lib/screenshot";
 
 export default function ProjectCard({ project }: { project: Project }) {
   const t = useTranslations("projects");
@@ -10,30 +16,93 @@ export default function ProjectCard({ project }: { project: Project }) {
     description: string;
     tags: string[];
   };
-  const badgeLabel = t(`badges.${project.status}`);
+
+  const relatedVideo = videos.find((v) => v.id === project.id);
+
+  const ref = useRef<HTMLDivElement>(null);
+  const [hovering, setHovering] = useState(false);
+  const rotateX = useMotionValue(0);
+  const rotateY = useMotionValue(0);
+  const springX = useSpring(rotateX, { stiffness: 300, damping: 25 });
+  const springY = useSpring(rotateY, { stiffness: 300, damping: 25 });
+  const glowX = useTransform(springY, [-8, 8], [0, 100]);
+  const glowY = useTransform(springX, [8, -8], [0, 100]);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = ref.current?.getBoundingClientRect();
+    if (!rect) return;
+    const px = (e.clientX - rect.left) / rect.width;
+    const py = (e.clientY - rect.top) / rect.height;
+    rotateY.set((px - 0.5) * 16);
+    rotateX.set((0.5 - py) * 16);
+  };
+
+  const reset = () => {
+    rotateX.set(0);
+    rotateY.set(0);
+    setHovering(false);
+  };
 
   return (
-    <article className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-bg-soft">
-      <div
-        className="relative flex aspect-[4/5] items-end p-5"
-        style={{
-          background: `radial-gradient(120% 100% at 20% 0%, ${project.accent}33, transparent 60%), linear-gradient(160deg, ${project.accent}22, #0c0e11 70%)`,
-        }}
+    <motion.article
+      ref={ref}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setHovering(true)}
+      onMouseLeave={reset}
+      style={{ rotateX: springX, rotateY: springY, transformPerspective: 1000 }}
+      className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-bg-soft"
+    >
+      <a
+        href={project.url}
+        target="_blank"
+        rel="noreferrer"
+        className="relative block aspect-[4/3] overflow-hidden"
       >
-        <span className="absolute right-4 top-4 inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-black/30 px-3 py-1 text-[11px] font-medium text-ink backdrop-blur">
-          {project.status !== "live" &&
-            (project.status === "password-protected" ? (
-              <Lock className="size-3" />
-            ) : (
-              <Clock className="size-3" />
-            ))}
-          {badgeLabel}
+        <motion.img
+          src={getScreenshotUrl(project.url)}
+          alt={item.name}
+          loading="lazy"
+          animate={{ scale: hovering && !relatedVideo ? 1.06 : 1 }}
+          transition={{ duration: 0.5 }}
+          className="absolute inset-0 size-full object-cover object-top"
+        />
+
+        {relatedVideo && (
+          <motion.video
+            src={relatedVideo.src}
+            muted
+            loop
+            playsInline
+            preload="none"
+            animate={{ opacity: hovering ? 1 : 0 }}
+            transition={{ duration: 0.35 }}
+            className="absolute inset-0 size-full object-cover"
+            ref={(el) => {
+              if (!el) return;
+              if (hovering) el.play().catch(() => {});
+              else el.pause();
+            }}
+          />
+        )}
+
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
+
+        <motion.div
+          aria-hidden
+          style={{
+            background: `radial-gradient(320px circle at ${glowX}% ${glowY}%, ${project.accent}33, transparent 70%)`,
+          }}
+          className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        />
+
+        <span className="absolute left-4 top-4 inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-black/30 px-3 py-1 text-[11px] font-medium text-ink backdrop-blur">
+          {t("badges.live")}
         </span>
 
-        <h3 className="font-display text-3xl font-semibold text-white/90 mix-blend-plus-lighter">
+        <h3 className="absolute bottom-4 left-4 right-4 font-display text-2xl font-semibold text-white drop-shadow-sm">
           {item.name}
         </h3>
-      </div>
+      </a>
 
       <div className="flex flex-1 flex-col p-6">
         <p className="text-sm font-medium text-lime">{item.tagline}</p>
@@ -53,25 +122,17 @@ export default function ProjectCard({ project }: { project: Project }) {
         </div>
 
         <div className="mt-5 flex items-center justify-between border-t border-border pt-4">
-          {project.status === "live" ? (
-            <a
-              href={project.url}
-              target="_blank"
-              rel="noreferrer"
-              className="group/link inline-flex items-center gap-1 text-sm font-medium text-ink hover:text-lime"
-            >
-              {t("viewLive")}
-              <ArrowUpRight className="size-3.5 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
-            </a>
-          ) : (
-            <span className="text-sm text-ink-muted/60">
-              {project.status === "password-protected"
-                ? t("viewLiveDisabled")
-                : t("comingSoon")}
-            </span>
-          )}
+          <a
+            href={project.url}
+            target="_blank"
+            rel="noreferrer"
+            className="group/link inline-flex items-center gap-1 text-sm font-medium text-ink hover:text-lime"
+          >
+            {t("viewLive")}
+            <ArrowUpRight className="size-3.5 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
+          </a>
         </div>
       </div>
-    </article>
+    </motion.article>
   );
 }

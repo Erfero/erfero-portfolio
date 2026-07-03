@@ -5,7 +5,7 @@ import { Link } from "@/i18n/navigation";
 import Reveal from "@/components/ui/Reveal";
 import ProjectCard from "@/components/ui/ProjectCard";
 import VideoCard from "@/components/ui/VideoCard";
-import { projects } from "@/data/projects";
+import { visibleProjects } from "@/data/projects";
 import { videos } from "@/data/videos";
 
 export async function generateMetadata({
@@ -50,7 +50,7 @@ export default async function RealisationsPage({
         </Reveal>
 
         <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {projects.map((project, i) => (
+          {visibleProjects.map((project, i) => (
             <Reveal key={project.id} delay={i * 0.05}>
               <ProjectCard project={project} />
             </Reveal>

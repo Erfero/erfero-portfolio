@@ -60,10 +60,19 @@ export const projects: Project[] = [
   {
     id: "maisonNova",
     url: "https://shop-off-7216.myshopify.com",
-    status: "coming-soon",
+    status: "password-protected",
     accent: "#E8D8B8",
     niche: "maison",
     videoSrc: "/videos/maison-nova.mp4",
     year: 2026,
   },
 ];
+
+/**
+ * Seules les boutiques réellement accessibles publiquement (vérifié par
+ * requête HTTP, pas juste déclaratif) sont affichées sur le site. Les autres
+ * restent dans ce fichier, prêtes à réapparaître dès que tu enlèves le mot de
+ * passe côté Shopify — aucune action de plus ne sera nécessaire ici.
+ * Dernière vérification : voir date du commit qui a ajusté ce fichier.
+ */
+export const visibleProjects = projects.filter((p) => p.status === "live");

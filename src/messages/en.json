@@ -101,7 +101,7 @@
       { "value": "5", "suffix": "+", "label": "years of web experience" },
       { "value": "200", "suffix": "+", "label": "Shopify stores launched" },
       { "value": "200", "suffix": "+", "label": "behind-the-scenes videos" },
-      { "value": "10", "suffix": "d", "label": "average delivery time" },
+      { "value": "3", "suffix": "d", "label": "average delivery time" },
       { "value": "98", "suffix": "%", "label": "happy clients" }
     ]
   },
@@ -159,7 +159,7 @@
     "title": "Everything you're wondering before reaching out",
     "items": [
       { "q": "How much does a Shopify store cost?", "a": "It depends on the project's complexity (number of pages, features, custom design or not). After our discovery call, you'll get a clear, detailed quote — no surprises." },
-      { "q": "How long does a project take?", "a": "On average 7 to 14 days for a complete store, depending on complexity and how fast feedback comes back. You get a precise timeline upfront." },
+      { "q": "How long does a project take?", "a": "On average 3 days for a complete store, depending on complexity and how fast feedback comes back. You get a precise timeline upfront." },
       { "q": "I don't have products or a logo yet, is that a problem?", "a": "Not at all. We can move in parallel: I build the structure while you finalize your branding, or I can help with that too." },
       { "q": "Do you work with clients outside Benin?", "a": "Yes, I work remotely with clients worldwide, in both French and English." },
       { "q": "Do I fully own my store?", "a": "Completely. Your Shopify store is entirely yours, along with any custom code built for you." },

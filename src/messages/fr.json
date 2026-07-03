@@ -101,7 +101,7 @@
       { "value": "5", "suffix": "+", "label": "années d'expérience web" },
       { "value": "200", "suffix": "+", "label": "boutiques Shopify lancées" },
       { "value": "200", "suffix": "+", "label": "vidéos de réalisations" },
-      { "value": "10", "suffix": "j", "label": "délai moyen de livraison" },
+      { "value": "3", "suffix": "j", "label": "délai moyen de livraison" },
       { "value": "98", "suffix": "%", "label": "clients satisfaits" }
     ]
   },
@@ -159,7 +159,7 @@
     "title": "Tout ce que tu te demandes avant de me contacter",
     "items": [
       { "q": "Combien coûte la création d'une boutique Shopify ?", "a": "Ça dépend de la complexité du projet (nombre de pages, fonctionnalités, design sur-mesure ou non). Après notre appel découverte, tu reçois un devis clair et détaillé, sans surprise." },
-      { "q": "Combien de temps prend un projet ?", "a": "En moyenne 7 à 14 jours pour une boutique complète, selon la complexité et la réactivité sur les retours. Tu reçois un planning précis dès le départ." },
+      { "q": "Combien de temps prend un projet ?", "a": "En moyenne 3 jours pour une boutique complète, selon la complexité et la réactivité sur les retours. Tu reçois un planning précis dès le départ." },
       { "q": "Je n'ai pas encore de produits ou de logo, c'est un problème ?", "a": "Non. On peut avancer en parallèle : je construis la structure pendant que tu finalises ton branding, ou je peux t'accompagner sur cette partie aussi." },
       { "q": "Tu travailles avec des clients en dehors du Bénin ?", "a": "Oui, je travaille à distance avec des clients partout dans le monde, en français comme en anglais." },
       { "q": "Est-ce que je reste propriétaire de ma boutique ?", "a": "Totalement. Ta boutique Shopify t'appartient entièrement, ainsi que le code personnalisé développé pour toi." },

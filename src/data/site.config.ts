@@ -26,7 +26,7 @@ export const siteConfig = {
     yearsExperience: 5,
     storesLaunched: 200,
     videosDocumented: 200,
-    avgDeliveryDays: 10,
+    avgDeliveryDays: 3,
     clientSatisfaction: 98,
   },
 } as const;

@@ -37,29 +37,31 @@
     "items": [
       {
         "title": "Un taux de conversion qui stagne",
-        "description": "1,4 % de conversion en moyenne sur Shopify. Un design générique fait fuir des clients prêts à acheter.",
-        "source": "Source : wearepresta.com"
+        "description": "Le taux de conversion moyen d'une boutique Shopify tourne autour de 1,4 %. Tu as du trafic, peut-être même de bons produits — mais les ventes ne suivent pas. Un design générique, un tunnel d'achat confus ou une mise en avant floue des produits suffisent à faire fuir des clients pourtant prêts à sortir leur carte.",
+        "source": "Source : wearepresta.com",
+        "stat": 1.4
       },
       {
         "title": "Un panier abandonné presque une fois sur deux",
-        "description": "70 % des visiteurs abandonnent leur panier avant de payer — souvent à cause d'un checkout mal optimisé.",
-        "source": "Source : Baymard Institute"
+        "description": "En moyenne, 70 % des visiteurs abandonnent leur panier avant de payer. Frais de livraison découverts au dernier moment, création de compte obligatoire, formulaire trop long, moyens de paiement manquants... chaque friction dans le tunnel de commande est une vente perdue, souvent à quelques clics de la conclusion.",
+        "source": "Source : Baymard Institute",
+        "stat": 70
       },
       {
         "title": "Un site lent qui fait fuir le mobile",
-        "description": "La majorité du trafic Shopify est mobile. Un site lent, ce sont des ventes perdues avant même d'avoir vu un produit."
+        "description": "La majorité du trafic Shopify vient du mobile. Si ta boutique met plus de 3 secondes à charger sur un téléphone, une bonne partie de tes visiteurs repartent avant même d'avoir vu un produit — et Google pénalise aussi les sites lents dans son classement, ce qui te prive de trafic en plus des ventes."
       },
       {
         "title": "Un design qui n'inspire pas confiance",
-        "description": "Un thème qui ressemble à mille autres ne rassure pas. La crédibilité se joue en quelques secondes."
+        "description": "Un thème qui ressemble à mille autres boutiques, des photos produits mal cadrées, une mise en page bancale sur mobile... Les visiteurs jugent la crédibilité d'un site en quelques secondes à peine, souvent avant même de lire un mot. Sans ce vernis de confiance, même le meilleur produit du monde ne convertira pas."
       },
       {
         "title": "Des apps qui ralentissent tout",
-        "description": "Trop d'apps mal optimisées alourdissent le site au lieu d'améliorer l'expérience."
+        "description": "Une app pour les avis clients, une autre pour les pop-ups, une troisième pour l'upsell... chacune ajoute du code et des requêtes qui s'accumulent. Résultat : un site plus lent, parfois des bugs d'affichage, et une expérience qui casse au lieu de vendre — l'inverse de l'effet recherché en les installant."
       },
       {
         "title": "Un SEO invisible sur Google",
-        "description": "Sans structure technique propre, ta boutique reste invisible même avec de bons produits."
+        "description": "Sans structure technique propre (balises, vitesse, maillage interne) ni contenu pensé pour répondre aux recherches de tes clients, ta boutique reste invisible sur Google — même avec d'excellents produits. Résultat : tu dépends à 100 % de la pub payante pour générer du trafic, ce qui pèse lourd sur ta marge à long terme."
       }
     ]
   },

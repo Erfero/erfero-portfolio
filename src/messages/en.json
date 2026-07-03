@@ -37,29 +37,32 @@
     "items": [
       {
         "title": "A conversion rate that won't budge",
-        "description": "1.4% average conversion on Shopify. A generic design pushes away visitors who were ready to buy.",
-        "source": "Source: wearepresta.com"
+        "description": "The average Shopify store conversion rate sits around 1.4%. You've got traffic, maybe even great products — but sales aren't following. A generic design, a confusing checkout flow, or unclear product presentation is enough to push away visitors who were already reaching for their card.",
+        "source": "Source: wearepresta.com",
+        "stat": 1.4
       },
       {
         "title": "Almost 1 in 2 carts abandoned",
-        "description": "70% of visitors abandon their cart before paying — often because of a poorly optimized checkout.",
-        "source": "Source: Baymard Institute"
+        "description": "On average, 70% of visitors abandon their cart before paying. Shipping costs revealed too late, forced account creation, overly long forms, missing payment methods... every extra bit of friction in the checkout flow is a lost sale, often just a few clicks from closing.",
+        "source": "Source: Baymard Institute",
+        "stat": 70
       },
       {
         "title": "A slow site that loses mobile shoppers",
-        "description": "Most Shopify traffic is mobile. A slow site means lost sales before a visitor even sees a product."
+        "description": "Most Shopify traffic comes from mobile. If your store takes more than 3 seconds to load on a phone, a good chunk of your visitors leave before even seeing a product — and Google also penalizes slow sites in its rankings, costing you traffic on top of sales."
       },
       {
         "title": "A design that doesn't build trust",
-        "description": "A theme that looks like a thousand others doesn't reassure anyone. Credibility is judged within seconds."
+        "description": "A theme that looks like a thousand other stores, poorly framed product photos, a layout that breaks on mobile... Visitors judge a site's credibility within seconds, often before reading a single word. Without that layer of trust, even the best product in the world won't convert."
       },
       {
         "title": "Apps that slow everything down",
-        "description": "Too many poorly optimized apps weigh the site down instead of improving it."
+        "description": "An app for reviews, another for pop-ups, a third for upsells... each one adds code and requests that pile up. The result: a slower site, sometimes broken layouts, and an experience that breaks instead of sells — the opposite of what installing them was supposed to achieve."
       },
       {
         "title": "Invisible on Google",
-        "description": "Without a clean technical structure, your store stays invisible even with great products."
+        "description": "Without a clean technical structure (tags, speed, internal linking) or content actually built to answer your customers' searches, your store stays invisible on Google — even with great products. The result: you depend 100% on paid ads to drive traffic, which eats into your margin over time.",
+        "source": null
       }
     ]
   },

@@ -128,6 +128,7 @@ export default function ProjectsManager({
                       Protégée par mot de passe (masquée)
                     </option>
                     <option value="coming-soon">Bientôt (masquée)</option>
+                    <option value="unavailable">Indisponible (masquée)</option>
                   </select>
                 </Field>
                 <Field label="Couleur d'accent">

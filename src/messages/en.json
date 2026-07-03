@@ -1,0 +1,234 @@
+{
+  "meta": {
+    "title": "Erféro Keoula — Freelance Shopify Developer",
+    "description": "Shopify & Full-Stack Web Developer. I build fast, custom online stores designed to convert."
+  },
+  "nav": {
+    "home": "Home",
+    "projects": "Work",
+    "services": "Services",
+    "process": "Process",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "cta": "Start a project",
+    "switchLocale": "FR"
+  },
+  "hero": {
+    "badge": "Freelance Shopify Developer · Open for new projects",
+    "titleLine1": "Shopify stores",
+    "titleHighlight": "built to be bought from.",
+    "subtitle": "I design and build fast, custom Shopify stores made to convert — for brands that refuse the generic theme.",
+    "ctaPrimary": "Let's talk about your project",
+    "ctaSecondary": "See my work",
+    "scrollHint": "Scroll",
+    "stats": [
+      { "value": "200+", "label": "stores launched" },
+      { "value": "5 yrs", "label": "of web experience" },
+      { "value": "98%", "label": "happy clients" }
+    ]
+  },
+  "painPoints": {
+    "eyebrow": "Sound familiar?",
+    "title": "Your store deserves better than a generic theme",
+    "subtitle": "Most online stores lose sales to problems that are invisible to the naked eye. Here are the most common ones.",
+    "items": [
+      {
+        "title": "A conversion rate that won't budge",
+        "description": "The average Shopify store conversion rate sits around 1.4%. A generic design and a poorly thought-out experience push away visitors who were ready to buy.",
+        "source": "Source: wearepresta.com"
+      },
+      {
+        "title": "Almost 1 in 2 carts abandoned",
+        "description": "On average, 70% of visitors abandon their cart before paying. A poorly optimized checkout or surprise fees are often the cause.",
+        "source": "Source: Baymard Institute"
+      },
+      {
+        "title": "A slow site that loses mobile shoppers",
+        "description": "Most Shopify traffic is mobile. A slow or poorly responsive site means lost sales before a visitor even sees a product."
+      },
+      {
+        "title": "A design that doesn't build trust",
+        "description": "A theme that looks like a thousand other stores doesn't reassure anyone. Visitors judge a site's credibility within seconds."
+      },
+      {
+        "title": "Apps that slow everything down",
+        "description": "Too many apps installed without optimization weigh the site down and break the experience instead of improving it."
+      },
+      {
+        "title": "Invisible on Google",
+        "description": "Without a clean technical structure or optimized content, your store stays invisible on search engines, even with great products."
+      }
+    ]
+  },
+  "services": {
+    "eyebrow": "What I do",
+    "title": "Full Shopify expertise, from design to code",
+    "subtitle": "Full-stack means I handle everything: design, development, performance and SEO — without you juggling three different providers.",
+    "items": [
+      {
+        "title": "Custom store builds",
+        "description": "A unique design in Liquid + Tailwind, built for your brand and built to convert — not a recycled theme."
+      },
+      {
+        "title": "Redesign & optimization",
+        "description": "Already running a store? I audit it, fix what's holding back sales, and modernize the design."
+      },
+      {
+        "title": "Speed & conversion (CRO)",
+        "description": "Faster load times, a simplified checkout flow, and optimization of the elements that actually drive sales."
+      },
+      {
+        "title": "Custom features & apps",
+        "description": "Liquid sections, private apps, API integrations (payment, ERP, CRM) when off-the-shelf apps aren't enough."
+      },
+      {
+        "title": "Technical SEO & content",
+        "description": "Clean structure, internal linking, content written to rank — backed by my background as an SEO copywriter."
+      },
+      {
+        "title": "Maintenance & support",
+        "description": "A living site needs upkeep. Fixes, updates and improvements as your business grows."
+      }
+    ]
+  },
+  "metrics": {
+    "eyebrow": "By the numbers",
+    "title": "Five years building stores that sell",
+    "items": [
+      { "value": "5", "suffix": "+", "label": "years of web experience" },
+      { "value": "200", "suffix": "+", "label": "Shopify stores launched" },
+      { "value": "200", "suffix": "+", "label": "behind-the-scenes videos" },
+      { "value": "10", "suffix": "d", "label": "average delivery time" },
+      { "value": "98", "suffix": "%", "label": "happy clients" }
+    ]
+  },
+  "projects": {
+    "eyebrow": "Work",
+    "title": "Stores built to sell",
+    "subtitle": "A selection from 200+ Shopify stores designed and built for beauty, wellness and lifestyle brands.",
+    "viewLive": "Visit store",
+    "viewLiveDisabled": "Private client access",
+    "comingSoon": "Launching soon",
+    "watchVideo": "Watch the video",
+    "viewAll": "See all my work",
+    "badges": {
+      "live": "Live",
+      "password-protected": "Private",
+      "coming-soon": "Coming soon"
+    },
+    "items": {
+      "cisseGlow": {
+        "name": "Cissé Glow",
+        "tagline": "Beauty & skincare tech",
+        "description": "A store dedicated to skincare devices (IPL hair removal, skin diagnostics, eye massage). A minimal, elegant design built to build trust around technical products.",
+        "tags": ["Shopify", "Liquid", "CRO", "Beauty"]
+      },
+      "zylvea": {
+        "name": "Zylvea",
+        "tagline": "Wellness & eye comfort",
+        "description": "Launch of a heated eye device with light therapy. A sales funnel built around social proof and a seamless mobile experience.",
+        "tags": ["Shopify", "CRO", "Landing page", "Trust"]
+      },
+      "cilvya": {
+        "name": "Cilvya",
+        "tagline": "Magnetic beauty",
+        "description": "A store dedicated to reusable magnetic eyelashes. Clear product storytelling and a purchase flow built for impulse buys.",
+        "tags": ["Shopify", "E-commerce", "Storytelling"]
+      },
+      "seshellBeauty": {
+        "name": "Seshell Beauty Label",
+        "tagline": "Custom beauty brand",
+        "description": "Design of a premium beauty store identity, currently under private client access. The build process is documented in my video showcase.",
+        "tags": ["Shopify", "Branding", "Beauty"]
+      },
+      "nexora": {
+        "name": "Nexora",
+        "tagline": "Lifestyle store",
+        "description": "Design of a lifestyle store currently under restricted client access. Check out the build process on video.",
+        "tags": ["Shopify", "Design", "Lifestyle"]
+      },
+      "maisonNova": {
+        "name": "Maison Nova",
+        "tagline": "Launch in progress",
+        "description": "A new store in the making, collecting emails ahead of launch to build anticipation.",
+        "tags": ["Shopify", "Pre-launch", "Growth"]
+      }
+    }
+  },
+  "videoReels": {
+    "eyebrow": "Behind the scenes",
+    "title": "My work, in vertical format",
+    "subtitle": "200+ videos showing Shopify stores being built from scratch — TikTok-style, but with the code behind it.",
+    "cta": "Watch all videos"
+  },
+  "process": {
+    "eyebrow": "How it works",
+    "title": "A clear process, from first message to launch",
+    "subtitle": "No surprises, no vague promises. Here's exactly how we'll work together.",
+    "steps": [
+      { "title": "Discovery call", "description": "We talk about your project, your goals and your budget. Free, no commitment." },
+      { "title": "Proposal & quote", "description": "You get a clear proposal: scope, timeline, price. Nothing hidden." },
+      { "title": "Design & mockups", "description": "I design a custom interface, aligned with your brand identity." },
+      { "title": "Shopify development", "description": "Liquid integration, apps, payments, technical SEO — tested on mobile and desktop." },
+      { "title": "Testing & launch", "description": "Full checks before launch: speed, checkout flow, tracking." },
+      { "title": "Post-launch support", "description": "I stay available to tweak, fix and grow the store with you." }
+    ]
+  },
+  "techStack": {
+    "eyebrow": "Tech stack",
+    "title": "The tools I use every day"
+  },
+  "trust": {
+    "eyebrow": "Why work with me",
+    "title": "One simple guarantee: your store has to sell, not just look good",
+    "subtitle": "I still work with agencies alongside my direct clients — every project gets the same level of care.",
+    "items": [
+      { "title": "Direct communication", "description": "You talk directly to the developer building your site, not a middleman project manager." },
+      { "title": "Deadlines set, deadlines kept", "description": "A clear timeline from the quote onward, with regular check-ins." },
+      { "title": "Clean code, delivered cleanly", "description": "You keep full ownership of your store and its code, with no hidden lock-in." },
+      { "title": "Client reviews coming soon", "description": "My first client reviews will land on this page soon — in the meantime, check out my video showcase." }
+    ]
+  },
+  "faq": {
+    "eyebrow": "FAQ",
+    "title": "Everything you're wondering before reaching out",
+    "items": [
+      { "q": "How much does a Shopify store cost?", "a": "It depends on the project's complexity (number of pages, features, custom design or not). After our discovery call, you'll get a clear, detailed quote — no surprises." },
+      { "q": "How long does a project take?", "a": "On average 7 to 14 days for a complete store, depending on complexity and how fast feedback comes back. You get a precise timeline upfront." },
+      { "q": "I don't have products or a logo yet, is that a problem?", "a": "Not at all. We can move in parallel: I build the structure while you finalize your branding, or I can help with that too." },
+      { "q": "Do you work with clients outside Benin?", "a": "Yes, I work remotely with clients worldwide, in both French and English." },
+      { "q": "Do I fully own my store?", "a": "Completely. Your Shopify store is entirely yours, along with any custom code built for you." },
+      { "q": "What happens after launch?", "a": "I stay available for maintenance, improvements or urgent fixes, with or without an ongoing support plan depending on your needs." },
+      { "q": "Can you improve an existing store?", "a": "Yes, auditing and redesigning existing stores is one of my most requested services." }
+    ]
+  },
+  "contact": {
+    "eyebrow": "Contact",
+    "title": "Let's talk about your project",
+    "subtitle": "Fill out the form, message me directly, or book a call — whatever works for you.",
+    "formName": "Your name",
+    "formEmail": "Your email",
+    "formBudget": "Estimated budget (optional)",
+    "formMessage": "Tell me about your project",
+    "formSubmit": "Send message",
+    "formSending": "Sending...",
+    "formSuccess": "Message sent! I'll get back to you within 24h.",
+    "formError": "Something went wrong. Try WhatsApp or email directly.",
+    "or": "or",
+    "whatsappCta": "Chat on WhatsApp",
+    "calendlyCta": "Book a free call",
+    "emailCta": "Send an email"
+  },
+  "footer": {
+    "tagline": "Freelance Shopify developer based in Cotonou, available worldwide.",
+    "rights": "All rights reserved.",
+    "madeWith": "Designed and built with Next.js, Tailwind, GSAP & Framer Motion."
+  },
+  "realisationsPage": {
+    "title": "All my work",
+    "subtitle": "Shopify stores delivered and short-form videos of my builds.",
+    "backHome": "Back to home",
+    "filterAll": "All",
+    "videoSectionTitle": "The video wall"
+  }
+}

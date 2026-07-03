@@ -69,7 +69,7 @@ export default function ExpertiseCatalog({
                 <TiltCard strength={5}>
                   <div className="flex h-full flex-col items-start gap-3 overflow-hidden rounded-2xl border border-border bg-white/[0.02] transition-colors hover:border-lime/30">
                     {image ? (
-                      <div className="relative h-28 w-full overflow-hidden">
+                      <div className="relative h-44 w-full overflow-hidden">
                         <img
                           src={image}
                           alt={t(`niches.${niche}`)}

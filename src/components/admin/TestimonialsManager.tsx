@@ -80,6 +80,7 @@ export default function TestimonialsManager({
                   update(i, { type: e.target.value as TestimonialType })
                 }
                 className={inputClass}
+                style={{ colorScheme: "dark" }}
               >
                 <option value="whatsapp">WhatsApp</option>
                 <option value="instagram">Instagram</option>

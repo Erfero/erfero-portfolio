@@ -154,6 +154,7 @@ export default function ProjectsManager({
                       update(i, { status: e.target.value as ProjectStatus })
                     }
                     className={inputClass}
+                    style={{ colorScheme: "dark" }}
                   >
                     <option value="live">En ligne (visible sur le site)</option>
                     <option value="password-protected">

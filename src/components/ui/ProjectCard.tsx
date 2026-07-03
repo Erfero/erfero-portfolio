@@ -11,9 +11,16 @@ import { getScreenshotUrl } from "@/lib/screenshot";
 export default function ProjectCard({
   project,
   relatedVideo,
+  thumbWidth = 900,
+  thumbHeight = 1400,
 }: {
   project: Project;
   relatedVideo?: VideoEntry;
+  /** Réduit la taille demandée à thum.io pour les cartes plus petites
+   * (carrousels), afin d'alléger le poids réseau/décodage quand des dizaines
+   * de cartes sont affichées en même temps. */
+  thumbWidth?: number;
+  thumbHeight?: number;
 }) {
   const t = useTranslations("projects");
   const locale = useLocale() as "fr" | "en";
@@ -73,7 +80,10 @@ export default function ProjectCard({
         className="relative block aspect-[4/3] overflow-hidden"
       >
         <motion.img
-          src={project.thumbnailOverride || getScreenshotUrl(project.url)}
+          src={
+            project.thumbnailOverride ||
+            getScreenshotUrl(project.url, thumbWidth, thumbHeight)
+          }
           alt={item.name}
           loading="lazy"
           animate={{ scale: hovering && !relatedVideo ? 1.06 : 1 }}

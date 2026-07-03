@@ -43,8 +43,8 @@ export default async function HomePage({
       <Services />
       <Testimonials testimonials={testimonials} />
       <Pricing />
-      <ExpertiseCatalog projects={projects} nicheImages={nicheImages} />
       <PainPoints />
+      <ExpertiseCatalog projects={projects} nicheImages={nicheImages} />
       <Metrics />
       <Process />
       <TechStack />

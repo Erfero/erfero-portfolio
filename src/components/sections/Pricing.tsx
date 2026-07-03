@@ -70,7 +70,7 @@ export default function Pricing() {
                   </ul>
 
                   <Link
-                    href="/#contact"
+                    href={`/contact?plan=${encodeURIComponent(plan.name)}`}
                     className={`mt-6 inline-flex items-center justify-center gap-1.5 rounded-full px-5 py-3 text-sm font-medium transition-transform hover:scale-[1.02] ${
                       popular ? "bg-lime text-bg" : "border border-border text-ink"
                     }`}

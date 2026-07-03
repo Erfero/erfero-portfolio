@@ -131,7 +131,7 @@
       },
       {
         "name": "Boutique Multiproduit",
-        "price": "À partir de 250 €",
+        "price": "À partir de 180 €",
         "description": "Pour un catalogue complet : collections, filtres et navigation pensés pour ne perdre aucun visiteur entre les pages.",
         "features": [
           "Structure de catalogue et collections illimitées",
@@ -192,7 +192,10 @@
     "title": "Ce que mes clients et partenaires en disent",
     "subtitle": "Retours WhatsApp, Instagram, confirmations de livraison et avis d'agences avec lesquelles je travaille.",
     "placeholderImage": "Capture à ajouter",
-    "placeholderVideo": "Vidéo à ajouter"
+    "placeholderVideo": "Vidéo à ajouter",
+    "prevPage": "Avis précédents",
+    "nextPage": "Avis suivants",
+    "page": "Page"
   },
   "metrics": {
     "eyebrow": "En chiffres",
@@ -271,6 +274,7 @@
     "eyebrow": "Contact",
     "title": "Parlons de ton projet",
     "subtitle": "Remplis le formulaire, écris-moi directement ou réserve un appel — comme tu préfères.",
+    "planBadge": "Devis demandé :",
     "formName": "Ton nom",
     "formEmail": "Ton email",
     "formBudget": "Budget estimé (optionnel)",

@@ -61,9 +61,9 @@ export default function Navbar() {
             onClick={goHome}
             className="flex items-center gap-3"
           >
-            <span className="font-display text-lg font-semibold tracking-tight">
+            <span className="font-display text-xl font-semibold tracking-tight">
               {siteConfig.shortName}
-              <span className="ml-0.5 align-baseline text-2xl leading-none text-lime">.</span>
+              <span className="ml-0.5 align-baseline text-3xl leading-none text-lime">.</span>
             </span>
             <span className="hidden h-4 w-px bg-border lg:block" />
             <span className="hidden text-[11px] text-ink-muted lg:block">

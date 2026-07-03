@@ -2,11 +2,11 @@
 
 import { useState, type FormEvent } from "react";
 import { useTranslations } from "next-intl";
-import { Loader2, Send, CheckCircle2, AlertCircle } from "lucide-react";
+import { Loader2, Send, CheckCircle2, AlertCircle, Sparkles } from "lucide-react";
 
 type Status = "idle" | "sending" | "success" | "error";
 
-export default function ContactForm() {
+export default function ContactForm({ selectedPlan }: { selectedPlan?: string }) {
   const t = useTranslations("contact");
   const [status, setStatus] = useState<Status>("idle");
   const formEndpoint = process.env.NEXT_PUBLIC_FORMSPREE_ID
@@ -48,6 +48,16 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+      {selectedPlan && (
+        <div className="flex items-center gap-2 rounded-xl border border-lime/30 bg-lime/6 px-4 py-3 text-sm text-lime">
+          <Sparkles className="size-4 shrink-0" />
+          <span>
+            {t("planBadge")} <strong>{selectedPlan}</strong>
+          </span>
+          <input type="hidden" name="offre_demandee" value={selectedPlan} />
+        </div>
+      )}
+
       <div className="grid gap-4 sm:grid-cols-2">
         <input
           type="text"

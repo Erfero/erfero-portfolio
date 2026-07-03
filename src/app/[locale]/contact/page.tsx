@@ -16,12 +16,15 @@ export async function generateMetadata({
 
 export default async function ContactPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ locale: string }>;
+  searchParams: Promise<{ plan?: string }>;
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("nav");
+  const { plan } = await searchParams;
 
   return (
     <div className="pt-32 sm:pt-40">
@@ -34,7 +37,7 @@ export default async function ContactPage({
           {t("home")}
         </Link>
       </div>
-      <Contact />
+      <Contact selectedPlan={plan} />
     </div>
   );
 }

@@ -20,8 +20,9 @@ export default function Footer() {
     <footer className="border-t border-border">
       <div className="container-page flex flex-col gap-8 py-14 md:flex-row md:items-start md:justify-between">
         <div className="max-w-sm">
-          <Link href="/" className="font-display text-lg font-semibold">
+          <Link href="/" className="font-display text-4xl font-semibold tracking-tight">
             {siteConfig.shortName}
+            <span className="text-lime">.</span>
           </Link>
           <p className="mt-3 text-sm text-ink-muted">{t("tagline")}</p>
           <div className="mt-5 flex items-center gap-3">

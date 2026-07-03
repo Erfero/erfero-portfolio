@@ -17,15 +17,32 @@ export default function CustomCursor() {
     if (!canHover || reduced) return;
     setEnabled(true);
 
-    const move = (e: MouseEvent) => {
-      x.set(e.clientX - 10);
-      y.set(e.clientY - 10);
-      const target = e.target as HTMLElement;
+    // Un seul point de mise à jour par frame (rAF) : appeler setHovering /
+    // closest() sur chaque event mousemove brut (jusqu'à 120/s) surchargeait
+    // le thread principal et rendait le curseur (et le reste de la page)
+    // visiblement saccadé.
+    let frame = 0;
+    let pendingEvent: MouseEvent | null = null;
+
+    const applyFrame = () => {
+      frame = 0;
+      if (!pendingEvent) return;
+      x.set(pendingEvent.clientX - 10);
+      y.set(pendingEvent.clientY - 10);
+      const target = pendingEvent.target as HTMLElement;
       setHovering(!!target.closest("a, button, [data-cursor-hover]"));
     };
 
-    window.addEventListener("mousemove", move);
-    return () => window.removeEventListener("mousemove", move);
+    const move = (e: MouseEvent) => {
+      pendingEvent = e;
+      if (!frame) frame = requestAnimationFrame(applyFrame);
+    };
+
+    window.addEventListener("mousemove", move, { passive: true });
+    return () => {
+      window.removeEventListener("mousemove", move);
+      if (frame) cancelAnimationFrame(frame);
+    };
   }, [x, y]);
 
   if (!enabled) return null;

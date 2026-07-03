@@ -131,7 +131,7 @@
       },
       {
         "name": "Multi-product store",
-        "price": "From €250",
+        "price": "From €180",
         "description": "For a full catalog: collections, filters and navigation built so no visitor gets lost between pages.",
         "features": [
           "Catalog structure with unlimited collections",
@@ -192,7 +192,10 @@
     "title": "What my clients and partners say",
     "subtitle": "WhatsApp and Instagram feedback, delivery confirmations, and reviews from agencies I work with.",
     "placeholderImage": "Screenshot to add",
-    "placeholderVideo": "Video to add"
+    "placeholderVideo": "Video to add",
+    "prevPage": "Previous reviews",
+    "nextPage": "Next reviews",
+    "page": "Page"
   },
   "metrics": {
     "eyebrow": "By the numbers",
@@ -271,6 +274,7 @@
     "eyebrow": "Contact",
     "title": "Let's talk about your project",
     "subtitle": "Fill out the form, message me directly, or book a call — whatever works for you.",
+    "planBadge": "Quote requested:",
     "formName": "Your name",
     "formEmail": "Your email",
     "formBudget": "Estimated budget (optional)",

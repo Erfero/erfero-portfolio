@@ -118,44 +118,6 @@
       "live": "Live",
       "password-protected": "Private",
       "coming-soon": "Coming soon"
-    },
-    "items": {
-      "cisseGlow": {
-        "name": "Cissé Glow",
-        "tagline": "Beauty & skincare tech",
-        "description": "A store dedicated to skincare devices (IPL hair removal, skin diagnostics, eye massage). A minimal, elegant design built to build trust around technical products.",
-        "tags": ["Shopify", "Liquid", "CRO", "Beauty"]
-      },
-      "zylvea": {
-        "name": "Zylvea",
-        "tagline": "Wellness & eye comfort",
-        "description": "Launch of a heated eye device with light therapy. A sales funnel built around social proof and a seamless mobile experience.",
-        "tags": ["Shopify", "CRO", "Landing page", "Trust"]
-      },
-      "cilvya": {
-        "name": "Cilvya",
-        "tagline": "Magnetic beauty",
-        "description": "A store dedicated to reusable magnetic eyelashes. Clear product storytelling and a purchase flow built for impulse buys.",
-        "tags": ["Shopify", "E-commerce", "Storytelling"]
-      },
-      "seshellBeauty": {
-        "name": "Seshell Beauty Label",
-        "tagline": "Custom beauty brand",
-        "description": "Design of a premium beauty store identity, currently under private client access. The build process is documented in my video showcase.",
-        "tags": ["Shopify", "Branding", "Beauty"]
-      },
-      "nexora": {
-        "name": "Nexora",
-        "tagline": "Lifestyle store",
-        "description": "Design of a lifestyle store currently under restricted client access. Check out the build process on video.",
-        "tags": ["Shopify", "Design", "Lifestyle"]
-      },
-      "maisonNova": {
-        "name": "Maison Nova",
-        "tagline": "Launch in progress",
-        "description": "A new store in the making, collecting emails ahead of launch to build anticipation.",
-        "tags": ["Shopify", "Pre-launch", "Growth"]
-      }
     }
   },
   "videoReels": {

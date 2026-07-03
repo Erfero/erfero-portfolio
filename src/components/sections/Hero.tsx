@@ -1,12 +1,12 @@
 "use client";
 
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import { ArrowUpRight, ChevronDown } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import MagneticButton from "@/components/ui/MagneticButton";
 import GradientBlob from "@/components/ui/GradientBlob";
-import { visibleProjects } from "@/data/projects";
+import type { Project } from "@/data/projects";
 import { getScreenshotUrl } from "@/lib/screenshot";
 
 const floatConfigs = [
@@ -15,14 +15,14 @@ const floatConfigs = [
   { x: "12%", y: "48%", rotate: -3, duration: 6.5, delay: 1.2 },
 ];
 
-function HeroShowcase() {
-  const t = useTranslations("projects");
+function HeroShowcase({ projects }: { projects: Project[] }) {
+  const locale = useLocale() as "fr" | "en";
 
   return (
     <div className="relative hidden h-[520px] w-full lg:block">
-      {visibleProjects.slice(0, 3).map((project, i) => {
+      {projects.slice(0, 3).map((project, i) => {
         const cfg = floatConfigs[i % floatConfigs.length];
-        const item = t.raw(`items.${project.id}`) as { name: string };
+        const item = { name: project.name[locale] };
 
         return (
           <motion.a
@@ -67,7 +67,7 @@ function HeroShowcase() {
   );
 }
 
-export default function Hero() {
+export default function Hero({ projects }: { projects: Project[] }) {
   const t = useTranslations("hero");
 
   return (
@@ -151,7 +151,7 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        <HeroShowcase />
+        <HeroShowcase projects={projects} />
       </div>
 
       <motion.div

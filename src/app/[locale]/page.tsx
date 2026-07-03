@@ -10,6 +10,7 @@ import TechStack from "@/components/sections/TechStack";
 import Trust from "@/components/sections/Trust";
 import FAQ from "@/components/sections/FAQ";
 import Contact from "@/components/sections/Contact";
+import { getVisibleProjects, getVideos } from "@/lib/content";
 
 export default async function HomePage({
   params,
@@ -19,14 +20,19 @@ export default async function HomePage({
   const { locale } = await params;
   setRequestLocale(locale);
 
+  const [projects, videos] = await Promise.all([
+    getVisibleProjects(),
+    getVideos(),
+  ]);
+
   return (
     <>
-      <Hero />
+      <Hero projects={projects} />
       <PainPoints />
       <Services />
       <Metrics />
-      <FeaturedProjects />
-      <VideoReels />
+      <FeaturedProjects projects={projects} videos={videos} />
+      <VideoReels videos={videos} />
       <Process />
       <TechStack />
       <Trust />

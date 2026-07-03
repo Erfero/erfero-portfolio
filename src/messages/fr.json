@@ -118,44 +118,6 @@
       "live": "En ligne",
       "password-protected": "Accès privé",
       "coming-soon": "Bientôt"
-    },
-    "items": {
-      "cisseGlow": {
-        "name": "Cissé Glow",
-        "tagline": "Beauté & high-tech skincare",
-        "description": "Boutique dédiée aux appareils de soin de la peau (épilation IPL, diagnostic de peau, massage oculaire). Design minimaliste et élégant pensé pour inspirer confiance sur des produits techniques.",
-        "tags": ["Shopify", "Liquid", "CRO", "Beauté"]
-      },
-      "zylvea": {
-        "name": "Zylvea",
-        "tagline": "Wellness & confort oculaire",
-        "description": "Lancement d'un appareil chauffant pour les yeux avec luminothérapie. Tunnel de vente construit autour de la preuve sociale et d'une expérience mobile ultra fluide.",
-        "tags": ["Shopify", "CRO", "Landing page", "Trust"]
-      },
-      "cilvya": {
-        "name": "Cilvya",
-        "tagline": "Beauté magnétique",
-        "description": "Boutique dédiée à des faux-cils magnétiques réutilisables. Storytelling produit clair et parcours d'achat pensé pour les ventes impulsives.",
-        "tags": ["Shopify", "E-commerce", "Storytelling"]
-      },
-      "seshellBeauty": {
-        "name": "Seshell Beauty Label",
-        "tagline": "Marque de beauté sur-mesure",
-        "description": "Création d'une identité de boutique beauté haut de gamme, actuellement en accès privé pour le client. Le processus de création est visible dans mes vidéos de réalisations.",
-        "tags": ["Shopify", "Branding", "Beauté"]
-      },
-      "nexora": {
-        "name": "Nexora",
-        "tagline": "Boutique lifestyle",
-        "description": "Conception d'une boutique lifestyle actuellement en accès restreint pour le client. Retrouve le processus de création en vidéo.",
-        "tags": ["Shopify", "Design", "Lifestyle"]
-      },
-      "maisonNova": {
-        "name": "Maison Nova",
-        "tagline": "Lancement en préparation",
-        "description": "Nouvelle boutique en cours de préparation, avec collecte d'emails avant ouverture pour créer l'attente autour du lancement.",
-        "tags": ["Shopify", "Pre-launch", "Growth"]
-      }
     }
   },
   "videoReels": {

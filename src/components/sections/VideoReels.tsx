@@ -1,14 +1,14 @@
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { ArrowUpRight } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import Reveal from "@/components/ui/Reveal";
 import SectionHeading from "@/components/ui/SectionHeading";
 import VideoCard from "@/components/ui/VideoCard";
-import { videos } from "@/data/videos";
+import type { VideoEntry } from "@/data/videos";
 
-export default function VideoReels() {
+export default function VideoReels({ videos }: { videos: VideoEntry[] }) {
   const t = useTranslations("videoReels");
-  const projectsT = useTranslations("projects");
+  const locale = useLocale() as "fr" | "en";
 
   return (
     <section className="relative overflow-hidden py-24 sm:py-32">
@@ -37,10 +37,7 @@ export default function VideoReels() {
                 key={video.id}
                 className="w-[62vw] shrink-0 snap-start sm:w-[38vw] lg:w-[22vw]"
               >
-                <VideoCard
-                  video={video}
-                  caption={projectsT(`items.${video.captionKey}.name`)}
-                />
+                <VideoCard video={video} caption={video.caption[locale]} />
               </div>
             ))}
           </div>

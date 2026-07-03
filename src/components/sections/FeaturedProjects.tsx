@@ -4,9 +4,17 @@ import { Link } from "@/i18n/navigation";
 import Reveal from "@/components/ui/Reveal";
 import SectionHeading from "@/components/ui/SectionHeading";
 import ProjectCard from "@/components/ui/ProjectCard";
-import { visibleProjects } from "@/data/projects";
+import type { Project } from "@/data/projects";
+import type { VideoEntry } from "@/data/videos";
+import { resolveRelatedVideo } from "@/lib/resolveVideo";
 
-export default function FeaturedProjects() {
+export default function FeaturedProjects({
+  projects,
+  videos,
+}: {
+  projects: Project[];
+  videos: VideoEntry[];
+}) {
   const t = useTranslations("projects");
 
   return (
@@ -31,9 +39,12 @@ export default function FeaturedProjects() {
         </div>
 
         <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {visibleProjects.map((project, i) => (
+          {projects.map((project, i) => (
             <Reveal key={project.id} delay={i * 0.06}>
-              <ProjectCard project={project} />
+              <ProjectCard
+                project={project}
+                relatedVideo={resolveRelatedVideo(project, videos)}
+              />
             </Reveal>
           ))}
         </div>

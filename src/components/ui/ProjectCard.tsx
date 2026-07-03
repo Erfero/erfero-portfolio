@@ -1,23 +1,28 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import type { Project } from "@/data/projects";
-import { videos } from "@/data/videos";
+import type { VideoEntry } from "@/data/videos";
 import { getScreenshotUrl } from "@/lib/screenshot";
 
-export default function ProjectCard({ project }: { project: Project }) {
+export default function ProjectCard({
+  project,
+  relatedVideo,
+}: {
+  project: Project;
+  relatedVideo?: VideoEntry;
+}) {
   const t = useTranslations("projects");
-  const item = t.raw(`items.${project.id}`) as {
-    name: string;
-    tagline: string;
-    description: string;
-    tags: string[];
+  const locale = useLocale() as "fr" | "en";
+  const item = {
+    name: project.name[locale],
+    tagline: project.tagline[locale],
+    description: project.description[locale],
+    tags: project.tags[locale],
   };
-
-  const relatedVideo = videos.find((v) => v.id === project.id);
 
   const ref = useRef<HTMLDivElement>(null);
   const [hovering, setHovering] = useState(false);

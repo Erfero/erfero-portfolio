@@ -5,8 +5,8 @@ import { Link } from "@/i18n/navigation";
 import Reveal from "@/components/ui/Reveal";
 import ProjectCard from "@/components/ui/ProjectCard";
 import VideoCard from "@/components/ui/VideoCard";
-import { visibleProjects } from "@/data/projects";
-import { videos } from "@/data/videos";
+import { getVisibleProjects, getVideos } from "@/lib/content";
+import { resolveRelatedVideo } from "@/lib/resolveVideo";
 
 export async function generateMetadata({
   params,
@@ -27,7 +27,11 @@ export default async function RealisationsPage({
   setRequestLocale(locale);
 
   const t = await getTranslations("realisationsPage");
-  const projectsT = await getTranslations("projects");
+  const l = locale as "fr" | "en";
+  const [visibleProjects, videos] = await Promise.all([
+    getVisibleProjects(),
+    getVideos(),
+  ]);
 
   return (
     <div className="pb-24 pt-32 sm:pt-40">
@@ -52,7 +56,10 @@ export default async function RealisationsPage({
         <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {visibleProjects.map((project, i) => (
             <Reveal key={project.id} delay={i * 0.05}>
-              <ProjectCard project={project} />
+              <ProjectCard
+                project={project}
+                relatedVideo={resolveRelatedVideo(project, videos)}
+              />
             </Reveal>
           ))}
         </div>
@@ -66,10 +73,7 @@ export default async function RealisationsPage({
         <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
           {videos.map((video, i) => (
             <Reveal key={video.id} delay={(i % 5) * 0.05}>
-              <VideoCard
-                video={video}
-                caption={projectsT(`items.${video.captionKey}.name`)}
-              />
+              <VideoCard video={video} caption={video.caption[l]} />
             </Reveal>
           ))}
         </div>

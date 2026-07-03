@@ -27,10 +27,15 @@ function Column({
       }`}
     >
       <div
-        className="flex flex-col gap-6 [animation-fill-mode:backwards] hover:[animation-play-state:paused]"
-        style={{
-          animation: `${reverse ? "scroll-col-down" : "scroll-col-up"} ${durationSeconds}s linear ${pauseSeconds}s infinite`,
-        }}
+        className="marquee-track flex flex-col gap-6"
+        style={
+          {
+            "--marquee-name": reverse ? "scroll-col-down" : "scroll-col-up",
+            "--marquee-duration": `${durationSeconds}s`,
+            "--marquee-delay": `${pauseSeconds}s`,
+            "--marquee-fill": "backwards",
+          } as React.CSSProperties
+        }
       >
         {doubled.map((project, i) => (
           <div key={`${project.id}-${i}`} className="w-full">

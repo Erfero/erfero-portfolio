@@ -2,12 +2,54 @@
 
 import { useLocale, useTranslations } from "next-intl";
 import { motion } from "framer-motion";
-import { ArrowUpRight, ChevronDown } from "lucide-react";
+import { ArrowUpRight, ChevronDown, Star } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import MagneticButton from "@/components/ui/MagneticButton";
 import GradientBlob from "@/components/ui/GradientBlob";
+import { ShopifyBagIcon } from "@/components/ui/BrandIcons";
 import type { Project } from "@/data/projects";
 import { getScreenshotUrl } from "@/lib/screenshot";
+
+function HeroDecor() {
+  return (
+    <div aria-hidden className="pointer-events-none absolute inset-0">
+      <motion.div
+        className="absolute left-[4%] top-[10%] text-lime/25"
+        animate={{ rotate: 360 }}
+        transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+      >
+        <Star className="size-12 sm:size-20 lg:size-28" fill="currentColor" strokeWidth={0} />
+      </motion.div>
+
+      <motion.div
+        className="absolute bottom-[8%] right-[5%] text-violet/25"
+        animate={{ rotate: -360, scale: [1, 1.08, 1] }}
+        transition={{
+          rotate: { duration: 55, repeat: Infinity, ease: "linear" },
+          scale: { duration: 5, repeat: Infinity, ease: "easeInOut" },
+        }}
+      >
+        <Star className="size-9 sm:size-14 lg:size-20" fill="currentColor" strokeWidth={0} />
+      </motion.div>
+
+      <motion.div
+        className="absolute right-[10%] top-[6%] text-lime"
+        animate={{ y: [0, -14, 0], rotate: [-8, 8, -8] }}
+        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+      >
+        <ShopifyBagIcon className="size-6 opacity-80 sm:size-9 lg:size-11" />
+      </motion.div>
+
+      <motion.div
+        className="absolute left-[8%] bottom-[16%] text-lime"
+        animate={{ y: [0, 12, 0], rotate: [6, -6, 6] }}
+        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
+      >
+        <ShopifyBagIcon className="size-5 opacity-60 sm:size-7 lg:size-9" />
+      </motion.div>
+    </div>
+  );
+}
 
 const floatConfigs = [
   { x: "0%", y: "2%", rotate: -6, duration: 6, delay: 0 },
@@ -76,6 +118,7 @@ export default function Hero({ projects }: { projects: Project[] }) {
     <section className="relative flex min-h-[100svh] items-center overflow-hidden pt-28">
       <GradientBlob className="left-[-10%] top-[-10%] size-[38rem] bg-lime/25" />
       <GradientBlob className="right-[-15%] top-[20%] size-[32rem] bg-violet/25" />
+      <HeroDecor />
 
       <div className="container-page relative z-10 grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
         <div className="flex flex-col gap-10">

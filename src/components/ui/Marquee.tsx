@@ -16,11 +16,14 @@ export default function Marquee({
   return (
     <div className={cn("relative overflow-hidden", className)}>
       <div
-        className="flex w-max gap-10 whitespace-nowrap"
-        style={{
-          animation: `marquee ${speed}s linear infinite`,
-          animationDirection: reverse ? "reverse" : "normal",
-        }}
+        className="marquee-track flex w-max gap-10 whitespace-nowrap"
+        style={
+          {
+            "--marquee-name": "marquee",
+            "--marquee-duration": `${speed}s`,
+            animationDirection: reverse ? "reverse" : "normal",
+          } as React.CSSProperties
+        }
       >
         {[...items, ...items].map((item, i) => (
           <span

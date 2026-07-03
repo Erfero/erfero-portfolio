@@ -26,10 +26,13 @@ function MarqueeRow({
   return (
     <div className="overflow-hidden">
       <div
-        className="flex w-max gap-7 hover:[animation-play-state:paused]"
-        style={{
-          animation: `${reverse ? "marquee-x-reverse" : "marquee-x"} ${videos.length * 4}s linear infinite`,
-        }}
+        className="marquee-track flex w-max gap-7"
+        style={
+          {
+            "--marquee-name": reverse ? "marquee-x-reverse" : "marquee-x",
+            "--marquee-duration": `${videos.length * 4}s`,
+          } as React.CSSProperties
+        }
       >
         {doubled.map((video, i) => (
           <VideoMarqueeCard

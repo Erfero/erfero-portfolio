@@ -88,6 +88,24 @@
   }
 }
 
+/* Propriétés d'animation pilotées par variables CSS plutôt que par le
+   raccourci `animation` en style inline : un style inline a une priorité
+   plus forte que n'importe quelle règle de classe (même `:hover`), donc
+   `hover:[animation-play-state:paused]` ne pouvait jamais fonctionner tant
+   que `animation: ...` était posé en inline sur le même élément. */
+.marquee-track {
+  animation-name: var(--marquee-name);
+  animation-duration: var(--marquee-duration, 60s);
+  animation-timing-function: linear;
+  animation-delay: var(--marquee-delay, 0s);
+  animation-iteration-count: infinite;
+  animation-fill-mode: var(--marquee-fill, none);
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
 @keyframes scroll-col-up {
   0% {
     transform: translateY(0);

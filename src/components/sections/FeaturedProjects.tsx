@@ -15,9 +15,12 @@ export default function FeaturedProjects({
   videos: VideoEntry[];
 }) {
   const t = useTranslations("projects");
-  // Toutes les boutiques actuellement en ligne défilent ici, pas seulement
-  // un extrait — le vérificateur de liens tient cette liste à jour tout seul.
-  const featured = projects;
+  // La page /realisations affiche tout ; ce bandeau défilant de l'accueil se
+  // limite volontairement aux 20 mieux classées (elles sont doublées pour la
+  // boucle infinie, donc "toutes" = 2x le nombre de boutiques en ligne en
+  // cartes montées + captures live chargées en simultané, ce qui ralentissait
+  // le défilement et le scroll général du site).
+  const featured = projects.slice(0, 20);
 
   return (
     <section

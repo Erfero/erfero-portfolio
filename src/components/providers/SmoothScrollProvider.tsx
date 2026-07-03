@@ -2,11 +2,11 @@
 
 import { useEffect } from "react";
 import Lenis from "lenis";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-gsap.registerPlugin(ScrollTrigger);
-
+// GSAP/ScrollTrigger étaient importés ici sans qu'aucun ScrollTrigger ne soit
+// jamais créé ailleurs dans le code — du poids mort au chargement (JS parsé/
+// exécuté pour rien) qui ralentissait le site sans apporter aucune animation.
+// Toutes les animations au scroll passent par framer-motion (voir Reveal.tsx).
 export default function SmoothScrollProvider({
   children,
 }: {
@@ -25,16 +25,15 @@ export default function SmoothScrollProvider({
       smoothWheel: true,
     });
 
-    lenis.on("scroll", ScrollTrigger.update);
-
+    let frame: number;
     const raf = (time: number) => {
-      lenis.raf(time * 1000);
+      lenis.raf(time);
+      frame = requestAnimationFrame(raf);
     };
-    gsap.ticker.add(raf);
-    gsap.ticker.lagSmoothing(0);
+    frame = requestAnimationFrame(raf);
 
     return () => {
-      gsap.ticker.remove(raf);
+      cancelAnimationFrame(frame);
       lenis.destroy();
     };
   }, []);

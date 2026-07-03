@@ -52,3 +52,16 @@ export function WhatsappIcon(props: IconProps) {
     </svg>
   );
 }
+
+/** Silhouette de sac stylisée en vert Shopify (#95BF47) — un clin d'œil
+ * visuel à la plateforme, pas une reproduction du logo officiel. */
+export function ShopifyBagIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" {...props}>
+      <path
+        fill="currentColor"
+        d="M17.5 6.2c-.4 0-1 .1-1.6.3-.5-1.4-1.5-2.8-3.2-2.8-.5 0-1 .1-1.4.4C10.7 3 9.9 2.5 9.1 2.5c-3.3 0-4.9 4.1-5.4 6.2-1.4.4-2.4.8-2.6.8-.7.2-.8.3-.9 1C0 11 0 21 0 21l14.8 2.7 6.7-1.5S19 6.6 19 6.4c0-.1-.1-.2-.3-.2 0 0-.6 0-1.2 0zm-3.9.4l-1.9.6c0-1.2-.2-2.9-.7-3.9 1.5.3 2.2 1.9 2.6 3.3zm-2.3-3.1c.5 1 .7 2.5.8 3.7L9 8.1c.4-1.6 1.2-3.3 2.3-4.6zM8.9 3.5c.2 0 .4 0 .5.1-1.3 1.4-2.1 3.3-2.5 4.9l-2.5.8c.6-2.2 2-5.8 4.5-5.8z"
+      />
+    </svg>
+  );
+}

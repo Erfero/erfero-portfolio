@@ -4,7 +4,7 @@ import { routing } from "@/i18n/routing";
 const baseUrl = "https://erfero-portfolio.vercel.app";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const paths = ["", "/realisations"];
+  const paths = ["", "/realisations", "/services", "/process", "/faq", "/contact"];
 
   return paths.flatMap((path) =>
     routing.locales.map((locale) => ({

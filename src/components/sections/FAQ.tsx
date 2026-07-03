@@ -24,12 +24,12 @@ export default function FAQ() {
               <Reveal key={item.q} delay={i * 0.03} y={12}>
                 <button
                   onClick={() => setOpen(isOpen ? null : i)}
-                  className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
+                  className="flex w-full items-start justify-between gap-4 px-6 py-5 text-left"
                   aria-expanded={isOpen}
                 >
-                  <span className="font-medium">{item.q}</span>
+                  <span className="font-medium leading-relaxed">{item.q}</span>
                   <Plus
-                    className={`size-4 shrink-0 text-lime transition-transform duration-300 ${
+                    className={`mt-0.5 size-4 shrink-0 text-lime transition-transform duration-300 ${
                       isOpen ? "rotate-45" : ""
                     }`}
                   />

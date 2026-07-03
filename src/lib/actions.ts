@@ -37,6 +37,12 @@ export async function saveTestimonialsAction(testimonials: Testimonial[]) {
   revalidatePath("/", "layout");
 }
 
+export async function saveNicheImagesAction(images: Record<string, string>) {
+  await requireAdmin();
+  await writeJsonBlob("content/niche-images.json", images);
+  revalidatePath("/", "layout");
+}
+
 export async function saveContentAction(
   locale: string,
   data: Record<string, unknown>

@@ -16,7 +16,8 @@ export default function StatCounter({
 }: StatCounterProps) {
   const ref = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-40px" });
-  const target = parseInt(value.replace(/\D/g, ""), 10) || 0;
+  const target = parseFloat(value.replace(/[^\d.]/g, "")) || 0;
+  const decimals = value.includes(".") ? value.split(".")[1].length : 0;
   const [display, setDisplay] = useState(0);
 
   useEffect(() => {
@@ -27,7 +28,7 @@ export default function StatCounter({
     const tick = (now: number) => {
       const progress = Math.min((now - start) / (duration * 1000), 1);
       const eased = 1 - Math.pow(1 - progress, 3);
-      setDisplay(Math.round(eased * target));
+      setDisplay(eased * target);
       if (progress < 1) frame = requestAnimationFrame(tick);
     };
 
@@ -37,7 +38,7 @@ export default function StatCounter({
 
   return (
     <span ref={ref}>
-      {display}
+      {display.toFixed(decimals)}
       {suffix}
     </span>
   );

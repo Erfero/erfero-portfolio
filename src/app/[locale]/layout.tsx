@@ -9,6 +9,7 @@ import LocaleHtmlSync from "@/components/providers/LocaleHtmlSync";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import CustomCursor from "@/components/ui/CustomCursor";
+import FloatingCTA from "@/components/ui/FloatingCTA";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -101,6 +102,7 @@ export default async function LocaleLayout({
           <PageTransition>{children}</PageTransition>
         </main>
         <Footer />
+        <FloatingCTA />
       </SmoothScrollProvider>
     </NextIntlClientProvider>
   );

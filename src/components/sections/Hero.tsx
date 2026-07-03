@@ -53,7 +53,7 @@ function HeroShowcase({ projects }: { projects: Project[] }) {
             className="group absolute w-56 overflow-hidden rounded-2xl border border-white/10 shadow-2xl shadow-black/40"
           >
             <img
-              src={getScreenshotUrl(project.url, 500, 700)}
+              src={project.thumbnailOverride || getScreenshotUrl(project.url, 500, 700)}
               alt={item.name}
               loading="lazy"
               className="aspect-[5/7] w-full object-cover object-top transition-transform duration-500 group-hover:scale-110"
@@ -178,14 +178,21 @@ export default function Hero({ projects }: { projects: Project[] }) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1, duration: 0.6 }}
-        className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-xs text-ink-muted sm:flex"
+        className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-3 text-xs uppercase tracking-widest text-ink-muted sm:flex"
       >
-        {t("scrollHint")}
+        <span>{t("scrollHint")}</span>
+        <div className="relative flex h-10 w-6 justify-center rounded-full border border-border/80 bg-white/[0.02] p-1">
+          <motion.span
+            className="block size-1.5 rounded-full bg-lime shadow-[0_0_8px_1px_var(--color-lime)]"
+            animate={{ y: [0, 16, 0], opacity: [1, 0.3, 1] }}
+            transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+          />
+        </div>
         <motion.div
-          animate={{ y: [0, 6, 0] }}
+          animate={{ y: [0, 4, 0] }}
           transition={{ duration: 1.6, repeat: Infinity }}
         >
-          <ChevronDown className="size-4" />
+          <ChevronDown className="size-3.5" />
         </motion.div>
       </motion.div>
     </section>

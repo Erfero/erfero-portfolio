@@ -54,8 +54,14 @@ function AppsVisual() {
           className="h-2.5 rounded bg-lime/60"
           style={{ width: 14 + i * 8 }}
           initial={{ opacity: 0, y: -6 }}
-          animate={{ opacity: 1 - i * 0.15, y: 0 }}
-          transition={{ duration: 0.5, delay: i * 0.15, repeat: Infinity, repeatDelay: 1.6 }}
+          animate={{ opacity: [0, 1 - i * 0.15, 1 - i * 0.15, 0] }}
+          transition={{
+            duration: 2.1,
+            delay: i * 0.15,
+            repeat: Infinity,
+            repeatDelay: 0.4,
+            times: [0, 0.2, 0.8, 1],
+          }}
         />
       ))}
     </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
@@ -10,6 +10,7 @@ import LocaleSwitcher from "./LocaleSwitcher";
 
 export default function Navbar() {
   const t = useTranslations("nav");
+  const locale = useLocale();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -20,11 +21,23 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  const homeHref = locale === "en" ? "/en" : "/";
+  const tagline =
+    siteConfig.tagline[locale as keyof typeof siteConfig.tagline] ??
+    siteConfig.tagline.fr;
+
+  const goHome = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setOpen(false);
+    window.location.href = homeHref;
+  };
+
   const links = [
-    { href: "/#services", label: t("services") },
+    { href: "/services", label: t("services") },
     { href: "/realisations", label: t("projects") },
-    { href: "/#process", label: t("process") },
-    { href: "/#faq", label: t("faq") },
+    { href: "/process", label: t("process") },
+    { href: "/faq", label: t("faq") },
+    { href: "/contact", label: t("contactMenu") },
   ];
 
   return (
@@ -39,17 +52,24 @@ export default function Navbar() {
           className={cn(
             "flex items-center justify-between rounded-full px-4 py-2.5 transition-all duration-300",
             scrolled
-              ? "border border-border bg-bg/90 shadow-lg shadow-black/20 backdrop-blur-xl"
-              : "border border-transparent bg-bg/40 backdrop-blur-md"
+              ? "border border-border bg-surface/85 shadow-lg shadow-black/20 backdrop-blur-xl"
+              : "border border-transparent bg-surface/45 backdrop-blur-md"
           )}
         >
-          <Link
-            href="/"
-            className="font-display text-lg font-semibold tracking-tight"
-            onClick={() => setOpen(false)}
+          <a
+            href={homeHref}
+            onClick={goHome}
+            className="flex items-center gap-3"
           >
-            {siteConfig.shortName}
-          </Link>
+            <span className="font-display text-lg font-semibold tracking-tight">
+              {siteConfig.shortName}
+              <span className="ml-0.5 align-baseline text-2xl leading-none text-lime">.</span>
+            </span>
+            <span className="hidden h-4 w-px bg-border lg:block" />
+            <span className="hidden text-[11px] text-ink-muted lg:block">
+              {tagline}
+            </span>
+          </a>
 
           <nav className="hidden items-center gap-8 md:flex">
             {links.map((link) => (
@@ -66,7 +86,7 @@ export default function Navbar() {
           <div className="hidden items-center gap-3 md:flex">
             <LocaleSwitcher />
             <Link
-              href="/#contact"
+              href="/contact"
               className="group inline-flex items-center gap-1.5 rounded-full bg-lime px-4 py-2 text-sm font-medium text-bg transition-transform hover:scale-105"
             >
               {t("cta")}
@@ -98,7 +118,7 @@ export default function Navbar() {
             <div className="mt-2 flex items-center justify-between px-3">
               <LocaleSwitcher />
               <Link
-                href="/#contact"
+                href="/contact"
                 onClick={() => setOpen(false)}
                 className="inline-flex items-center gap-1.5 rounded-full bg-lime px-4 py-2 text-sm font-medium text-bg"
               >

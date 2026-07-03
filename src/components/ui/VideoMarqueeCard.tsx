@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Maximize2, Video as VideoIcon } from "lucide-react";
 import type { VideoEntry } from "@/data/videos";
@@ -16,6 +16,24 @@ export default function VideoMarqueeCard({
 }) {
   const [failed, setFailed] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  // Avec des dizaines de vidéos dans le carrousel, autoplay sur toutes en
+  // même temps rend le site très lent : seule la vidéo réellement visible
+  // à l'écran doit décoder et jouer.
+  useEffect(() => {
+    const el = videoRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) el.play().catch(() => {});
+        else el.pause();
+      },
+      { threshold: 0.25 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   const playMusic = () => {
     if (!video.musicSrc) return;
@@ -46,13 +64,13 @@ export default function VideoMarqueeCard({
     >
       {!failed && (
         <video
+          ref={videoRef}
           className="absolute inset-0 size-full object-cover"
           src={video.src}
           muted
           loop
-          autoPlay
           playsInline
-          preload="metadata"
+          preload="none"
           onError={() => setFailed(true)}
         />
       )}

@@ -13,7 +13,12 @@ import TechStack from "@/components/sections/TechStack";
 import Trust from "@/components/sections/Trust";
 import FAQ from "@/components/sections/FAQ";
 import Contact from "@/components/sections/Contact";
-import { getVisibleProjects, getVideos, getTestimonials } from "@/lib/content";
+import {
+  getVisibleProjects,
+  getVideos,
+  getTestimonials,
+  getNicheImages,
+} from "@/lib/content";
 
 export default async function HomePage({
   params,
@@ -23,10 +28,11 @@ export default async function HomePage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const [projects, videos, testimonials] = await Promise.all([
+  const [projects, videos, testimonials, nicheImages] = await Promise.all([
     getVisibleProjects(),
     getVideos(),
     getTestimonials(),
+    getNicheImages(),
   ]);
 
   return (
@@ -34,10 +40,10 @@ export default async function HomePage({
       <Hero projects={projects} />
       <FeaturedProjects projects={projects} videos={videos} />
       <VideoReels videos={videos} />
-      <Testimonials testimonials={testimonials} />
       <Services />
+      <Testimonials testimonials={testimonials} />
       <Pricing />
-      <ExpertiseCatalog projects={projects} />
+      <ExpertiseCatalog projects={projects} nicheImages={nicheImages} />
       <PainPoints />
       <Metrics />
       <Process />

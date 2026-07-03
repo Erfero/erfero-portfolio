@@ -11,6 +11,13 @@ export default function Testimonials({
 }) {
   const t = useTranslations("testimonials");
 
+  // Les emplacements "screenshot"/"video" restent masqués tant qu'aucun média
+  // réel n'a été ajouté depuis /admin/testimonials (évite d'afficher une
+  // preuve vide ou fabriquée).
+  const visible = testimonials.filter(
+    (item) => (item.type !== "screenshot" && item.type !== "video") || item.mediaUrl
+  );
+
   return (
     <section className="relative py-16 sm:py-20">
       <div className="container-page">
@@ -21,7 +28,7 @@ export default function Testimonials({
         />
 
         <div className="mt-12 columns-1 gap-4 sm:columns-2 lg:columns-3">
-          {testimonials.map((testimonial, i) => (
+          {visible.map((testimonial, i) => (
             <Reveal
               key={testimonial.id}
               delay={i * 0.05}

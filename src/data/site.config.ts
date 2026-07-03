@@ -1,9 +1,13 @@
 export const siteConfig = {
-  name: "Erféro Keoula",
-  shortName: "Erféro",
-  studioName: "Erféro Studio",
+  name: "Erfero Keoula",
+  shortName: "Erfero",
+  studioName: "Erfero Studio",
   role: "Développeur Shopify & Web FullStack",
-  location: "Cotonou, Bénin — Télétravail dans le monde entier",
+  tagline: {
+    fr: "Boutiques Shopify qui vendent",
+    en: "Shopify stores that sell",
+  },
+  location: "Télétravail dans le monde entier",
   email: "erferokam@gmail.com",
   phone: "+229 69 27 25 95",
   whatsappNumber: "22969272595",

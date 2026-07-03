@@ -15,7 +15,9 @@ export default function FeaturedProjects({
   videos: VideoEntry[];
 }) {
   const t = useTranslations("projects");
-  const featured = projects.slice(0, 10);
+  // Toutes les boutiques actuellement en ligne défilent ici, pas seulement
+  // un extrait — le vérificateur de liens tient cette liste à jour tout seul.
+  const featured = projects;
 
   return (
     <section

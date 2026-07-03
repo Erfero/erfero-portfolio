@@ -24,9 +24,15 @@ export default function Pricing() {
           subtitle={t("subtitle")}
         />
 
-        <div className="mt-14 grid gap-6 lg:grid-cols-3">
+        <Reveal delay={0.1} className="mx-auto mt-8 max-w-2xl">
+          <p className="rounded-full border border-lime/30 bg-lime/6 px-5 py-2.5 text-center text-sm text-lime">
+            {t("guarantee")}
+          </p>
+        </Reveal>
+
+        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {plans.map((plan, i) => {
-            const popular = i === 1;
+            const popular = i === 0;
             return (
               <Reveal key={plan.name} delay={i * 0.08}>
                 <div

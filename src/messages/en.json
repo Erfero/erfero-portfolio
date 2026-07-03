@@ -6,6 +6,9 @@
     "title": "Erféro Keoula — Freelance Shopify Developer | Custom Shopify Store Design",
     "description": "Expert freelance Shopify developer (5+ years of experience): custom Shopify store builds, redesigns, conversion rate optimization (CRO) and SEO. 200+ stores delivered, ready to sell in days."
   },
+  "floatingCta": {
+    "label": "Start my project"
+  },
   "nav": {
     "home": "Home",
     "projects": "Work",
@@ -13,6 +16,7 @@
     "process": "Process",
     "faq": "FAQ",
     "contact": "Contact",
+    "contactMenu": "Contact me",
     "cta": "Start a project",
     "switchLocale": "FR"
   },
@@ -20,14 +24,14 @@
     "badge": "Freelance Shopify Developer · Open for new projects",
     "titleLine1": "Shopify stores",
     "titleHighlight": "built to be bought from.",
-    "subtitle": "I design and build fast, custom Shopify stores made to convert — for brands that refuse the generic theme.",
+    "subtitle": "More visitors, more sales, better Google rankings — I build Shopify stores engineered for that exact outcome, not just to look nice.",
     "ctaPrimary": "Let's talk about your project",
     "ctaSecondary": "See my work",
     "scrollHint": "Scroll",
     "stats": [
       { "value": "200+", "label": "stores launched" },
       { "value": "5 yrs", "label": "of web experience" },
-      { "value": "98%", "label": "happy clients" }
+      { "value": "4.8/5", "label": "average client rating" }
     ]
   },
   "painPoints": {
@@ -107,39 +111,55 @@
   "pricing": {
     "eyebrow": "Pricing",
     "title": "Clear packs, starting at €100",
-    "subtitle": "Price depends on the theme and project scope — here's a starting point, to refine together based on your exact needs.",
+    "subtitle": "Single-product or multi-product store, premium Story theme, default template or fully custom: the price adapts to your project, never the other way around.",
+    "guarantee": "Not happy with the result? You don't pay. Post-delivery adjustments are included, never a hidden extra.",
     "popular": "Most chosen",
     "cta": "Request a quote",
     "plans": [
       {
-        "name": "Starter store",
+        "name": "Single-product store",
         "price": "From €100",
-        "description": "A store on a standard Shopify template or default theme. Ideal to launch fast on a controlled budget.",
+        "description": "Everything needed for a store ready to sell around one hero product — the same level as the stores featured on this site.",
         "features": [
-          "Default theme or template of your choice",
-          "Essential page structure",
-          "Fast turnaround"
+          "Premium Story theme, default template, or fully custom — your choice",
+          "Purchase flow built to convert (social proof, urgency, FAQ)",
+          "Optimized for mobile and load speed",
+          "Delivered in 3 days on average",
+          "Post-delivery adjustments included",
+          "Not happy? You don't pay."
         ]
       },
       {
-        "name": "Custom Story store",
-        "price": "Custom quote",
-        "description": "My specialty: a complete store on the premium Story theme with the full proven sales structure.",
+        "name": "Multi-product store",
+        "price": "From €250",
+        "description": "For a full catalog: collections, filters and navigation built so no visitor gets lost between pages.",
         "features": [
-          "Premium Story theme (or fully custom theme)",
-          "Social proof, urgency, comparisons, FAQ",
-          "Mobile & speed optimization",
-          "Technical SEO included"
+          "Catalog structure with unlimited collections",
+          "Navigation and filters built for conversion",
+          "Technical SEO across every product page",
+          "Post-delivery adjustments included"
+        ]
+      },
+      {
+        "name": "Custom theme & design",
+        "price": "Custom quote",
+        "description": "A 100% custom theme designed and coded for your brand — not for just any store.",
+        "features": [
+          "Custom theme design and development",
+          "Art direction aligned with your brand",
+          "Technical SEO included",
+          "Launch support"
         ]
       },
       {
         "name": "Ongoing management",
         "price": "Custom quote, monthly",
-        "description": "I run your store day to day: adding products, monitoring sales, ongoing advice to keep improving.",
+        "description": "I run your store like a real assistant: adding products, monitoring sales, ongoing advice to sell more every month.",
         "features": [
-          "Product uploads & optimization",
-          "Sales monitoring",
-          "Continuous improvement advice"
+          "Product uploads and optimization, A to Z",
+          "Sales and traffic monitoring",
+          "Continuous improvement advice",
+          "Available on demand, no long-term commitment"
         ]
       }
     ]
@@ -182,7 +202,7 @@
       { "value": "200", "suffix": "+", "label": "Shopify stores launched" },
       { "value": "200", "suffix": "+", "label": "behind-the-scenes videos" },
       { "value": "3", "suffix": "d", "label": "average delivery time" },
-      { "value": "98", "suffix": "%", "label": "happy clients" }
+      { "value": "4.8", "suffix": "/5", "label": "average client rating" }
     ]
   },
   "projects": {
@@ -241,7 +261,7 @@
       { "q": "How much does a Shopify store cost?", "a": "It depends on the project's complexity (number of pages, features, custom design or not). After our discovery call, you'll get a clear, detailed quote — no surprises." },
       { "q": "How long does a project take?", "a": "On average 3 days for a complete store, depending on complexity and how fast feedback comes back. You get a precise timeline upfront." },
       { "q": "I don't have products or a logo yet, is that a problem?", "a": "Not at all. We can move in parallel: I build the structure while you finalize your branding, or I can help with that too." },
-      { "q": "Do you work with clients outside Benin?", "a": "Yes, I work remotely with clients worldwide, in both French and English." },
+      { "q": "Do you work with international clients?", "a": "Yes, I work remotely with clients worldwide, businesses and solo founders alike, in both French and English." },
       { "q": "Do I fully own my store?", "a": "Completely. Your Shopify store is entirely yours, along with any custom code built for you." },
       { "q": "What happens after launch?", "a": "I stay available for maintenance, improvements or urgent fixes, with or without an ongoing support plan depending on your needs." },
       { "q": "Can you improve an existing store?", "a": "Yes, auditing and redesigning existing stores is one of my most requested services." }

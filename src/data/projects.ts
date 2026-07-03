@@ -24,6 +24,33 @@ export interface Project {
   /** Note de qualité visuelle sur 10 (design, structure, preuve sociale) —
    * sert à classer les boutiques du plus au moins abouti sur le portfolio. */
   rating?: number;
+  /** Position forcée (1 = premier) dans la liste des réalisations, prioritaire
+   * sur le tri par note. Utile pour épingler une boutique à un rang précis
+   * depuis l'admin sans devoir recalculer toutes les notes. */
+  pinnedRank?: number;
+  /** Capture d'écran personnalisée (upload via la Médiathèque admin) à
+   * utiliser à la place de la capture live automatique — utile quand le
+   * service de capture automatique échoue sur une boutique en particulier. */
+  thumbnailOverride?: string;
+}
+
+/** Trie par note (desc) puis applique les positions épinglées (pinnedRank)
+ * par-dessus, du rang le plus bas au plus élevé pour éviter les collisions. */
+export function sortProjectsForDisplay(list: Project[]): Project[] {
+  const sorted = [...list].sort((a, b) => (b.rating ?? 7) - (a.rating ?? 7));
+  const pinned = sorted
+    .filter((p) => p.pinnedRank != null)
+    .sort((a, b) => (a.pinnedRank ?? 0) - (b.pinnedRank ?? 0));
+
+  for (const project of pinned) {
+    const from = sorted.findIndex((p) => p.id === project.id);
+    if (from === -1) continue;
+    sorted.splice(from, 1);
+    const to = Math.min(Math.max((project.pinnedRank ?? 1) - 1, 0), sorted.length);
+    sorted.splice(to, 0, project);
+  }
+
+  return sorted;
 }
 
 export const projects: Project[] = [
@@ -36,6 +63,7 @@ export const projects: Project[] = [
     videoSrc: "/videos/cisse-glow.mp4",
     year: 2025,
     rating: 8.5,
+    pinnedRank: 5,
     name: { fr: "Cissé Glow", en: "Cissé Glow" },
     tagline: {
       fr: "Beauté & high-tech skincare",
@@ -2063,6 +2091,6 @@ export const projects: Project[] = [
  * passe côté Shopify — aucune action de plus ne sera nécessaire ici.
  * Dernière vérification : voir date du commit qui a ajusté ce fichier.
  */
-export const visibleProjects = projects
-  .filter((p) => p.status === "live")
-  .sort((a, b) => (b.rating ?? 7) - (a.rating ?? 7));
+export const visibleProjects = sortProjectsForDisplay(
+  projects.filter((p) => p.status === "live")
+);

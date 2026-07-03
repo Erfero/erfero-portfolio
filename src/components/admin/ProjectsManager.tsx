@@ -266,6 +266,48 @@ export default function ProjectsManager({
                   className={inputClass}
                 />
               </Field>
+              <Field label="Note (classement, ex: 7.5)">
+                <input
+                  type="number"
+                  step="0.5"
+                  value={project.rating ?? ""}
+                  onChange={(e) =>
+                    update(i, {
+                      rating: e.target.value === "" ? undefined : Number(e.target.value),
+                    })
+                  }
+                  className={inputClass}
+                  placeholder="7"
+                />
+              </Field>
+              <Field label="Position forcée (1 = première, vide = auto par note)">
+                <input
+                  type="number"
+                  min={1}
+                  value={project.pinnedRank ?? ""}
+                  onChange={(e) =>
+                    update(i, {
+                      pinnedRank: e.target.value === "" ? undefined : Number(e.target.value),
+                    })
+                  }
+                  className={inputClass}
+                  placeholder="ex: 5"
+                />
+              </Field>
+              <Field label="Capture d'écran personnalisée (si la capture live échoue)">
+                <input
+                  list={`thumb-${i}`}
+                  value={project.thumbnailOverride ?? ""}
+                  onChange={(e) => update(i, { thumbnailOverride: e.target.value })}
+                  className={inputClass}
+                  placeholder="URL depuis la Médiathèque"
+                />
+                <datalist id={`thumb-${i}`}>
+                  {mediaUrls.map((url) => (
+                    <option key={url} value={url} />
+                  ))}
+                </datalist>
+              </Field>
             </div>
           </div>
         ))}

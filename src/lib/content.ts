@@ -3,6 +3,7 @@ import frDefault from "@/messages/fr.json";
 import enDefault from "@/messages/en.json";
 import {
   projects as defaultProjects,
+  sortProjectsForDisplay,
   type Project,
   type ProjectStatus,
 } from "@/data/projects";
@@ -47,7 +48,7 @@ export async function getProjects(): Promise<Project[]> {
 
 export async function getVisibleProjects(): Promise<Project[]> {
   const all = await getProjects();
-  return all.filter((p) => p.status === "live");
+  return sortProjectsForDisplay(all.filter((p) => p.status === "live"));
 }
 
 export async function getVideos(): Promise<VideoEntry[]> {
@@ -60,4 +61,13 @@ export async function getTestimonials(): Promise<Testimonial[]> {
     "content/testimonials.json"
   );
   return override && override.length > 0 ? override : defaultTestimonials;
+}
+
+/** Image représentative par univers/niche (catalogue) — vide par défaut,
+ * modifiable depuis /admin/catalog sans toucher au code. */
+export async function getNicheImages(): Promise<Record<string, string>> {
+  const override = await readJsonBlob<Record<string, string>>(
+    "content/niche-images.json"
+  );
+  return override ?? {};
 }

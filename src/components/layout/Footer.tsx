@@ -32,9 +32,9 @@ export default function Footer() {
                 target="_blank"
                 rel="noreferrer"
                 aria-label={label}
-                className="grid size-9 place-items-center rounded-full border border-border text-ink-muted transition-colors hover:border-lime/50 hover:text-lime"
+                className="grid size-10 place-items-center rounded-full border border-border text-ink-muted transition-colors hover:border-lime/50 hover:text-lime"
               >
-                <Icon className="size-4" />
+                <Icon className="size-5" />
               </a>
             ))}
           </div>
@@ -45,13 +45,13 @@ export default function Footer() {
             <span className="text-xs uppercase tracking-wide text-ink-muted/70">
               {nav("home")}
             </span>
-            <Link href="/#services" className="text-ink-muted hover:text-ink">
+            <Link href="/services" className="text-ink-muted hover:text-ink">
               {nav("services")}
             </Link>
             <Link href="/realisations" className="text-ink-muted hover:text-ink">
               {nav("projects")}
             </Link>
-            <Link href="/#faq" className="text-ink-muted hover:text-ink">
+            <Link href="/faq" className="text-ink-muted hover:text-ink">
               {nav("faq")}
             </Link>
           </div>

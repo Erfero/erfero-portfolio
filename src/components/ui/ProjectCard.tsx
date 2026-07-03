@@ -28,18 +28,20 @@ export default function ProjectCard({
   const [hovering, setHovering] = useState(false);
   const rotateX = useMotionValue(0);
   const rotateY = useMotionValue(0);
-  const springX = useSpring(rotateX, { stiffness: 300, damping: 25 });
-  const springY = useSpring(rotateY, { stiffness: 300, damping: 25 });
-  const glowX = useTransform(springY, [-8, 8], [0, 100]);
-  const glowY = useTransform(springX, [8, -8], [0, 100]);
+  const springX = useSpring(rotateX, { stiffness: 200, damping: 32 });
+  const springY = useSpring(rotateY, { stiffness: 200, damping: 32 });
+  const glowX = useTransform(springY, [-4, 4], [0, 100]);
+  const glowY = useTransform(springX, [4, -4], [0, 100]);
 
+  // Tilt volontairement discret (±4°) : un effet trop marqué déplace le
+  // bouton "Voir la boutique" sous le curseur et le rend difficile à cliquer.
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = ref.current?.getBoundingClientRect();
     if (!rect) return;
     const px = (e.clientX - rect.left) / rect.width;
     const py = (e.clientY - rect.top) / rect.height;
-    rotateY.set((px - 0.5) * 16);
-    rotateX.set((0.5 - py) * 16);
+    rotateY.set((px - 0.5) * 8);
+    rotateX.set((0.5 - py) * 8);
   };
 
   const reset = () => {
@@ -71,7 +73,7 @@ export default function ProjectCard({
         className="relative block aspect-[4/3] overflow-hidden"
       >
         <motion.img
-          src={getScreenshotUrl(project.url)}
+          src={project.thumbnailOverride || getScreenshotUrl(project.url)}
           alt={item.name}
           loading="lazy"
           animate={{ scale: hovering && !relatedVideo ? 1.06 : 1 }}
@@ -111,14 +113,14 @@ export default function ProjectCard({
           {t("badges.live")}
         </span>
 
-        <h3 className="absolute bottom-4 left-4 right-4 font-display text-2xl font-semibold text-white drop-shadow-sm">
+        <h3 className="absolute bottom-3 left-3 right-3 font-display text-lg font-semibold text-white drop-shadow-sm sm:bottom-4 sm:left-4 sm:right-4 sm:text-2xl">
           {item.name}
         </h3>
       </a>
 
-      <div className="flex flex-1 flex-col p-6">
+      <div className="flex flex-1 flex-col p-4 sm:p-6">
         <p className="text-sm font-medium text-lime">{item.tagline}</p>
-        <p className="mt-2 text-sm leading-relaxed text-ink-muted">
+        <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-ink-muted sm:line-clamp-none">
           {item.description}
         </p>
 
@@ -133,7 +135,7 @@ export default function ProjectCard({
           ))}
         </div>
 
-        <div className="mt-5 flex items-center justify-between border-t border-border pt-4">
+        <div className="mt-4 flex items-center justify-between border-t border-border pt-3 sm:mt-5 sm:pt-4">
           <a
             href={project.url}
             target="_blank"

@@ -6,6 +6,9 @@
     "title": "Erféro Keoula — Développeur Shopify Freelance | Création de Boutique Shopify Sur-Mesure",
     "description": "Développeur Shopify freelance expert (5+ ans d'expérience) : création de boutique Shopify sur-mesure, refonte, optimisation de la conversion (CRO) et SEO. Plus de 200 boutiques livrées, prêtes à vendre en quelques jours."
   },
+  "floatingCta": {
+    "label": "Lancer mon projet"
+  },
   "nav": {
     "home": "Accueil",
     "projects": "Réalisations",
@@ -13,6 +16,7 @@
     "process": "Process",
     "faq": "FAQ",
     "contact": "Contact",
+    "contactMenu": "Contactez-moi",
     "cta": "Démarrer un projet",
     "switchLocale": "EN"
   },
@@ -20,14 +24,14 @@
     "badge": "Développeur Shopify freelance · Disponible pour de nouveaux projets",
     "titleLine1": "Des boutiques Shopify",
     "titleHighlight": "qui donnent envie d'acheter.",
-    "subtitle": "Je conçois et développe des boutiques Shopify rapides, sur-mesure et pensées pour convertir — pour des marques qui refusent le thème générique.",
+    "subtitle": "Plus de visiteurs, plus de ventes, un meilleur classement Google — je construis des boutiques Shopify pensées pour ce résultat précis, pas juste pour être jolies.",
     "ctaPrimary": "Discutons de ton projet",
     "ctaSecondary": "Voir mes réalisations",
     "scrollHint": "Scroll",
     "stats": [
       { "value": "200+", "label": "boutiques lancées" },
       { "value": "5 ans", "label": "d'expérience web" },
-      { "value": "98%", "label": "clients satisfaits" }
+      { "value": "4.8/5", "label": "note moyenne clients" }
     ]
   },
   "painPoints": {
@@ -107,39 +111,55 @@
   "pricing": {
     "eyebrow": "Tarifs",
     "title": "Des packs clairs, à partir de 100 €",
-    "subtitle": "Le prix dépend du thème choisi et du périmètre du projet — voici une base de départ, à ajuster ensemble selon ton besoin exact.",
+    "subtitle": "Boutique mono-produit ou multiproduit, thème premium Story, template par défaut ou sur-mesure : le tarif s'ajuste à ton projet, jamais l'inverse.",
+    "guarantee": "Pas satisfait du résultat ? Pas facturé. Les ajustements après livraison sont inclus, jamais en supplément caché.",
     "popular": "Le plus choisi",
     "cta": "Demander un devis",
     "plans": [
       {
-        "name": "Boutique Starter",
+        "name": "Boutique Mono-produit",
         "price": "À partir de 100 €",
-        "description": "Boutique sur template Shopify standard ou thème par défaut. Idéal pour démarrer vite avec un budget maîtrisé.",
+        "description": "Tout le nécessaire pour une boutique prête à vendre autour d'un produit phare — le même niveau que les boutiques présentées sur ce site.",
         "features": [
-          "Thème par défaut ou template de ton choix",
-          "Structure de pages essentielles",
-          "Mise en ligne rapide"
+          "Thème Story premium, template par défaut ou sur-mesure, à ton choix",
+          "Tunnel d'achat pensé pour convertir (preuve sociale, urgence, FAQ)",
+          "Optimisé mobile et vitesse de chargement",
+          "Mise en ligne en 3 jours en moyenne",
+          "Ajustements après livraison inclus",
+          "Pas satisfait ? Pas facturé."
         ]
       },
       {
-        "name": "Boutique Story sur-mesure",
-        "price": "Sur devis",
-        "description": "Ma spécialité : boutique complète sur le thème premium Story avec toute la structure de vente qui a fait ses preuves.",
+        "name": "Boutique Multiproduit",
+        "price": "À partir de 250 €",
+        "description": "Pour un catalogue complet : collections, filtres et navigation pensés pour ne perdre aucun visiteur entre les pages.",
         "features": [
-          "Thème premium Story (ou thème sur-mesure)",
-          "Preuve sociale, urgence, comparatifs, FAQ",
-          "Optimisation mobile & vitesse",
-          "SEO technique inclus"
+          "Structure de catalogue et collections illimitées",
+          "Navigation et filtres pensés pour la conversion",
+          "SEO technique sur toutes les pages produits",
+          "Ajustements après livraison inclus"
+        ]
+      },
+      {
+        "name": "Sur-mesure & thème personnalisé",
+        "price": "Sur devis",
+        "description": "Thème 100 % personnalisé, conçu et codé pour ta marque plutôt que pour n'importe quelle boutique.",
+        "features": [
+          "Design et développement de thème sur-mesure",
+          "Direction artistique alignée sur ta marque",
+          "SEO technique inclus",
+          "Accompagnement au lancement"
         ]
       },
       {
         "name": "Accompagnement & gestion",
         "price": "Sur devis, au mois",
-        "description": "Je gère ta boutique au quotidien : ajout de produits, suivi des ventes, conseils pour progresser en continu.",
+        "description": "Je gère ta boutique comme un vrai assistant : ajout de produits, suivi des ventes, conseils pour vendre plus chaque mois.",
         "features": [
-          "Ajout et optimisation de produits",
-          "Surveillance des ventes",
-          "Conseils d'amélioration continue"
+          "Ajout et optimisation de produits, de A à Z",
+          "Suivi des ventes et du trafic",
+          "Conseils d'amélioration continue",
+          "Disponible à la demande, sans engagement long"
         ]
       }
     ]
@@ -182,7 +202,7 @@
       { "value": "200", "suffix": "+", "label": "boutiques Shopify lancées" },
       { "value": "200", "suffix": "+", "label": "vidéos de réalisations" },
       { "value": "3", "suffix": "j", "label": "délai moyen de livraison" },
-      { "value": "98", "suffix": "%", "label": "clients satisfaits" }
+      { "value": "4.8", "suffix": "/5", "label": "note moyenne clients" }
     ]
   },
   "projects": {
@@ -241,7 +261,7 @@
       { "q": "Combien coûte la création d'une boutique Shopify ?", "a": "Ça dépend de la complexité du projet (nombre de pages, fonctionnalités, design sur-mesure ou non). Après notre appel découverte, tu reçois un devis clair et détaillé, sans surprise." },
       { "q": "Combien de temps prend un projet ?", "a": "En moyenne 3 jours pour une boutique complète, selon la complexité et la réactivité sur les retours. Tu reçois un planning précis dès le départ." },
       { "q": "Je n'ai pas encore de produits ou de logo, c'est un problème ?", "a": "Non. On peut avancer en parallèle : je construis la structure pendant que tu finalises ton branding, ou je peux t'accompagner sur cette partie aussi." },
-      { "q": "Tu travailles avec des clients en dehors du Bénin ?", "a": "Oui, je travaille à distance avec des clients partout dans le monde, en français comme en anglais." },
+      { "q": "Tu travailles avec des clients à l'étranger ?", "a": "Oui, je travaille à distance avec des clients partout dans le monde, entreprises comme indépendants, en français comme en anglais." },
       { "q": "Est-ce que je reste propriétaire de ma boutique ?", "a": "Totalement. Ta boutique Shopify t'appartient entièrement, ainsi que le code personnalisé développé pour toi." },
       { "q": "Que se passe-t-il après la mise en ligne ?", "a": "Je reste disponible pour la maintenance, les évolutions ou les urgences, avec ou sans forfait de suivi selon tes besoins." },
       { "q": "Peux-tu améliorer une boutique déjà existante ?", "a": "Oui, l'audit et la refonte de boutiques existantes font partie de mes services les plus demandés." }

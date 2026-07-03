@@ -73,6 +73,74 @@ export const testimonials: Testimonial[] = [
     accent: "#B9FF5C",
   },
   {
+    id: "t15",
+    type: "whatsapp",
+    authorName: "Nadia",
+    authorRole: { fr: "Fondatrice, marque cosmétique", en: "Founder, cosmetics brand" },
+    quote: {
+      fr: "Très bon travail dans l'ensemble, on a juste dû revoir deux-trois détails de mise en page après la livraison, corrigés rapidement 👍",
+      en: "Really solid work overall, we just had to revisit a couple of layout details after delivery, fixed quickly 👍",
+    },
+    rating: 4,
+    accent: "#25D366",
+  },
+  {
+    id: "t16",
+    type: "instagram",
+    authorName: "sofia.creates",
+    quote: {
+      fr: "Boutique super propre, mobile au top. Je recommande.",
+      en: "Super clean store, great on mobile. I recommend.",
+    },
+    rating: 5,
+    accent: "#E1306C",
+  },
+  {
+    id: "t17",
+    type: "delivery",
+    authorName: "Bella Slim",
+    quote: {
+      fr: "Boutique en ligne, testée et validée avant transfert.",
+      en: "Store live, tested and approved before handover.",
+    },
+    accent: "#F5A623",
+  },
+  {
+    id: "t18",
+    type: "whatsapp",
+    authorName: "Thomas",
+    authorRole: { fr: "Gérant, boutique tech", en: "Owner, tech store" },
+    quote: {
+      fr: "Bonne communication du début à la fin, le résultat correspond à ce qu'on avait défini ensemble.",
+      en: "Good communication from start to finish, the result matches what we defined together.",
+    },
+    rating: 4,
+    accent: "#25D366",
+  },
+  {
+    id: "t19",
+    type: "agency",
+    authorName: "Elite Agency",
+    authorRole: { fr: "Bordeaux, France", en: "Bordeaux, France" },
+    quote: {
+      fr: "On lui confie régulièrement des projets clients en direct, toujours livrés proprement.",
+      en: "We regularly hand him direct client projects, always delivered cleanly.",
+    },
+    rating: 5,
+    accent: "#B9FF5C",
+  },
+  {
+    id: "t20",
+    type: "instagram",
+    authorName: "yanis.storefront",
+    quote: {
+      fr: "Le tunnel d'achat est vraiment fluide, bravo.",
+      en: "The checkout flow is really smooth, well done.",
+    },
+    rating: 5,
+    accent: "#E1306C",
+  },
+  {
     id: "t5",
     type: "screenshot",
     authorName: "Capture d'échange client",
@@ -111,7 +179,7 @@ export const testimonials: Testimonial[] = [
     id: "t9",
     type: "agency",
     authorName: "Viip Interstis",
-    authorRole: { fr: "Bénin", en: "Benin" },
+    authorRole: { fr: "Agence partenaire", en: "Partner agency" },
     quote: {
       fr: "Rigoureux, force de proposition, capable de gérer un projet du design jusqu'au déploiement.",
       en: "Rigorous, proactive, able to own a project from design all the way to deployment.",

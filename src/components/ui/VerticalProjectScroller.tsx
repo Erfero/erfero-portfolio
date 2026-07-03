@@ -9,17 +9,23 @@ function Column({
   reverse,
   pauseSeconds,
   durationSeconds,
+  hideOnMobile,
 }: {
   projects: Project[];
   videos: VideoEntry[];
   reverse?: boolean;
   pauseSeconds: number;
   durationSeconds: number;
+  hideOnMobile?: boolean;
 }) {
   const doubled = [...projects, ...projects];
 
   return (
-    <div className="relative h-[720px] overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,black_8%,black_92%,transparent)]">
+    <div
+      className={`relative h-[420px] overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,black_8%,black_92%,transparent)] sm:h-[720px] ${
+        hideOnMobile ? "hidden sm:block" : ""
+      }`}
+    >
       <div
         className="flex flex-col gap-6 [animation-fill-mode:backwards] hover:[animation-play-state:paused]"
         style={{
@@ -58,6 +64,7 @@ export default function VerticalProjectScroller({
         reverse
         pauseSeconds={2.5}
         durationSeconds={55}
+        hideOnMobile
       />
     </div>
   );

@@ -8,6 +8,7 @@ import {
   Video,
   FileText,
   MessageSquareQuote,
+  LayoutGrid,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -17,6 +18,7 @@ const navItems = [
   { href: "/admin/projects", label: "Boutiques", icon: ListTodo },
   { href: "/admin/videos", label: "Mur de vidéos", icon: Video },
   { href: "/admin/testimonials", label: "Témoignages", icon: MessageSquareQuote },
+  { href: "/admin/catalog", label: "Catalogue (univers)", icon: LayoutGrid },
   { href: "/admin/content", label: "Textes du site", icon: FileText },
 ];
 

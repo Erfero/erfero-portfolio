@@ -176,7 +176,7 @@ function HeroShowcase({ projects }: { projects: Project[] }) {
   const locale = useLocale() as "fr" | "en";
 
   return (
-    <div className="relative hidden h-[640px] w-full lg:block">
+    <div className="relative h-[280px] w-full sm:h-[400px] lg:h-[640px]">
       {projects.slice(0, 5).map((project, i) => {
         const cfg = floatConfigs[i % floatConfigs.length];
         const item = { name: project.name[locale] };
@@ -205,7 +205,7 @@ function HeroShowcase({ projects }: { projects: Project[] }) {
             }}
             whileHover={{ scale: 1.05, zIndex: 20 }}
             style={{ left: cfg.x, top: cfg.y, rotate: cfg.rotate }}
-            className="group absolute w-56 overflow-hidden rounded-2xl border border-white/10 shadow-2xl shadow-black/40"
+            className="group absolute w-24 overflow-hidden rounded-xl border border-white/10 shadow-2xl shadow-black/40 sm:w-36 sm:rounded-2xl lg:w-56"
           >
             <img
               src={project.thumbnailOverride || getScreenshotUrl(project.url, 500, 700)}
@@ -214,7 +214,7 @@ function HeroShowcase({ projects }: { projects: Project[] }) {
               className="aspect-[5/7] w-full object-cover object-top transition-transform duration-500 group-hover:scale-110"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-            <span className="absolute bottom-3 left-3 text-sm font-medium text-white">
+            <span className="absolute bottom-1.5 left-1.5 text-[10px] font-medium text-white sm:bottom-3 sm:left-3 sm:text-sm">
               {item.name}
             </span>
           </motion.a>

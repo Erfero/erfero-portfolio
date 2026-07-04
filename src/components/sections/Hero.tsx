@@ -57,8 +57,8 @@ const starConfigs: FloatItem[] = [
   },
   {
     style: { bottom: "10%", right: "18%" },
-    sizeClass: "size-8 sm:size-12 lg:size-18",
-    opacity: 0.45,
+    sizeClass: "size-9 sm:size-12 lg:size-18",
+    opacity: 0.65,
     duration: 13,
     delay: 2,
     x: [0, -12, 16, -6, 0],
@@ -66,9 +66,9 @@ const starConfigs: FloatItem[] = [
     rotate: [0, -16, 26, -12, 0],
   },
   {
-    style: { top: "48%", left: "46%" },
-    sizeClass: "size-5 sm:size-7 lg:size-9",
-    opacity: 0.3,
+    style: { top: "48%", left: "6%" },
+    sizeClass: "size-6 sm:size-8 lg:size-9",
+    opacity: 0.5,
     duration: 10,
     delay: 1.6,
     x: [0, 8, -10, 4, 0],
@@ -101,9 +101,9 @@ const bagConfigs: FloatItem[] = [
     rotate: [6, -10, 6, 6],
   },
   {
-    style: { top: "36%", right: "26%" },
-    sizeClass: "size-5 sm:size-7 lg:size-9",
-    opacity: 0.45,
+    style: { top: "38%", right: "4%" },
+    sizeClass: "size-6 sm:size-8 lg:size-9",
+    opacity: 0.6,
     duration: 9.5,
     delay: 1.6,
     x: [0, -8, 10, 0],
@@ -111,9 +111,9 @@ const bagConfigs: FloatItem[] = [
     rotate: [-6, 10, -8, -6],
   },
   {
-    style: { bottom: "6%", left: "38%" },
-    sizeClass: "size-6 sm:size-8 lg:size-10",
-    opacity: 0.55,
+    style: { bottom: "4%", left: "42%" },
+    sizeClass: "size-7 sm:size-8 lg:size-10",
+    opacity: 0.65,
     duration: 10.5,
     delay: 0.6,
     x: [0, 10, -12, 0],
@@ -121,9 +121,9 @@ const bagConfigs: FloatItem[] = [
     rotate: [8, -8, 10, 8],
   },
   {
-    style: { top: "14%", left: "30%" },
-    sizeClass: "size-4 sm:size-6 lg:size-8",
-    opacity: 0.35,
+    style: { top: "3%", left: "38%" },
+    sizeClass: "size-6 sm:size-7 lg:size-8",
+    opacity: 0.55,
     duration: 12,
     delay: 2.3,
     x: [0, -6, 8, 0],
@@ -134,16 +134,17 @@ const bagConfigs: FloatItem[] = [
 
 function HeroDecor() {
   return (
-    <div aria-hidden className="pointer-events-none absolute inset-0">
+    <div aria-hidden className="pointer-events-none absolute inset-0 z-20">
       {starConfigs.map((cfg, i) => (
         <motion.div
           key={`star-${i}`}
           className={`absolute ${cfg.sizeClass}`}
           style={{ ...cfg.style, opacity: cfg.opacity }}
+          initial={{ x: 0, y: 0, rotate: 0 }}
           animate={{ x: cfg.x, y: cfg.y, rotate: cfg.rotate }}
           transition={{ duration: cfg.duration, delay: cfg.delay, repeat: Infinity, ease: "easeInOut" }}
         >
-          <TrustpilotStar className="size-full drop-shadow-[0_0_12px_rgba(0,182,122,0.35)]" />
+          <TrustpilotStar className="size-full drop-shadow-[0_2px_10px_rgba(0,182,122,0.6)]" />
         </motion.div>
       ))}
 
@@ -152,10 +153,11 @@ function HeroDecor() {
           key={`bag-${i}`}
           className={`absolute ${cfg.sizeClass}`}
           style={{ ...cfg.style, opacity: cfg.opacity }}
+          initial={{ x: 0, y: 0, rotate: 0 }}
           animate={{ x: cfg.x, y: cfg.y, rotate: cfg.rotate }}
           transition={{ duration: cfg.duration, delay: cfg.delay, repeat: Infinity, ease: "easeInOut" }}
         >
-          <ShopifyBagIcon className="size-full drop-shadow-[0_0_10px_rgba(149,191,71,0.35)]" />
+          <ShopifyBagIcon className="size-full drop-shadow-[0_2px_8px_rgba(149,191,71,0.6)]" />
         </motion.div>
       ))}
     </div>

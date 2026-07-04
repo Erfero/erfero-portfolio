@@ -11,8 +11,7 @@ export const siteConfig = {
   email: "erferokam@gmail.com",
   phone: "+229 69 27 25 95",
   whatsappNumber: "22969272595",
-  // TODO(erfero): remplace par ton vrai lien Calendly une fois le compte gratuit créé (voir README).
-  calendlyUrl: "https://calendly.com/erferokam/appel-decouverte",
+  calendlyUrl: "https://calendly.com/erferokam/30min",
   socials: {
     instagram: "https://www.instagram.com/erfero04",
     linkedin: "https://www.linkedin.com/in/erfero-keoula-905b7220",

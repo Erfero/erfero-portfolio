@@ -32,7 +32,19 @@
       { "value": "200+", "label": "stores launched" },
       { "value": "5 yrs", "label": "of web experience" },
       { "value": "4.8/5", "label": "average client rating" }
-    ]
+    ],
+    "mock": {
+      "badge": "New collection",
+      "heading": "Everyday",
+      "headingLine2": "elegance.",
+      "cta": "Shop −20%",
+      "addToCart": "Add to cart",
+      "toastTitle": "Sale confirmed",
+      "toastSub": "Cart · €102",
+      "growth": "+32% sales",
+      "growthSub": "after redesign",
+      "rating": "4.8"
+    }
   },
   "painPoints": {
     "eyebrow": "Sound familiar?",

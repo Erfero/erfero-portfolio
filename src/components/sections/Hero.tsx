@@ -1,12 +1,14 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { ArrowUpRight, ChevronDown } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import MagneticButton from "@/components/ui/MagneticButton";
 import GradientBlob from "@/components/ui/GradientBlob";
 import { ShopifyBagIcon, TrustpilotStar } from "@/components/ui/BrandIcons";
+import HeroSceneBrowser from "@/components/sections/HeroSceneBrowser";
 import type { Project } from "@/data/projects";
 import { getScreenshotUrl } from "@/lib/screenshot";
 
@@ -164,19 +166,56 @@ function HeroDecor() {
   );
 }
 
+// Chaque carte dérive sur x/y/rotate (pas juste un rebond vertical) pour un
+// mouvement flottant plus organique, façon "cartes qui respirent".
 const floatConfigs = [
-  { x: "0%", y: "2%", rotate: -6, duration: 6, delay: 0 },
-  { x: "38%", y: "6%", rotate: 5, duration: 7, delay: 0.6 },
-  { x: "4%", y: "44%", rotate: -3, duration: 6.5, delay: 1.2 },
-  { x: "44%", y: "50%", rotate: 4, duration: 7.5, delay: 0.3 },
-  { x: "20%", y: "72%", rotate: -5, duration: 6.8, delay: 0.9 },
+  {
+    x: "0%",
+    y: "2%",
+    duration: 6,
+    delay: 0,
+    drift: { x: [0, 5, -4, 0], y: [0, -18, 6, 0], rotate: [-6, -1, -9, -6] },
+  },
+  {
+    x: "38%",
+    y: "6%",
+    duration: 7,
+    delay: 0.6,
+    drift: { x: [0, -6, 4, 0], y: [0, -14, 8, 0], rotate: [5, 10, 1, 5] },
+  },
+  {
+    x: "4%",
+    y: "44%",
+    duration: 6.5,
+    delay: 1.2,
+    drift: { x: [0, 5, -6, 0], y: [0, -16, 5, 0], rotate: [-3, 2, -8, -3] },
+  },
+  {
+    x: "44%",
+    y: "50%",
+    duration: 7.5,
+    delay: 0.3,
+    drift: { x: [0, -5, 6, 0], y: [0, -20, 4, 0], rotate: [4, 9, -1, 4] },
+  },
+  {
+    x: "20%",
+    y: "72%",
+    duration: 6.8,
+    delay: 0.9,
+    drift: { x: [0, 6, -5, 0], y: [0, -15, 6, 0], rotate: [-5, 0, -10, -5] },
+  },
 ];
 
 function HeroShowcase({ projects }: { projects: Project[] }) {
   const locale = useLocale() as "fr" | "en";
 
   return (
-    <div className="relative h-[280px] w-full sm:h-[400px] lg:h-[640px]">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0, transition: { duration: 0.4 } }}
+      className="absolute inset-0"
+    >
       {projects.slice(0, 5).map((project, i) => {
         const cfg = floatConfigs[i % floatConfigs.length];
         const item = { name: project.name[locale] };
@@ -187,25 +226,34 @@ function HeroShowcase({ projects }: { projects: Project[] }) {
             href={project.url}
             target="_blank"
             rel="noreferrer"
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 0, scale: 0.85, y: 30 }}
             animate={{
               opacity: 1,
               scale: 1,
-              y: [0, -16, 0],
+              x: cfg.drift.x,
+              y: cfg.drift.y,
+              rotate: cfg.drift.rotate,
             }}
             transition={{
               opacity: { duration: 0.6, delay: 0.4 + i * 0.15 },
-              scale: { duration: 0.6, delay: 0.4 + i * 0.15 },
-              y: {
-                duration: cfg.duration,
-                delay: cfg.delay,
-                repeat: Infinity,
-                ease: "easeInOut",
+              scale: {
+                type: "spring",
+                stiffness: 140,
+                damping: 14,
+                delay: 0.4 + i * 0.15,
               },
+              x: { duration: cfg.duration, delay: cfg.delay, repeat: Infinity, ease: "easeInOut" },
+              y: { duration: cfg.duration, delay: cfg.delay, repeat: Infinity, ease: "easeInOut" },
+              rotate: { duration: cfg.duration, delay: cfg.delay, repeat: Infinity, ease: "easeInOut" },
             }}
-            whileHover={{ scale: 1.05, zIndex: 20 }}
-            style={{ left: cfg.x, top: cfg.y, rotate: cfg.rotate }}
-            className="group absolute w-24 overflow-hidden rounded-xl border border-white/10 shadow-2xl shadow-black/40 sm:w-36 sm:rounded-2xl lg:w-56"
+            whileHover={{
+              scale: 1.08,
+              rotate: 0,
+              zIndex: 20,
+              transition: { duration: 0.3, ease: "easeOut" },
+            }}
+            style={{ left: cfg.x, top: cfg.y }}
+            className="group absolute w-24 overflow-hidden rounded-xl border border-white/10 shadow-2xl shadow-black/40 transition-shadow duration-300 hover:shadow-[0_25px_60px_-15px_rgba(185,255,92,0.35)] sm:w-36 sm:rounded-2xl lg:w-56"
           >
             <img
               src={project.thumbnailOverride || getScreenshotUrl(project.url, 500, 700)}
@@ -220,6 +268,47 @@ function HeroShowcase({ projects }: { projects: Project[] }) {
           </motion.a>
         );
       })}
+
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8, y: 10 }}
+        animate={{ opacity: 1, scale: 1, y: [0, -8, 0] }}
+        exit={{ opacity: 0, transition: { duration: 0.3 } }}
+        transition={{
+          opacity: { duration: 0.6, delay: 1.2 },
+          scale: { duration: 0.6, delay: 1.2 },
+          y: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1.2 },
+        }}
+        className="glass absolute bottom-2 right-1 z-20 flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-semibold shadow-lg sm:bottom-4 sm:right-2"
+      >
+        <TrustpilotStar className="size-4" />
+        4.8
+      </motion.div>
+    </motion.div>
+  );
+}
+
+function HeroSceneSwitcher({ projects }: { projects: Project[] }) {
+  const prefersReducedMotion = useReducedMotion();
+  const [scene, setScene] = useState<"a" | "b">("a");
+
+  useEffect(() => {
+    if (prefersReducedMotion) return;
+    const duration = scene === "a" ? 7200 : 6400;
+    const id = setTimeout(() => setScene((s) => (s === "a" ? "b" : "a")), duration);
+    return () => clearTimeout(id);
+  }, [scene, prefersReducedMotion]);
+
+  const activeScene = prefersReducedMotion ? "b" : scene;
+
+  return (
+    <div className="relative order-first h-[280px] w-full sm:h-[400px] lg:order-last lg:h-[640px]">
+      <AnimatePresence mode="wait">
+        {activeScene === "a" ? (
+          <HeroSceneBrowser key="scene-a" projects={projects} />
+        ) : (
+          <HeroShowcase key="scene-b" projects={projects} />
+        )}
+      </AnimatePresence>
     </div>
   );
 }
@@ -234,7 +323,7 @@ export default function Hero({ projects }: { projects: Project[] }) {
       <HeroDecor />
 
       <div className="container-page relative z-10 grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-        <div className="flex flex-col gap-10">
+        <div className="order-last flex flex-col gap-10 lg:order-first">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
@@ -327,7 +416,7 @@ export default function Hero({ projects }: { projects: Project[] }) {
           </motion.div>
         </div>
 
-        <HeroShowcase projects={projects} />
+        <HeroSceneSwitcher projects={projects} />
       </div>
 
       <motion.div

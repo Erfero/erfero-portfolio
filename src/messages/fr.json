@@ -32,7 +32,19 @@
       { "value": "200+", "label": "boutiques lancées" },
       { "value": "5 ans", "label": "d'expérience web" },
       { "value": "4.8/5", "label": "note moyenne clients" }
-    ]
+    ],
+    "mock": {
+      "badge": "Nouvelle collection",
+      "heading": "L'élégance,",
+      "headingLine2": "au quotidien.",
+      "cta": "Acheter −20%",
+      "addToCart": "Ajouter au panier",
+      "toastTitle": "Vente confirmée",
+      "toastSub": "Panier · 102 €",
+      "growth": "+32% ventes",
+      "growthSub": "après refonte",
+      "rating": "4.8"
+    }
   },
   "painPoints": {
     "eyebrow": "Ça te parle ?",

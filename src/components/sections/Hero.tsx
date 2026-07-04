@@ -2,51 +2,162 @@
 
 import { useLocale, useTranslations } from "next-intl";
 import { motion } from "framer-motion";
-import { ArrowUpRight, ChevronDown, Star } from "lucide-react";
+import { ArrowUpRight, ChevronDown } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import MagneticButton from "@/components/ui/MagneticButton";
 import GradientBlob from "@/components/ui/GradientBlob";
-import { ShopifyBagIcon } from "@/components/ui/BrandIcons";
+import { ShopifyBagIcon, TrustpilotStar } from "@/components/ui/BrandIcons";
 import type { Project } from "@/data/projects";
 import { getScreenshotUrl } from "@/lib/screenshot";
+
+interface FloatItem {
+  style: React.CSSProperties;
+  sizeClass: string;
+  opacity: number;
+  duration: number;
+  delay: number;
+  x: number[];
+  y: number[];
+  rotate: number[];
+}
+
+// 5 étoiles (vert Trustpilot) qui dérivent lentement dans des trajectoires
+// irrégulières (x/y/rotate en plusieurs points), chacune à sa propre vitesse
+// et son propre décalage pour un mouvement organique, pas synchronisé.
+const starConfigs: FloatItem[] = [
+  {
+    style: { top: "9%", left: "3%" },
+    sizeClass: "size-10 sm:size-16 lg:size-24",
+    opacity: 0.85,
+    duration: 9,
+    delay: 0,
+    x: [0, 16, -10, 4, 0],
+    y: [0, -20, 8, -6, 0],
+    rotate: [0, 30, -18, 12, 0],
+  },
+  {
+    style: { top: "22%", right: "6%" },
+    sizeClass: "size-7 sm:size-11 lg:size-16",
+    opacity: 0.6,
+    duration: 11,
+    delay: 1.1,
+    x: [0, -14, 10, -4, 0],
+    y: [0, 14, -12, 6, 0],
+    rotate: [0, -25, 18, -10, 0],
+  },
+  {
+    style: { bottom: "26%", left: "11%" },
+    sizeClass: "size-6 sm:size-9 lg:size-12",
+    opacity: 0.7,
+    duration: 8,
+    delay: 0.5,
+    x: [0, 10, -12, 5, 0],
+    y: [0, -12, 14, -8, 0],
+    rotate: [0, 22, -20, 8, 0],
+  },
+  {
+    style: { bottom: "10%", right: "18%" },
+    sizeClass: "size-8 sm:size-12 lg:size-18",
+    opacity: 0.45,
+    duration: 13,
+    delay: 2,
+    x: [0, -12, 16, -6, 0],
+    y: [0, 16, -10, 8, 0],
+    rotate: [0, -16, 26, -12, 0],
+  },
+  {
+    style: { top: "48%", left: "46%" },
+    sizeClass: "size-5 sm:size-7 lg:size-9",
+    opacity: 0.3,
+    duration: 10,
+    delay: 1.6,
+    x: [0, 8, -10, 4, 0],
+    y: [0, -14, 8, -4, 0],
+    rotate: [0, 15, -22, 10, 0],
+  },
+];
+
+// 5 sacs Shopify qui flottent dans le même esprit, positions décalées par
+// rapport aux étoiles pour bien répartir la composition.
+const bagConfigs: FloatItem[] = [
+  {
+    style: { top: "6%", right: "12%" },
+    sizeClass: "size-7 sm:size-10 lg:size-14",
+    opacity: 0.9,
+    duration: 7,
+    delay: 0.2,
+    x: [0, -10, 8, 0],
+    y: [0, -16, 10, 0],
+    rotate: [-8, 8, -6, -8],
+  },
+  {
+    style: { bottom: "18%", left: "6%" },
+    sizeClass: "size-6 sm:size-8 lg:size-11",
+    opacity: 0.75,
+    duration: 8.5,
+    delay: 0.9,
+    x: [0, 12, -8, 0],
+    y: [0, 12, -10, 0],
+    rotate: [6, -10, 6, 6],
+  },
+  {
+    style: { top: "36%", right: "26%" },
+    sizeClass: "size-5 sm:size-7 lg:size-9",
+    opacity: 0.45,
+    duration: 9.5,
+    delay: 1.6,
+    x: [0, -8, 10, 0],
+    y: [0, -10, 12, 0],
+    rotate: [-6, 10, -8, -6],
+  },
+  {
+    style: { bottom: "6%", left: "38%" },
+    sizeClass: "size-6 sm:size-8 lg:size-10",
+    opacity: 0.55,
+    duration: 10.5,
+    delay: 0.6,
+    x: [0, 10, -12, 0],
+    y: [0, 10, -8, 0],
+    rotate: [8, -8, 10, 8],
+  },
+  {
+    style: { top: "14%", left: "30%" },
+    sizeClass: "size-4 sm:size-6 lg:size-8",
+    opacity: 0.35,
+    duration: 12,
+    delay: 2.3,
+    x: [0, -6, 8, 0],
+    y: [0, 8, -10, 0],
+    rotate: [-5, 8, -6, -5],
+  },
+];
 
 function HeroDecor() {
   return (
     <div aria-hidden className="pointer-events-none absolute inset-0">
-      <motion.div
-        className="absolute left-[4%] top-[10%] text-lime/25"
-        animate={{ rotate: 360 }}
-        transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-      >
-        <Star className="size-12 sm:size-20 lg:size-28" fill="currentColor" strokeWidth={0} />
-      </motion.div>
+      {starConfigs.map((cfg, i) => (
+        <motion.div
+          key={`star-${i}`}
+          className={`absolute ${cfg.sizeClass}`}
+          style={{ ...cfg.style, opacity: cfg.opacity }}
+          animate={{ x: cfg.x, y: cfg.y, rotate: cfg.rotate }}
+          transition={{ duration: cfg.duration, delay: cfg.delay, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <TrustpilotStar className="size-full drop-shadow-[0_0_12px_rgba(0,182,122,0.35)]" />
+        </motion.div>
+      ))}
 
-      <motion.div
-        className="absolute bottom-[8%] right-[5%] text-violet/25"
-        animate={{ rotate: -360, scale: [1, 1.08, 1] }}
-        transition={{
-          rotate: { duration: 55, repeat: Infinity, ease: "linear" },
-          scale: { duration: 5, repeat: Infinity, ease: "easeInOut" },
-        }}
-      >
-        <Star className="size-9 sm:size-14 lg:size-20" fill="currentColor" strokeWidth={0} />
-      </motion.div>
-
-      <motion.div
-        className="absolute right-[10%] top-[6%] text-lime"
-        animate={{ y: [0, -14, 0], rotate: [-8, 8, -8] }}
-        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-      >
-        <ShopifyBagIcon className="size-6 opacity-80 sm:size-9 lg:size-11" />
-      </motion.div>
-
-      <motion.div
-        className="absolute left-[8%] bottom-[16%] text-lime"
-        animate={{ y: [0, 12, 0], rotate: [6, -6, 6] }}
-        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
-      >
-        <ShopifyBagIcon className="size-5 opacity-60 sm:size-7 lg:size-9" />
-      </motion.div>
+      {bagConfigs.map((cfg, i) => (
+        <motion.div
+          key={`bag-${i}`}
+          className={`absolute ${cfg.sizeClass}`}
+          style={{ ...cfg.style, opacity: cfg.opacity }}
+          animate={{ x: cfg.x, y: cfg.y, rotate: cfg.rotate }}
+          transition={{ duration: cfg.duration, delay: cfg.delay, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <ShopifyBagIcon className="size-full drop-shadow-[0_0_10px_rgba(149,191,71,0.35)]" />
+        </motion.div>
+      ))}
     </div>
   );
 }

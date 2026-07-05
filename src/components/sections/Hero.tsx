@@ -166,46 +166,84 @@ function HeroDecor() {
 
 // Chaque carte dérive sur x/y/rotate (pas juste un rebond vertical) pour un
 // mouvement flottant plus organique, façon "cartes qui respirent".
+// Les 6 boutiques à mettre en avant en priorité dans le Hero, dans cet ordre.
+const FEATURED_PROJECT_IDS = [
+  "kyraCosmetic",
+  "curmaParis",
+  "silke",
+  "rsBodyFrance",
+  "suenoPerfecto",
+  "meinShop",
+];
+
+function pickFeaturedProjects(projects: Project[]): Project[] {
+  const byId = new Map(projects.map((p) => [p.id, p]));
+  const featured = FEATURED_PROJECT_IDS.map((id) => byId.get(id)).filter(
+    (p): p is Project => Boolean(p),
+  );
+  if (featured.length >= 6) return featured;
+  const rest = projects.filter((p) => !featured.includes(p));
+  return [...featured, ...rest].slice(0, 6);
+}
+
+// Positions en % (coin haut-gauche de chaque carte) réparties autour du
+// centre de la boîte, avec un `top` volontairement bas (max ~22%) pour que
+// même la boîte la plus petite (mobile, cartes plus hautes en proportion)
+// ne déborde jamais sur le texte en dessous.
 const floatConfigs = [
   {
-    x: "0%",
-    y: "2%",
+    x: "20%",
+    y: "10%",
+    z: 10,
     duration: 6,
     delay: 0,
-    drift: { x: [0, 5, -4, 0], y: [0, -18, 6, 0], rotate: [-6, -1, -9, -6] },
-  },
-  {
-    x: "38%",
-    y: "6%",
-    duration: 7,
-    delay: 0.6,
-    drift: { x: [0, -6, 4, 0], y: [0, -14, 8, 0], rotate: [5, 10, 1, 5] },
+    drift: { x: [0, 5, -4, 0], y: [0, -14, 5, 0], rotate: [-4, 1, -7, -4] },
   },
   {
     x: "4%",
-    y: "44%",
+    y: "6%",
+    z: 4,
+    duration: 7,
+    delay: 0.6,
+    drift: { x: [0, -6, 4, 0], y: [0, -12, 6, 0], rotate: [-8, -3, -11, -8] },
+  },
+  {
+    x: "38%",
+    y: "2%",
+    z: 3,
     duration: 6.5,
     delay: 1.2,
-    drift: { x: [0, 5, -6, 0], y: [0, -16, 5, 0], rotate: [-3, 2, -8, -3] },
+    drift: { x: [0, 5, -6, 0], y: [0, -13, 5, 0], rotate: [7, 12, 3, 7] },
   },
   {
-    x: "44%",
-    y: "50%",
+    x: "10%",
+    y: "22%",
+    z: 6,
     duration: 7.5,
     delay: 0.3,
-    drift: { x: [0, -5, 6, 0], y: [0, -20, 4, 0], rotate: [4, 9, -1, 4] },
+    drift: { x: [0, -5, 6, 0], y: [0, -12, 4, 0], rotate: [-2, 3, -6, -2] },
   },
   {
-    x: "20%",
-    y: "72%",
+    x: "42%",
+    y: "18%",
+    z: 2,
     duration: 6.8,
     delay: 0.9,
-    drift: { x: [0, 6, -5, 0], y: [0, -15, 6, 0], rotate: [-5, 0, -10, -5] },
+    drift: { x: [0, 6, -5, 0], y: [0, -11, 6, 0], rotate: [5, 9, 1, 5] },
+  },
+  {
+    x: "30%",
+    y: "14%",
+    z: 5,
+    duration: 7.2,
+    delay: 0.45,
+    drift: { x: [0, -4, 5, 0], y: [0, -13, 5, 0], rotate: [-1, 4, -5, -1] },
   },
 ];
 
 function HeroShowcase({ projects }: { projects: Project[] }) {
   const locale = useLocale() as "fr" | "en";
+  const featured = pickFeaturedProjects(projects);
 
   return (
     <motion.div
@@ -214,7 +252,7 @@ function HeroShowcase({ projects }: { projects: Project[] }) {
       exit={{ opacity: 0, transition: { duration: 0.4 } }}
       className="absolute inset-0"
     >
-      {projects.slice(0, 5).map((project, i) => {
+      {featured.map((project, i) => {
         const cfg = floatConfigs[i % floatConfigs.length];
         const item = { name: project.name[locale] };
 
@@ -250,14 +288,14 @@ function HeroShowcase({ projects }: { projects: Project[] }) {
               zIndex: 20,
               transition: { duration: 0.3, ease: "easeOut" },
             }}
-            style={{ left: cfg.x, top: cfg.y }}
+            style={{ left: cfg.x, top: cfg.y, zIndex: cfg.z }}
             className="group absolute w-24 overflow-hidden rounded-xl border border-white/10 shadow-2xl shadow-black/40 transition-shadow duration-300 hover:shadow-[0_25px_60px_-15px_rgba(185,255,92,0.35)] sm:w-36 sm:rounded-2xl lg:w-56"
           >
             <img
-              src={project.thumbnailOverride || getScreenshotUrl(project.url, 500, 700)}
+              src={project.thumbnailOverride || getScreenshotUrl(project.url, 500, 625)}
               alt={item.name}
               loading="lazy"
-              className="aspect-[5/7] w-full object-cover object-top transition-transform duration-500 group-hover:scale-110"
+              className="aspect-[4/5] w-full object-cover object-top transition-transform duration-500 group-hover:scale-110"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
             <span className="absolute bottom-1.5 left-1.5 text-[10px] font-medium text-white sm:bottom-3 sm:left-3 sm:text-sm">

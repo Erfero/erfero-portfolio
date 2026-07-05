@@ -71,3 +71,25 @@ export async function getNicheImages(): Promise<Record<string, string>> {
   );
   return override ?? {};
 }
+
+/** Réglages du kit de candidature freelance (/admin/freelance) : TJM et
+ * disponibilité, injectés dans les textes générés (lettre de motivation,
+ * bio, réponses aux offres...). Non affichés sur le site public. */
+export interface FreelanceSettings {
+  dailyRate: string;
+  availability: string;
+  workMode: string;
+}
+
+const defaultFreelanceSettings: FreelanceSettings = {
+  dailyRate: "",
+  availability: "sous 1 à 2 semaines",
+  workMode: "à distance ou en présentiel ponctuel",
+};
+
+export async function getFreelanceSettings(): Promise<FreelanceSettings> {
+  const override = await readJsonBlob<FreelanceSettings>(
+    "content/freelance-settings.json"
+  );
+  return { ...defaultFreelanceSettings, ...override };
+}

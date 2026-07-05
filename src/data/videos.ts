@@ -52,6 +52,7 @@ const musicTracks = Array.from(
 export const videos: VideoEntry[] = accents.map((accent, i) => ({
   id: `reel-${String(i + 1).padStart(2, "0")}`,
   src: `/videos/reel-${String(i + 1).padStart(2, "0")}.mp4`,
+  poster: `/videos/posters/reel-${String(i + 1).padStart(2, "0")}.jpg`,
   caption: pitchLines[i % pitchLines.length],
   accent,
   musicSrc: musicTracks[i % musicTracks.length],

@@ -15,7 +15,6 @@ export default function VideoMarqueeCard({
   onOpen: () => void;
 }) {
   const [failed, setFailed] = useState(false);
-  const audioRef = useRef<HTMLAudioElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   // Avec des dizaines de vidéos dans le carrousel, autoplay sur toutes en
@@ -35,25 +34,14 @@ export default function VideoMarqueeCard({
     return () => observer.disconnect();
   }, []);
 
-  const playMusic = () => {
-    if (!video.musicSrc) return;
-    audioRef.current?.play().catch(() => {});
-  };
-
-  const stopMusic = () => {
-    if (!audioRef.current) return;
-    audioRef.current.pause();
-    audioRef.current.currentTime = 0;
-  };
-
+  // La musique de fond n'appartient qu'à la lightbox (voir VideoLightbox) :
+  // un seul <audio> à la fois, qui démarre à l'ouverture et s'arrête à la
+  // fermeture. La carte ne doit rien jouer elle-même (ni au survol, ni au
+  // clic), sinon deux pistes se superposent et celle de la carte continue
+  // en boucle même après la fermeture de la lightbox.
   return (
     <motion.button
-      onClick={() => {
-        onOpen();
-        playMusic();
-      }}
-      onMouseEnter={playMusic}
-      onMouseLeave={stopMusic}
+      onClick={onOpen}
       whileHover={{ scale: 1.06 }}
       whileTap={{ scale: 0.97 }}
       transition={{ type: "spring", stiffness: 260, damping: 20 }}
@@ -67,6 +55,7 @@ export default function VideoMarqueeCard({
           ref={videoRef}
           className="absolute inset-0 size-full object-cover"
           src={video.src}
+          poster={video.poster}
           muted
           loop
           playsInline
@@ -74,8 +63,6 @@ export default function VideoMarqueeCard({
           onError={() => setFailed(true)}
         />
       )}
-
-      {video.musicSrc && <audio ref={audioRef} src={video.musicSrc} loop />}
 
       {failed && (
         <div className="absolute inset-0 flex flex-col items-center justify-center gap-2">

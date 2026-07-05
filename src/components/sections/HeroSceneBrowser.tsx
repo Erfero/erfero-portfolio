@@ -161,7 +161,7 @@ export default function HeroSceneBrowser({ projects }: { projects: Project[] }) 
           </div>
           <div style={{ position: "relative", height: 168, overflow: "hidden", animation: `heroSmHero ${CYCLE}` }}>
             <img
-              src={main.thumbnailOverride || getScreenshotUrl(main.url, 700, 500)}
+              src={main.thumbnailOverride || getScreenshotUrl(main.url, 1050, 750)}
               alt=""
               loading="lazy"
               style={{
@@ -245,7 +245,7 @@ export default function HeroSceneBrowser({ projects }: { projects: Project[] }) 
                 }}
               >
                 <img
-                  src={p.thumbnailOverride || getScreenshotUrl(p.url, 220, 220)}
+                  src={p.thumbnailOverride || getScreenshotUrl(p.url, 320, 320)}
                   alt=""
                   loading="lazy"
                   style={{ height: 74, width: "100%", objectFit: "cover", objectPosition: "top" }}

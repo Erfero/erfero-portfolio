@@ -4,6 +4,6 @@
  * sur 100% des storefronts testés). Le screenshot est régénéré par thum.io
  * à intervalle régulier, donc reste globalement à jour.
  */
-export function getScreenshotUrl(url: string, width = 900, cropHeight = 1400) {
+export function getScreenshotUrl(url: string, width = 1300, cropHeight = 2020) {
   return `https://image.thum.io/get/width/${width}/crop/${cropHeight}/noanimate/${url}`;
 }

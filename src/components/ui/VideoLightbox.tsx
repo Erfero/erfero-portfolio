@@ -32,7 +32,10 @@ export default function VideoLightbox({
       audioRef.current?.play().catch(() => {});
     }
     return () => {
-      audioRef.current?.pause();
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.currentTime = 0;
+      }
     };
   }, [video]);
 
@@ -58,9 +61,11 @@ export default function VideoLightbox({
               ref={videoRef}
               key={video.id}
               src={video.src}
+              poster={video.poster}
               loop
               muted
               playsInline
+              preload="auto"
               className="size-full object-cover"
             />
             {video.musicSrc && (

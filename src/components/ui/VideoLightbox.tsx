@@ -15,8 +15,19 @@ export default function VideoLightbox({
   onClose: () => void;
 }) {
   const audioRef = useRef<HTMLAudioElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
+  // Le navigateur évalue l'autorisation d'autoplay dès l'attachement de
+  // l'élément, avant que React n'applique la prop `muted` comme propriété
+  // DOM — avec `autoPlay` seul en JSX, la vidéo reste bloquée sur un cadre
+  // vide. On force donc `muted` puis `play()` explicitement ici.
   useEffect(() => {
+    const el = videoRef.current;
+    if (el) {
+      el.muted = true;
+      el.currentTime = 0;
+      el.play().catch(() => {});
+    }
     if (video?.musicSrc) {
       audioRef.current?.play().catch(() => {});
     }
@@ -44,8 +55,9 @@ export default function VideoLightbox({
             className="relative aspect-[9/16] w-full max-w-sm overflow-hidden rounded-3xl border border-white/10 shadow-2xl"
           >
             <video
+              ref={videoRef}
+              key={video.id}
               src={video.src}
-              autoPlay
               loop
               muted
               playsInline

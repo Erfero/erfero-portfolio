@@ -81,6 +81,10 @@ export default function Footer() {
         </span>
         <span>{t("madeWith")}</span>
       </div>
+
+      <div className="container-page border-t border-border py-4 text-[11px] leading-relaxed text-ink-muted/50">
+        {t("musicCredit")}
+      </div>
     </footer>
   );
 }

@@ -303,7 +303,8 @@
   "footer": {
     "tagline": "Freelance Shopify developer, available worldwide.",
     "rights": "All rights reserved.",
-    "madeWith": "Designed and built with Next.js, Tailwind, GSAP & Framer Motion."
+    "madeWith": "Designed and built with Next.js, Tailwind, GSAP & Framer Motion.",
+    "musicCredit": "Background music: Cheery Monday, Carefree, Celebration, Bossa Antigua, Boogie Party, Beach Party, Carpe Diem, Chipper Doodle, Chill Wave — by Kevin MacLeod (incompetech.com), licensed under Creative Commons BY 4.0."
   },
   "realisationsPage": {
     "title": "All my work",

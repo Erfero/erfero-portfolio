@@ -39,20 +39,26 @@ export default async function HomePage({
 
   return (
     <>
-      <Hero projects={projects} />
-      <FeaturedProjects projects={projects} videos={videos} />
-      <VideoReels videos={videos} />
-      <Services />
-      <Testimonials testimonials={testimonials} />
+      {sections.heroEnabled && <Hero projects={projects} />}
+      {sections.featuredProjectsEnabled && (
+        <FeaturedProjects projects={projects} videos={videos} />
+      )}
+      {sections.videoReelsEnabled && <VideoReels videos={videos} />}
+      {sections.servicesEnabled && <Services />}
+      {sections.testimonialsEnabled && (
+        <Testimonials testimonials={testimonials} />
+      )}
       {sections.pricingEnabled && <Pricing />}
-      <PainPoints />
-      <ExpertiseCatalog projects={projects} nicheImages={nicheImages} />
-      <Metrics />
-      <Process />
-      <TechStack />
-      <Trust />
-      <FAQ />
-      <Contact />
+      {sections.painPointsEnabled && <PainPoints />}
+      {sections.expertiseCatalogEnabled && (
+        <ExpertiseCatalog projects={projects} nicheImages={nicheImages} />
+      )}
+      {sections.metricsEnabled && <Metrics />}
+      {sections.processEnabled && <Process />}
+      {sections.techStackEnabled && <TechStack />}
+      {sections.trustEnabled && <Trust />}
+      {sections.faqEnabled && <FAQ />}
+      {sections.contactEnabled && <Contact />}
     </>
   );
 }

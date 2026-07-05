@@ -95,7 +95,9 @@ export async function getFreelanceSettings(): Promise<FreelanceSettings> {
 }
 
 /** Réglages de la section CV (lien nav public) : fichier PDF uploadé via
- * /admin/cv et interrupteur pour l'afficher ou non sur le site. */
+ * /admin/cv et interrupteur pour l'afficher ou non sur le site. Par défaut,
+ * pointe vers /public/cv/erfero-keoula-cv.pdf (le CV fourni) — uploader un
+ * nouveau fichier depuis /admin/cv remplace ce lien par défaut. */
 export interface CvSettings {
   enabled: boolean;
   url: string;
@@ -103,7 +105,7 @@ export interface CvSettings {
 
 const defaultCvSettings: CvSettings = {
   enabled: true,
-  url: "",
+  url: "/cv/erfero-keoula-cv.pdf",
 };
 
 export async function getCvSettings(): Promise<CvSettings> {
@@ -111,14 +113,41 @@ export async function getCvSettings(): Promise<CvSettings> {
   return { ...defaultCvSettings, ...override };
 }
 
-/** Bascules de visibilité pour certaines sections publiques du site,
- * modifiables depuis /admin/sections sans toucher au code. */
+/** Bascules de visibilité pour chaque section de la page d'accueil,
+ * modifiables depuis /admin/sections sans toucher au code. Toutes activées
+ * par défaut — à désactiver au cas par cas si besoin. */
 export interface SectionsSettings {
+  heroEnabled: boolean;
+  featuredProjectsEnabled: boolean;
+  videoReelsEnabled: boolean;
+  servicesEnabled: boolean;
+  testimonialsEnabled: boolean;
   pricingEnabled: boolean;
+  painPointsEnabled: boolean;
+  expertiseCatalogEnabled: boolean;
+  metricsEnabled: boolean;
+  processEnabled: boolean;
+  techStackEnabled: boolean;
+  trustEnabled: boolean;
+  faqEnabled: boolean;
+  contactEnabled: boolean;
 }
 
 const defaultSectionsSettings: SectionsSettings = {
+  heroEnabled: true,
+  featuredProjectsEnabled: true,
+  videoReelsEnabled: true,
+  servicesEnabled: true,
+  testimonialsEnabled: true,
   pricingEnabled: true,
+  painPointsEnabled: true,
+  expertiseCatalogEnabled: true,
+  metricsEnabled: true,
+  processEnabled: true,
+  techStackEnabled: true,
+  trustEnabled: true,
+  faqEnabled: true,
+  contactEnabled: true,
 };
 
 export async function getSectionsSettings(): Promise<SectionsSettings> {

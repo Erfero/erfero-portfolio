@@ -93,3 +93,37 @@ export async function getFreelanceSettings(): Promise<FreelanceSettings> {
   );
   return { ...defaultFreelanceSettings, ...override };
 }
+
+/** Réglages de la section CV (lien nav public) : fichier PDF uploadé via
+ * /admin/cv et interrupteur pour l'afficher ou non sur le site. */
+export interface CvSettings {
+  enabled: boolean;
+  url: string;
+}
+
+const defaultCvSettings: CvSettings = {
+  enabled: false,
+  url: "",
+};
+
+export async function getCvSettings(): Promise<CvSettings> {
+  const override = await readJsonBlob<CvSettings>("content/cv-settings.json");
+  return { ...defaultCvSettings, ...override };
+}
+
+/** Bascules de visibilité pour certaines sections publiques du site,
+ * modifiables depuis /admin/sections sans toucher au code. */
+export interface SectionsSettings {
+  pricingEnabled: boolean;
+}
+
+const defaultSectionsSettings: SectionsSettings = {
+  pricingEnabled: true,
+};
+
+export async function getSectionsSettings(): Promise<SectionsSettings> {
+  const override = await readJsonBlob<SectionsSettings>(
+    "content/sections-settings.json"
+  );
+  return { ...defaultSectionsSettings, ...override };
+}

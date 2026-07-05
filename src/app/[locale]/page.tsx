@@ -18,6 +18,7 @@ import {
   getVideos,
   getTestimonials,
   getNicheImages,
+  getSectionsSettings,
 } from "@/lib/content";
 
 export default async function HomePage({
@@ -28,11 +29,12 @@ export default async function HomePage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const [projects, videos, testimonials, nicheImages] = await Promise.all([
+  const [projects, videos, testimonials, nicheImages, sections] = await Promise.all([
     getVisibleProjects(),
     getVideos(),
     getTestimonials(),
     getNicheImages(),
+    getSectionsSettings(),
   ]);
 
   return (
@@ -42,7 +44,7 @@ export default async function HomePage({
       <VideoReels videos={videos} />
       <Services />
       <Testimonials testimonials={testimonials} />
-      <Pricing />
+      {sections.pricingEnabled && <Pricing />}
       <PainPoints />
       <ExpertiseCatalog projects={projects} nicheImages={nicheImages} />
       <Metrics />

@@ -282,6 +282,55 @@
   content: counter(hero-cd);
 }
 
+/* Empilement de breakpoints "max-width" décroissants : écrits ici à la main
+ * (au lieu d'utilitaires Tailwind max-lg:/max-[Npx]: combinés) car Tailwind
+ * ne garantit pas leur ordre relatif dans la feuille de style compilée —
+ * sur un écran de 390px, la règle max-lg (pensée pour tablette) se
+ * retrouvait après max-[720px]/max-[380px] et l'emportait à tort, faisant
+ * déborder la maquette du Hero sur mobile. L'ordre ci-dessous (du plus
+ * large au plus étroit) est ce qui garantit la bonne cascade CSS. */
+.hero-mockup-box {
+  width: 602px;
+  height: 464px;
+}
+@media (max-width: 1023.98px) {
+  .hero-mockup-box {
+    width: 518px;
+    height: 400px;
+  }
+}
+@media (max-width: 720px) {
+  .hero-mockup-box {
+    width: 340px;
+    height: 262px;
+  }
+}
+@media (max-width: 380px) {
+  .hero-mockup-box {
+    width: 300px;
+    height: 232px;
+  }
+}
+
+.hero-stage-scale {
+  transform: scale(0.86);
+}
+@media (max-width: 1023.98px) {
+  .hero-stage-scale {
+    transform: scale(0.74);
+  }
+}
+@media (max-width: 720px) {
+  .hero-stage-scale {
+    transform: scale(0.485);
+  }
+}
+@media (max-width: 380px) {
+  .hero-stage-scale {
+    transform: scale(0.428);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

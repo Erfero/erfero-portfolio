@@ -11,7 +11,7 @@ import {
 import type { Project } from "@/data/projects";
 import type { VideoEntry } from "@/data/videos";
 import type { Testimonial } from "@/data/testimonials";
-import type { FreelanceSettings } from "@/lib/content";
+import type { FreelanceSettings, CvSettings, SectionsSettings } from "@/lib/content";
 
 async function requireAdmin() {
   const session = await auth();
@@ -57,6 +57,20 @@ export async function saveFreelanceSettingsAction(settings: FreelanceSettings) {
   await requireAdmin();
   await writeJsonBlob("content/freelance-settings.json", settings);
   revalidatePath("/admin/freelance");
+}
+
+export async function saveCvSettingsAction(settings: CvSettings) {
+  await requireAdmin();
+  await writeJsonBlob("content/cv-settings.json", settings);
+  revalidatePath("/", "layout");
+  revalidatePath("/admin/cv");
+}
+
+export async function saveSectionsSettingsAction(settings: SectionsSettings) {
+  await requireAdmin();
+  await writeJsonBlob("content/sections-settings.json", settings);
+  revalidatePath("/", "layout");
+  revalidatePath("/admin/sections");
 }
 
 export async function listMediaAction() {

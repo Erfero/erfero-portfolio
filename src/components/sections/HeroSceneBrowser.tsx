@@ -50,7 +50,7 @@ export default function HeroSceneBrowser({ projects }: { projects: Project[] }) 
     >
       <div
         style={stageBase}
-        className="scale-[0.86] max-lg:scale-[0.74] max-[720px]:scale-[0.485] max-[380px]:scale-[0.428]"
+        className="hero-stage-scale"
       >
         {/* fenêtre navigateur */}
         <div

@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 import { siteConfig } from "@/data/site.config";
 import LocaleSwitcher from "./LocaleSwitcher";
 
-export default function Navbar() {
+export default function Navbar({ cvUrl }: { cvUrl?: string }) {
   const t = useTranslations("nav");
   const locale = useLocale();
   const [scrolled, setScrolled] = useState(false);
@@ -39,6 +39,7 @@ export default function Navbar() {
     { href: "/faq", label: t("faq") },
     { href: "/contact", label: t("contactMenu") },
   ];
+  const cvLabel = t("cv");
 
   return (
     <header
@@ -81,6 +82,16 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
+            {cvUrl && (
+              <a
+                href={cvUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="text-sm text-ink-muted transition-colors hover:text-ink"
+              >
+                {cvLabel}
+              </a>
+            )}
           </nav>
 
           <div className="hidden items-center gap-3 md:flex">
@@ -115,6 +126,17 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
+            {cvUrl && (
+              <a
+                href={cvUrl}
+                target="_blank"
+                rel="noreferrer"
+                onClick={() => setOpen(false)}
+                className="rounded-xl px-3 py-2.5 text-sm text-ink-muted hover:bg-white/5 hover:text-ink"
+              >
+                {cvLabel}
+              </a>
+            )}
             <div className="mt-2 flex items-center justify-between px-3">
               <LocaleSwitcher />
               <Link

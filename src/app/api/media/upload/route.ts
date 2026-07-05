@@ -24,6 +24,7 @@ export async function POST(request: Request): Promise<NextResponse> {
             "audio/mpeg",
             "audio/mp3",
             "audio/wav",
+            "application/pdf",
           ],
           addRandomSuffix: true,
         };

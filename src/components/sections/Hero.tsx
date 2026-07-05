@@ -345,7 +345,7 @@ function HeroSceneSwitcher({ projects }: { projects: Project[] }) {
   return (
     <div
       id="mockup-box"
-      className="relative w-[602px] h-[464px] max-lg:w-[518px] max-lg:h-[400px] max-[720px]:w-[340px] max-[720px]:h-[262px] max-[380px]:w-[300px] max-[380px]:h-[232px]"
+      className="hero-mockup-box relative"
       style={{ animation: "heroFloatY 7s ease-in-out infinite" }}
     >
       <AnimatePresence mode="wait">

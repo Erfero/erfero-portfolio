@@ -4,6 +4,7 @@ import { ArrowLeft } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import Services from "@/components/sections/Services";
 import Pricing from "@/components/sections/Pricing";
+import { getSectionsSettings } from "@/lib/content";
 
 export async function generateMetadata({
   params,
@@ -23,6 +24,7 @@ export default async function ServicesPage({
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("nav");
+  const sections = await getSectionsSettings();
 
   return (
     <div className="pt-32 sm:pt-40">
@@ -36,7 +38,7 @@ export default async function ServicesPage({
         </Link>
       </div>
       <Services />
-      <Pricing />
+      {sections.pricingEnabled && <Pricing />}
     </div>
   );
 }

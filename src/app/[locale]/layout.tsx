@@ -99,7 +99,7 @@ export default async function LocaleLayout({
       <LocaleHtmlSync locale={locale} />
       <SmoothScrollProvider>
         <CustomCursor />
-        <Navbar cvUrl={cvSettings.enabled ? cvSettings.url : undefined} />
+        <Navbar showCv={cvSettings.enabled && Boolean(cvSettings.url)} />
         <main>
           <PageTransition>{children}</PageTransition>
         </main>

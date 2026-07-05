@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { ArrowLeft, Download } from "lucide-react";
+import { Link } from "@/i18n/navigation";
 import { getCvSettings } from "@/lib/content";
 
 // Rendu toujours dynamique : sans ça, tant qu'aucun réglage n'a jamais été
@@ -27,18 +29,45 @@ export default async function CvPage({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
+  const t = await getTranslations("nav");
   const cv = await getCvSettings();
 
   if (!cv.enabled || !cv.url) notFound();
 
-  // Juste le PDF, sans cadre ni carte autour : plein écran sous la nav fixe
-  // (la nav est en position fixed, d'où le margin-top pour ne pas passer
-  // dessous).
   return (
-    <iframe
-      src="/api/cv"
-      title="CV-Erfero"
-      className="mt-24 block h-[calc(100svh-6rem)] w-full border-0"
-    />
+    <div className="pt-32 pb-20 sm:pt-40">
+      <div className="container-page">
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-1.5 text-sm text-ink-muted hover:text-ink"
+          >
+            <ArrowLeft className="size-4" />
+            {t("home")}
+          </Link>
+
+          <a
+            href="/api/cv"
+            download="CV-Erfero.pdf"
+            className="inline-flex items-center gap-1.5 rounded-full border border-border px-4 py-2 text-sm font-medium hover:border-lime/50"
+          >
+            <Download className="size-4" />
+            Télécharger le PDF
+          </a>
+        </div>
+
+        <h1 className="font-display mt-6 text-3xl font-medium tracking-tight sm:text-4xl">
+          {t("cv")}
+        </h1>
+
+        <div className="mt-8 overflow-hidden rounded-2xl border border-border bg-white/[0.02]">
+          <iframe
+            src="/api/cv"
+            title="CV-Erfero"
+            className="h-[75vh] w-full sm:h-[85vh]"
+          />
+        </div>
+      </div>
+    </div>
   );
 }

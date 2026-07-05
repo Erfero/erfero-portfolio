@@ -2,16 +2,19 @@
 
 import { useRef, useState, useTransition } from "react";
 import { upload } from "@vercel/blob/client";
-import { Upload, Check, Save, FileText, ExternalLink } from "lucide-react";
+import { Upload, Check, Save, FileText, ExternalLink, AlertCircle } from "lucide-react";
 import { saveCvSettingsAction } from "@/lib/actions";
 import type { CvSettings } from "@/lib/content";
 
 export default function CvManager({ initial }: { initial: CvSettings }) {
+  const [savedSettings, setSavedSettings] = useState(initial);
   const [settings, setSettings] = useState(initial);
   const [uploading, setUploading] = useState(false);
   const [isPending, startTransition] = useTransition();
-  const [saved, setSaved] = useState(false);
+  const [justSaved, setJustSaved] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const isDirty = JSON.stringify(settings) !== JSON.stringify(savedSettings);
 
   const handleUpload = async (files: FileList | null) => {
     const file = files?.[0];
@@ -33,8 +36,9 @@ export default function CvManager({ initial }: { initial: CvSettings }) {
   const handleSave = () => {
     startTransition(async () => {
       await saveCvSettingsAction(settings);
-      setSaved(true);
-      setTimeout(() => setSaved(false), 2000);
+      setSavedSettings(settings);
+      setJustSaved(true);
+      setTimeout(() => setJustSaved(false), 2500);
     });
   };
 
@@ -49,23 +53,33 @@ export default function CvManager({ initial }: { initial: CvSettings }) {
               Afficher le lien CV sur le site
             </h2>
             <p className="mt-1 text-xs text-ink-muted">
-              Une fois activé, un lien « CV » apparaît dans le menu du site.
-              Au clic, le PDF s&apos;ouvre dans un nouvel onglet.
+              Une fois activé <strong>et enregistré</strong>, un lien « CV »
+              apparaît dans le menu du site. Au clic, le PDF s&apos;ouvre dans
+              un nouvel onglet.
             </p>
           </div>
-          <button
-            onClick={() => setSettings((s) => ({ ...s, enabled: !s.enabled }))}
-            aria-pressed={settings.enabled}
-            className={`relative h-7 w-12 shrink-0 rounded-full transition-colors ${
-              settings.enabled ? "bg-lime" : "bg-white/10"
-            }`}
-          >
+          <div className="flex shrink-0 flex-col items-end gap-1.5">
             <span
-              className={`absolute top-1 size-5 rounded-full bg-bg transition-transform ${
-                settings.enabled ? "translate-x-6" : "translate-x-1"
+              className={`text-xs font-semibold ${
+                settings.enabled ? "text-lime" : "text-ink-muted"
               }`}
-            />
-          </button>
+            >
+              {settings.enabled ? "Activé" : "Désactivé"}
+            </span>
+            <button
+              onClick={() => setSettings((s) => ({ ...s, enabled: !s.enabled }))}
+              aria-pressed={settings.enabled}
+              className={`relative h-7 w-12 rounded-full transition-colors ${
+                settings.enabled ? "bg-lime" : "bg-white/10"
+              }`}
+            >
+              <span
+                className={`absolute top-1 size-5 rounded-full bg-bg transition-transform ${
+                  settings.enabled ? "translate-x-6" : "translate-x-1"
+                }`}
+              />
+            </button>
+          </div>
         </div>
       </div>
 
@@ -73,10 +87,10 @@ export default function CvManager({ initial }: { initial: CvSettings }) {
         <h2 className="font-display text-base font-medium">Fichier PDF</h2>
         <p className="mt-1 text-xs text-ink-muted">
           Uploade ton CV au format PDF. Un nouvel envoi remplace le lien
-          utilisé sur le site.
+          utilisé sur le site (n&apos;oublie pas d&apos;enregistrer après).
         </p>
 
-        {settings.url && (
+        {settings.url ? (
           <a
             href={settings.url}
             target="_blank"
@@ -87,6 +101,11 @@ export default function CvManager({ initial }: { initial: CvSettings }) {
             <span className="truncate">{fileName || settings.url}</span>
             <ExternalLink className="ml-auto size-3.5 shrink-0 text-ink-muted" />
           </a>
+        ) : (
+          <p className="mt-4 flex items-center gap-2 rounded-xl border border-white/10 bg-white/[0.02] px-4 py-3 text-sm text-ink-muted">
+            <AlertCircle className="size-4 shrink-0" />
+            Aucun fichier envoyé pour l&apos;instant.
+          </p>
         )}
 
         <label className="mt-4 flex cursor-pointer flex-col items-center justify-center gap-2 rounded-2xl border border-dashed border-border p-8 text-center transition-colors hover:border-lime/40">
@@ -105,14 +124,21 @@ export default function CvManager({ initial }: { initial: CvSettings }) {
         </label>
       </div>
 
-      <button
-        onClick={handleSave}
-        disabled={isPending}
-        className="inline-flex w-fit items-center gap-1.5 rounded-full bg-lime px-5 py-2.5 text-sm font-medium text-bg disabled:opacity-60"
-      >
-        {saved ? <Check className="size-4" /> : <Save className="size-4" />}
-        {isPending ? "Enregistrement..." : saved ? "Enregistré" : "Enregistrer"}
-      </button>
+      <div className="flex items-center gap-3">
+        <button
+          onClick={handleSave}
+          disabled={isPending || (!isDirty && !justSaved)}
+          className="inline-flex w-fit items-center gap-1.5 rounded-full bg-lime px-5 py-2.5 text-sm font-medium text-bg disabled:opacity-40"
+        >
+          {justSaved ? <Check className="size-4" /> : <Save className="size-4" />}
+          {isPending ? "Enregistrement..." : justSaved ? "Enregistré" : "Enregistrer"}
+        </button>
+        {isDirty && !isPending && (
+          <span className="text-xs text-amber-400">
+            Modifications non enregistrées
+          </span>
+        )}
+      </div>
     </div>
   );
 }

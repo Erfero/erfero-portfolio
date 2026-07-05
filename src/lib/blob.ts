@@ -13,7 +13,9 @@ export async function readJsonBlob<T>(pathname: string): Promise<T | null> {
     const match = blobs.find((b) => b.pathname === pathname);
     if (!match) return null;
 
-    const res = await fetch(match.url, { next: { revalidate: 30 } });
+    // no-store : ces JSON sont modifiés depuis l'admin et doivent refléter le
+    // dernier enregistrement immédiatement, pas après un délai de cache.
+    const res = await fetch(match.url, { cache: "no-store" });
     if (!res.ok) return null;
     return (await res.json()) as T;
   } catch {

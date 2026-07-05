@@ -102,7 +102,7 @@ export interface CvSettings {
 }
 
 const defaultCvSettings: CvSettings = {
-  enabled: false,
+  enabled: true,
   url: "",
 };
 

@@ -47,8 +47,8 @@ export default async function CvPage({
           </Link>
 
           <a
-            href={cv.url}
-            download
+            href="/api/cv"
+            download="CV-Erfero.pdf"
             className="inline-flex items-center gap-1.5 rounded-full border border-border px-4 py-2 text-sm font-medium hover:border-lime/50"
           >
             <Download className="size-4" />
@@ -62,8 +62,8 @@ export default async function CvPage({
 
         <div className="mt-8 overflow-hidden rounded-2xl border border-border bg-white/[0.02]">
           <iframe
-            src={cv.url}
-            title={t("cv")}
+            src="/api/cv"
+            title="CV-Erfero"
             className="h-[75vh] w-full sm:h-[85vh]"
           />
         </div>

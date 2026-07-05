@@ -21,7 +21,7 @@ export default function CvManager({ initial }: { initial: CvSettings }) {
     if (!file) return;
     setUploading(true);
     try {
-      const blob = await upload(`media/${file.name}`, file, {
+      const blob = await upload("cv/erfero-keoula-cv.pdf", file, {
         access: "public",
         handleUploadUrl: "/api/media/upload",
       });

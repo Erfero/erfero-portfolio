@@ -9,9 +9,13 @@ export async function POST(request: Request): Promise<NextResponse> {
     const jsonResponse = await handleUpload({
       body,
       request,
-      onBeforeGenerateToken: async () => {
+      onBeforeGenerateToken: async (pathname) => {
         const session = await auth();
         if (!session) throw new Error("Non autorisé");
+
+        // Le CV a un chemin fixe (cv/erfero-keoula-cv.pdf) : pas de suffixe
+        // aléatoire, chaque nouvel envoi remplace le précédent proprement.
+        const isFixedPath = pathname.startsWith("cv/");
 
         return {
           allowedContentTypes: [
@@ -26,7 +30,8 @@ export async function POST(request: Request): Promise<NextResponse> {
             "audio/wav",
             "application/pdf",
           ],
-          addRandomSuffix: true,
+          addRandomSuffix: !isFixedPath,
+          allowOverwrite: isFixedPath,
         };
       },
       onUploadCompleted: async () => {},

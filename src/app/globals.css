@@ -142,6 +142,146 @@
   }
 }
 
+/* ==== Hero "scene A" (maquette navigateur/téléphone) : port fidèle de la
+   maquette HTML fournie — dimensions/animations en pixels fixes, mises à
+   l'échelle via transform selon le breakpoint, comme dans la maquette. */
+@keyframes heroFlA {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(70px, -50px) scale(1.18); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+@keyframes heroFlB {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-60px, 55px) scale(1.12); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+@keyframes heroWordUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes heroDotPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(194, 242, 78, 0.55); }
+  70% { box-shadow: 0 0 0 7px rgba(194, 242, 78, 0); }
+}
+@keyframes heroFloatY {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-9px); }
+}
+@keyframes heroChipFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-9px); }
+}
+@keyframes heroChipFloat2 {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+@keyframes heroSmChrome {
+  0% { opacity: 0; transform: translateY(16px) scale(0.985); }
+  3%, 90% { opacity: 1; transform: none; }
+  97%, 100% { opacity: 0; transform: translateY(16px) scale(0.985); }
+}
+@keyframes heroSmTop {
+  0%, 7% { opacity: 0; transform: translateY(-10px); }
+  11%, 90% { opacity: 1; transform: none; }
+  96%, 100% { opacity: 0; transform: translateY(-10px); }
+}
+@keyframes heroSmHero {
+  0%, 12% { opacity: 0; filter: blur(16px); transform: scale(1.05); }
+  18%, 90% { opacity: 1; filter: blur(0); transform: scale(1); }
+  96%, 100% { opacity: 0; filter: blur(16px); }
+}
+@keyframes heroSmKen {
+  0% { transform: scale(1.02); }
+  100% { transform: scale(1.13); }
+}
+@keyframes heroSmText {
+  0%, 19% { opacity: 0; transform: translateY(12px); }
+  25%, 90% { opacity: 1; transform: none; }
+  96%, 100% { opacity: 0; transform: translateY(12px); }
+}
+@keyframes heroSmC1 {
+  0%, 24% { opacity: 0; transform: translateY(20px) scale(0.95); }
+  30%, 90% { opacity: 1; transform: none; }
+  96%, 100% { opacity: 0; }
+}
+@keyframes heroSmC2 {
+  0%, 28% { opacity: 0; transform: translateY(20px) scale(0.95); }
+  34%, 90% { opacity: 1; transform: none; }
+  96%, 100% { opacity: 0; }
+}
+@keyframes heroSmC3 {
+  0%, 32% { opacity: 0; transform: translateY(20px) scale(0.95); }
+  38%, 90% { opacity: 1; transform: none; }
+  96%, 100% { opacity: 0; }
+}
+@keyframes heroSmPhone {
+  0%, 30% { opacity: 0; transform: translateY(34px) rotate(-4deg); }
+  39%, 90% { opacity: 1; transform: translateY(0) rotate(-4deg); }
+  96%, 100% { opacity: 0; transform: translateY(34px) rotate(-4deg); }
+}
+@keyframes heroSmCursor {
+  0%, 52% { opacity: 0; transform: translate(360px, 392px); }
+  56% { opacity: 1; transform: translate(360px, 392px); }
+  66% { opacity: 1; transform: translate(196px, 214px); }
+  69% { opacity: 1; transform: translate(196px, 214px) scale(0.82); }
+  72% { opacity: 1; transform: translate(196px, 214px) scale(1); }
+  82% { opacity: 1; transform: translate(196px, 214px); }
+  88%, 100% { opacity: 0; }
+}
+@keyframes heroSmToast {
+  0%, 69% { opacity: 0; transform: translateY(10px) scale(0.9); }
+  73%, 86% { opacity: 1; transform: none; }
+  92%, 100% { opacity: 0; transform: translateY(-6px); }
+}
+@keyframes heroSmBadge {
+  0%, 68% { transform: scale(1); }
+  72% { transform: scale(1.55); }
+  80%, 100% { transform: scale(1); }
+}
+@keyframes heroSmRipple {
+  0%, 68% { opacity: 0; transform: translate(196px, 214px) scale(0.2); }
+  72% { opacity: 0.7; }
+  80% { opacity: 0; transform: translate(196px, 214px) scale(2.6); }
+  100% { opacity: 0; }
+}
+
+@property --hero-cc {
+  syntax: '<integer>';
+  inherits: false;
+  initial-value: 0;
+}
+@property --hero-cd {
+  syntax: '<integer>';
+  inherits: false;
+  initial-value: 0;
+}
+@keyframes heroCnt200 {
+  from { --hero-cc: 0; }
+  to { --hero-cc: 200; }
+}
+@keyframes heroCnt5 {
+  from { --hero-cd: 0; }
+  to { --hero-cd: 5; }
+}
+.hero-counter-200 {
+  counter-reset: hero-cc var(--hero-cc);
+  animation: heroCnt200 2.2s 0.5s ease-out forwards;
+}
+.hero-counter-200::after {
+  content: counter(hero-cc);
+}
+.hero-counter-5 {
+  counter-reset: hero-cd var(--hero-cd);
+  animation: heroCnt5 2s 0.5s ease-out forwards;
+}
+.hero-counter-5::after {
+  content: counter(hero-cd);
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

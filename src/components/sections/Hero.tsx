@@ -3,10 +3,8 @@
 import { useEffect, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-import { ArrowUpRight, ChevronDown } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { Link } from "@/i18n/navigation";
-import MagneticButton from "@/components/ui/MagneticButton";
-import GradientBlob from "@/components/ui/GradientBlob";
 import { ShopifyBagIcon, TrustpilotStar } from "@/components/ui/BrandIcons";
 import HeroSceneBrowser from "@/components/sections/HeroSceneBrowser";
 import type { Project } from "@/data/projects";
@@ -287,13 +285,19 @@ function HeroShowcase({ projects }: { projects: Project[] }) {
   );
 }
 
+// Durée de la scène A = durée réelle du cycle CSS de la maquette (10s,
+// smChrome/smCursor/etc. sont tous en "10s linear infinite") : on ne bascule
+// vers la scène B qu'une fois ce cycle terminé, comme demandé.
+const SCENE_A_MS = 10000;
+const SCENE_B_MS = 6400;
+
 function HeroSceneSwitcher({ projects }: { projects: Project[] }) {
   const prefersReducedMotion = useReducedMotion();
   const [scene, setScene] = useState<"a" | "b">("a");
 
   useEffect(() => {
     if (prefersReducedMotion) return;
-    const duration = scene === "a" ? 7200 : 6400;
+    const duration = scene === "a" ? SCENE_A_MS : SCENE_B_MS;
     const id = setTimeout(() => setScene((s) => (s === "a" ? "b" : "a")), duration);
     return () => clearTimeout(id);
   }, [scene, prefersReducedMotion]);
@@ -301,7 +305,11 @@ function HeroSceneSwitcher({ projects }: { projects: Project[] }) {
   const activeScene = prefersReducedMotion ? "b" : scene;
 
   return (
-    <div className="relative order-first h-[280px] w-full sm:h-[400px] lg:order-last lg:h-[640px]">
+    <div
+      id="mockup-box"
+      className="relative w-[602px] h-[464px] max-lg:w-[518px] max-lg:h-[400px] max-[720px]:w-[340px] max-[720px]:h-[262px] max-[380px]:w-[300px] max-[380px]:h-[232px]"
+      style={{ animation: "heroFloatY 7s ease-in-out infinite" }}
+    >
       <AnimatePresence mode="wait">
         {activeScene === "a" ? (
           <HeroSceneBrowser key="scene-a" projects={projects} />
@@ -313,110 +321,158 @@ function HeroSceneSwitcher({ projects }: { projects: Project[] }) {
   );
 }
 
+// Sépare le badge combiné ("Développeur Shopify freelance · Disponible...")
+// en ses deux pastilles, exactement comme les deux badges de la maquette.
+function splitBadge(raw: string): [string, string] {
+  const [first, ...rest] = raw.split(" · ");
+  return [first ?? raw, rest.join(" · ")];
+}
+
+// Anime chaque mot du titre comme des lignes empilées (heroWordUp), au même
+// tempo que la maquette (délai +0.13s par ligne).
+function TitleLine({
+  children,
+  delay,
+  className = "",
+}: {
+  children: React.ReactNode;
+  delay: number;
+  className?: string;
+}) {
+  return (
+    <span
+      className={`block ${className}`}
+      style={{ animation: `heroWordUp 0.7s ${delay}s ease both` }}
+    >
+      {children}
+    </span>
+  );
+}
+
 export default function Hero({ projects }: { projects: Project[] }) {
   const t = useTranslations("hero");
+  const [badgeFreelance, badgeAvailable] = splitBadge(t("badge"));
+  const titleWords = t("titleLine1").split(" ");
+  const titleLastWord = titleWords.pop();
+  const titleFirstLine = titleWords.join(" ");
+  const stats = t.raw("stats") as { value: string; label: string }[];
 
   return (
-    <section className="relative flex min-h-[100svh] items-center overflow-hidden pt-28">
-      <GradientBlob className="left-[-10%] top-[-10%] size-[38rem] bg-lime/25" />
-      <GradientBlob className="right-[-15%] top-[20%] size-[32rem] bg-violet/25" />
+    <section className="relative flex min-h-[100svh] items-center overflow-hidden pt-28 bg-[radial-gradient(120%_120%_at_78%_8%,#0d160c_0%,#080b08_46%,#050705_100%)]">
+      <div
+        className="pointer-events-none absolute -left-[120px] -top-[140px] size-[520px] rounded-full blur-[46px]"
+        style={{
+          background: "radial-gradient(circle, rgba(120,200,90,.34), transparent 62%)",
+          animation: "heroFlA 16s ease-in-out infinite",
+        }}
+      />
+      <div
+        className="pointer-events-none absolute -bottom-[180px] right-[120px] size-[560px] rounded-full blur-[52px]"
+        style={{
+          background: "radial-gradient(circle, rgba(60,150,120,.28), transparent 64%)",
+          animation: "heroFlB 19s ease-in-out infinite",
+        }}
+      />
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px)",
+          backgroundSize: "46px 46px",
+          WebkitMaskImage: "radial-gradient(120% 90% at 30% 40%, #000 30%, transparent 78%)",
+          maskImage: "radial-gradient(120% 90% at 30% 40%, #000 30%, transparent 78%)",
+        }}
+      />
       <HeroDecor />
 
-      <div className="container-page relative z-10 grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-        <div className="order-last flex flex-col gap-10 lg:order-first">
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="inline-flex w-fit items-center gap-2 rounded-full border border-border bg-white/[0.03] px-4 py-1.5 text-xs text-ink-muted"
+      <div className="container-page relative z-10 flex flex-col items-center gap-6 lg:flex-row lg:items-center">
+        <div className="order-last w-full max-w-[660px] lg:order-first lg:w-[560px] lg:max-w-none lg:flex-none">
+          <div
+            className="mb-[30px] flex flex-wrap gap-2.5"
+            style={{ animation: "heroFadeUp 0.7s ease both" }}
           >
-            <span className="relative flex size-1.5">
-              <span className="absolute inline-flex size-full animate-ping rounded-full bg-lime opacity-75" />
-              <span className="relative inline-flex size-1.5 rounded-full bg-lime" />
-            </span>
-            {t("badge")}
-          </motion.div>
-
-          <div>
-            <h1 className="font-display max-w-4xl text-4xl font-medium leading-[1.05] tracking-tight sm:text-6xl lg:text-6xl xl:text-7xl">
-              <span className="inline-block overflow-hidden align-bottom">
-                {t("titleLine1").split(" ").map((word, i) => (
-                  <motion.span
-                    key={i}
-                    initial={{ y: "110%" }}
-                    animate={{ y: 0 }}
-                    transition={{
-                      duration: 0.6,
-                      delay: 0.1 + i * 0.07,
-                      ease: [0.16, 1, 0.3, 1],
-                    }}
-                    className="inline-block"
-                  >
-                    {word}&nbsp;
-                  </motion.span>
-                ))}
-              </span>
-              <motion.span
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.5 }}
-                className="text-gradient inline-block"
-              >
-                {t("titleHighlight")}
-              </motion.span>
-            </h1>
-
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.25 }}
-              className="mt-6 max-w-xl text-lg text-ink-muted"
-            >
-              {t("subtitle")}
-            </motion.p>
+            <div className="inline-flex items-center gap-2 rounded-full border border-[rgba(194,242,78,.28)] bg-[rgba(194,242,78,.06)] py-2 pl-[11px] pr-[15px] text-[13.5px] font-semibold text-[#d8e9b9]">
+              <ShopifyBagIcon className="size-[15px] flex-none" />
+              {badgeFreelance}
+            </div>
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] py-2 pl-3 pr-[15px] text-[13.5px] text-[#c3ccbe]">
+              <span
+                className="size-2 flex-none rounded-full bg-lime"
+                style={{ animation: "heroDotPulse 2s ease-out infinite" }}
+              />
+              {badgeAvailable}
+            </div>
           </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.35 }}
-            className="flex flex-wrap items-center gap-4"
+          <h1
+            className="font-display m-0 mb-[26px] text-[40px] font-bold leading-[1.02] tracking-[-0.02em] text-[#f0f4ee] max-lg:text-[56px] lg:text-[66px] lg:leading-[1.0]"
           >
-            <MagneticButton
+            <TitleLine delay={0.05}>{titleFirstLine}</TitleLine>
+            <TitleLine delay={0.18}>{titleLastWord}</TitleLine>
+            <TitleLine delay={0.32} className="text-gradient">
+              {t("titleHighlight")}
+            </TitleLine>
+          </h1>
+
+          <p
+            className="mb-9 max-w-[470px] text-[16.5px] leading-[1.6] text-[#98a292] lg:max-w-[600px] lg:text-[19px]"
+            style={{ animation: "heroFadeUp 0.7s 0.5s ease both" }}
+          >
+            {t("subtitle")}
+          </p>
+
+          <div
+            id="cta-row"
+            className="mb-[52px] flex flex-col flex-wrap gap-3.5 sm:flex-row sm:items-center"
+            style={{ animation: "heroFadeUp 0.7s 0.62s ease both" }}
+          >
+            <Link
               href="/#contact"
-              className="bg-lime text-bg hover:shadow-[0_0_40px_-10px_var(--color-lime)]"
+              className="inline-flex items-center justify-center gap-2 rounded-[14px] bg-lime px-[26px] py-4 text-base font-bold text-[#0a0d09] no-underline shadow-[0_14px_34px_-12px_rgba(194,242,78,.55)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_20px_44px_-12px_rgba(194,242,78,.7)]"
             >
-              {t("ctaPrimary")}
-              <ArrowUpRight className="size-4" />
-            </MagneticButton>
+              {t("ctaPrimary")} <span className="text-[15px]">→</span>
+            </Link>
 
             <Link
               href="/realisations"
-              className="group inline-flex items-center gap-2 rounded-full border border-border px-7 py-3.5 text-sm font-medium text-ink transition-colors hover:border-lime/50"
+              className="inline-flex items-center justify-center gap-2 rounded-[14px] border border-white/[0.16] px-6 py-4 text-base font-semibold text-[#e6ece2] no-underline transition-all duration-200 hover:border-white/30 hover:bg-white/[0.06]"
             >
-              {t("ctaSecondary")}
-              <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              {t("ctaSecondary")} <span className="text-[15px]">→</span>
             </Link>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.7, delay: 0.5 }}
-            className="grid max-w-lg grid-cols-3 gap-6 border-t border-border pt-8"
+          <div
+            id="stats-row"
+            className="flex flex-wrap justify-center gap-x-[34px] gap-y-[26px] border-t border-white/10 pt-[30px] sm:justify-start"
+            style={{ animation: "heroFadeUp 0.7s 0.74s ease both" }}
           >
-            {t.raw("stats").map((stat: { value: string; label: string }) => (
-              <div key={stat.label}>
-                <div className="font-display text-2xl font-semibold sm:text-3xl">
-                  {stat.value}
+            {stats.map((stat, i) => {
+              const match = stat.value.match(/^(\d+(?:\.\d+)?)(.*)$/);
+              const num = match?.[1];
+              const rest = match?.[2] ?? "";
+              const restIsAccent = rest.startsWith("+") || rest.startsWith("/");
+              const canCount = i < 2 && num !== undefined && Number.isInteger(Number(num));
+
+              return (
+                <div key={stat.label} className="text-center sm:text-left">
+                  <div className="font-display text-[30px] font-bold leading-none text-[#f0f4ee] lg:text-[38px]">
+                    {canCount ? (
+                      <span className={i === 0 ? "hero-counter-200" : "hero-counter-5"} />
+                    ) : (
+                      num ?? stat.value
+                    )}
+                    {restIsAccent ? <span className="text-lime">{rest}</span> : rest}
+                  </div>
+                  <div className="mt-[7px] text-[13.5px] text-[#8b9585]">{stat.label}</div>
                 </div>
-                <div className="mt-1 text-xs text-ink-muted">{stat.label}</div>
-              </div>
-            ))}
-          </motion.div>
+              );
+            })}
+          </div>
         </div>
 
-        <HeroSceneSwitcher projects={projects} />
+        <div className="order-first flex w-full items-center justify-center lg:order-last lg:w-auto lg:flex-1 lg:self-stretch">
+          <HeroSceneSwitcher projects={projects} />
+        </div>
       </div>
 
       <motion.div

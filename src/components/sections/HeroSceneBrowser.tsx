@@ -1,11 +1,11 @@
 "use client";
 
+import type { CSSProperties } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { motion } from "framer-motion";
-import { ShoppingBag, MousePointer2, CheckCircle2, TrendingUp } from "lucide-react";
+import { ShoppingBag, CheckCircle2, TrendingUp, MousePointer2 } from "lucide-react";
 import type { Project } from "@/data/projects";
 import { getScreenshotUrl } from "@/lib/screenshot";
-import { TrustpilotStar } from "@/components/ui/BrandIcons";
 
 function hostnameOf(url: string) {
   try {
@@ -15,12 +15,12 @@ function hostnameOf(url: string) {
   }
 }
 
-const enter = { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const };
+const CYCLE = "10s linear infinite";
 
 /**
- * Scène "A" : maquette animée d'une boutique en pleine construction
- * (navigateur + téléphone, curseur qui clique, toast de vente) — alterne
- * avec la scène "B" (HeroShowcase) dans HeroSceneSwitcher.
+ * Scène "A" du Hero : reproduction fidèle (dimensions px, timings, mise en
+ * scène) de la maquette navigateur + téléphone fournie — un canevas fixe de
+ * 700x540, mis à l'échelle par breakpoint, exactement comme dans la source.
  */
 export default function HeroSceneBrowser({ projects }: { projects: Project[] }) {
   const locale = useLocale() as "fr" | "en";
@@ -31,6 +31,16 @@ export default function HeroSceneBrowser({ projects }: { projects: Project[] }) 
   const pool = projects.length > 1 ? projects.slice(1) : projects;
   const products = Array.from({ length: 3 }, (_, i) => pool[i % pool.length]);
 
+  const stageBase: CSSProperties = {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: 700,
+    height: 540,
+    transformOrigin: "top left",
+    color: "#eef3ec",
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -38,164 +48,415 @@ export default function HeroSceneBrowser({ projects }: { projects: Project[] }) 
       exit={{ opacity: 0, transition: { duration: 0.4 } }}
       className="absolute inset-0"
     >
-      {/* Fenêtre navigateur */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.94, y: 16 }}
-        animate={{ opacity: 1, scale: 1, y: 0 }}
-        exit={{ opacity: 0, scale: 0.96, filter: "blur(6px)" }}
-        transition={enter}
-        className="absolute inset-x-0 top-0 mx-auto w-[88%] overflow-hidden rounded-xl border border-white/10 bg-surface shadow-2xl shadow-black/50 sm:w-[82%] lg:w-[78%]"
+      <div
+        style={stageBase}
+        className="scale-[0.86] max-lg:scale-[0.74] max-[720px]:scale-[0.485] max-[380px]:scale-[0.428]"
       >
-        <div className="flex items-center gap-1.5 border-b border-white/5 bg-white/[0.03] px-3 py-2">
-          <span className="size-2 rounded-full bg-white/15" />
-          <span className="size-2 rounded-full bg-white/15" />
-          <span className="size-2 rounded-full bg-white/15" />
-          <div className="ml-2 flex-1 truncate rounded-full bg-white/5 px-3 py-1 text-center text-[9px] text-ink-muted sm:text-[10px]">
-            {hostnameOf(main.url)}
-          </div>
-        </div>
-
-        <div className="hidden items-center justify-between border-b border-white/5 px-4 py-2.5 sm:flex">
-          <span className="font-display truncate text-xs font-semibold">
-            {main.name[locale]}
-          </span>
-          <div className="flex items-center gap-3 text-[10px] text-ink-muted">
-            <span>Shop</span>
-            <span>New</span>
-            <span>Sale</span>
-          </div>
-          <ShoppingBag className="size-3.5 text-ink-muted" />
-        </div>
-
-        <div className="relative h-24 overflow-hidden sm:h-32 lg:h-40">
-          <motion.img
-            src={main.thumbnailOverride || getScreenshotUrl(main.url, 700, 500)}
-            alt=""
-            loading="lazy"
-            className="absolute inset-0 size-full object-cover object-top"
-            initial={{ scale: 1 }}
-            animate={{ scale: 1.14 }}
-            transition={{ duration: 7, ease: "linear" }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/30 to-transparent" />
-          <div className="absolute inset-0 flex flex-col justify-center gap-1.5 px-4">
-            <span className="w-fit rounded-full bg-lime px-2 py-0.5 text-[8px] font-semibold text-bg sm:text-[9px]">
-              {t("badge")}
-            </span>
-            <p className="font-display text-sm font-medium leading-tight text-white sm:text-lg lg:text-xl">
-              {t("heading")}
-              <br />
-              {t("headingLine2")}
-            </p>
-            <span className="mt-1 w-fit rounded-full border border-white/40 px-2.5 py-1 text-[8px] font-medium text-white sm:text-[10px]">
-              {t("cta")}
-            </span>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-3 gap-2 p-2.5 sm:gap-3 sm:p-3">
-          {products.map((p, i) => (
-            <div key={`${p.id}-${i}`} className="overflow-hidden rounded-lg bg-white/5">
-              <img
-                src={p.thumbnailOverride || getScreenshotUrl(p.url, 220, 220)}
-                alt=""
-                loading="lazy"
-                className="aspect-square w-full object-cover object-top"
-              />
+        {/* fenêtre navigateur */}
+        <div
+          style={{
+            position: "absolute",
+            right: 0,
+            top: 12,
+            width: 530,
+            height: 414,
+            borderRadius: 16,
+            background: "#0b0f0b",
+            border: "1px solid rgba(255,255,255,.09)",
+            boxShadow: "0 40px 90px -30px rgba(0,0,0,.85), 0 8px 30px -12px rgba(0,0,0,.6)",
+            overflow: "hidden",
+            animation: `heroSmChrome ${CYCLE}`,
+          }}
+        >
+          <div
+            style={{
+              height: 38,
+              display: "flex",
+              alignItems: "center",
+              gap: 12,
+              padding: "0 14px",
+              borderBottom: "1px solid rgba(255,255,255,.06)",
+            }}
+          >
+            <div style={{ display: "flex", gap: 7 }}>
+              <span style={{ width: 11, height: 11, borderRadius: "50%", background: "#ff5f57" }} />
+              <span style={{ width: 11, height: 11, borderRadius: "50%", background: "#febc2e" }} />
+              <span style={{ width: 11, height: 11, borderRadius: "50%", background: "#28c840" }} />
             </div>
-          ))}
+            <div
+              style={{
+                flex: 1,
+                height: 22,
+                borderRadius: 7,
+                background: "rgba(255,255,255,.05)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: 7,
+                fontSize: 11,
+                color: "#8e988c",
+                maxWidth: 300,
+                margin: "0 auto",
+              }}
+            >
+              <span style={{ width: 9, height: 9, borderRadius: 2, border: "1.5px solid #57c07a" }} />
+              {hostnameOf(main.url)}
+            </div>
+            <div style={{ width: 44 }} />
+          </div>
+          <div
+            style={{
+              height: 44,
+              display: "flex",
+              alignItems: "center",
+              gap: 14,
+              padding: "0 18px",
+              borderBottom: "1px solid rgba(255,255,255,.05)",
+              animation: `heroSmTop ${CYCLE}`,
+            }}
+          >
+            <span className="font-display" style={{ fontWeight: 700, letterSpacing: ".14em", fontSize: 14 }}>
+              {main.name[locale].toUpperCase()}
+            </span>
+            <div style={{ flex: 1, display: "flex", gap: 16, fontSize: 11, color: "#9aa494" }}>
+              <span>Shop</span>
+              <span>New</span>
+              <span>Sale</span>
+            </div>
+            <div
+              style={{
+                position: "relative",
+                width: 26,
+                height: 26,
+                borderRadius: 8,
+                background: "rgba(255,255,255,.06)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <ShoppingBag size={14} color="#cdd7c2" />
+              <span
+                style={{
+                  position: "absolute",
+                  top: -6,
+                  right: -6,
+                  minWidth: 16,
+                  height: 16,
+                  padding: "0 4px",
+                  borderRadius: 8,
+                  background: "#c2f24e",
+                  color: "#0a0d09",
+                  fontSize: 10,
+                  fontWeight: 700,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  animation: `heroSmBadge ${CYCLE}`,
+                }}
+              >
+                3
+              </span>
+            </div>
+          </div>
+          <div style={{ position: "relative", height: 168, overflow: "hidden", animation: `heroSmHero ${CYCLE}` }}>
+            <img
+              src={main.thumbnailOverride || getScreenshotUrl(main.url, 700, 500)}
+              alt=""
+              loading="lazy"
+              style={{
+                position: "absolute",
+                inset: 0,
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                objectPosition: "center 28%",
+                animation: "heroSmKen 12s ease-in-out infinite alternate",
+              }}
+            />
+            <div
+              style={{
+                position: "absolute",
+                inset: 0,
+                background:
+                  "linear-gradient(90deg, rgba(6,9,6,.82) 0%, rgba(6,9,6,.25) 55%, rgba(6,9,6,0) 100%)",
+              }}
+            />
+            <div
+              style={{
+                position: "absolute",
+                left: 20,
+                top: 26,
+                right: 180,
+                animation: `heroSmText ${CYCLE}`,
+              }}
+            >
+              <span
+                style={{
+                  display: "inline-block",
+                  fontSize: 10,
+                  letterSpacing: ".12em",
+                  textTransform: "uppercase",
+                  color: "#c2f24e",
+                  border: "1px solid rgba(194,242,78,.4)",
+                  borderRadius: 20,
+                  padding: "3px 9px",
+                  marginBottom: 10,
+                }}
+              >
+                {t("badge")}
+              </span>
+              <div
+                className="font-display"
+                style={{ fontWeight: 700, fontSize: 22, lineHeight: 1.05, marginBottom: 12 }}
+              >
+                {t("heading")}
+                <br />
+                {t("headingLine2")}
+              </div>
+              <span
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 6,
+                  background: "#c2f24e",
+                  color: "#0a0d09",
+                  fontWeight: 700,
+                  fontSize: 12,
+                  padding: "8px 14px",
+                  borderRadius: 10,
+                }}
+              >
+                {t("cta")}
+              </span>
+            </div>
+          </div>
+          <div style={{ display: "flex", gap: 10, padding: "12px 14px" }}>
+            {products.map((p, i) => (
+              <div
+                key={`${p.id}-${i}`}
+                style={{
+                  flex: 1,
+                  borderRadius: 11,
+                  overflow: "hidden",
+                  background: "#10150f",
+                  border: "1px solid rgba(255,255,255,.06)",
+                  animation: `${i === 0 ? "heroSmC1" : i === 1 ? "heroSmC2" : "heroSmC3"} ${CYCLE}`,
+                }}
+              >
+                <img
+                  src={p.thumbnailOverride || getScreenshotUrl(p.url, 220, 220)}
+                  alt=""
+                  loading="lazy"
+                  style={{ height: 74, width: "100%", objectFit: "cover", objectPosition: "top" }}
+                />
+                <div style={{ padding: "8px 9px" }}>
+                  <div style={{ fontSize: 11, fontWeight: 600 }}>{p.name[locale]}</div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
-      </motion.div>
 
-      {/* Mockup téléphone */}
-      <motion.div
-        initial={{ opacity: 0, x: -16, rotate: -12 }}
-        animate={{ opacity: 1, x: 0, rotate: -6 }}
-        exit={{ opacity: 0, x: -16, transition: { duration: 0.3 } }}
-        transition={{ ...enter, delay: 0.25 }}
-        className="absolute bottom-0 left-0 w-[30%] max-w-[110px] overflow-hidden rounded-[1.3rem] border-4 border-white/10 bg-bg shadow-2xl shadow-black/60 sm:max-w-[140px] sm:rounded-[1.6rem]"
-        style={{ aspectRatio: "9/18" }}
-      >
-        <div className="absolute left-1/2 top-1.5 h-1.5 w-6 -translate-x-1/2 rounded-full bg-black/60" />
-        <img
-          src={main.thumbnailOverride || getScreenshotUrl(main.url, 300, 500)}
-          alt=""
-          loading="lazy"
-          className="size-full object-cover object-top"
-        />
-        <div className="absolute inset-x-1.5 bottom-1.5 flex items-center justify-center gap-1 rounded-full bg-lime py-1 text-[7px] font-semibold text-bg sm:text-[8px]">
-          <ShoppingBag className="size-2.5" />
-          {t("addToCart")}
+        {/* mockup téléphone */}
+        <div
+          style={{
+            position: "absolute",
+            left: 2,
+            bottom: 8,
+            width: 162,
+            height: 330,
+            borderRadius: 28,
+            background: "#0b0f0b",
+            border: "1px solid rgba(255,255,255,.12)",
+            boxShadow: "0 30px 60px -20px rgba(0,0,0,.85)",
+            overflow: "hidden",
+            transform: "rotate(-4deg)",
+            transformOrigin: "bottom left",
+            animation: `heroSmPhone ${CYCLE}`,
+          }}
+        >
+          <div
+            style={{
+              position: "absolute",
+              left: "50%",
+              top: 9,
+              transform: "translateX(-50%)",
+              width: 52,
+              height: 15,
+              borderRadius: 10,
+              background: "#000",
+              zIndex: 3,
+            }}
+          />
+          <div style={{ height: 150, position: "relative" }}>
+            <img
+              src={main.thumbnailOverride || getScreenshotUrl(main.url, 300, 500)}
+              alt=""
+              loading="lazy"
+              style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 20%" }}
+            />
+            <div
+              style={{
+                position: "absolute",
+                inset: 0,
+                background: "linear-gradient(180deg, rgba(6,9,6,.5), rgba(6,9,6,0) 45%, rgba(6,9,6,.7))",
+              }}
+            />
+            <div className="font-display" style={{ position: "absolute", left: 12, bottom: 10, fontWeight: 700, fontSize: 14 }}>
+              {main.name[locale]}
+            </div>
+          </div>
+          <div style={{ padding: "14px 12px 0" }}>
+            <div style={{ height: 8, borderRadius: 5, background: "rgba(255,255,255,.06)", marginBottom: 7 }} />
+            <div style={{ height: 8, width: "70%", borderRadius: 5, background: "rgba(255,255,255,.06)" }} />
+          </div>
+          <div
+            style={{
+              position: "absolute",
+              left: 12,
+              right: 12,
+              bottom: 12,
+              height: 38,
+              borderRadius: 12,
+              background: "#c2f24e",
+              color: "#0a0d09",
+              fontWeight: 700,
+              fontSize: 12,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 6,
+            }}
+          >
+            <ShoppingBag size={12} />
+            {t("addToCart")}
+          </div>
         </div>
-      </motion.div>
 
-      {/* Curseur + clic + toast, synchronisés sur un cycle de 6s en boucle */}
-      <motion.div
-        aria-hidden
-        className="absolute z-20 text-white drop-shadow-[0_2px_6px_rgba(0,0,0,0.6)]"
-        initial={{ left: "80%", top: "72%", scale: 1 }}
-        animate={{
-          left: ["80%", "80%", "58%", "58%", "58%", "80%"],
-          top: ["72%", "72%", "46%", "46%", "46%", "72%"],
-          scale: [1, 1, 1, 0.75, 1, 1],
-        }}
-        transition={{ duration: 6, times: [0, 0.15, 0.42, 0.48, 0.55, 1], repeat: Infinity, ease: "easeInOut" }}
-      >
-        <MousePointer2 className="size-4 sm:size-5" fill="white" />
-      </motion.div>
-
-      <motion.span
-        aria-hidden
-        className="absolute z-10 size-6 rounded-full border-2 border-lime"
-        style={{ left: "56%", top: "44%" }}
-        initial={{ opacity: 0, scale: 0.4 }}
-        animate={{ opacity: [0, 0, 0.9, 0], scale: [0.4, 0.4, 1.8, 2.2] }}
-        transition={{ duration: 6, times: [0, 0.46, 0.5, 0.68], repeat: Infinity, ease: "easeOut" }}
-      />
-
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: [0, 0, 1, 1, 0], y: [10, 10, 0, 0, 10] }}
-        transition={{ duration: 6, times: [0, 0.52, 0.6, 0.85, 1], repeat: Infinity, ease: "easeInOut" }}
-        className="glass absolute bottom-[8%] left-1/2 z-20 flex -translate-x-1/2 items-center gap-2 rounded-xl px-3 py-2 text-[10px] shadow-xl sm:text-xs"
-      >
-        <CheckCircle2 className="size-4 text-lime" />
-        <div>
-          <div className="font-semibold text-ink">{t("toastTitle")}</div>
-          <div className="text-ink-muted">{t("toastSub")}</div>
+        {/* ripple + curseur + toast, synchronisés sur le cycle de 10s */}
+        <span
+          aria-hidden
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: 22,
+            height: 22,
+            pointerEvents: "none",
+            zIndex: 20,
+            animation: `heroSmRipple ${CYCLE}`,
+          }}
+        >
+          <span
+            style={{
+              display: "block",
+              width: 44,
+              height: 44,
+              margin: -11,
+              borderRadius: "50%",
+              background: "radial-gradient(circle, rgba(194,242,78,.55), transparent 70%)",
+            }}
+          />
+        </span>
+        <div
+          aria-hidden
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            pointerEvents: "none",
+            zIndex: 21,
+            filter: "drop-shadow(0 3px 5px rgba(0,0,0,.5))",
+            animation: `heroSmCursor ${CYCLE}`,
+            color: "#fff",
+          }}
+        >
+          <MousePointer2 size={22} fill="#fff" />
         </div>
-      </motion.div>
+        <div
+          style={{
+            position: "absolute",
+            right: 14,
+            top: 70,
+            zIndex: 22,
+            display: "flex",
+            alignItems: "center",
+            gap: 8,
+            background: "rgba(12,17,11,.92)",
+            border: "1px solid rgba(194,242,78,.35)",
+            backdropFilter: "blur(6px)",
+            borderRadius: 12,
+            padding: "9px 13px",
+            boxShadow: "0 16px 40px -16px rgba(0,0,0,.8)",
+            animation: `heroSmToast ${CYCLE}`,
+          }}
+        >
+          <CheckCircle2 size={20} color="#c2f24e" />
+          <div style={{ lineHeight: 1.15 }}>
+            <div style={{ fontSize: 12, fontWeight: 700 }}>{t("toastTitle")}</div>
+            <div style={{ fontSize: 10, color: "#8e988c" }}>{t("toastSub")}</div>
+          </div>
+        </div>
 
-      {/* Chips flottants */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8, y: -8 }}
-        animate={{ opacity: 1, scale: 1, y: [0, -8, 0] }}
-        exit={{ opacity: 0, transition: { duration: 0.3 } }}
-        transition={{
-          opacity: { duration: 0.5, delay: 0.9 },
-          scale: { duration: 0.5, delay: 0.9 },
-          y: { duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 0.9 },
-        }}
-        className="glass absolute -top-2 right-2 z-20 flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-semibold text-lime shadow-lg sm:right-4"
-      >
-        <TrendingUp className="size-3.5" />
-        {t("growth")}
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8, y: 8 }}
-        animate={{ opacity: 1, scale: 1, y: [0, 8, 0] }}
-        exit={{ opacity: 0, transition: { duration: 0.3 } }}
-        transition={{
-          opacity: { duration: 0.5, delay: 1.1 },
-          scale: { duration: 0.5, delay: 1.1 },
-          y: { duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1.1 },
-        }}
-        className="glass absolute bottom-2 right-0 z-20 flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-semibold shadow-lg sm:bottom-6"
-      >
-        <TrustpilotStar className="size-4" />
-        {t("rating")}
-      </motion.div>
+        {/* chips flottants */}
+        <div
+          style={{
+            position: "absolute",
+            top: -4,
+            right: -4,
+            display: "flex",
+            alignItems: "center",
+            gap: 9,
+            background: "rgba(12,17,11,.94)",
+            border: "1px solid rgba(255,255,255,.12)",
+            borderRadius: 13,
+            padding: "11px 14px",
+            boxShadow: "0 18px 44px -16px rgba(0,0,0,.85)",
+            animation: "heroChipFloat 5s ease-in-out infinite",
+            zIndex: 30,
+          }}
+        >
+          <span
+            style={{
+              width: 32,
+              height: 32,
+              borderRadius: 9,
+              background: "rgba(194,242,78,.16)",
+              color: "#c2f24e",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <TrendingUp size={16} />
+          </span>
+          <div style={{ lineHeight: 1.15 }}>
+            <div style={{ fontSize: 15, fontWeight: 700, color: "#f0f4ee" }}>{t("growth")}</div>
+            <div style={{ fontSize: 11.5, color: "#8b9585" }}>{t("growthSub")}</div>
+          </div>
+        </div>
+        <div
+          style={{
+            position: "absolute",
+            top: 392,
+            right: -10,
+            display: "flex",
+            alignItems: "center",
+            gap: 8,
+            background: "rgba(12,17,11,.94)",
+            border: "1px solid rgba(255,255,255,.12)",
+            borderRadius: 13,
+            padding: "10px 14px",
+            boxShadow: "0 18px 44px -16px rgba(0,0,0,.85)",
+            animation: "heroChipFloat2 6s ease-in-out infinite",
+            zIndex: 30,
+          }}
+        >
+          <span style={{ color: "#c2f24e", fontSize: 15 }}>★★★★★</span>
+          <span style={{ fontSize: 14, fontWeight: 700, color: "#f0f4ee" }}>{t("rating")}</span>
+        </div>
+      </div>
     </motion.div>
   );
 }

@@ -26,16 +26,16 @@
     background: var(--color-bg);
     color-scheme: dark;
     scroll-behavior: auto;
-    overflow-x: hidden;
-    width: 100%;
+    overflow-x: clip;
+    overflow-y: auto;
   }
 
   body {
     background: var(--color-bg);
     color: var(--color-ink);
     font-family: var(--font-sans);
-    overflow-x: hidden;
-    width: 100%;
+    overflow-x: clip;
+    overflow-y: visible;
   }
 
   ::selection {

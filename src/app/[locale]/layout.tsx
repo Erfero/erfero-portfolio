@@ -3,7 +3,6 @@ import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
-import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
 import PageTransition from "@/components/providers/PageTransition";
 import LocaleHtmlSync from "@/components/providers/LocaleHtmlSync";
 import Navbar from "@/components/layout/Navbar";
@@ -97,15 +96,13 @@ export default async function LocaleLayout({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <LocaleHtmlSync locale={locale} />
-      <SmoothScrollProvider>
-        <CustomCursor />
-        <Navbar showCv={cvSettings.enabled && Boolean(cvSettings.url)} />
-        <main>
-          <PageTransition>{children}</PageTransition>
-        </main>
-        <Footer />
-        <FloatingCTA />
-      </SmoothScrollProvider>
+      <CustomCursor />
+      <Navbar showCv={cvSettings.enabled && Boolean(cvSettings.url)} />
+      <main>
+        <PageTransition>{children}</PageTransition>
+      </main>
+      <Footer />
+      <FloatingCTA />
     </NextIntlClientProvider>
   );
 }

@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef, useState, useTransition } from "react";
-import { upload } from "@vercel/blob/client";
 import { Upload, Check, Save, FileText, ExternalLink, AlertCircle } from "lucide-react";
 import { saveCvSettingsAction } from "@/lib/actions";
 import type { CvSettings } from "@/lib/content";
@@ -21,11 +20,13 @@ export default function CvManager({ initial }: { initial: CvSettings }) {
     if (!file) return;
     setUploading(true);
     try {
-      const blob = await upload("cv/erfero-keoula-cv.pdf", file, {
-        access: "public",
-        handleUploadUrl: "/api/media/upload",
-      });
-      setSettings((prev) => ({ ...prev, url: blob.url }));
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("pathname", "cv/erfero-keoula-cv.pdf");
+      const res = await fetch("/api/media/upload", { method: "POST", body: formData });
+      if (!res.ok) throw new Error((await res.json()).error ?? "Échec de l'upload");
+      const { url } = await res.json();
+      setSettings((prev) => ({ ...prev, url }));
     } catch (err) {
       alert(`Échec de l'upload : ${(err as Error).message}`);
     }

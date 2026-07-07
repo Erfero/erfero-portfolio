@@ -1,60 +1,76 @@
-import { list, put, del } from "@vercel/blob";
+import { supabaseAdmin, SUPABASE_BUCKET } from "./supabase";
 
 /**
- * Petite couche au-dessus de Vercel Blob pour stocker à la fois les fichiers
- * uploadés (vidéos/images) et des documents JSON "config" (textes du site,
- * liste des boutiques, liste des vidéos) qu'on peut réécrire depuis l'admin
- * sans jamais toucher au code ni redéployer.
+ * Petite couche au-dessus de Supabase Storage pour stocker à la fois les
+ * fichiers uploadés (vidéos/images) et des documents JSON "config" (textes
+ * du site, liste des boutiques, liste des vidéos) qu'on peut réécrire depuis
+ * l'admin sans jamais toucher au code ni redéployer.
  */
+
+function withRandomSuffix(pathname: string) {
+  const dot = pathname.lastIndexOf(".");
+  const suffix = Math.random().toString(36).slice(2, 10);
+  if (dot === -1) return `${pathname}-${suffix}`;
+  return `${pathname.slice(0, dot)}-${suffix}${pathname.slice(dot)}`;
+}
 
 export async function readJsonBlob<T>(pathname: string): Promise<T | null> {
   try {
-    const { blobs } = await list({ prefix: pathname, limit: 1 });
-    const match = blobs.find((b) => b.pathname === pathname);
-    if (!match) return null;
-
-    // no-store : ces JSON sont modifiés depuis l'admin et doivent refléter le
-    // dernier enregistrement immédiatement, pas après un délai de cache.
-    const res = await fetch(match.url, { cache: "no-store" });
-    if (!res.ok) return null;
-    return (await res.json()) as T;
+    const { data, error } = await supabaseAdmin.storage
+      .from(SUPABASE_BUCKET)
+      .download(pathname);
+    if (error || !data) return null;
+    return JSON.parse(await data.text()) as T;
   } catch {
     return null;
   }
 }
 
 export async function writeJsonBlob(pathname: string, data: unknown) {
-  await put(pathname, JSON.stringify(data, null, 2), {
-    access: "public",
-    addRandomSuffix: false,
-    allowOverwrite: true,
+  const body = new Blob([JSON.stringify(data, null, 2)], {
+    type: "application/json",
+  });
+  await supabaseAdmin.storage.from(SUPABASE_BUCKET).upload(pathname, body, {
+    upsert: true,
     contentType: "application/json",
   });
 }
 
 export async function uploadMediaFile(pathname: string, file: File) {
-  const blob = await put(`media/${pathname}`, file, {
-    access: "public",
-    addRandomSuffix: true,
-  });
-  return blob.url;
+  const path = withRandomSuffix(`media/${pathname}`);
+  const { error } = await supabaseAdmin.storage
+    .from(SUPABASE_BUCKET)
+    .upload(path, file, { upsert: true, contentType: file.type });
+  if (error) throw error;
+  const { data } = supabaseAdmin.storage.from(SUPABASE_BUCKET).getPublicUrl(path);
+  return data.publicUrl;
 }
 
 export async function listMedia() {
-  const { blobs } = await list({ prefix: "media/" });
-  return blobs
-    .map((b) => ({
-      url: b.url,
-      pathname: b.pathname,
-      size: b.size,
-      uploadedAt: b.uploadedAt,
-    }))
-    .sort(
-      (a, b) =>
-        new Date(b.uploadedAt).getTime() - new Date(a.uploadedAt).getTime()
-    );
+  const { data, error } = await supabaseAdmin.storage
+    .from(SUPABASE_BUCKET)
+    .list("media", { sortBy: { column: "created_at", order: "desc" } });
+  if (error || !data) return [];
+  return data
+    .filter((item) => item.id)
+    .map((item) => {
+      const path = `media/${item.name}`;
+      const { data: urlData } = supabaseAdmin.storage
+        .from(SUPABASE_BUCKET)
+        .getPublicUrl(path);
+      return {
+        url: urlData.publicUrl,
+        pathname: path,
+        size: item.metadata?.size ?? 0,
+        uploadedAt: item.created_at ?? new Date().toISOString(),
+      };
+    });
 }
 
 export async function deleteMedia(url: string) {
-  await del(url);
+  const marker = `/object/public/${SUPABASE_BUCKET}/`;
+  const idx = url.indexOf(marker);
+  if (idx === -1) return;
+  const pathname = decodeURIComponent(url.slice(idx + marker.length));
+  await supabaseAdmin.storage.from(SUPABASE_BUCKET).remove([pathname]);
 }

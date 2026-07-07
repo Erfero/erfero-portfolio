@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef, useState, useTransition } from "react";
-import { upload } from "@vercel/blob/client";
 import { Upload, Trash2, Copy, Check, Music } from "lucide-react";
 import { deleteMediaAction } from "@/lib/actions";
 
@@ -29,12 +28,14 @@ export default function MediaManager({
     for (const file of Array.from(files)) {
       setProgress(`Envoi de ${file.name}...`);
       try {
-        const blob = await upload(`media/${file.name}`, file, {
-          access: "public",
-          handleUploadUrl: "/api/media/upload",
-        });
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append("pathname", `media/${file.name}`);
+        const res = await fetch("/api/media/upload", { method: "POST", body: formData });
+        if (!res.ok) throw new Error((await res.json()).error ?? "Échec de l'upload");
+        const { url, pathname } = await res.json();
         setMedia((prev) => [
-          { url: blob.url, pathname: blob.pathname, size: file.size, uploadedAt: new Date() },
+          { url, pathname, size: file.size, uploadedAt: new Date() },
           ...prev,
         ]);
       } catch (err) {

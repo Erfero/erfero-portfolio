@@ -315,8 +315,18 @@
   },
   "cvPage": {
     "print": "Imprimer / Enregistrer en PDF",
+    "contactLabel": "Contact",
+    "mobilityLabel": "Mobilité",
+    "mobility": "Télétravail ou présentiel",
+    "contacts": [
+      { "label": "Email", "value": "erferokam@gmail.com", "href": "mailto:erferokam@gmail.com" },
+      { "label": "Appel direct", "value": "+229 0169272595", "href": "tel:+2290169272595" },
+      { "label": "WhatsApp", "value": "+229 69272595", "href": "https://wa.me/22969272595" },
+      { "label": "Portfolio", "value": "erfero-portfolio.vercel.app", "href": "https://erfero-portfolio.vercel.app" },
+      { "label": "LinkedIn", "value": "in/erfero-keoula", "href": "https://www.linkedin.com/in/erfero-keoula-905b7220" }
+    ],
     "profileEyebrow": "Profil",
-    "profile": "Développeur web Fullstack spécialisé Shopify. Je conçois des boutiques et applications rapides, bien référencées et pensées pour convertir. Autonome, rigoureux et orienté résultat, je transforme un besoin métier en produit web performant.",
+    "profile": "Développeur web **Fullstack spécialisé Shopify**. Je conçois des boutiques et applications rapides, bien référencées et pensées pour **convertir**. Autonome, rigoureux et orienté résultat, je transforme un besoin métier en produit web performant.",
     "stats": [
       { "value": "200+", "label": "boutiques livrées" },
       { "value": "5 ans", "label": "d'expérience web" },
@@ -324,8 +334,22 @@
     ],
     "skillsEyebrow": "Compétences",
     "skillGroups": [
-      { "title": "Frontend", "items": ["Shopify", "React.js", "Vue.js", "Angular", "WordPress", "Flutter"] },
-      { "title": "Backend & SEO", "items": ["Node.js", "Laravel", "PHP", "MongoDB", "Firebase", "SEO"] }
+      { "title": "Frontend", "items": [
+        { "name": "Shopify", "highlight": true },
+        { "name": "React.js" },
+        { "name": "Vue.js" },
+        { "name": "Angular" },
+        { "name": "WordPress" },
+        { "name": "Flutter" }
+      ] },
+      { "title": "Backend & SEO", "items": [
+        { "name": "Node.js" },
+        { "name": "Laravel" },
+        { "name": "PHP" },
+        { "name": "MongoDB" },
+        { "name": "Firebase" },
+        { "name": "SEO", "highlight": true }
+      ] }
     ],
     "experienceEyebrow": "Expériences",
     "experience": [

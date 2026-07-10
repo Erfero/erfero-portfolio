@@ -32,7 +32,7 @@ function emptyLike(sample: Json): Json {
   return sample;
 }
 
-function RecursiveField({
+export function RecursiveField({
   value,
   onChange,
 }: {

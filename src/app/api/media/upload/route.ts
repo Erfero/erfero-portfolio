@@ -13,6 +13,7 @@ const ALLOWED_TYPES = [
   "audio/mp3",
   "audio/wav",
   "application/pdf",
+  "text/html",
 ];
 
 function withRandomSuffix(pathname: string) {

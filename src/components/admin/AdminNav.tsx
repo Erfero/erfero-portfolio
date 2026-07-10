@@ -10,6 +10,7 @@ import {
   MessageSquareQuote,
   LayoutGrid,
   Briefcase,
+  IdCard,
   ToggleLeft,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -23,6 +24,7 @@ const navItems = [
   { href: "/admin/catalog", label: "Catalogue (univers)", icon: LayoutGrid },
   { href: "/admin/content", label: "Textes du site", icon: FileText },
   { href: "/admin/freelance", label: "Kit freelance", icon: Briefcase },
+  { href: "/admin/cv", label: "CV", icon: IdCard },
   { href: "/admin/sections", label: "Sections du site", icon: ToggleLeft },
 ];
 

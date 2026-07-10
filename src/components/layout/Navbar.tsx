@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 import { siteConfig } from "@/data/site.config";
 import LocaleSwitcher from "./LocaleSwitcher";
 
-export default function Navbar() {
+export default function Navbar({ showCv }: { showCv?: boolean }) {
   const t = useTranslations("nav");
   const locale = useLocale();
   const [scrolled, setScrolled] = useState(false);
@@ -51,7 +51,7 @@ export default function Navbar() {
       <div className="container-page">
         <div
           className={cn(
-            "flex items-center justify-between rounded-full px-4 py-2.5 transition-all duration-300",
+            "flex items-center justify-between gap-x-6 rounded-full px-4 py-2.5 transition-all duration-300",
             scrolled
               ? "border border-border bg-surface/85 shadow-lg shadow-black/20 backdrop-blur-xl"
               : "border border-transparent bg-surface/45 backdrop-blur-md"
@@ -66,13 +66,13 @@ export default function Navbar() {
               {siteConfig.shortName}
               <span className="ml-0.5 align-baseline text-3xl leading-none text-lime">.</span>
             </span>
-            <span className="hidden h-4 w-px bg-border lg:block" />
-            <span className="hidden text-[11px] text-ink-muted lg:block">
+            <span className="hidden h-4 w-px bg-border xl:block" />
+            <span className="hidden text-[11px] text-ink-muted xl:block">
               {tagline}
             </span>
           </a>
 
-          <nav className="hidden items-center gap-8 md:flex">
+          <nav className="hidden items-center gap-6 md:flex">
             {links.map((link) => (
               <Link
                 key={link.href}
@@ -82,12 +82,14 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
-            <Link
-              href="/cv"
-              className="text-sm text-ink-muted transition-colors hover:text-ink"
-            >
-              {cvLabel}
-            </Link>
+            {showCv && (
+              <Link
+                href="/cv"
+                className="text-sm text-ink-muted transition-colors hover:text-ink"
+              >
+                {cvLabel}
+              </Link>
+            )}
           </nav>
 
           <div className="hidden items-center gap-3 md:flex">
@@ -122,13 +124,15 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
-            <Link
-              href="/cv"
-              onClick={() => setOpen(false)}
-              className="rounded-xl px-3 py-2.5 text-sm text-ink-muted hover:bg-white/5 hover:text-ink"
-            >
-              {cvLabel}
-            </Link>
+            {showCv && (
+              <Link
+                href="/cv"
+                onClick={() => setOpen(false)}
+                className="rounded-xl px-3 py-2.5 text-sm text-ink-muted hover:bg-white/5 hover:text-ink"
+              >
+                {cvLabel}
+              </Link>
+            )}
             <div className="mt-2 flex items-center justify-between px-3">
               <LocaleSwitcher />
               <Link

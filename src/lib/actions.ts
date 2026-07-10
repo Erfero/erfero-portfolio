@@ -8,10 +8,11 @@ import {
   listMedia,
   deleteMedia,
 } from "@/lib/blob";
+import { getMessages } from "@/lib/content";
 import type { Project } from "@/data/projects";
 import type { VideoEntry } from "@/data/videos";
 import type { Testimonial } from "@/data/testimonials";
-import type { FreelanceSettings, SectionsSettings } from "@/lib/content";
+import type { FreelanceSettings, SectionsSettings, CvSettings } from "@/lib/content";
 
 async function requireAdmin() {
   const session = await auth();
@@ -57,6 +58,27 @@ export async function saveFreelanceSettingsAction(settings: FreelanceSettings) {
   await requireAdmin();
   await writeJsonBlob("content/freelance-settings.json", settings);
   revalidatePath("/admin/freelance");
+}
+
+export async function saveCvSettingsAction(settings: CvSettings) {
+  await requireAdmin();
+  await writeJsonBlob("content/cv-settings.json", settings);
+  revalidatePath("/", "layout");
+  revalidatePath("/admin/cv");
+}
+
+/** Met à jour uniquement la section "cvPage" du contenu d'une langue, en
+ * préservant tous les autres textes déjà personnalisés depuis /admin/content
+ * (contrairement à saveContentAction qui réécrit tout le fichier). */
+export async function saveCvPageContentAction(
+  locale: string,
+  cvPage: Record<string, unknown>
+) {
+  await requireAdmin();
+  const current = await getMessages(locale);
+  await writeJsonBlob(`content/${locale}.json`, { ...current, cvPage });
+  revalidatePath("/", "layout");
+  revalidatePath("/admin/cv");
 }
 
 export async function saveSectionsSettingsAction(settings: SectionsSettings) {

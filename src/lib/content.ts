@@ -94,6 +94,28 @@ export async function getFreelanceSettings(): Promise<FreelanceSettings> {
   return { ...defaultFreelanceSettings, ...override };
 }
 
+/** Réglages de la section CV : interrupteur pour l'afficher ou non sur le
+ * site, et fichier de référence (PDF ou HTML) envoyé depuis /admin/cv —
+ * ce fichier n'est pas affiché directement (la page /cv reste une page
+ * HTML bilingue générée depuis le contenu du site, voir cvPage dans
+ * messages/*.json, éditable depuis /admin/content ou /admin/cv), il sert
+ * uniquement de référence pour mettre à jour ce contenu. */
+export interface CvSettings {
+  enabled: boolean;
+  fileUrl: string;
+  fileName: string;
+}
+
+const defaultCvSettings: CvSettings = {
+  enabled: true,
+  fileUrl: "",
+  fileName: "",
+};
+
+export async function getCvSettings(): Promise<CvSettings> {
+  const override = await readJsonBlob<CvSettings>("content/cv-settings.json");
+  return { ...defaultCvSettings, ...override };
+}
 
 /** Bascules de visibilité pour chaque section de la page d'accueil,
  * modifiables depuis /admin/sections sans toucher au code. Toutes activées

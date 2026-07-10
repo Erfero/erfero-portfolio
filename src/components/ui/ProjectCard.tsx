@@ -77,7 +77,7 @@ export default function ProjectCard({
         href={project.url}
         target="_blank"
         rel="noreferrer"
-        className="relative block aspect-[4/3] overflow-hidden"
+        className="relative block aspect-[3/4] overflow-hidden"
       >
         <motion.img
           src={

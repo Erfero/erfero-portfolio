@@ -53,7 +53,7 @@ export default async function RealisationsPage({
           </p>
         </Reveal>
 
-        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-14 grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
           {visibleProjects.map((project, i) => (
             <Reveal key={project.id} delay={i * 0.05}>
               <ProjectCard

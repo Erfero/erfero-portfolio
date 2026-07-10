@@ -53,7 +53,7 @@ export default function CustomCursor() {
       style={{ x: springX, y: springY }}
       animate={{ scale: hovering ? 2.2 : 1 }}
       transition={{ scale: { duration: 0.2 } }}
-      className="pointer-events-none fixed left-0 top-0 z-[70] size-5 rounded-full bg-lime mix-blend-difference"
+      className="pointer-events-none fixed left-0 top-0 z-[70] size-5 rounded-full bg-lime mix-blend-difference print:hidden"
     />
   );
 }

@@ -17,7 +17,7 @@ export default function Footer() {
   ].filter((s) => s.href);
 
   return (
-    <footer className="border-t border-border">
+    <footer className="border-t border-border print:hidden">
       <div className="container-page flex flex-col gap-8 py-14 md:flex-row md:items-start md:justify-between">
         <div className="max-w-sm">
           <Link href="/" className="font-display text-4xl font-semibold tracking-tight">

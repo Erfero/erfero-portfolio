@@ -42,6 +42,24 @@
     background: var(--color-lime);
     color: #07080a;
   }
+
+  /* Page CV imprimable : on réécrit les tokens de couleur pour un rendu
+   * clair (fond blanc, texte sombre) — tous les utilitaires bg et text
+   * du site reposant sur ces variables s'adaptent automatiquement, sans
+   * classes print à dupliquer partout. Le reste de l'UI (nav/footer/
+   * CTA/curseur) est masqué via print:hidden. */
+  @media print {
+    html {
+      --color-bg: #ffffff;
+      --color-bg-soft: #f3f3f3;
+      --color-surface: #f7f7f7;
+      --color-border: rgba(0, 0, 0, 0.12);
+      --color-ink: #111111;
+      --color-ink-muted: #444444;
+      background: var(--color-bg);
+      color: var(--color-ink);
+    }
+  }
 }
 
 @layer utilities {

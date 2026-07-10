@@ -24,7 +24,7 @@ export default function FloatingCTA() {
   return (
     <Link
       href="/#contact"
-      className={`fixed bottom-5 right-5 z-40 flex items-center gap-2 rounded-full bg-lime px-5 py-3.5 text-sm font-semibold text-bg shadow-2xl shadow-lime/20 transition-all duration-300 sm:bottom-8 sm:right-8 relative ${
+      className={`fixed bottom-5 right-5 z-40 flex items-center gap-2 rounded-full bg-lime px-5 py-3.5 text-sm font-semibold text-bg shadow-2xl shadow-lime/20 transition-all duration-300 sm:bottom-8 sm:right-8 relative print:hidden ${
         visible
           ? "translate-y-0 opacity-100"
           : "pointer-events-none translate-y-20 opacity-0"

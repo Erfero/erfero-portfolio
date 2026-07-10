@@ -94,24 +94,6 @@ export async function getFreelanceSettings(): Promise<FreelanceSettings> {
   return { ...defaultFreelanceSettings, ...override };
 }
 
-/** Réglages de la section CV (lien nav public) : fichier PDF uploadé via
- * /admin/cv et interrupteur pour l'afficher ou non sur le site. Par défaut,
- * pointe vers /public/cv/erfero-keoula-cv.pdf (le CV fourni) — uploader un
- * nouveau fichier depuis /admin/cv remplace ce lien par défaut. */
-export interface CvSettings {
-  enabled: boolean;
-  url: string;
-}
-
-const defaultCvSettings: CvSettings = {
-  enabled: true,
-  url: "/cv/erfero-keoula-cv.pdf",
-};
-
-export async function getCvSettings(): Promise<CvSettings> {
-  const override = await readJsonBlob<CvSettings>("content/cv-settings.json");
-  return { ...defaultCvSettings, ...override };
-}
 
 /** Bascules de visibilité pour chaque section de la page d'accueil,
  * modifiables depuis /admin/sections sans toucher au code. Toutes activées

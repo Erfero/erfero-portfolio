@@ -9,7 +9,6 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import CustomCursor from "@/components/ui/CustomCursor";
 import FloatingCTA from "@/components/ui/FloatingCTA";
-import { getCvSettings } from "@/lib/content";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -55,7 +54,6 @@ export default async function LocaleLayout({
 
   setRequestLocale(locale);
   const messages = await getMessages();
-  const cvSettings = await getCvSettings();
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -97,7 +95,7 @@ export default async function LocaleLayout({
       />
       <LocaleHtmlSync locale={locale} />
       <CustomCursor />
-      <Navbar showCv={cvSettings.enabled && Boolean(cvSettings.url)} />
+      <Navbar />
       <main>
         <PageTransition>{children}</PageTransition>
       </main>

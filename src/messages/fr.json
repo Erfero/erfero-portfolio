@@ -312,5 +312,77 @@
     "backHome": "Retour à l'accueil",
     "filterAll": "Tout",
     "videoSectionTitle": "Le mur des vidéos"
+  },
+  "cvPage": {
+    "print": "Imprimer / Enregistrer en PDF",
+    "profileEyebrow": "Profil",
+    "profile": "Développeur web Fullstack spécialisé Shopify. Je conçois des boutiques et applications rapides, bien référencées et pensées pour convertir. Autonome, rigoureux et orienté résultat, je transforme un besoin métier en produit web performant.",
+    "stats": [
+      { "value": "200+", "label": "boutiques livrées" },
+      { "value": "5 ans", "label": "d'expérience web" },
+      { "value": "4.8/5", "label": "note clients" }
+    ],
+    "skillsEyebrow": "Compétences",
+    "skillGroups": [
+      { "title": "Frontend", "items": ["Shopify", "React.js", "Vue.js", "Angular", "WordPress", "Flutter"] },
+      { "title": "Backend & SEO", "items": ["Node.js", "Laravel", "PHP", "MongoDB", "Firebase", "SEO"] }
+    ],
+    "experienceEyebrow": "Expériences",
+    "experience": [
+      {
+        "title": "Développeur Web Fullstack",
+        "company": "Viip Interstis · France",
+        "period": "Févr. 2023 – Mars 2025",
+        "bullets": [
+          "Application omnicanale centralisant les réseaux sociaux de l'entreprise.",
+          "Site + application de monitoring pour la gestion des données internes.",
+          "Outil de gestion dédié aux équipes de téléconseillers et développeurs."
+        ]
+      },
+      {
+        "title": "Développeur Shopify",
+        "company": "Elite Agency · Bordeaux",
+        "period": "Mai 2021 – Janv. 2025",
+        "bullets": [
+          "Création de boutiques Shopify sur-mesure, optimisées pour la conversion.",
+          "Stratégies SEO pour la visibilité sur Google et les réseaux sociaux."
+        ]
+      },
+      {
+        "title": "Développeur WordPress",
+        "company": "Omega Agency · Paris",
+        "period": "Août 2022 – Janv. 2023",
+        "bullets": [
+          "Création et optimisation de sites WordPress orientés expérience utilisateur.",
+          "Amélioration du référencement naturel (SEO)."
+        ]
+      },
+      {
+        "title": "Rédacteur Web SEO",
+        "company": "Savage Note · Paris",
+        "period": "Sept. 2019 – Juil. 2023",
+        "bullets": [
+          "Rédaction d'articles de fond (700–1500 mots) optimisés SEO."
+        ]
+      }
+    ],
+    "educationEyebrow": "Formation",
+    "education": [
+      { "title": "Développeur Web Fullstack", "school": "High-Five University · France", "period": "Depuis mars 2022 — 2 ans d'enseignement + 2 ans en entreprise" },
+      { "title": "Licence pro · Sciences Naturelles", "school": "FAST Bénin", "period": "2019 – 2021 — Biologie, chimie, géologie" }
+    ],
+    "languagesEyebrow": "Langues",
+    "languages": [
+      { "name": "Français", "level": "Langue maternelle" },
+      { "name": "Anglais", "level": "Professionnel" }
+    ],
+    "interestsEyebrow": "Centres d'intérêt",
+    "interests": ["Technologie", "IA & Programmation", "Football", "Basketball", "Fitness"],
+    "strengthsEyebrow": "Atouts",
+    "strengths": ["Communication", "Gestion de projet", "Souci du détail"],
+    "referenceEyebrow": "Référence",
+    "referenceName": "Tiburce Kouagou",
+    "referenceRole": "Formateur — High-Five University / Viip Interstis",
+    "referenceContact": "tiburcekouagou@gmail.com"
   }
 }

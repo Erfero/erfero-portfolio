@@ -312,5 +312,77 @@
     "backHome": "Back to home",
     "filterAll": "All",
     "videoSectionTitle": "The video wall"
+  },
+  "cvPage": {
+    "print": "Print / Save as PDF",
+    "profileEyebrow": "Profile",
+    "profile": "Fullstack web developer specialized in Shopify. I build fast, well-optimized stores and applications designed to convert. Autonomous, rigorous and results-driven, I turn a business need into a high-performing web product.",
+    "stats": [
+      { "value": "200+", "label": "stores delivered" },
+      { "value": "5 yrs", "label": "of web experience" },
+      { "value": "4.8/5", "label": "client rating" }
+    ],
+    "skillsEyebrow": "Skills",
+    "skillGroups": [
+      { "title": "Frontend", "items": ["Shopify", "React.js", "Vue.js", "Angular", "WordPress", "Flutter"] },
+      { "title": "Backend & SEO", "items": ["Node.js", "Laravel", "PHP", "MongoDB", "Firebase", "SEO"] }
+    ],
+    "experienceEyebrow": "Experience",
+    "experience": [
+      {
+        "title": "Fullstack Web Developer",
+        "company": "Viip Interstis · France",
+        "period": "Feb 2023 – Mar 2025",
+        "bullets": [
+          "Omnichannel application centralizing the company's social media accounts.",
+          "Monitoring site + app for managing internal data.",
+          "Management tool dedicated to customer service and developer teams."
+        ]
+      },
+      {
+        "title": "Shopify Developer",
+        "company": "Elite Agency · Bordeaux",
+        "period": "May 2021 – Jan 2025",
+        "bullets": [
+          "Built custom Shopify stores optimized for conversion.",
+          "SEO strategies for visibility on Google and social media."
+        ]
+      },
+      {
+        "title": "WordPress Developer",
+        "company": "Omega Agency · Paris",
+        "period": "Aug 2022 – Jan 2023",
+        "bullets": [
+          "Built and optimized WordPress sites focused on user experience.",
+          "Improved organic search rankings (SEO)."
+        ]
+      },
+      {
+        "title": "SEO Web Writer",
+        "company": "Savage Note · Paris",
+        "period": "Sep 2019 – Jul 2023",
+        "bullets": [
+          "Wrote in-depth SEO-optimized articles (700–1500 words)."
+        ]
+      }
+    ],
+    "educationEyebrow": "Education",
+    "education": [
+      { "title": "Fullstack Web Developer", "school": "High-Five University · France", "period": "Since Mar 2022 — 2 years teaching + 2 years in industry" },
+      { "title": "Associate Degree · Natural Sciences", "school": "FAST Benin", "period": "2019 – 2021 — Biology, chemistry, geology" }
+    ],
+    "languagesEyebrow": "Languages",
+    "languages": [
+      { "name": "French", "level": "Native" },
+      { "name": "English", "level": "Professional" }
+    ],
+    "interestsEyebrow": "Interests",
+    "interests": ["Technology", "AI & Programming", "Football", "Basketball", "Fitness"],
+    "strengthsEyebrow": "Strengths",
+    "strengths": ["Communication", "Project management", "Attention to detail"],
+    "referenceEyebrow": "Reference",
+    "referenceName": "Tiburce Kouagou",
+    "referenceRole": "Trainer — High-Five University / Viip Interstis",
+    "referenceContact": "tiburcekouagou@gmail.com"
   }
 }

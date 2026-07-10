@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 import { siteConfig } from "@/data/site.config";
 import LocaleSwitcher from "./LocaleSwitcher";
 
-export default function Navbar({ showCv }: { showCv?: boolean }) {
+export default function Navbar() {
   const t = useTranslations("nav");
   const locale = useLocale();
   const [scrolled, setScrolled] = useState(false);
@@ -44,7 +44,7 @@ export default function Navbar({ showCv }: { showCv?: boolean }) {
   return (
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-all duration-300",
+        "fixed inset-x-0 top-0 z-50 transition-all duration-300 print:hidden",
         scrolled ? "py-3" : "py-5"
       )}
     >
@@ -82,14 +82,12 @@ export default function Navbar({ showCv }: { showCv?: boolean }) {
                 {link.label}
               </Link>
             ))}
-            {showCv && (
-              <Link
-                href="/cv"
-                className="text-sm text-ink-muted transition-colors hover:text-ink"
-              >
-                {cvLabel}
-              </Link>
-            )}
+            <Link
+              href="/cv"
+              className="text-sm text-ink-muted transition-colors hover:text-ink"
+            >
+              {cvLabel}
+            </Link>
           </nav>
 
           <div className="hidden items-center gap-3 md:flex">
@@ -124,15 +122,13 @@ export default function Navbar({ showCv }: { showCv?: boolean }) {
                 {link.label}
               </Link>
             ))}
-            {showCv && (
-              <Link
-                href="/cv"
-                onClick={() => setOpen(false)}
-                className="rounded-xl px-3 py-2.5 text-sm text-ink-muted hover:bg-white/5 hover:text-ink"
-              >
-                {cvLabel}
-              </Link>
-            )}
+            <Link
+              href="/cv"
+              onClick={() => setOpen(false)}
+              className="rounded-xl px-3 py-2.5 text-sm text-ink-muted hover:bg-white/5 hover:text-ink"
+            >
+              {cvLabel}
+            </Link>
             <div className="mt-2 flex items-center justify-between px-3">
               <LocaleSwitcher />
               <Link

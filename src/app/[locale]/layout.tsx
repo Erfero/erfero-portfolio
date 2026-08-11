@@ -4,6 +4,7 @@ import { getMessages, getTranslations, setRequestLocale } from "next-intl/server
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import PageTransition from "@/components/providers/PageTransition";
+import MotionPreferences from "@/components/providers/MotionPreferences";
 import LocaleHtmlSync from "@/components/providers/LocaleHtmlSync";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -100,13 +101,15 @@ export default async function LocaleLayout({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <LocaleHtmlSync locale={locale} />
-      <CustomCursor />
-      <Navbar showCv={cvSettings.enabled} />
-      <main>
-        <PageTransition>{children}</PageTransition>
-      </main>
-      <Footer />
-      <FloatingCTA />
+      <MotionPreferences>
+        <CustomCursor />
+        <Navbar showCv={cvSettings.enabled} />
+        <main>
+          <PageTransition>{children}</PageTransition>
+        </main>
+        <Footer />
+        <FloatingCTA />
+      </MotionPreferences>
     </NextIntlClientProvider>
   );
 }

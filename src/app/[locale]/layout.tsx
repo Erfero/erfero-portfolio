@@ -10,6 +10,7 @@ import Footer from "@/components/layout/Footer";
 import CustomCursor from "@/components/ui/CustomCursor";
 import FloatingCTA from "@/components/ui/FloatingCTA";
 import { getCvSettings } from "@/lib/content";
+import { buildAlternates, SITE_URL } from "@/lib/seo";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -26,11 +27,14 @@ export async function generateMetadata({
   return {
     title: t("title"),
     description: t("description"),
-    metadataBase: new URL("https://erfero-portfolio.vercel.app"),
+    metadataBase: new URL(SITE_URL),
+    alternates: buildAlternates(locale, "/"),
     openGraph: {
       title: t("title"),
       description: t("description"),
       type: "website",
+      locale: locale === "fr" ? "fr_FR" : "en_US",
+      alternateLocale: locale === "fr" ? "en_US" : "fr_FR",
     },
     twitter: {
       card: "summary_large_image",

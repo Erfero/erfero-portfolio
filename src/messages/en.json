@@ -273,6 +273,7 @@
   "faq": {
     "eyebrow": "FAQ",
     "title": "Everything you're wondering before reaching out",
+    "subtitle": "Pricing, timelines, store ownership, working across borders: answers to the questions I get asked most before starting a Shopify project.",
     "items": [
       { "q": "How much does a Shopify store cost?", "a": "It depends on the project's complexity (number of pages, features, custom design or not). After our discovery call, you'll get a clear, detailed quote — no surprises." },
       { "q": "How long does a project take?", "a": "On average 3 days for a complete store, depending on complexity and how fast feedback comes back. You get a precise timeline upfront." },

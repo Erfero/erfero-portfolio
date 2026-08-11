@@ -3,6 +3,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { ArrowLeft } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import Contact from "@/components/sections/Contact";
+import { buildAlternates } from "@/lib/seo";
 
 export async function generateMetadata({
   params,
@@ -11,7 +12,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "contact" });
-  return { title: t("title"), description: t("subtitle") };
+  return { title: t("title"), description: t("subtitle"), alternates: buildAlternates(locale, "/contact") };
 }
 
 export default async function ContactPage({

@@ -273,6 +273,7 @@
   "faq": {
     "eyebrow": "Questions fréquentes",
     "title": "Tout ce que tu te demandes avant de me contacter",
+    "subtitle": "Prix, délais, propriété de ta boutique, clients à l'étranger : les réponses aux questions les plus posées avant de démarrer un projet Shopify.",
     "items": [
       { "q": "Combien coûte la création d'une boutique Shopify ?", "a": "Ça dépend de la complexité du projet (nombre de pages, fonctionnalités, design sur-mesure ou non). Après notre appel découverte, tu reçois un devis clair et détaillé, sans surprise." },
       { "q": "Combien de temps prend un projet ?", "a": "En moyenne 3 jours pour une boutique complète, selon la complexité et la réactivité sur les retours. Tu reçois un planning précis dès le départ." },

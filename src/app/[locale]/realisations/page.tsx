@@ -7,6 +7,7 @@ import ProjectCard from "@/components/ui/ProjectCard";
 import VideoCard from "@/components/ui/VideoCard";
 import { getVisibleProjects, getVideos } from "@/lib/content";
 import { resolveRelatedVideo } from "@/lib/resolveVideo";
+import { buildAlternates } from "@/lib/seo";
 
 export async function generateMetadata({
   params,
@@ -15,7 +16,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "realisationsPage" });
-  return { title: t("title"), description: t("subtitle") };
+  return { title: t("title"), description: t("subtitle"), alternates: buildAlternates(locale, "/realisations") };
 }
 
 export default async function RealisationsPage({

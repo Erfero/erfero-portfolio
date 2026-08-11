@@ -5,6 +5,7 @@ import { Link } from "@/i18n/navigation";
 import Services from "@/components/sections/Services";
 import Pricing from "@/components/sections/Pricing";
 import { getSectionsSettings } from "@/lib/content";
+import { buildAlternates } from "@/lib/seo";
 
 export async function generateMetadata({
   params,
@@ -13,7 +14,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "services" });
-  return { title: t("title"), description: t("subtitle") };
+  return { title: t("title"), description: t("subtitle"), alternates: buildAlternates(locale, "/services") };
 }
 
 export default async function ServicesPage({

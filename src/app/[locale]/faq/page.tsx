@@ -4,6 +4,7 @@ import { ArrowLeft } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import FAQ from "@/components/sections/FAQ";
 import Contact from "@/components/sections/Contact";
+import { buildAlternates } from "@/lib/seo";
 
 export async function generateMetadata({
   params,
@@ -12,7 +13,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "faq" });
-  return { title: t("title") };
+  return { title: t("title"), description: t("subtitle"), alternates: buildAlternates(locale, "/faq") };
 }
 
 export default async function FAQPage({

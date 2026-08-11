@@ -4,6 +4,7 @@ import { ArrowLeft } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import Process from "@/components/sections/Process";
 import Trust from "@/components/sections/Trust";
+import { buildAlternates } from "@/lib/seo";
 
 export async function generateMetadata({
   params,
@@ -12,7 +13,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "process" });
-  return { title: t("title"), description: t("subtitle") };
+  return { title: t("title"), description: t("subtitle"), alternates: buildAlternates(locale, "/process") };
 }
 
 export default async function ProcessPage({

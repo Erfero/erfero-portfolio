@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { Plus, Trash2, Save, Check, RefreshCw } from "lucide-react";
-import { saveProjectsAction } from "@/lib/actions";
+import { Plus, Trash2, Save, Check, RefreshCw, Link2 } from "lucide-react";
+import { saveProjectsAction, quickAddProjectsAction } from "@/lib/actions";
 import type { Project, ProjectStatus } from "@/data/projects";
 
 interface CheckResult {
@@ -55,6 +55,43 @@ export default function ProjectsManager({
   const [saved, setSaved] = useState(false);
   const [checking, setChecking] = useState(false);
   const [checkSummary, setCheckSummary] = useState<string | null>(null);
+  const [quickAddInput, setQuickAddInput] = useState("");
+  const [quickAdding, setQuickAdding] = useState(false);
+  const [quickAddSummary, setQuickAddSummary] = useState<string | null>(null);
+
+  const handleQuickAdd = async () => {
+    if (!quickAddInput.trim()) return;
+    setQuickAdding(true);
+    setQuickAddSummary(null);
+    try {
+      const result = await quickAddProjectsAction(
+        quickAddInput,
+        projects.map((p) => p.url)
+      );
+      if (result.added.length > 0) {
+        setProjects((prev) => [...result.added, ...prev]);
+      }
+      const parts: string[] = [];
+      if (result.added.length > 0) {
+        const live = result.added.filter((p) => p.status === "live").length;
+        parts.push(
+          `${result.added.length} boutique(s) ajoutée(s) (${live} en ligne, ${result.added.length - live} masquée(s))`
+        );
+      }
+      if (result.skipped.length > 0) {
+        parts.push(`${result.skipped.length} ignoré(s) (déjà présent ou lien invalide)`);
+      }
+      setQuickAddSummary(
+        parts.length > 0
+          ? `${parts.join(" · ")}. Pense à relire tagline/description avant d'enregistrer.`
+          : "Rien à ajouter."
+      );
+      setQuickAddInput("");
+    } catch {
+      setQuickAddSummary("Échec de l'ajout, réessaie.");
+    }
+    setQuickAdding(false);
+  };
 
   const handleCheckLinks = async () => {
     setChecking(true);
@@ -125,7 +162,41 @@ export default function ProjectsManager({
 
   return (
     <div className="mt-6">
-      <div className="flex flex-col gap-6">
+      <div className="rounded-2xl border border-border bg-white/[0.02] p-6">
+        <h2 className="flex items-center gap-2 text-sm font-semibold">
+          <Link2 className="size-4" />
+          Ajouter des boutiques depuis des liens
+        </h2>
+        <p className="mt-1 text-xs text-ink-muted">
+          Colle une ou plusieurs URLs (une par ligne). Chaque lien est vérifié
+          en direct (en ligne / protégé / indisponible), et une capture
+          d&apos;écran permanente est prise automatiquement pour les boutiques
+          en ligne. Le nom et la description sont pré-remplis du mieux
+          possible — relis-les avant d&apos;enregistrer.
+        </p>
+        <textarea
+          value={quickAddInput}
+          onChange={(e) => setQuickAddInput(e.target.value)}
+          rows={4}
+          placeholder={"https://exemple.myshopify.com\nhttps://autre-boutique.com"}
+          className={`${inputClass} mt-3 font-mono`}
+        />
+        <div className="mt-3 flex flex-wrap items-center gap-3">
+          <button
+            onClick={handleQuickAdd}
+            disabled={quickAdding || !quickAddInput.trim()}
+            className="inline-flex items-center gap-1.5 rounded-full bg-lime px-5 py-2 text-sm font-medium text-bg disabled:opacity-60"
+          >
+            <RefreshCw className={`size-4 ${quickAdding ? "animate-spin" : ""}`} />
+            {quickAdding ? "Vérification en cours..." : "Vérifier et ajouter"}
+          </button>
+          {quickAddSummary && (
+            <span className="text-xs text-ink-muted">{quickAddSummary}</span>
+          )}
+        </div>
+      </div>
+
+      <div className="mt-6 flex flex-col gap-6">
         {projects.map((project, i) => (
           <div
             key={project.id}
@@ -346,7 +417,10 @@ export default function ProjectsManager({
         Une vérification automatique tourne aussi toutes les ~20 minutes en
         arrière-plan (GitHub Actions) : les statuts se corrigent seuls, ce
         bouton sert juste à forcer un contrôle immédiat avant d&apos;envoyer
-        ton lien à un client.
+        ton lien à un client. Les captures d&apos;écran sont aussi rafraîchies
+        automatiquement en haute résolution, à raison d&apos;une quinzaine
+        par jour (quota du service de capture) — le catalogue entier monte en
+        qualité progressivement sans action de ta part.
       </p>
     </div>
   );

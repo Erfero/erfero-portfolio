@@ -1,0 +1,20 @@
+name: Rafraîchissement des captures d'écran
+
+on:
+  schedule:
+    # Une fois par jour — microlink.io (captures haute résolution) limite à
+    # 25 requêtes/jour sans clé API, partagées avec l'ajout rapide depuis
+    # l'admin, donc pas besoin (et pas possible) de tourner plus souvent.
+    - cron: "0 6 * * *"
+  workflow_dispatch: {}
+
+jobs:
+  refresh-thumbnails:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Appeler l'API de rafraîchissement des captures
+        run: |
+          curl -sf -X POST "https://erfero-portfolio.vercel.app/api/refresh-thumbnails" \
+            -H "x-cron-secret: ${{ secrets.CRON_SECRET }}" \
+            -o response.json
+          cat response.json

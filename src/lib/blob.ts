@@ -46,6 +46,21 @@ export async function uploadMediaFile(pathname: string, file: File) {
   return data.publicUrl;
 }
 
+/** Stocke une capture d'écran (bytes déjà téléchargés) sous un chemin stable
+ * indexé par id de boutique, en écrasant toute capture précédente pour ce
+ * même id — utilisé pour figer une capture live thum.io en fichier permanent
+ * (voir captureThumbnail.ts), afin de ne plus dépendre de thum.io au
+ * chargement de la page publique. */
+export async function uploadScreenshot(id: string, bytes: Buffer) {
+  const path = `media/screenshots/${id}.png`;
+  const { error } = await supabaseAdmin.storage
+    .from(SUPABASE_BUCKET)
+    .upload(path, bytes, { upsert: true, contentType: "image/png" });
+  if (error) throw error;
+  const { data } = supabaseAdmin.storage.from(SUPABASE_BUCKET).getPublicUrl(path);
+  return data.publicUrl;
+}
+
 export async function listMedia() {
   const { data, error } = await supabaseAdmin.storage
     .from(SUPABASE_BUCKET)

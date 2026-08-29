@@ -32,18 +32,24 @@ export async function getMessages(locale: string) {
  * statut (content/project-status.json, écrit par le vérificateur de liens)
  * par id — ainsi, ajouter une boutique dans le code la fait toujours
  * apparaître, même si le vérificateur automatique a déjà écrit un instantané
- * plus ancien.
+ * plus ancien. On applique aussi content/thumbnail-overrides.json (écrit par
+ * le rafraîchisseur de captures, voir refreshThumbnails.ts) par-dessus le
+ * champ thumbnailOverride — un id présent dans cette table gagne toujours,
+ * ce qui permet de faire monter en qualité les captures des boutiques du
+ * code sans avoir à "basculer" tout le catalogue vers l'override admin.
  */
 export async function getProjects(): Promise<Project[]> {
-  const [override, statusMap] = await Promise.all([
+  const [override, statusMap, thumbnailMap] = await Promise.all([
     readJsonBlob<Project[]>("content/projects.json"),
     readJsonBlob<Record<string, ProjectStatus>>("content/project-status.json"),
+    readJsonBlob<Record<string, string>>("content/thumbnail-overrides.json"),
   ]);
   const base = override && override.length > 0 ? override : defaultProjects;
-  if (!statusMap) return base;
-  return base.map((p) =>
-    statusMap[p.id] ? { ...p, status: statusMap[p.id] } : p
-  );
+  return base.map((p) => ({
+    ...p,
+    status: statusMap?.[p.id] ?? p.status,
+    thumbnailOverride: thumbnailMap?.[p.id] ?? p.thumbnailOverride,
+  }));
 }
 
 export async function getVisibleProjects(): Promise<Project[]> {

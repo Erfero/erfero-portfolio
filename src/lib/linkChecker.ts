@@ -3,7 +3,7 @@ import type { ProjectStatus } from "@/data/projects";
 import { getProjects } from "./content";
 import { writeJsonBlob } from "./blob";
 
-async function checkOne(url: string): Promise<ProjectStatus> {
+export async function checkOne(url: string): Promise<ProjectStatus> {
   try {
     const res = await fetch(url, {
       redirect: "follow",

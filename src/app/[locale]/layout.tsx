@@ -88,7 +88,7 @@ export default async function LocaleLayout({
       jobTitle:
         locale === "fr" ? "Développeur Shopify freelance" : "Freelance Shopify Developer",
       sameAs: [
-        "https://www.linkedin.com/in/erfero-keoula-905b7220",
+        "https://www.linkedin.com/in/erfero-keoula-905b72205",
         "https://www.instagram.com/erfero04",
       ],
     },

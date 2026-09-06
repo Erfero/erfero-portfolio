@@ -14,7 +14,7 @@ export const siteConfig = {
   calendlyUrl: "https://calendly.com/erferokam/30min",
   socials: {
     instagram: "https://www.instagram.com/erfero04",
-    linkedin: "https://www.linkedin.com/in/erfero-keoula-905b7220",
+    linkedin: "https://www.linkedin.com/in/erfero-keoula-905b72205",
     // TODO(erfero): ajoute tes vraies URLs quand elles existent.
     github: "https://github.com/Erfero",
     upwork: "",

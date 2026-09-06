@@ -17,7 +17,7 @@ const PROFILE = {
   email: "erferokam@gmail.com",
   phone: "01 69 27 25 95",
   portfolio: "erfero-portfolio.vercel.app",
-  linkedin: "linkedin.com/in/erfero-keoula",
+  linkedin: "linkedin.com/in/erfero-keoula-905b72205",
   stats: {
     stores: "200+",
     years: "5 ans",

@@ -147,7 +147,7 @@ export default function TechStack({ index }: { index?: string }) {
       <div aria-hidden className="bg-grid mask-radial pointer-events-none absolute inset-0 -z-0 opacity-60" />
 
       <div className="container-page relative">
-        <SectionHeading eyebrow={t("eyebrow")} title={t("title")} subtitle={t("subtitle")} index={index} size="lg" />
+        <SectionHeading layout="split" eyebrow={t("eyebrow")} title={t("title")} subtitle={t("subtitle")} index={index} />
 
         {/* 1 + 2 : code Liquid et compétences Shopify */}
         <div className="mt-16 grid gap-10 lg:mt-20 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:gap-14">
@@ -216,14 +216,14 @@ export default function TechStack({ index }: { index?: string }) {
               <span className="grid size-10 place-items-center rounded-xl bg-[#008060] text-white">
                 <TechIcon name="shopify" color="currentColor" className="size-5" />
               </span>
-              <h3 className="font-display text-xl font-semibold tracking-[-0.02em] sm:text-2xl">{t("skillsTitle")}</h3>
+              <h3 className="font-serif text-3xl leading-none sm:text-4xl">{t("skillsTitle")}</h3>
             </div>
             <ol className="mt-6 border-t border-line">
               {skills.map((s, i) => (
                 <li key={s.title} className="ts-skill group grid grid-cols-[2.5rem_1fr] gap-x-3 border-b border-line py-4 sm:py-5">
                   <span className="pt-1 font-mono text-xs text-accent">{String(i + 1).padStart(2, "0")}</span>
                   <div>
-                    <p className="flex items-center gap-2 font-display text-lg font-semibold tracking-[-0.02em] transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover:translate-x-1 sm:text-xl">
+                    <p className="flex items-center gap-2 font-serif text-[1.5rem] leading-tight transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover:translate-x-1 sm:text-[1.75rem]">
                       {s.title}
                       <ArrowUpRight className="size-4 text-accent opacity-0 transition-opacity duration-300 group-hover:opacity-100" aria-hidden />
                     </p>
@@ -237,7 +237,7 @@ export default function TechStack({ index }: { index?: string }) {
 
         {/* 3 : les qualités d'un bon développeur Shopify */}
         <div className="ts-qualities mt-24">
-          <h3 className="font-display max-w-2xl text-2xl font-semibold tracking-[-0.03em] sm:text-3xl">
+          <h3 className="max-w-2xl font-serif text-4xl leading-tight sm:text-5xl">
             <RichText text={t("qualitiesTitle")} />
           </h3>
           <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -248,7 +248,7 @@ export default function TechStack({ index }: { index?: string }) {
                   <span className="grid size-11 place-items-center rounded-xl border border-accent/30 bg-accent/10 text-accent">
                     <Icon className="size-5" aria-hidden />
                   </span>
-                  <p className="font-display mt-5 text-lg font-semibold tracking-[-0.02em]">{q.title}</p>
+                  <p className="mt-5 font-serif text-[1.6rem] leading-tight">{q.title}</p>
                   <p className="mt-2 text-sm leading-relaxed text-ink-muted sm:text-[15px]">{q.description}</p>
                 </li>
               );
@@ -259,7 +259,7 @@ export default function TechStack({ index }: { index?: string }) {
         {/* 4 : le reste de la stack, en second plan */}
         <div className="ts-others mt-16 rounded-3xl border border-line p-6 sm:p-8">
           <div className="flex flex-col gap-2 lg:flex-row lg:items-end lg:justify-between lg:gap-10">
-            <p className="font-display text-xl font-semibold tracking-[-0.02em]">{t("othersTitle")}</p>
+            <p className="font-serif text-3xl leading-none">{t("othersTitle")}</p>
             <p className="max-w-xl text-sm leading-relaxed text-ink-muted">{t("othersSubtitle")}</p>
           </div>
           <div className="mt-6 grid gap-6 border-t border-line pt-6 md:grid-cols-3">

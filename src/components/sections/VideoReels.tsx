@@ -1,104 +1,184 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { ArrowLeft, ArrowRight, ArrowUpRight, Play, Volume2 } from "lucide-react";
+import { ArrowUpRight, Hand, Play } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { gsap, useGSAP, MOTION_OK } from "@/lib/gsap";
-import { useMediaQuery } from "@/lib/useMediaQuery";
 import SectionHeading from "@/components/ui/SectionHeading";
 import VideoLightbox from "@/components/ui/VideoLightbox";
 import type { VideoEntry } from "@/data/videos";
 
-const VISIBLE_RANGE = 4; // téléphones montés de chaque côté (le 4e est invisible, prêt à entrer)
-const AUTO_ADVANCE_MS = 6500;
+/** Vitesse de rotation automatique (degrés / seconde). */
+const AUTO_SPEED = 3.2;
 
-/** Écran d'un téléphone : la vidéo ne joue que sur le téléphone central. */
-function Screen({ video, playing }: { video: VideoEntry; playing: boolean }) {
+/** Aperçu muet de la vidéo face au visiteur. */
+function FrontPreview({ video }: { video: VideoEntry }) {
   const ref = useRef<HTMLVideoElement>(null);
-
   useEffect(() => {
     const el = ref.current;
-    if (!el || !playing) return;
-    // `muted` doit être une propriété DOM avant play() pour l'autoplay.
+    if (!el) return;
     el.muted = true;
     el.play().catch(() => {});
     return () => el.pause();
-  }, [playing]);
-
+  }, []);
   return (
-    <div
-      className="relative aspect-[9/16] overflow-hidden rounded-[1.9rem] bg-[#18201c]"
-    >
-      {video.poster && (
-        // eslint-disable-next-line @next/next/no-img-element -- affiches JPEG légères
-        <img src={video.poster} alt="" loading="lazy" decoding="async" className="absolute inset-0 size-full object-cover" />
-      )}
-      {playing && (
-        <video
-          ref={ref}
-          src={video.src}
-          poster={video.poster}
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          className="absolute inset-0 size-full object-cover"
-        />
-      )}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/20" />
-    </div>
+    <video
+      ref={ref}
+      src={video.src}
+      poster={video.poster}
+      muted
+      loop
+      playsInline
+      preload="metadata"
+      className="absolute inset-0 size-full object-cover"
+    />
   );
 }
 
 /**
- * Vidéos de réalisations en carrousel 3D de téléphones : le téléphone
- * central est grand et joue sa vidéo, les voisins s'inclinent en
- * perspective. Navigation au glisser, aux flèches, au clavier, ou en
- * cliquant sur un téléphone ; un clic sur le téléphone central ouvre la
- * vidéo en grand (avec musique). Défilement automatique quand la section est
- * visible et que la souris n'est pas dessus.
+ * « En coulisses » : les vidéos de réalisations posées sur un anneau 3D, à
+ * faire tourner au doigt ou à la souris (avec inertie). L'anneau tourne
+ * doucement tout seul, la vidéo face au visiteur se lance en aperçu muet, et
+ * un clic ouvre n'importe quelle vidéo en grand, avec sa musique.
  */
 export default function VideoReels({ videos, index }: { videos: VideoEntry[]; index?: string }) {
   const t = useTranslations("videoReels");
   const locale = useLocale() as "fr" | "en";
   const root = useRef<HTMLElement>(null);
   const stage = useRef<HTMLDivElement>(null);
-  const drag = useRef<{ x: number; moved: boolean } | null>(null);
-  const [active, setActive] = useState(0);
+  const ring = useRef<HTMLDivElement>(null);
   const [lightbox, setLightbox] = useState<VideoEntry | null>(null);
+  const [front, setFront] = useState(0);
   const [inView, setInView] = useState(false);
-  const [hovered, setHovered] = useState(false);
-  const reduced = useMediaQuery("(prefers-reduced-motion: reduce)");
   const count = videos.length;
-
-  const go = useCallback((dir: number) => setActive((a) => (a + dir + count) % count), [count]);
+  const step = 360 / Math.max(count, 1);
+  const lightboxRef = useRef(false);
+  useEffect(() => {
+    lightboxRef.current = !!lightbox;
+  }, [lightbox]);
 
   useEffect(() => {
     const el = stage.current;
     if (!el) return;
-    const io = new IntersectionObserver(([entry]) => setInView(entry.isIntersecting), { threshold: 0.35 });
+    const io = new IntersectionObserver(([e]) => setInView(e.isIntersecting), { threshold: 0.25 });
     io.observe(el);
     return () => io.disconnect();
   }, []);
 
+  // Rotation de l'anneau : auto + glisser avec inertie.
   useEffect(() => {
-    if (!inView || hovered || lightbox || reduced || count < 2) return;
-    const id = window.setTimeout(() => go(1), AUTO_ADVANCE_MS);
-    return () => window.clearTimeout(id);
-  }, [active, inView, hovered, lightbox, reduced, count, go]);
+    const el = stage.current;
+    const r = ring.current;
+    if (!el || !r || count === 0) return;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const cards = Array.from(r.querySelectorAll<HTMLElement>(".vr-card"));
+    let angle = 0;
+    let velocity = 0;
+    let dragging = false;
+    let hovered = false;
+    let lastX = 0;
+    let moved = 0;
+    let current = -1;
+
+    const radius = () => {
+      const w = cards[0]?.offsetWidth ?? 168;
+      return (w + (window.innerWidth < 640 ? 14 : 22)) / (2 * Math.sin((step * Math.PI) / 360));
+    };
+    let R = radius();
+
+    const apply = () => {
+      r.style.transform = `translateZ(${-R}px) rotateY(${-angle}deg)`;
+      cards.forEach((card, i) => {
+        const a = ((i * step - angle) % 360 + 540) % 360 - 180;
+        const abs = Math.abs(a);
+        const o = abs < 34 ? 1 : abs > 70 ? 0 : 1 - (abs - 34) / 36;
+        card.style.opacity = o.toFixed(3);
+        card.style.pointerEvents = o > 0.3 ? "auto" : "none";
+        card.style.transform = `rotateY(${i * step}deg) translateZ(${R}px)`;
+      });
+      const f = ((Math.round(angle / step) % count) + count) % count;
+      if (f !== current) {
+        current = f;
+        setFront(f);
+      }
+    };
+
+    const tick = (_t: number, dt: number) => {
+      const s = Math.min(dt, 64) / 1000;
+      if (!dragging) {
+        if (Math.abs(velocity) > 0.01) {
+          angle += velocity;
+          velocity *= 0.93;
+        } else if (!reduced && !hovered && !lightboxRef.current) {
+          angle += AUTO_SPEED * s;
+        }
+      }
+      apply();
+    };
+    gsap.ticker.add(tick);
+
+    const down = (e: PointerEvent) => {
+      dragging = true;
+      moved = 0;
+      lastX = e.clientX;
+      velocity = 0;
+    };
+    const move = (e: PointerEvent) => {
+      if (!dragging) return;
+      const dx = e.clientX - lastX;
+      lastX = e.clientX;
+      moved += Math.abs(dx);
+      const delta = -dx * 0.11;
+      angle += delta;
+      velocity = delta;
+    };
+    const up = () => {
+      dragging = false;
+    };
+    const click = (e: MouseEvent) => {
+      // Un vrai glisser ne doit pas ouvrir de vidéo.
+      if (moved > 6) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    };
+    const enter = () => (hovered = true);
+    const leave = () => {
+      hovered = false;
+      dragging = false;
+    };
+    const resize = () => (R = radius());
+
+    el.addEventListener("pointerdown", down);
+    window.addEventListener("pointermove", move, { passive: true });
+    window.addEventListener("pointerup", up);
+    el.addEventListener("click", click, true);
+    el.addEventListener("mouseenter", enter);
+    el.addEventListener("mouseleave", leave);
+    window.addEventListener("resize", resize);
+    return () => {
+      gsap.ticker.remove(tick);
+      el.removeEventListener("pointerdown", down);
+      window.removeEventListener("pointermove", move);
+      window.removeEventListener("pointerup", up);
+      el.removeEventListener("click", click, true);
+      el.removeEventListener("mouseenter", enter);
+      el.removeEventListener("mouseleave", leave);
+      window.removeEventListener("resize", resize);
+    };
+  }, [count, step]);
 
   useGSAP(
     () => {
       const mm = gsap.matchMedia();
       mm.add(MOTION_OK, () => {
         gsap.from(".vr-stage", {
-          y: 80,
           autoAlpha: 0,
-          scale: 0.92,
+          y: 60,
           duration: 1.4,
           ease: "expo.out",
-          scrollTrigger: { trigger: ".vr-stage", start: "top 95%", once: true },
+          scrollTrigger: { trigger: ".vr-stage", start: "top 92%", once: true },
         });
       });
     },
@@ -107,117 +187,79 @@ export default function VideoReels({ videos, index }: { videos: VideoEntry[]; in
 
   if (count === 0) return null;
 
-  const onPointerDown = (e: React.PointerEvent) => {
-    drag.current = { x: e.clientX, moved: false };
-  };
-  const onPointerUp = (e: React.PointerEvent) => {
-    const d = drag.current;
-    if (!d) return;
-    const dx = e.clientX - d.x;
-    if (Math.abs(dx) > 40) {
-      d.moved = true;
-      go(dx < 0 ? 1 : -1);
-    }
-  };
-  const onPhoneClick = (i: number, video: VideoEntry) => {
-    if (drag.current?.moved) {
-      drag.current = null;
-      return;
-    }
-    drag.current = null;
-    if (i === active) setLightbox(video);
-    else setActive(i);
-  };
-
   return (
-    <section ref={root} id="videos" className="tone-dark relative scroll-mt-24 overflow-hidden py-24 sm:py-32">
+    <section ref={root} id="videos" className="tone-dark scroll-mt-24 px-2 pb-3 sm:px-3 sm:pb-4">
+      <div className="tone-dark relative overflow-hidden rounded-[2rem] !bg-bg-soft py-20 ring-1 ring-line sm:rounded-[3rem] sm:py-28">
+        <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-80 bg-[radial-gradient(60%_100%_at_50%_0%,rgba(0,128,96,0.22),transparent)]" />
+        <div className="container-page relative">
+          <SectionHeading layout="split" eyebrow={t("eyebrow")} title={t("title")} subtitle={t("subtitle")} index={index} />
+        </div>
 
-      <div className="container-page flex flex-wrap items-end justify-between gap-6">
-        <SectionHeading eyebrow={t("eyebrow")} title={t("title")} subtitle={t("subtitle")} index={index} />
-        <Link href="/realisations#videos" className="btn-ghost mb-1 px-5 py-3 text-sm">
-          {t("cta")}
-          <ArrowUpRight className="size-4" />
-        </Link>
-      </div>
-
-      <div
-        ref={stage}
-        role="region"
-        aria-roledescription="carousel"
-        aria-label={t("eyebrow")}
-        tabIndex={0}
-        onKeyDown={(e) => {
-          if (e.key === "ArrowRight") go(1);
-          if (e.key === "ArrowLeft") go(-1);
-        }}
-        onPointerDown={onPointerDown}
-        onPointerUp={onPointerUp}
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
-        className="vr-stage relative mx-auto mt-14 w-full touch-pan-y select-none outline-none [--ph:62vw] [perspective:1800px] sm:[--ph:36vw] lg:[--ph:clamp(230px,21vw,310px)]"
-        style={{ height: "calc(var(--ph) * 16 / 9 + 1rem)" }}
-      >
-        <div className="absolute inset-0 [transform-style:preserve-3d]">
-          {videos.map((video, i) => {
-            let k = (((i - active) % count) + count) % count;
-            if (k > count / 2) k -= count;
-            const abs = Math.abs(k);
-            if (abs > VISIBLE_RANGE) return null;
-            const isActive = k === 0;
-            return (
-              <button
-                key={video.id}
-                type="button"
-                onClick={() => onPhoneClick(i, video)}
-                tabIndex={abs <= 1 ? 0 : -1}
-                aria-hidden={abs === VISIBLE_RANGE || undefined}
-                aria-label={`${video.caption[locale]}${isActive ? ` — ${t("play")}` : ""}`}
-                data-cursor={isActive ? t("play") : undefined}
-                className="absolute left-1/2 top-0 rounded-[2.4rem] border border-white/12 bg-[#0a0e0c] p-1.5 text-left shadow-[0_40px_80px_-35px_rgba(0,0,0,0.95)] transition-[transform,opacity,filter] duration-[900ms] ease-[var(--ease-out-expo)]"
-                style={{
-                  width: "var(--ph)",
-                  transform: `translateX(calc(-50% + ${k} * var(--ph) * 0.72)) translateZ(${-abs * 140}px) rotateY(${k * -20}deg) scale(${1 - abs * 0.05})`,
-                  zIndex: 20 - abs,
-                  opacity: abs === VISIBLE_RANGE ? 0 : 1 - abs * 0.14,
-                  filter: isActive ? "none" : `brightness(${1 - abs * 0.2}) saturate(${1 - abs * 0.15})`,
-                  boxShadow: isActive ? "0 50px 120px -40px rgba(60,200,150,0.35)" : undefined,
-                }}
-              >
-                <span aria-hidden className="absolute left-1/2 top-3 z-10 h-1.5 w-14 -translate-x-1/2 rounded-full bg-black/80" />
-                <Screen video={video} playing={isActive && inView && !lightbox} />
-                {isActive && (
-                  <span className="pointer-events-none absolute inset-x-4 bottom-5 flex items-end justify-between gap-3">
-                    <span className="line-clamp-2 text-sm font-semibold leading-snug text-white drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)] sm:text-base">
+        <div
+          ref={stage}
+          role="region"
+          aria-roledescription="carousel"
+          aria-label={t("eyebrow")}
+          className="vr-stage relative mt-14 h-[24rem] cursor-grab touch-pan-y select-none [perspective:1700px] active:cursor-grabbing sm:mt-16 sm:h-[30rem]"
+        >
+          <div ref={ring} className="absolute left-1/2 top-1/2 size-0 [transform-style:preserve-3d]">
+            {videos.map((video, i) => {
+              const isFront = i === front;
+              return (
+                <button
+                  key={video.id}
+                  type="button"
+                  onClick={() => setLightbox(video)}
+                  aria-label={`${video.caption[locale]} — ${t("play")}`}
+                  data-cursor={t("play")}
+                  className="vr-card absolute left-0 top-0 -ml-[4.25rem] -mt-[7.55rem] block w-[8.5rem] overflow-hidden rounded-[1.1rem] bg-[#15291f] text-left shadow-[0_30px_60px_-30px_rgba(0,0,0,0.9)] ring-1 ring-white/10 [backface-visibility:hidden] sm:-ml-[5.6rem] sm:-mt-[9.95rem] sm:w-[11.2rem] sm:rounded-[1.3rem]"
+                  style={{ opacity: 0 }}
+                >
+                  <span className="relative block aspect-[9/16]">
+                    {video.poster && (
+                      // eslint-disable-next-line @next/next/no-img-element -- affiches JPEG légères
+                      <img
+                        src={video.poster}
+                        alt=""
+                        loading="lazy"
+                        decoding="async"
+                        draggable={false}
+                        className="absolute inset-0 size-full object-cover"
+                      />
+                    )}
+                    {isFront && inView && !lightbox && <FrontPreview video={video} />}
+                    <span className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/5 to-transparent" />
+                    <span className="pointer-events-none absolute inset-x-2.5 bottom-2.5 line-clamp-2 text-[11px] font-medium leading-snug text-white sm:inset-x-3 sm:bottom-3 sm:text-xs">
                       {video.caption[locale]}
                     </span>
-                    <span className="grid size-11 shrink-0 place-items-center rounded-full bg-white text-[#0e1311] shadow-lg">
-                      <Play className="size-4 translate-x-px fill-current" />
-                    </span>
+                    {isFront && (
+                      <span className="pointer-events-none absolute right-2.5 top-2.5 grid size-8 place-items-center rounded-full bg-white text-[#0e1311]">
+                        <Play className="size-3.5 translate-x-px fill-current" />
+                      </span>
+                    )}
                   </span>
-                )}
-              </button>
-            );
-          })}
+                </button>
+              );
+            })}
+          </div>
         </div>
-      </div>
 
-      <div className="container-page mt-10 flex flex-col items-center gap-5">
-        <div className="flex items-center gap-4">
-          <button type="button" onClick={() => go(-1)} aria-label={t("prev")} className="btn-ghost size-12 p-0">
-            <ArrowLeft className="size-5" />
-          </button>
-          <span className="min-w-24 text-center font-mono text-lg font-medium tabular-nums">
-            <span className="text-accent">{String(active + 1).padStart(2, "0")}</span>
-            <span className="text-ink-dim"> / {String(count).padStart(2, "0")}</span>
-          </span>
-          <button type="button" onClick={() => go(1)} aria-label={t("next")} className="btn-ghost size-12 p-0">
-            <ArrowRight className="size-5" />
-          </button>
+        <div className="container-page relative mt-10 flex flex-col items-start justify-between gap-6 sm:mt-14 sm:flex-row sm:items-center">
+          <div>
+            <p className="font-serif text-3xl italic">{t("countLabel", { count })}</p>
+            <p className="mt-2 flex items-center gap-2 text-sm text-ink-muted">
+              <Hand className="size-4 text-accent" aria-hidden />
+              {t("hint")}
+            </p>
+          </div>
+          <Link
+            href="/realisations#videos"
+            className="group inline-flex items-center gap-2 rounded-full border border-ink/25 px-6 py-3 text-sm font-medium transition-colors hover:bg-ink hover:text-bg"
+          >
+            {t("cta")}
+            <ArrowUpRight className="size-4 transition-transform duration-300 group-hover:rotate-45" />
+          </Link>
         </div>
-        <p className="flex items-center gap-2 text-sm text-ink-muted">
-          <Volume2 className="size-4 text-accent" aria-hidden />
-          {t("hint")}
-        </p>
       </div>
 
       <VideoLightbox video={lightbox} caption={lightbox?.caption[locale]} onClose={() => setLightbox(null)} />

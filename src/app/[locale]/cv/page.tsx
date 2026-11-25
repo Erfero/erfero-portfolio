@@ -41,11 +41,10 @@ type CvData = {
   referenceContact?: string;
 };
 
-// Rendu toujours dynamique : sinon, tant qu'aucun réglage n'a jamais été
-// enregistré depuis l'admin, Next.js ne détecte aucune donnée "vivante" au
-// premier build et fige la page (activée) en statique — désactiver le CV
-// depuis /admin/cv ne serait alors visible qu'après un redéploiement.
-export const dynamic = "force-dynamic";
+// Page statique régénérée en arrière-plan (au plus toutes les 60 s) : elle
+// s'ouvre et change de langue instantanément. Un enregistrement depuis
+// /admin/cv la régénère aussitôt (revalidatePath sur tout le layout).
+export const revalidate = 60;
 
 export async function generateMetadata({
   params,
@@ -89,7 +88,7 @@ export default async function CvPage({
   const cv = t.raw("cvPage") as CvData;
 
   return (
-    <div className="tone-light pt-32 pb-20 sm:pt-40 print:pt-8">
+    <div className="cv-sheet tone-light pt-32 pb-20 sm:pt-40 print:p-0">
       <div className="container-page max-w-5xl">
         <div className="flex flex-wrap items-center justify-between gap-4 print:hidden">
           <Link

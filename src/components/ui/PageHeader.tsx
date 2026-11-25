@@ -29,7 +29,7 @@ export default function PageHeader({
         <SplitHeading
           as="h1"
           text={title}
-          className="font-display mt-8 text-[clamp(3.2rem,11vw,10rem)] font-semibold leading-[0.95] tracking-[-0.05em]"
+          className="mt-8 font-serif text-[clamp(3.6rem,12vw,11rem)] font-normal leading-[0.92] tracking-[-0.02em]"
         />
         {kicker && (
           <Reveal delay={0.1}>

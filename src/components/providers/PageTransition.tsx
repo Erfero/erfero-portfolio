@@ -1,6 +1,5 @@
 "use client";
 
-import { useLocale } from "next-intl";
 import { AnimatePresence, motion } from "framer-motion";
 import { usePathname } from "@/i18n/navigation";
 import { ScrollTrigger } from "@/lib/gsap";
@@ -12,13 +11,14 @@ import { ScrollTrigger } from "@/lib/gsap";
  * resteraient alors plus fixés à l'écran.
  */
 export default function PageTransition({ children }: { children: React.ReactNode }) {
-  const locale = useLocale();
   const pathname = usePathname();
 
   return (
     <AnimatePresence mode="wait" initial={false}>
       <motion.div
-        key={`${locale}-${pathname}`}
+        // Clé = page seulement (sans la langue) : changer de langue remplace
+        // le texte instantanément, sans fondu ni attente.
+        key={pathname}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}

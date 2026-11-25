@@ -55,7 +55,9 @@
       "growthSub": "after redesign",
       "rating": "4.8"
     },
-    "stackLabel": "Shopify, Liquid and the technologies I master"
+    "stackLabel": "Shopify, Liquid and the technologies I master",
+    "visit": "Visit the store",
+    "galleryHint": "Scroll to enter the gallery"
   },
   "painPoints": {
     "eyebrow": "Sound familiar?",
@@ -90,7 +92,12 @@
         "title": "Invisible on Google",
         "description": "Without a clean technical structure (tags, speed, internal linking) or content actually built to answer your customers' searches, your store stays invisible on Google — even with great products. The result: you depend 100% on paid ads to drive traffic, which eats into your margin over time."
       }
-    ]
+    ],
+    "receiptTitle": "The bill of a generic theme",
+    "receiptMeta": "Shopify store · Free theme · No optimization",
+    "receiptTotal": "Total",
+    "receiptTotalValue": "lost sales",
+    "receiptFooter": "Good news: none of this is inevitable."
   },
   "services": {
     "eyebrow": "My method",
@@ -224,7 +231,7 @@
   },
   "metrics": {
     "eyebrow": "By the numbers",
-    "title": "Five years building stores *that sell*",
+    "title": "Web developer since 2021, *Shopify since 2022*",
     "items": [
       {
         "value": "5",
@@ -273,17 +280,19 @@
     "swipeHint": "Swipe to browse →",
     "prev": "Previous store",
     "next": "Next store",
-    "scrollHint": "Keep scrolling to browse the stores"
+    "scrollHint": "Keep scrolling to browse the stores",
+    "showcaseSubtitle": "A glimpse among {count}+ Shopify stores designed and delivered for beauty, wellness, fashion and lifestyle brands."
   },
   "videoReels": {
     "eyebrow": "Behind the scenes",
-    "title": "My work, *on video*",
+    "title": "My work *in vertical format*",
     "subtitle": "200+ videos showing Shopify stores being built from scratch — TikTok-style, but with the code behind it.",
     "cta": "Watch all videos",
     "play": "Play",
     "prev": "Previous video",
     "next": "Next video",
-    "hint": "Click the centre video to watch it full size, with music"
+    "hint": "Drag to spin — click any video to watch it full size, with music.",
+    "countLabel": "{count} behind-the-scenes videos"
   },
   "process": {
     "eyebrow": "How it works",
@@ -525,7 +534,7 @@
       }
     ],
     "profileEyebrow": "Profile",
-    "profile": "**Shopify developer**. I build fast, well-optimized Shopify stores designed to **convert**: custom Liquid themes and sections, product pages, apps, speed and SEO. Autonomous, rigorous and results-driven, I turn a business need into a store that sells.",
+    "profile": "**Shopify developer**. Full-stack web developer since 2021, Shopify specialist since 2022: I build fast, well-optimized stores designed to **convert** — custom Liquid themes and sections, product pages, apps, speed and SEO. Autonomous, rigorous and results-driven.",
     "stats": [
       {
         "value": "200+",
@@ -630,16 +639,17 @@
     "experienceEyebrow": "Experience",
     "experience": [
       {
-        "title": "Shopify Developer",
+        "title": "Full-Stack Web Developer, then Shopify",
         "company": "Elite Agency · Bordeaux",
         "period": "May 2021 – Jan 2025",
         "bullets": [
-          "Built custom Shopify stores optimized for conversion.",
+          "2021: full-stack web development (custom websites and applications).",
+          "From 2022: Shopify specialization — custom stores optimized for conversion.",
           "SEO strategies for visibility on Google and social media."
         ]
       },
       {
-        "title": "Web Developer",
+        "title": "Full-Stack Web Developer",
         "company": "Viip Interstis · France",
         "period": "Feb 2023 – Mar 2025",
         "bullets": [
@@ -669,7 +679,7 @@
     "educationEyebrow": "Education",
     "education": [
       {
-        "title": "Web Developer",
+        "title": "Full-Stack Web Developer",
         "school": "High-Five University · France",
         "period": "Since Mar 2022 — 2 years teaching + 2 years in industry"
       },
@@ -711,7 +721,7 @@
   },
   "manifesto": {
     "eyebrow": "About",
-    "text": "I'm Erféro. Since 2021, I've been building Shopify stores for e-commerce brands and agencies — *200+ so far*. My obsession: fast, trustworthy stores designed to sell, delivered in *3 days on average*.",
+    "text": "I'm Erféro. I started as a full-stack web developer in 2021, then specialized in Shopify in 2022. Since then, I've been building stores for e-commerce brands and agencies — *200+ so far*. My obsession: fast, trustworthy stores designed to sell, delivered in *3 days on average*.",
     "agenciesLabel": "Agencies and companies I've worked with",
     "agencies": [
       "Elite Agency",
@@ -724,7 +734,11 @@
   "experience": {
     "eyebrow": "Experience",
     "title": "Agency-trained, *independent* as a freelancer",
-    "subtitle": "Nearly four years of Shopify production in agencies, plus web development and SEO: I fit into an agency team just as well as working directly with a brand.",
+    "subtitle": "Full-stack web developer from 2021, Shopify specialist since 2022: custom code, SEO and stores that sell — in an agency team or directly with a brand.",
     "ctaCv": "View full CV"
+  },
+  "toolbox": {
+    "eyebrow": "My toolbox",
+    "title": "Shopify first, and the technologies I use *every day*"
   }
 }

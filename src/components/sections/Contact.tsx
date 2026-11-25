@@ -36,7 +36,7 @@ export default function Contact({ selectedPlan }: { selectedPlan?: string }) {
           </Reveal>
           <SplitHeading
             text={t("bigTitle")}
-            className="font-display mt-7 max-w-[14ch] text-[clamp(2.8rem,7.5vw,7.5rem)] font-semibold leading-[0.98] tracking-[-0.045em]"
+            className="mt-7 max-w-[14ch] font-serif text-[clamp(3.2rem,8vw,8rem)] font-normal leading-[0.95] tracking-[-0.02em]"
           />
           <Reveal delay={0.1}>
             <p className="mt-6 max-w-xl text-base leading-relaxed text-ink-muted sm:text-lg">{t("subtitle")}</p>
@@ -44,26 +44,24 @@ export default function Contact({ selectedPlan }: { selectedPlan?: string }) {
 
           <div className="mt-14 grid grid-cols-[minmax(0,1fr)] gap-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:gap-10">
             <Reveal>
-              <div className="spotlight p-6 sm:p-9">
-                <ContactForm selectedPlan={selectedPlan} />
-              </div>
+              <ContactForm selectedPlan={selectedPlan} />
             </Reveal>
 
-            <Reveal delay={0.1} className="flex flex-col gap-3">
+            <Reveal delay={0.1} className="flex flex-col">
               {links.map(({ href, icon: Icon, label, meta }) => (
                 <a
                   key={label}
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="spotlight group flex items-center justify-between gap-4 p-5 sm:p-6"
+                  className="group flex items-center justify-between gap-4 border-b border-line py-5 first:border-t"
                 >
                   <span className="flex min-w-0 items-center gap-4">
-                    <span className="grid size-14 shrink-0 place-items-center rounded-2xl border border-accent/25 bg-accent/10 text-accent transition-transform duration-500 group-hover:scale-110">
+                    <span className="grid size-11 shrink-0 place-items-center rounded-full border border-line text-accent transition-transform duration-500 group-hover:scale-110">
                       <Icon className="size-6" />
                     </span>
                     <span className="min-w-0">
-                      <span className="font-display block text-xl font-semibold tracking-[-0.02em] sm:text-2xl">{label}</span>
+                      <span className="block font-serif text-2xl leading-tight">{label}</span>
                       <span className="mt-0.5 block truncate text-sm text-ink-muted">{meta}</span>
                     </span>
                   </span>

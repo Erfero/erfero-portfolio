@@ -79,7 +79,7 @@ export default function ExpertiseCatalog({
                   </span>
                   <span className="flex items-end justify-between gap-3">
                     <span
-                      className={`font-display min-w-0 font-semibold leading-tight tracking-[-0.03em] text-white ${
+                      className={`min-w-0 font-serif font-normal leading-[1.02] text-white ${
                         i === 0 ? "text-3xl sm:text-5xl" : "text-xl sm:text-2xl"
                       }`}
                     >

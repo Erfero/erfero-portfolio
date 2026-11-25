@@ -94,7 +94,7 @@ export default function Experience({ showCv, index }: { showCv?: boolean; index?
                     <span className="inline-block rounded-full bg-ink/[0.06] px-3 py-1 font-mono text-xs font-medium text-ink-muted">
                       {job.period}
                     </span>
-                    <h3 className="font-display mt-4 text-2xl font-semibold tracking-[-0.03em] sm:text-[1.7rem]">{job.title}</h3>
+                    <h3 className="mt-4 font-serif text-[1.9rem] leading-tight sm:text-[2.2rem]">{job.title}</h3>
                     <p className="mt-1 text-base font-medium text-accent">{job.company}</p>
                     <ul className="mt-4 flex flex-col gap-2">
                       {job.bullets.map((b) => (

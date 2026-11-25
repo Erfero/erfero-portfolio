@@ -51,7 +51,7 @@ export default async function RealisationsPage({
           <SplitHeading
             as="h1"
             text={t("title")}
-            className="font-display max-w-[16ch] text-[clamp(2.6rem,7vw,6.5rem)] font-semibold leading-[0.98] tracking-[-0.045em]"
+            className="max-w-[16ch] font-serif text-[clamp(3rem,7.5vw,7rem)] font-normal leading-[0.95] tracking-[-0.02em]"
           />
           <Reveal delay={0.1}>
             <p className="flex items-end gap-3 rounded-3xl border border-line bg-surface px-6 py-4">

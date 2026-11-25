@@ -1,18 +1,18 @@
 "use client";
 
 import { useRef } from "react";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { ArrowUp, ArrowUpRight, Mail } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { gsap, useGSAP, MOTION_OK } from "@/lib/gsap";
 import { siteConfig } from "@/data/site.config";
 import { GithubIcon, InstagramIcon, LinkedinIcon, WhatsappIcon } from "@/components/ui/BrandIcons";
 import Wordmark from "@/components/ui/Wordmark";
+import ShareLinks from "@/components/ui/ShareLinks";
 
 export default function Footer({ showCv }: { showCv?: boolean }) {
   const t = useTranslations("footer");
   const nav = useTranslations("nav");
-  const locale = useLocale();
   const root = useRef<HTMLElement>(null);
   const year = new Date().getFullYear();
 
@@ -65,80 +65,83 @@ export default function Footer({ showCv }: { showCv?: boolean }) {
   ];
 
   return (
-    <footer ref={root} data-hide-cta className="tone-dark relative isolate overflow-hidden print:hidden">
-      <div className="container-page grid gap-12 pb-12 pt-24 md:grid-cols-[1.4fr_1fr_1fr]">
-        <div className="max-w-md">
-          <p className="label-mono text-accent">{locale === "en" ? siteConfig.roleEn : siteConfig.role}</p>
-          <p className="font-display mt-4 text-3xl font-semibold leading-[1.1] tracking-[-0.03em] sm:text-4xl">
-            {t("tagline")}
-          </p>
-          <Link href="/contact" className="btn-primary group mt-8 px-6 py-3.5 text-sm">
-            {nav("cta")}
-            <ArrowUpRight className="size-4 transition-transform duration-300 group-hover:rotate-45" />
-          </Link>
+    <footer ref={root} data-hide-cta className="tone-light px-2 pt-2 sm:px-3 print:hidden">
+      <div className="tone-green relative isolate overflow-hidden rounded-t-[2rem] sm:rounded-t-[3rem]">
+        <div className="container-page grid gap-12 pb-10 pt-20 md:grid-cols-[1.5fr_1fr_1fr] md:pt-24">
+          <div className="max-w-md">
+            <p className="font-serif text-[2rem] leading-[1.08] sm:text-[2.6rem]">{t("tagline")}</p>
+            <Link
+              href="/contact"
+              className="group mt-8 inline-flex items-center gap-2 border-b border-ink/40 pb-1 text-sm font-medium transition-colors hover:border-ink"
+            >
+              {nav("cta")}
+              <ArrowUpRight className="size-4 transition-transform duration-300 group-hover:rotate-45" />
+            </Link>
+          </div>
+
+          <div>
+            <p className="text-xs font-medium uppercase tracking-[0.16em] text-ink-dim">{t("pages")}</p>
+            <ul className="mt-5 flex flex-col gap-2.5">
+              {pages.map((p) => (
+                <li key={p.href}>
+                  <Link href={p.href} className="text-ink-muted transition-colors hover:text-ink">
+                    {p.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <p className="text-xs font-medium uppercase tracking-[0.16em] text-ink-dim">{t("elsewhere")}</p>
+            <ul className="mt-5 flex flex-col gap-2.5">
+              {socials.map(({ href, icon: Icon, label }) => (
+                <li key={label}>
+                  <a
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group inline-flex items-center gap-3 text-ink-muted transition-colors hover:text-ink"
+                  >
+                    <Icon className="size-4" />
+                    {label}
+                    <ArrowUpRight className="size-3.5 opacity-0 transition-all group-hover:rotate-45 group-hover:opacity-100" />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
 
-        <div>
-          <p className="label-mono text-ink-dim">{t("pages")}</p>
-          <ul className="mt-5 flex flex-col gap-3">
-            {pages.map((p) => (
-              <li key={p.href}>
-                <Link href={p.href} className="text-ink-muted transition-colors hover:text-ink">
-                  {p.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
+        {/* Grand logo sur toute la largeur du contenu : taille calculée sur la
+            largeur du conteneur (unités cqw). Marges internes pour que rien ne
+            soit rogné par le masque de l'animation. */}
+        <div className="container-page select-none [container-type:inline-size]" aria-hidden>
+          <div className="ft-mark overflow-hidden pb-[0.1em] pt-[0.04em] text-[44cqw]">
+            <Wordmark
+              split
+              letterClassName="ft-letter"
+              dotClassName="bg-[#9be3c4]"
+              className="leading-[0.86] tracking-[-0.02em] text-ink"
+            />
+          </div>
         </div>
 
-        <div>
-          <p className="label-mono text-ink-dim">{t("elsewhere")}</p>
-          <ul className="mt-5 flex flex-col gap-3">
-            {socials.map(({ href, icon: Icon, label }) => (
-              <li key={label}>
-                <a
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-3 text-ink-muted transition-colors hover:text-ink"
-                >
-                  <Icon className="size-4" />
-                  {label}
-                  <ArrowUpRight className="size-3.5 opacity-0 transition-all group-hover:rotate-45 group-hover:opacity-100" />
-                </a>
-              </li>
-            ))}
-          </ul>
+        <div className="container-page flex flex-col gap-3 border-t border-line py-6 text-xs text-ink-dim sm:flex-row sm:items-center sm:justify-between">
+          {/* Triple-clic sur ce texte : panneau privé des liens à partager. */}
+          <ShareLinks>
+            © {year} {siteConfig.name}. {t("rights")}
+          </ShareLinks>
+          <span>{t("madeWith")}</span>
+          <button
+            type="button"
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            className="inline-flex items-center gap-1.5 self-start text-ink-muted transition-colors hover:text-ink sm:self-auto"
+          >
+            {t("backToTop")}
+            <ArrowUp className="size-3.5" />
+          </button>
         </div>
-      </div>
-
-      {/* Grand logo sur toute la largeur du contenu : la taille du texte est
-          calculée sur la largeur du conteneur (unités cqw ; « Erfero. »
-          mesure ~2,98 fois sa taille de police). Marges internes pour que
-          rien ne soit rogné par le masque de l'animation. */}
-      <div className="container-page select-none [container-type:inline-size]" aria-hidden>
-        <div className="ft-mark overflow-hidden pb-[0.08em] pt-[0.02em] text-[32.5cqw]">
-          <Wordmark
-            split
-            letterClassName="ft-letter"
-            className="font-display font-semibold leading-[0.9] tracking-[-0.05em] text-ink"
-          />
-        </div>
-      </div>
-
-      <div className="container-page flex flex-col gap-3 border-t border-line py-6 text-xs text-ink-dim sm:flex-row sm:items-center sm:justify-between">
-        <span>
-          © {year} {siteConfig.name}. {t("rights")}
-        </span>
-        <span>{t("madeWith")}</span>
-        <button
-          type="button"
-          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          className="inline-flex items-center gap-1.5 self-start text-ink-muted transition-colors hover:text-ink sm:self-auto"
-        >
-          {t("backToTop")}
-          <ArrowUp className="size-3.5" />
-        </button>
       </div>
     </footer>
   );

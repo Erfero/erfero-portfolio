@@ -17,21 +17,21 @@
    ===================================================================== */
 @theme {
   /* Palette fixe */
-  --color-night: #0e1311;
+  --color-night: #0c1a15;
   --color-paper: #f4f2ed;
   --color-stone: #e5e0d6;
   --color-green: #008060;
   --color-green-light: #3cc896;
 
   /* Rôles (valeurs du ton sombre ; voir .tone-* plus bas) */
-  --color-bg: #0e1311;
-  --color-bg-soft: #131a17;
-  --color-surface: #18201c;
+  --color-bg: #0c1a15;
+  --color-bg-soft: #10211b;
+  --color-surface: #15291f;
   --color-border: rgba(244, 242, 237, 0.12);
   --color-line: rgba(244, 242, 237, 0.12);
   --color-ink: #f4f2ed;
-  --color-ink-muted: #b9beba;
-  --color-ink-dim: #8c938f;
+  --color-ink-muted: #b8c4bd;
+  --color-ink-dim: #8a9b92;
   --color-accent: #3cc896;
   --color-accent-fill: #3cc896;
   --color-on-accent: #0e1311;
@@ -55,19 +55,52 @@
    même si Tailwind n'émet que les variables qu'il voit utilisées. */
 :root,
 .tone-dark {
-  --color-bg: #0e1311;
-  --color-bg-soft: #131a17;
-  --color-surface: #18201c;
+  --color-bg: #0c1a15;
+  --color-bg-soft: #10211b;
+  --color-surface: #15291f;
   --color-border: rgba(244, 242, 237, 0.12);
   --color-line: rgba(244, 242, 237, 0.12);
   --color-ink: #f4f2ed;
-  --color-ink-muted: #b9beba;
-  --color-ink-dim: #8c938f;
+  --color-ink-muted: #b8c4bd;
+  --color-ink-dim: #8a9b92;
   --color-accent: #3cc896;
   --color-accent-fill: #3cc896;
-  --color-on-accent: #0e1311;
+  --color-on-accent: #0c1a15;
   --color-success: #3cc896;
   --grid-line: rgba(244, 242, 237, 0.05);
+}
+
+/* Fonds doux pour varier les sections (famille neutre / vert, jamais de rose). */
+.tone-sand {
+  --color-bg: #d9cfc4;
+  --color-bg-soft: #cfc4b8;
+  --color-surface: #e7e0d7;
+  --color-border: rgba(14, 19, 17, 0.14);
+  --color-line: rgba(14, 19, 17, 0.14);
+  --color-ink: #0e1311;
+  --color-ink-muted: #45463f;
+  --color-ink-dim: #5d5c55;
+  --color-accent: #006b4f;
+  --color-accent-fill: #0e1311;
+  --color-on-accent: #f4f2ed;
+  --color-success: #006b4f;
+  --grid-line: rgba(14, 19, 17, 0.06);
+}
+
+.tone-sage {
+  --color-bg: #d6e4d9;
+  --color-bg-soft: #cadbcf;
+  --color-surface: #e6efe8;
+  --color-border: rgba(14, 19, 17, 0.12);
+  --color-line: rgba(14, 19, 17, 0.12);
+  --color-ink: #0e1311;
+  --color-ink-muted: #3f4c45;
+  --color-ink-dim: #56645c;
+  --color-accent: #006b4f;
+  --color-accent-fill: #0e1311;
+  --color-on-accent: #f4f2ed;
+  --color-success: #006b4f;
+  --grid-line: rgba(14, 19, 17, 0.06);
 }
 
 .tone-light {
@@ -121,7 +154,9 @@
 .tone-dark,
 .tone-light,
 .tone-stone,
-.tone-green {
+.tone-green,
+.tone-sand,
+.tone-sage {
   background-color: var(--color-bg);
   color: var(--color-ink);
 }
@@ -132,7 +167,7 @@
   }
 
   html {
-    background: #0e1311;
+    background: #0c1a15;
     color-scheme: dark;
     scroll-behavior: auto;
     overflow-x: clip;
@@ -330,9 +365,8 @@
     transform: scale(0.97);
   }
 
-  /* Carte de base. Au survol : la bordure s'éclaire en vert autour de la
-     souris (variables --mx / --my posées par SpotlightTracker). Rien ne
-     passe jamais PAR-DESSUS le contenu : le texte reste net. */
+  /* Carte de base : au survol, elle se soulève et sa bordure se renforce.
+     Aucun halo ni dégradé : rien ne passe jamais par-dessus le texte. */
   .spotlight {
     position: relative;
     border-radius: 1.5rem;
@@ -340,33 +374,13 @@
     background: var(--color-surface);
     transition:
       transform 0.5s var(--ease-out-expo),
-      box-shadow 0.5s var(--ease-out-expo);
-  }
-  .spotlight::after {
-    content: "";
-    position: absolute;
-    inset: -1px;
-    padding: 1px;
-    border-radius: inherit;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.45s ease;
-    background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 0%), var(--color-accent), transparent 70%);
-    mask:
-      linear-gradient(#000 0 0) content-box exclude,
-      linear-gradient(#000 0 0);
-    -webkit-mask:
-      linear-gradient(#000 0 0) content-box,
-      linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
+      box-shadow 0.5s var(--ease-out-expo),
+      border-color 0.4s ease;
   }
   .spotlight:hover {
     transform: translateY(-3px);
-    box-shadow: 0 24px 50px -30px rgba(0, 0, 0, 0.45);
-  }
-  .spotlight:hover::after,
-  .spotlight:focus-within::after {
-    opacity: 1;
+    border-color: color-mix(in srgb, var(--color-accent) 55%, transparent);
+    box-shadow: 0 24px 50px -30px rgba(0, 0, 0, 0.35);
   }
 
   /* Widgets flottants du Hero : opaques pour rester lisibles. */
@@ -375,6 +389,13 @@
     background: var(--color-surface);
     box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.7);
   }
+}
+
+/* Ticket de caisse (section « Ça te parle ? ») : bords en dents de scie. */
+.receipt {
+  mask:
+    conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) bottom / 18px 51% repeat-x,
+    conic-gradient(from 135deg at top, #0000, #000 1deg 89deg, #0000 90deg) top / 18px 51% repeat-x;
 }
 
 /* ===== Captures de boutiques : au survol, la capture pleine page défile
@@ -390,52 +411,36 @@
   transition: object-position 8s linear;
 }
 
-/* ===== Vitrine des boutiques (accueil). --fp-w = largeur d'une carte.
-   Mode « libre » (mobile, tablette, écran très bas, mouvement réduit) :
-   carrousel natif au doigt / aux flèches. Mode « épinglé » (desktop) : la
-   rangée défile horizontalement au scroll, et la taille des cartes est
-   calculée sur la HAUTEUR de l'écran pour qu'elles soient toujours le plus
-   grandes possible sans jamais être coupées. La même requête média est
-   utilisée côté GSAP (voir FeaturedProjects.tsx). */
-.fp {
-  --fp-w: 84vw;
+/* ===== Vitrine des boutiques (accueil, ProjectShowcase.tsx).
+   Mode « libre » (mobile, tablette, écran bas, mouvement réduit) : les
+   panneaux s'empilent, chacun sur sa teinte. Mode « épinglé » (desktop) :
+   les panneaux défilent horizontalement et c'est la section entière qui
+   change de teinte. Même requête média que PIN_QUERY côté GSAP. */
+.ps-rail {
+  display: flex;
+  flex-direction: column;
 }
-@media (min-width: 640px) {
-  .fp {
-    --fp-w: 62vw;
-  }
+.ps-panel {
+  background-color: var(--panel-bg, transparent);
 }
-@media (min-width: 1024px) {
-  .fp {
-    --fp-w: min(48vw, 680px);
-  }
-}
-.fp-when-pinned {
-  display: none;
-}
-@media (min-width: 1024px) and (min-height: 520px) and (prefers-reduced-motion: no-preference) {
-  html.js .fp {
-    --fp-w: clamp(400px, calc((100svh - 240px) * 16 / 9), min(58vw, 980px));
-  }
-  html.js .fp-panel {
+@media (min-width: 1024px) and (min-height: 560px) and (prefers-reduced-motion: no-preference) {
+  html.js .ps-viewport {
     height: 100svh;
-    display: flex;
-    flex-direction: column;
-    margin-top: 0;
-    padding-top: 76px;
-  }
-  html.js .fp-viewport {
-    flex: 1;
+    overflow: hidden;
     display: flex;
     align-items: center;
-    overflow: hidden;
-    scroll-snap-type: none;
   }
-  html.js .fp-when-free {
-    display: none;
+  html.js .ps-rail {
+    flex-direction: row;
+    width: max-content;
   }
-  html.js .fp-when-pinned {
-    display: flex;
+  html.js .ps-panel {
+    width: min(86vw, 1240px);
+    flex-shrink: 0;
+    background-color: transparent;
+  }
+  html.js .ps-panel.ps-end {
+    width: min(52vw, 700px);
   }
 }
 
@@ -545,6 +550,49 @@
 @media (prefers-reduced-motion: no-preference) {
   html.js:not(.reveal-failsafe) [data-reveal] {
     opacity: 0;
+  }
+}
+
+/* ===== Impression / PDF du CV : TOUJOURS une seule page A4.
+   La taille de base du texte (rem) est réduite à l'impression : tout le CV
+   (textes, marges, espacements Tailwind en rem) rétrécit d'un bloc et tient
+   sur une page, en français comme en anglais. Les éléments animés à
+   l'apparition sont forcés visibles. */
+@media print {
+  @page {
+    size: A4;
+    margin: 9mm 10mm;
+  }
+  html {
+    font-size: 10.6px;
+  }
+  html,
+  body {
+    background: #ffffff !important;
+    height: auto !important;
+    min-height: 0 !important;
+  }
+  .grain::before {
+    display: none !important;
+  }
+  .cv-sheet {
+    padding: 0 !important;
+    background: #ffffff !important;
+  }
+  .cv-sheet .container-page {
+    max-width: none;
+    padding-inline: 0;
+  }
+  .cv-sheet * {
+    opacity: 1 !important;
+    transform: none !important;
+    box-shadow: none !important;
+  }
+  .cv-sheet,
+  .cv-sheet * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    break-inside: avoid;
   }
 }
 

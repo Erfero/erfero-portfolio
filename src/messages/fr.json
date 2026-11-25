@@ -55,7 +55,9 @@
       "growthSub": "après refonte",
       "rating": "4.8"
     },
-    "stackLabel": "Shopify, Liquid et les technologies que je maîtrise"
+    "stackLabel": "Shopify, Liquid et les technologies que je maîtrise",
+    "visit": "Visiter la boutique",
+    "galleryHint": "Défile pour entrer dans la galerie"
   },
   "painPoints": {
     "eyebrow": "Ça te parle ?",
@@ -90,7 +92,12 @@
         "title": "Un SEO invisible sur Google",
         "description": "Sans structure technique propre (balises, vitesse, maillage interne) ni contenu pensé pour répondre aux recherches de tes clients, ta boutique reste invisible sur Google — même avec d'excellents produits. Résultat : tu dépends à 100 % de la pub payante pour générer du trafic, ce qui pèse lourd sur ta marge à long terme."
       }
-    ]
+    ],
+    "receiptTitle": "La note d'un thème générique",
+    "receiptMeta": "Boutique Shopify · Thème gratuit · Sans optimisation",
+    "receiptTotal": "Total",
+    "receiptTotalValue": "des ventes perdues",
+    "receiptFooter": "Bonne nouvelle : rien de tout cela n'est une fatalité."
   },
   "services": {
     "eyebrow": "Ma méthode",
@@ -224,7 +231,7 @@
   },
   "metrics": {
     "eyebrow": "En chiffres",
-    "title": "Cinq ans à construire des boutiques *qui vendent*",
+    "title": "Développeur web depuis 2021, *Shopify depuis 2022*",
     "items": [
       {
         "value": "5",
@@ -273,17 +280,19 @@
     "swipeHint": "Faites glisser pour parcourir →",
     "prev": "Boutique précédente",
     "next": "Boutique suivante",
-    "scrollHint": "Continuez à défiler pour parcourir les boutiques"
+    "scrollHint": "Continuez à défiler pour parcourir les boutiques",
+    "showcaseSubtitle": "Un aperçu parmi plus de {count} boutiques Shopify conçues et livrées pour des marques de beauté, de bien-être, de mode et de lifestyle."
   },
   "videoReels": {
     "eyebrow": "En coulisses",
-    "title": "Mes réalisations, *en vidéo*",
+    "title": "Mes réalisations *en format vertical*",
     "subtitle": "Plus de 200 vidéos qui montrent la construction de boutiques Shopify de A à Z — comme sur TikTok, mais avec le code derrière.",
     "cta": "Voir toutes les vidéos",
     "play": "Lire",
     "prev": "Vidéo précédente",
     "next": "Vidéo suivante",
-    "hint": "Cliquez sur la vidéo du centre pour la voir en grand, avec la musique"
+    "hint": "Fais glisser pour tourner — clique sur une vidéo pour la voir en grand, avec la musique.",
+    "countLabel": "{count} vidéos de coulisses"
   },
   "process": {
     "eyebrow": "Comment ça se passe",
@@ -525,7 +534,7 @@
       }
     ],
     "profileEyebrow": "Profil",
-    "profile": "**Développeur Shopify**. Je conçois des boutiques Shopify rapides, bien référencées et pensées pour **convertir** : thèmes et sections sur mesure en Liquid, pages produit, apps, vitesse et SEO. Autonome, rigoureux et orienté résultat, je transforme un besoin métier en boutique qui vend.",
+    "profile": "**Développeur Shopify**. Développeur web full stack depuis 2021, spécialisé Shopify depuis 2022 : je conçois des boutiques rapides, bien référencées et pensées pour **convertir** — thèmes et sections sur mesure en Liquid, pages produit, apps, vitesse et SEO. Autonome, rigoureux et orienté résultat.",
     "stats": [
       {
         "value": "200+",
@@ -630,16 +639,17 @@
     "experienceEyebrow": "Expériences",
     "experience": [
       {
-        "title": "Développeur Shopify",
+        "title": "Développeur Web Full Stack, puis Shopify",
         "company": "Elite Agency · Bordeaux",
         "period": "Mai 2021 – Janv. 2025",
         "bullets": [
-          "Création de boutiques Shopify sur-mesure, optimisées pour la conversion.",
+          "2021 : développement web full stack (sites et applications sur mesure).",
+          "Dès 2022 : spécialisation Shopify — boutiques sur mesure, optimisées pour la conversion.",
           "Stratégies SEO pour la visibilité sur Google et les réseaux sociaux."
         ]
       },
       {
-        "title": "Développeur Web",
+        "title": "Développeur Web Full Stack",
         "company": "Viip Interstis · France",
         "period": "Févr. 2023 – Mars 2025",
         "bullets": [
@@ -669,7 +679,7 @@
     "educationEyebrow": "Formation",
     "education": [
       {
-        "title": "Développeur Web",
+        "title": "Développeur Web Full Stack",
         "school": "High-Five University · France",
         "period": "Depuis mars 2022 — 2 ans d'enseignement + 2 ans en entreprise"
       },
@@ -711,7 +721,7 @@
   },
   "manifesto": {
     "eyebrow": "À propos",
-    "text": "Je m'appelle Erféro. Depuis 2021, je conçois des boutiques Shopify pour des marques e-commerce et des agences — *plus de 200 à ce jour*. Mon obsession : des boutiques rapides, rassurantes et pensées pour vendre, livrées en *3 jours en moyenne*.",
+    "text": "Je m'appelle Erféro. J'ai commencé comme développeur web full stack en 2021, puis je me suis spécialisé sur Shopify en 2022. Depuis, je conçois des boutiques pour des marques e-commerce et des agences — *plus de 200 à ce jour*. Mon obsession : des boutiques rapides, rassurantes et pensées pour vendre, livrées en *3 jours en moyenne*.",
     "agenciesLabel": "Agences et entreprises avec lesquelles j'ai travaillé",
     "agencies": [
       "Elite Agency",
@@ -724,7 +734,11 @@
   "experience": {
     "eyebrow": "Parcours",
     "title": "Formé en agence, *autonome* en freelance",
-    "subtitle": "Près de quatre ans de production Shopify en agence, du développement web et du SEO : je m'intègre aussi bien à une équipe d'agence qu'en direct avec une marque.",
+    "subtitle": "Développeur web full stack dès 2021, spécialisé Shopify depuis 2022 : du code sur mesure, du SEO et des boutiques qui vendent — en équipe d'agence comme en direct avec une marque.",
     "ctaCv": "Voir le CV complet"
+  },
+  "toolbox": {
+    "eyebrow": "Ma boîte à outils",
+    "title": "Shopify d'abord, et les technologies que j'utilise *au quotidien*"
   }
 }

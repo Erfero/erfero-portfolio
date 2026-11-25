@@ -114,7 +114,7 @@ export default function Preloader({ role }: { role: string }) {
         {/* Marges internes : rien n'est rogné (ni le point, ni les lettres). */}
         <span className="overflow-hidden px-[0.08em] pb-[0.12em] pt-[0.04em] text-[18vw] sm:text-[11vw]">
           <span className="pl-word inline-block">
-            <Wordmark className="font-display font-semibold leading-[0.95] tracking-[-0.045em]" />
+            <Wordmark className="leading-[0.95] tracking-[-0.02em]" />
           </span>
         </span>
       </div>

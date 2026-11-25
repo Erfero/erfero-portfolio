@@ -57,7 +57,7 @@ export default function Testimonials({ testimonials, index }: { testimonials: Te
   if (visible.length === 0) return null;
 
   return (
-    <section className="tone-light relative py-24 sm:py-32">
+    <section className="tone-sage relative py-24 sm:py-32">
       <div className="container-page">
         <SectionHeading eyebrow={t("eyebrow")} title={t("title")} subtitle={t("subtitle")} index={index} />
         {/* Mobile / tablette : une seule colonne avec tous les avis */}

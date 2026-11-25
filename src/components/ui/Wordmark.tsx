@@ -2,9 +2,9 @@ import { cn } from "@/lib/utils";
 import { siteConfig } from "@/data/site.config";
 
 /**
- * Logo texte « Erfero. » : le point est un vrai disque vert (et non le
- * caractère « . »), dimensionné en em — il suit la taille du texte et ne
- * peut jamais être rogné, quelle que soit la police ou l'interlettrage.
+ * Logo texte « Erfero. » en serif : le point est un vrai disque (couleur
+ * d'accent du ton courant) et non le caractère « . », dimensionné en em — il
+ * suit la taille du texte et ne peut jamais être rogné.
  */
 export default function Wordmark({
   className,
@@ -21,7 +21,7 @@ export default function Wordmark({
 }) {
   const name = siteConfig.shortName;
   return (
-    <span className={cn("inline-flex items-baseline whitespace-nowrap", className)}>
+    <span className={cn("inline-flex items-baseline whitespace-nowrap font-serif font-normal", className)}>
       {split ? (
         name.split("").map((ch, i) => (
           <span key={i} className={cn("inline-block", letterClassName)}>
@@ -34,7 +34,7 @@ export default function Wordmark({
       <span
         aria-hidden
         className={cn(
-          "ml-[0.05em] inline-block size-[0.17em] shrink-0 rounded-full bg-accent",
+          "ml-[0.04em] inline-block size-[0.15em] shrink-0 rounded-full bg-accent",
           letterClassName,
           dotClassName
         )}

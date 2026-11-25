@@ -44,7 +44,7 @@ export default function ContactForm({ selectedPlan }: { selectedPlan?: string })
   };
 
   const inputClass =
-    "w-full rounded-2xl border border-line bg-ink/[0.04] px-5 py-4 text-base text-ink placeholder:text-ink-dim outline-none transition-[border-color,background-color,box-shadow] focus:border-accent focus:bg-ink/[0.06] focus:shadow-[0_0_0_4px_rgba(60,200,150,0.15)] sm:text-sm";
+    "w-full border-0 border-b border-ink/25 bg-transparent px-0 py-4 text-base text-ink placeholder:text-ink-muted outline-none transition-colors focus:border-accent sm:text-[15px]";
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
@@ -91,7 +91,7 @@ export default function ContactForm({ selectedPlan }: { selectedPlan?: string })
       <button
         type="submit"
         disabled={status === "sending"}
-        className="btn-primary w-fit px-8 py-4 text-sm disabled:opacity-60"
+        className="mt-4 inline-flex w-fit items-center gap-2 rounded-full bg-[#9be3c4] px-7 py-3.5 text-sm font-medium text-[#0c1a15] transition-colors hover:bg-white disabled:opacity-60"
       >
         {status === "sending" ? (
           <Loader2 className="size-4 animate-spin" />

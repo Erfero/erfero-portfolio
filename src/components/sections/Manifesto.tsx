@@ -1,17 +1,16 @@
 "use client";
 
-import { useRef } from "react";
+import { Fragment, useRef } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { ArrowUpRight, Building2 } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { gsap, useGSAP, MOTION_OK } from "@/lib/gsap";
 import { siteConfig } from "@/data/site.config";
-import SplitHeading from "@/components/ui/SplitHeading";
-import TechIcon from "@/components/ui/TechIcon";
 
 /**
- * À propos : portrait dans un cadre en dégradé, présentation en une phrase
- * forte (mots clés en dégradé), et les agences / entreprises partenaires.
+ * Présentation (juste après la galerie) : portrait en arche à gauche, et à
+ * droite une grande phrase serif dont les mots passent du gris à l'encre au
+ * fil du défilement. Les passages `*...*` sont en italique vert.
  */
 export default function Manifesto({ showCv }: { showCv?: boolean }) {
   const t = useTranslations("manifesto");
@@ -20,40 +19,39 @@ export default function Manifesto({ showCv }: { showCv?: boolean }) {
   const agencies = t.raw("agencies") as string[];
   const root = useRef<HTMLElement>(null);
 
+  // Découpe en mots, en gardant l'information « accent » des passages *...*.
+  const words = t("text")
+    .split(/(\*[^*]+\*)/g)
+    .filter(Boolean)
+    .flatMap((part) => {
+      const accent = part.startsWith("*") && part.endsWith("*");
+      const clean = accent ? part.slice(1, -1) : part;
+      return clean
+        .split(/\s+/)
+        .filter(Boolean)
+        .map((w) => ({ w, accent }));
+    });
+
   useGSAP(
     () => {
       const mm = gsap.matchMedia();
       mm.add(MOTION_OK, () => {
+        gsap.fromTo(
+          ".mf-word",
+          { opacity: 0.16 },
+          {
+            opacity: 1,
+            ease: "none",
+            stagger: 0.05,
+            scrollTrigger: { trigger: ".mf-text", start: "top 78%", end: "bottom 45%", scrub: true },
+          }
+        );
         gsap.from(".mf-photo", {
           y: 60,
-          rotate: -4,
           autoAlpha: 0,
-          duration: 1.4,
+          duration: 1.3,
           ease: "expo.out",
-          scrollTrigger: { trigger: root.current, start: "top 75%", once: true },
-        });
-        gsap.from(".mf-badge", {
-          scale: 0.6,
-          autoAlpha: 0,
-          duration: 0.9,
-          ease: "back.out(1.8)",
-          stagger: 0.15,
-          delay: 0.5,
-          scrollTrigger: { trigger: root.current, start: "top 75%", once: true },
-        });
-        gsap.from(".mf-agency", {
-          y: 20,
-          autoAlpha: 0,
-          stagger: 0.07,
-          duration: 0.8,
-          ease: "expo.out",
-          scrollTrigger: { trigger: ".mf-agencies", start: "top 92%", once: true },
-        });
-        // Le portrait flotte légèrement au scroll (profondeur).
-        gsap.to(".mf-photo-inner", {
-          yPercent: -6,
-          ease: "none",
-          scrollTrigger: { trigger: root.current, start: "top bottom", end: "bottom top", scrub: true },
+          scrollTrigger: { trigger: ".mf-photo", start: "top 88%", once: true },
         });
       });
     },
@@ -61,67 +59,55 @@ export default function Manifesto({ showCv }: { showCv?: boolean }) {
   );
 
   return (
-    <section ref={root} id="about" className="tone-light relative scroll-mt-24 py-24 sm:py-32">
-      <div className="container-page grid items-center gap-16 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-20">
-        <div className="mf-photo relative mx-auto w-full max-w-[400px]">
-          <div className="mf-photo-inner relative">
-            <div className="rounded-[2.2rem] border border-line bg-surface p-2 shadow-[0_50px_100px_-50px_rgba(14,19,17,0.55)]">
-              <div className="overflow-hidden rounded-[1.7rem] bg-bg-soft">
-                {/* eslint-disable-next-line @next/next/no-img-element -- photo de profil locale */}
-                <img
-                  src="/cv-photo.jpg"
-                  alt={siteConfig.name}
-                  width={451}
-                  height={433}
-                  loading="lazy"
-                  decoding="async"
-                  className="aspect-[451/433] w-full object-cover"
-                />
-              </div>
-            </div>
-
-            <div className="mf-badge hs-card tone-dark absolute -left-4 top-8 flex items-center gap-2.5 rounded-2xl py-2 pl-2 pr-4 sm:-left-10">
-              <span className="grid size-9 place-items-center rounded-xl bg-[#008060] text-white">
-                <TechIcon name="shopify" color="currentColor" className="size-5" />
-              </span>
-              <span className="text-sm font-semibold">{locale === "en" ? siteConfig.roleEn : siteConfig.role}</span>
-            </div>
-            <div className="mf-badge hs-card absolute -bottom-7 left-4 right-4 flex items-center gap-3 rounded-2xl px-4 py-3 sm:-right-8">
-              <span className="pulse-dot size-2.5 shrink-0 rounded-full bg-success" />
-              <span className="text-sm font-semibold leading-snug">{tc("availability")}</span>
-            </div>
+    <section ref={root} id="about" className="tone-light relative scroll-mt-24 py-24 sm:py-36">
+      <div className="container-page grid items-end gap-14 lg:grid-cols-[minmax(0,0.62fr)_minmax(0,1.38fr)] lg:gap-20">
+        <figure className="mf-photo mx-auto w-full max-w-[300px] lg:mx-0">
+          <div className="overflow-hidden rounded-t-full rounded-b-2xl bg-bg-soft">
+            {/* eslint-disable-next-line @next/next/no-img-element -- photo de profil locale */}
+            <img
+              src="/cv-photo.jpg"
+              alt={siteConfig.name}
+              width={451}
+              height={433}
+              loading="lazy"
+              decoding="async"
+              className="aspect-[4/5] w-full object-cover"
+            />
           </div>
-        </div>
+          <figcaption className="mt-4">
+            <p className="font-serif text-2xl italic">{siteConfig.name}</p>
+            <p className="mt-1 flex items-center gap-2 text-sm text-ink-muted">
+              {locale === "en" ? siteConfig.roleEn : siteConfig.role}
+              <span className="pulse-dot size-2 shrink-0 rounded-full bg-[#008060]" />
+            </p>
+          </figcaption>
+        </figure>
 
         <div>
-          <p className="label-mono flex items-center gap-3">
-            <span aria-hidden className="h-px w-8 bg-ink/30" />
-            <span className="text-ink-muted">{t("eyebrow")}</span>
+          <p className="text-xs font-medium uppercase tracking-[0.16em] text-ink-muted">{t("eyebrow")}</p>
+          <p className="mf-text mt-6 font-serif text-[clamp(2rem,4.2vw,4rem)] leading-[1.08] tracking-[-0.01em]">
+            {words.map(({ w, accent }, i) => (
+              <Fragment key={i}>
+                <span className={`mf-word ${accent ? "italic text-accent" : ""}`}>{w}</span>{" "}
+              </Fragment>
+            ))}
           </p>
-          <SplitHeading
-            as="p"
-            text={t("text")}
-            stagger={0.05}
-            className="font-display mt-6 text-[clamp(1.55rem,2.9vw,2.6rem)] font-semibold leading-[1.22] tracking-[-0.025em]"
-          />
+          <p className="mt-8 max-w-xl text-sm text-ink-muted sm:text-base">{tc("availability")}</p>
 
-          <div className="mf-agencies mt-12">
-            <p className="flex items-center gap-2 text-sm font-medium text-ink-muted">
-              <Building2 className="size-4 text-accent" aria-hidden />
-              {t("agenciesLabel")}
-            </p>
-            <ul className="mt-4 flex flex-wrap gap-3">
+          <div className="mt-10 border-t border-line pt-6">
+            <p className="text-xs font-medium uppercase tracking-[0.16em] text-ink-muted">{t("agenciesLabel")}</p>
+            <ul className="mt-4 flex flex-wrap gap-x-8 gap-y-3">
               {agencies.map((name) => (
-                <li
-                  key={name}
-                  className="mf-agency font-display rounded-2xl border border-line bg-surface px-5 py-3 text-lg font-semibold tracking-[-0.02em] sm:text-xl"
-                >
+                <li key={name} className="font-serif text-2xl sm:text-3xl">
                   {name}
                 </li>
               ))}
             </ul>
             {showCv && (
-              <Link href="/cv" className="btn-primary group mt-8 px-6 py-3.5 text-sm">
+              <Link
+                href="/cv"
+                className="group mt-8 inline-flex items-center gap-2 rounded-full bg-[#0e1311] px-6 py-3.5 text-sm font-medium text-white transition-colors hover:bg-[#008060]"
+              >
                 {t("cta")}
                 <ArrowUpRight className="size-4 transition-transform duration-300 group-hover:rotate-45" />
               </Link>

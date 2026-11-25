@@ -97,7 +97,7 @@ export default function Navbar({ showCv }: { showCv?: boolean }) {
             )}
           >
             <a href={homeHref} className="flex items-center gap-3" aria-label={siteConfig.name}>
-              <Wordmark className="font-display text-xl font-semibold tracking-[-0.03em]" />
+              <Wordmark className="text-[1.65rem] leading-none tracking-[-0.01em]" />
               <span className="hidden h-4 w-px bg-line lg:block" />
               <span className="label-mono hidden text-[10px] text-ink-muted lg:block">
                 {locale === "en" ? siteConfig.roleEn : siteConfig.role}

@@ -130,7 +130,7 @@ export default function VideoReels({ videos, index }: { videos: VideoEntry[]; in
   };
 
   return (
-    <section ref={root} id="videos" className="tone-stone relative scroll-mt-24 overflow-hidden py-24 sm:py-32">
+    <section ref={root} id="videos" className="tone-dark relative scroll-mt-24 overflow-hidden py-24 sm:py-32">
 
       <div className="container-page flex flex-wrap items-end justify-between gap-6">
         <SectionHeading eyebrow={t("eyebrow")} title={t("title")} subtitle={t("subtitle")} index={index} />
@@ -154,7 +154,7 @@ export default function VideoReels({ videos, index }: { videos: VideoEntry[]; in
         onPointerUp={onPointerUp}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
-        className="vr-stage relative mx-auto mt-14 w-full touch-pan-y select-none outline-none [--ph:58vw] [perspective:1800px] sm:[--ph:34vw] lg:[--ph:clamp(210px,19vw,280px)]"
+        className="vr-stage relative mx-auto mt-14 w-full touch-pan-y select-none outline-none [--ph:62vw] [perspective:1800px] sm:[--ph:36vw] lg:[--ph:clamp(230px,21vw,310px)]"
         style={{ height: "calc(var(--ph) * 16 / 9 + 1rem)" }}
       >
         <div className="absolute inset-0 [transform-style:preserve-3d]">
@@ -173,14 +173,14 @@ export default function VideoReels({ videos, index }: { videos: VideoEntry[]; in
                 aria-hidden={abs === VISIBLE_RANGE || undefined}
                 aria-label={`${video.caption[locale]}${isActive ? ` — ${t("play")}` : ""}`}
                 data-cursor={isActive ? t("play") : undefined}
-                className="absolute left-1/2 top-0 rounded-[2.4rem] border border-black/10 bg-[#0e1311] p-1.5 text-left shadow-[0_40px_80px_-35px_rgba(14,19,17,0.7)] transition-[transform,opacity,filter] duration-[900ms] ease-[var(--ease-out-expo)]"
+                className="absolute left-1/2 top-0 rounded-[2.4rem] border border-white/12 bg-[#0a0e0c] p-1.5 text-left shadow-[0_40px_80px_-35px_rgba(0,0,0,0.95)] transition-[transform,opacity,filter] duration-[900ms] ease-[var(--ease-out-expo)]"
                 style={{
                   width: "var(--ph)",
                   transform: `translateX(calc(-50% + ${k} * var(--ph) * 0.72)) translateZ(${-abs * 140}px) rotateY(${k * -20}deg) scale(${1 - abs * 0.05})`,
                   zIndex: 20 - abs,
                   opacity: abs === VISIBLE_RANGE ? 0 : 1 - abs * 0.14,
                   filter: isActive ? "none" : `brightness(${1 - abs * 0.2}) saturate(${1 - abs * 0.15})`,
-                  boxShadow: isActive ? "0 50px 100px -35px rgba(14,19,17,0.75)" : undefined,
+                  boxShadow: isActive ? "0 50px 120px -40px rgba(60,200,150,0.35)" : undefined,
                 }}
               >
                 <span aria-hidden className="absolute left-1/2 top-3 z-10 h-1.5 w-14 -translate-x-1/2 rounded-full bg-black/80" />

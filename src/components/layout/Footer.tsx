@@ -16,17 +16,32 @@ export default function Footer({ showCv }: { showCv?: boolean }) {
   const root = useRef<HTMLElement>(null);
   const year = new Date().getFullYear();
 
+  // Le pied de page reste monté d'une page à l'autre : un déclencheur au
+  // scroll (ScrollTrigger) garderait la position calculée sur la page
+  // précédente et pourrait ne jamais se déclencher sur une page plus courte.
+  // On lance donc l'apparition du grand logo à l'aide d'un
+  // IntersectionObserver, qui réagit à la visibilité réelle à l'écran.
   useGSAP(
     () => {
+      const mark = root.current?.querySelector<HTMLElement>(".ft-mark");
+      if (!mark) return;
       const mm = gsap.matchMedia();
       mm.add(MOTION_OK, () => {
-        gsap.from(".ft-letter", {
-          yPercent: 105,
-          duration: 1.2,
-          ease: "expo.out",
-          stagger: 0.05,
-          scrollTrigger: { trigger: ".ft-mark", start: "top 95%", once: true },
-        });
+        const letters = gsap.utils.toArray<HTMLElement>(".ft-letter", mark);
+        gsap.set(letters, { yPercent: 105 });
+        const observer = new IntersectionObserver(
+          (entries) => {
+            if (!entries.some((e) => e.isIntersecting)) return;
+            observer.disconnect();
+            gsap.to(letters, { yPercent: 0, duration: 1.2, ease: "expo.out", stagger: 0.05 });
+          },
+          { threshold: 0.15 }
+        );
+        observer.observe(mark);
+        return () => {
+          observer.disconnect();
+          gsap.set(letters, { clearProps: "transform" });
+        };
       });
     },
     { scope: root }
@@ -97,10 +112,12 @@ export default function Footer({ showCv }: { showCv?: boolean }) {
         </div>
       </div>
 
-      {/* Grand logo : marges internes pour que rien ne soit rogné par le
-          masque de l'animation (ni les lettres, ni le point). */}
-      <div className="ft-mark container-page select-none" aria-hidden>
-        <div className="overflow-hidden pb-[0.06em] pr-[0.1em] text-[24vw] lg:text-[21vw] 2xl:text-[280px]">
+      {/* Grand logo sur toute la largeur du contenu : la taille du texte est
+          calculée sur la largeur du conteneur (unités cqw ; « Erfero. »
+          mesure ~2,98 fois sa taille de police). Marges internes pour que
+          rien ne soit rogné par le masque de l'animation. */}
+      <div className="container-page select-none [container-type:inline-size]" aria-hidden>
+        <div className="ft-mark overflow-hidden pb-[0.08em] pt-[0.02em] text-[32.5cqw]">
           <Wordmark
             split
             letterClassName="ft-letter"

@@ -3,6 +3,7 @@
 import { useLocale } from "next-intl";
 import { AnimatePresence, motion } from "framer-motion";
 import { usePathname } from "@/i18n/navigation";
+import { ScrollTrigger } from "@/lib/gsap";
 
 /**
  * Fondu entre les pages. Volontairement en opacité seule : une transformation
@@ -22,6 +23,9 @@ export default function PageTransition({ children }: { children: React.ReactNode
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+        // Nouvelle page affichée : toutes les positions des animations au
+        // scroll sont recalculées (la hauteur de page a changé).
+        onAnimationComplete={() => ScrollTrigger.refresh()}
       >
         {children}
       </motion.div>

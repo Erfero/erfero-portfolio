@@ -2,37 +2,78 @@
 
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
-import { Rocket } from "lucide-react";
-import { Link } from "@/i18n/navigation";
+import { ArrowUpRight } from "lucide-react";
+import { Link, usePathname } from "@/i18n/navigation";
 
+/**
+ * Bouton "Lancer mon projet" flottant : apparaît après le Hero et s'efface
+ * au-dessus des zones marquées `data-hide-cta` (vitrine horizontale, contact,
+ * pied de page) et pendant qu'on fait défiler vers le bas, pour ne jamais
+ * gêner la lecture. Sur desktop c'est une pastille compacte qui s'ouvre au
+ * survol.
+ */
 export default function FloatingCTA() {
   const t = useTranslations("floatingCta");
-  const [visible, setVisible] = useState(false);
+  const pathname = usePathname();
+  const [pastHero, setPastHero] = useState(false);
+  const [scrollingDown, setScrollingDown] = useState(false);
+  const [blocked, setBlocked] = useState(false);
 
   useEffect(() => {
+    // Masqué pendant qu'on descend (lecture), visible dès qu'on remonte.
+    let last = window.scrollY;
     const onScroll = () => {
-      const nearContact =
-        window.scrollY + window.innerHeight >
-        document.body.scrollHeight - 400;
-      setVisible(window.scrollY > 500 && !nearContact);
+      const y = window.scrollY;
+      setPastHero(y > window.innerHeight * 0.9);
+      if (Math.abs(y - last) > 8) {
+        setScrollingDown(y > last);
+        last = y;
+      }
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+
+    const visible = new Set<Element>();
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) visible.add(e.target);
+          else visible.delete(e.target);
+        }
+        setBlocked(visible.size > 0);
+      },
+      { rootMargin: "0px 0px -10% 0px" }
+    );
+    // Laisse le temps à la nouvelle page de monter (transition de page).
+    const timer = window.setTimeout(() => {
+      document.querySelectorAll("[data-hide-cta]").forEach((el) => io.observe(el));
+    }, 700);
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.clearTimeout(timer);
+      io.disconnect();
+    };
+  }, [pathname]);
+
+  if (pathname === "/contact") return null;
+  const visible = pastHero && !blocked && !scrollingDown;
 
   return (
     <Link
-      href="/#contact"
-      className={`fixed bottom-5 right-5 z-40 flex items-center gap-2 rounded-full bg-lime px-5 py-3.5 text-sm font-semibold text-bg shadow-2xl shadow-lime/20 transition-all duration-300 sm:bottom-8 sm:right-8 relative print:hidden ${
-        visible
-          ? "translate-y-0 opacity-100"
-          : "pointer-events-none translate-y-20 opacity-0"
+      href="/contact"
+      aria-label={t("label")}
+      tabIndex={visible ? 0 : -1}
+      className={`group fixed bottom-5 right-5 z-40 flex items-center rounded-full bg-lime p-1.5 text-sm font-semibold text-bg shadow-[0_20px_50px_-15px_rgba(185,255,92,0.45)] transition-all duration-500 ease-[var(--ease-out-expo)] sm:bottom-8 sm:right-8 print:hidden ${
+        visible ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-24 opacity-0"
       }`}
     >
-      <span className="absolute inset-0 -z-10 animate-ping rounded-full bg-lime/40" />
-      <Rocket className="size-4" />
-      {t("label")}
+      <span className="max-w-40 overflow-hidden whitespace-nowrap pl-3.5 pr-2 transition-[max-width,padding] duration-500 ease-[var(--ease-out-expo)] lg:max-w-0 lg:px-0 lg:group-hover:max-w-40 lg:group-hover:pl-3.5 lg:group-hover:pr-2">
+        {t("label")}
+      </span>
+      <span className="grid size-10 place-items-center rounded-full bg-bg text-lime transition-transform duration-500 group-hover:rotate-45">
+        <ArrowUpRight className="size-4" />
+      </span>
     </Link>
   );
 }

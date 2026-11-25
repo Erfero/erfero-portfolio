@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { ArrowLeft } from "lucide-react";
-import { Link } from "@/i18n/navigation";
 import Contact from "@/components/sections/Contact";
+import PageHeader from "@/components/ui/PageHeader";
+import { plainText } from "@/components/ui/RichText";
 import { buildAlternates } from "@/lib/seo";
 
 export async function generateMetadata({
@@ -12,7 +12,11 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "contact" });
-  return { title: t("title"), description: t("subtitle"), alternates: buildAlternates(locale, "/contact") };
+  return {
+    title: plainText(t("title")),
+    description: t("subtitle"),
+    alternates: buildAlternates(locale, "/contact"),
+  };
 }
 
 export default async function ContactPage({
@@ -28,16 +32,8 @@ export default async function ContactPage({
   const { plan } = await searchParams;
 
   return (
-    <div className="pt-32 sm:pt-40">
-      <div className="container-page">
-        <Link
-          href="/"
-          className="inline-flex items-center gap-1.5 text-sm text-ink-muted hover:text-ink"
-        >
-          <ArrowLeft className="size-4" />
-          {t("home")}
-        </Link>
-      </div>
+    <div>
+      <PageHeader backLabel={t("home")} title={t("contact")} />
       <Contact selectedPlan={plan} />
     </div>
   );

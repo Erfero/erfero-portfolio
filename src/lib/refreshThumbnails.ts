@@ -31,8 +31,10 @@ export async function refreshThumbnails(): Promise<ThumbnailRefreshResult> {
   ]);
 
   const map = { ...(thumbnailMap ?? {}) };
+  // Les boutiques qui ont déjà une capture locale vérifiée (/public/shots)
+  // n'en ont pas besoin : inutile de consommer le quota microlink.io.
   const candidates = projects.filter(
-    (p) => p.status === "live" && !map[p.id]
+    (p) => p.status === "live" && !p.screenshot && !map[p.id]
   );
 
   const batch = candidates.slice(0, DAILY_BATCH_SIZE);

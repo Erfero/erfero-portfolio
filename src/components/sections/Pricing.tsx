@@ -16,30 +16,26 @@ export default function Pricing() {
   const plans = t.raw("plans") as Plan[];
 
   return (
-    <section className="relative py-16 sm:py-20">
+    <section className="relative py-24 sm:py-32">
       <div className="container-page">
-        <SectionHeading
-          eyebrow={t("eyebrow")}
-          title={t("title")}
-          subtitle={t("subtitle")}
-        />
+        <SectionHeading eyebrow={t("eyebrow")} title={t("title")} subtitle={t("subtitle")} />
 
-        <Reveal delay={0.1} className="mx-auto mt-8 max-w-2xl">
-          <p className="rounded-full border border-lime/30 bg-lime/6 px-5 py-2.5 text-center text-sm text-lime">
+        <Reveal delay={0.1} className="mt-8 max-w-2xl">
+          <p className="inline-flex rounded-full border border-lime/30 bg-lime/[0.06] px-5 py-2.5 text-sm text-lime">
             {t("guarantee")}
           </p>
         </Reveal>
 
-        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {plans.map((plan, i) => {
             const popular = i === 0;
             return (
               <Reveal key={plan.name} delay={i * 0.08}>
                 <div
-                  className={`relative flex h-full flex-col rounded-2xl border p-7 ${
+                  className={`relative flex h-full flex-col rounded-3xl border p-7 transition-transform duration-500 hover:-translate-y-1 ${
                     popular
-                      ? "border-lime/50 bg-lime/[0.04] shadow-[0_0_60px_-20px_var(--color-lime)]"
-                      : "border-border bg-white/[0.02]"
+                      ? "border-lime/50 bg-lime/[0.05] shadow-[0_0_80px_-30px_var(--color-lime)]"
+                      : "border-white/10 bg-white/[0.02]"
                   }`}
                 >
                   {popular && (
@@ -47,32 +43,21 @@ export default function Pricing() {
                       {t("popular")}
                     </span>
                   )}
-                  <h3 className="font-display text-xl font-semibold">
-                    {plan.name}
-                  </h3>
-                  <p className="mt-2 text-lg font-medium text-lime">
-                    {plan.price}
-                  </p>
-                  <p className="mt-3 text-sm leading-relaxed text-ink-muted">
-                    {plan.description}
-                  </p>
-
+                  <h3 className="font-display text-xl font-semibold">{plan.name}</h3>
+                  <p className="mt-2 text-lg font-medium text-lime">{plan.price}</p>
+                  <p className="mt-3 text-sm leading-relaxed text-ink-muted">{plan.description}</p>
                   <ul className="mt-5 flex flex-1 flex-col gap-2.5">
                     {plan.features.map((feature) => (
-                      <li
-                        key={feature}
-                        className="flex items-start gap-2 text-sm text-ink-muted"
-                      >
+                      <li key={feature} className="flex items-start gap-2 text-sm text-ink-muted">
                         <Check className="mt-0.5 size-4 shrink-0 text-lime" />
                         {feature}
                       </li>
                     ))}
                   </ul>
-
                   <Link
                     href={`/contact?plan=${encodeURIComponent(plan.name)}`}
                     className={`mt-6 inline-flex items-center justify-center gap-1.5 rounded-full px-5 py-3 text-sm font-medium transition-transform hover:scale-[1.02] ${
-                      popular ? "bg-lime text-bg" : "border border-border text-ink"
+                      popular ? "bg-lime text-bg" : "border border-white/15 text-ink"
                     }`}
                   >
                     {t("cta")}

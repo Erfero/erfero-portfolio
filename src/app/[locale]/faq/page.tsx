@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { ArrowLeft } from "lucide-react";
-import { Link } from "@/i18n/navigation";
 import FAQ from "@/components/sections/FAQ";
 import Contact from "@/components/sections/Contact";
+import PageHeader from "@/components/ui/PageHeader";
+import { plainText } from "@/components/ui/RichText";
 import { buildAlternates } from "@/lib/seo";
 
 export async function generateMetadata({
@@ -13,7 +13,11 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "faq" });
-  return { title: t("title"), description: t("subtitle"), alternates: buildAlternates(locale, "/faq") };
+  return {
+    title: plainText(t("title")),
+    description: t("subtitle"),
+    alternates: buildAlternates(locale, "/faq"),
+  };
 }
 
 export default async function FAQPage({
@@ -38,20 +42,9 @@ export default async function FAQPage({
   };
 
   return (
-    <div className="pt-32 sm:pt-40">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-      <div className="container-page">
-        <Link
-          href="/"
-          className="inline-flex items-center gap-1.5 text-sm text-ink-muted hover:text-ink"
-        >
-          <ArrowLeft className="size-4" />
-          {t("home")}
-        </Link>
-      </div>
+    <div>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <PageHeader backLabel={t("home")} title={t("faq")} />
       <FAQ />
       <Contact />
     </div>

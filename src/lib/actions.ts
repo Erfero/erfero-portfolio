@@ -135,7 +135,16 @@ export async function quickAddProjectsAction(
 
     let status: ProjectStatus;
     try {
-      status = await checkOne(url);
+      // "unknown" = challenge anti-bot Shopify ou lenteur ponctuelle : on
+      // retente une fois, puis on considère la boutique en ligne (comme le
+      // vérificateur automatique), plutôt que de l'enterrer en "indisponible"
+      // — statut qu'aucun passage automatique ne corrigerait ensuite.
+      let outcome = await checkOne(url);
+      if (outcome === "unknown") {
+        await new Promise((r) => setTimeout(r, 3000));
+        outcome = await checkOne(url);
+      }
+      status = outcome === "unknown" ? "live" : outcome;
     } catch {
       status = "unavailable";
     }

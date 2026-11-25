@@ -42,3 +42,7 @@ next-env.d.ts
 
 .vercel
 .env*
+
+# Vidéos brutes à importer (seules les versions optimisées de public/videos sont publiées)
+/videos-a-ajouter/*
+!/videos-a-ajouter/LISEZ-MOI.md

@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { ArrowLeft } from "lucide-react";
-import { Link } from "@/i18n/navigation";
 import Services from "@/components/sections/Services";
 import Pricing from "@/components/sections/Pricing";
+import PageHeader from "@/components/ui/PageHeader";
+import { plainText } from "@/components/ui/RichText";
 import { getSectionsSettings } from "@/lib/content";
 import { buildAlternates } from "@/lib/seo";
 
@@ -14,7 +14,11 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "services" });
-  return { title: t("title"), description: t("subtitle"), alternates: buildAlternates(locale, "/services") };
+  return {
+    title: plainText(t("title")),
+    description: t("subtitle"),
+    alternates: buildAlternates(locale, "/services"),
+  };
 }
 
 export default async function ServicesPage({
@@ -28,16 +32,8 @@ export default async function ServicesPage({
   const sections = await getSectionsSettings();
 
   return (
-    <div className="pt-32 sm:pt-40">
-      <div className="container-page">
-        <Link
-          href="/"
-          className="inline-flex items-center gap-1.5 text-sm text-ink-muted hover:text-ink"
-        >
-          <ArrowLeft className="size-4" />
-          {t("home")}
-        </Link>
-      </div>
+    <div>
+      <PageHeader backLabel={t("home")} title={t("services")} />
       <Services />
       {sections.pricingEnabled && <Pricing />}
     </div>

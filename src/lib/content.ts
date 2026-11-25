@@ -38,18 +38,43 @@ export async function getMessages(locale: string) {
  * ce qui permet de faire monter en qualité les captures des boutiques du
  * code sans avoir à "basculer" tout le catalogue vers l'override admin.
  */
+/** Liste de référence (override admin complet si présent, sinon le code),
+ * avec les statuts tels que vérifiés — sans les corrections automatiques. */
+export async function getBaseProjects(): Promise<Project[]> {
+  const override = await readJsonBlob<Project[]>("content/projects.json");
+  return override && override.length > 0 ? override : defaultProjects;
+}
+
 export async function getProjects(): Promise<Project[]> {
-  const [override, statusMap, thumbnailMap] = await Promise.all([
-    readJsonBlob<Project[]>("content/projects.json"),
+  const [base, statusMap, thumbnailMap] = await Promise.all([
+    getBaseProjects(),
     readJsonBlob<Record<string, ProjectStatus>>("content/project-status.json"),
     readJsonBlob<Record<string, string>>("content/thumbnail-overrides.json"),
   ]);
-  const base = override && override.length > 0 ? override : defaultProjects;
   return base.map((p) => ({
     ...p,
-    status: statusMap?.[p.id] ?? p.status,
+    status: resolveStatus(p.status, statusMap?.[p.id]),
     thumbnailOverride: thumbnailMap?.[p.id] ?? p.thumbnailOverride,
   }));
+}
+
+/**
+ * Le vérificateur automatique (HTTP simple, toutes les 20 min) peut seulement
+ * MASQUER une boutique (live -> indisponible / mot de passe), jamais en
+ * ré-afficher une : il ne voit pas la page bleue "Votre licence n'est pas
+ * activée" du thème Story (affichée en JavaScript), ni certains domaines
+ * parqués. Seule la vérification complète en navigateur réel, reportée dans
+ * le code (champ status), peut rendre une boutique visible.
+ */
+function resolveStatus(
+  codeStatus: ProjectStatus,
+  remoteStatus: ProjectStatus | undefined
+): ProjectStatus {
+  if (codeStatus !== "live") return codeStatus;
+  if (remoteStatus === "unavailable" || remoteStatus === "password-protected") {
+    return remoteStatus;
+  }
+  return codeStatus;
 }
 
 export async function getVisibleProjects(): Promise<Project[]> {
@@ -128,7 +153,9 @@ export async function getCvSettings(): Promise<CvSettings> {
  * par défaut — à désactiver au cas par cas si besoin. */
 export interface SectionsSettings {
   heroEnabled: boolean;
+  manifestoEnabled: boolean;
   featuredProjectsEnabled: boolean;
+  experienceEnabled: boolean;
   videoReelsEnabled: boolean;
   servicesEnabled: boolean;
   testimonialsEnabled: boolean;
@@ -145,7 +172,9 @@ export interface SectionsSettings {
 
 const defaultSectionsSettings: SectionsSettings = {
   heroEnabled: true,
+  manifestoEnabled: true,
   featuredProjectsEnabled: true,
+  experienceEnabled: true,
   videoReelsEnabled: true,
   servicesEnabled: true,
   testimonialsEnabled: true,

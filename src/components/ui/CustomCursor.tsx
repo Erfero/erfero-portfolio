@@ -1,59 +1,94 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import { useEffect, useRef } from "react";
+import { gsap } from "@/lib/gsap";
+import { useMediaQuery } from "@/lib/useMediaQuery";
 
+/**
+ * Curseur personnalisé (souris uniquement, désactivé au tactile et en
+ * "mouvement réduit") : un point qui suit la souris avec inertie, qui grossit
+ * sur les liens/boutons et affiche une étiquette sur les éléments marqués
+ * `data-cursor="Texte"` (ex. "Visiter" sur les cartes de boutiques).
+ *
+ * Positions via gsap.quickTo (une seule écriture par frame, transform
+ * uniquement) et détection de survol par délégation sur mouseover : aucun
+ * travail coûteux sur chaque mousemove.
+ */
 export default function CustomCursor() {
-  const [enabled, setEnabled] = useState(false);
-  const [hovering, setHovering] = useState(false);
-  const x = useMotionValue(-100);
-  const y = useMotionValue(-100);
-  const springX = useSpring(x, { stiffness: 500, damping: 40 });
-  const springY = useSpring(y, { stiffness: 500, damping: 40 });
+  const dot = useRef<HTMLDivElement>(null);
+  const labelRef = useRef<HTMLSpanElement>(null);
+  const enabled = useMediaQuery(
+    "(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)"
+  );
 
   useEffect(() => {
-    const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (!canHover || reduced) return;
-    setEnabled(true);
+    if (!enabled || !dot.current) return;
+    const el = dot.current;
+    gsap.set(el, { xPercent: -50, yPercent: -50, x: -100, y: -100 });
+    const xTo = gsap.quickTo(el, "x", { duration: 0.35, ease: "power3" });
+    const yTo = gsap.quickTo(el, "y", { duration: 0.35, ease: "power3" });
 
-    // Un seul point de mise à jour par frame (rAF) : appeler setHovering /
-    // closest() sur chaque event mousemove brut (jusqu'à 120/s) surchargeait
-    // le thread principal et rendait le curseur (et le reste de la page)
-    // visiblement saccadé.
-    let frame = 0;
-    let pendingEvent: MouseEvent | null = null;
-
-    const applyFrame = () => {
-      frame = 0;
-      if (!pendingEvent) return;
-      x.set(pendingEvent.clientX - 10);
-      y.set(pendingEvent.clientY - 10);
-      const target = pendingEvent.target as HTMLElement;
-      setHovering(!!target.closest("a, button, [data-cursor-hover]"));
+    let mode: "default" | "hover" | "label" = "default";
+    const setMode = (next: typeof mode, text = "") => {
+      if (next === mode && next !== "label") return;
+      mode = next;
+      if (labelRef.current) labelRef.current.textContent = text;
+      gsap.to(el, {
+        width: next === "label" ? 92 : next === "hover" ? 44 : 12,
+        height: next === "label" ? 92 : next === "hover" ? 44 : 12,
+        backgroundColor: next === "hover" ? "rgba(185,255,92,0.12)" : "rgb(185,255,92)",
+        borderColor: next === "hover" ? "rgba(185,255,92,0.7)" : "rgba(185,255,92,0)",
+        duration: 0.35,
+        ease: "power3.out",
+        overwrite: "auto",
+      });
+      gsap.to(labelRef.current, { autoAlpha: next === "label" ? 1 : 0, duration: 0.2 });
     };
 
-    const move = (e: MouseEvent) => {
-      pendingEvent = e;
-      if (!frame) frame = requestAnimationFrame(applyFrame);
+    const onMove = (e: MouseEvent) => {
+      xTo(e.clientX);
+      yTo(e.clientY);
     };
+    const onOver = (e: MouseEvent) => {
+      const target = e.target as HTMLElement | null;
+      const labelled = target?.closest<HTMLElement>("[data-cursor]");
+      if (labelled) {
+        setMode("label", labelled.dataset.cursor ?? "");
+        return;
+      }
+      if (target?.closest("a, button, [role='button'], input, textarea, select, label")) {
+        setMode("hover");
+        return;
+      }
+      setMode("default");
+    };
+    const onLeave = () => gsap.to(el, { autoAlpha: 0, duration: 0.2 });
+    const onEnter = () => gsap.to(el, { autoAlpha: 1, duration: 0.2 });
 
-    window.addEventListener("mousemove", move, { passive: true });
+    window.addEventListener("mousemove", onMove, { passive: true });
+    document.addEventListener("mouseover", onOver, { passive: true });
+    document.documentElement.addEventListener("mouseleave", onLeave);
+    document.documentElement.addEventListener("mouseenter", onEnter);
     return () => {
-      window.removeEventListener("mousemove", move);
-      if (frame) cancelAnimationFrame(frame);
+      window.removeEventListener("mousemove", onMove);
+      document.removeEventListener("mouseover", onOver);
+      document.documentElement.removeEventListener("mouseleave", onLeave);
+      document.documentElement.removeEventListener("mouseenter", onEnter);
     };
-  }, [x, y]);
+  }, [enabled]);
 
   if (!enabled) return null;
 
   return (
-    <motion.div
+    <div
+      ref={dot}
       aria-hidden
-      style={{ x: springX, y: springY }}
-      animate={{ scale: hovering ? 2.2 : 1 }}
-      transition={{ scale: { duration: 0.2 } }}
-      className="pointer-events-none fixed left-0 top-0 z-[70] size-5 rounded-full bg-lime mix-blend-difference print:hidden"
-    />
+      className="pointer-events-none fixed left-0 top-0 z-[90] grid size-3 place-items-center rounded-full border border-transparent bg-lime print:hidden"
+    >
+      <span
+        ref={labelRef}
+        className="invisible text-[11px] font-semibold uppercase tracking-wider text-bg opacity-0"
+      />
+    </div>
   );
 }

@@ -4,7 +4,7 @@
   },
   "meta": {
     "title": "Erféro Keoula — Freelance Shopify Developer | Custom Shopify Store Design",
-    "description": "Expert freelance Shopify developer (5+ years of experience): custom Shopify store builds, redesigns, conversion rate optimization (CRO) and SEO. 200+ stores delivered, ready to sell in days."
+    "description": "Freelance Shopify developer (5+ years, agency work and direct clients): custom Shopify store builds, redesigns, conversion rate optimization (CRO) and SEO. 200+ stores delivered."
   },
   "floatingCta": {
     "label": "Start my project"
@@ -22,7 +22,7 @@
     "switchLocale": "FR"
   },
   "hero": {
-    "badge": "Freelance Shopify Developer · Open for new projects",
+    "badge": "Freelance & agency work · Available now",
     "titleLine1": "Shopify stores",
     "titleHighlight": "built to be bought from.",
     "subtitle": "More visitors, more sales, better Google rankings — I build Shopify stores engineered for that exact outcome, not just to look nice.",
@@ -30,9 +30,18 @@
     "ctaSecondary": "See my work",
     "scrollHint": "Scroll",
     "stats": [
-      { "value": "200+", "label": "stores launched" },
-      { "value": "5 yrs", "label": "of web experience" },
-      { "value": "4.8/5", "label": "average client rating" }
+      {
+        "value": "200+",
+        "label": "stores launched"
+      },
+      {
+        "value": "5 yrs",
+        "label": "of web experience"
+      },
+      {
+        "value": "4.8/5",
+        "label": "average client rating"
+      }
     ],
     "mock": {
       "badge": "New collection",
@@ -49,7 +58,7 @@
   },
   "painPoints": {
     "eyebrow": "Sound familiar?",
-    "title": "Your store deserves better than a generic theme",
+    "title": "Your store deserves better than a *generic theme*",
     "subtitle": "Most online stores lose sales to problems that are invisible to the naked eye. Here are the most common ones.",
     "items": [
       {
@@ -84,7 +93,7 @@
   },
   "services": {
     "eyebrow": "My method",
-    "title": "Not a free theme. A proven sales structure.",
+    "title": "Not a free theme. *A proven sales structure.*",
     "subtitle": "My specialty is the premium Story theme — but I also build on default templates or from scratch, depending on your budget and needs. And more importantly, I replicate the exact mechanics used by DTC brands that actually sell: immediate social proof, urgency funnels, objection-killing FAQs. Here's concretely what that changes for you.",
     "items": [
       {
@@ -179,7 +188,7 @@
   },
   "catalog": {
     "eyebrow": "My domains",
-    "title": "Stores across dozens of different worlds",
+    "title": "Stores across *dozens of worlds*",
     "subtitle": "Beauty, wellness, fashion, tech, pets... here are the domains I've already built stores in that sell.",
     "storeSingular": "store",
     "storesPlural": "stores",
@@ -198,12 +207,13 @@
       "maison": "Home",
       "lifestyle": "Lifestyle",
       "automotive": "Automotive",
-      "kids": "Kids"
+      "kids": "Kids",
+      "food": "Food & grocery"
     }
   },
   "testimonials": {
     "eyebrow": "They say it better than I could",
-    "title": "What my clients and partners say",
+    "title": "What my clients and partners *say*",
     "subtitle": "WhatsApp and Instagram feedback, delivery confirmations, and reviews from agencies I work with.",
     "placeholderImage": "Screenshot to add",
     "placeholderVideo": "Video to add",
@@ -213,19 +223,39 @@
   },
   "metrics": {
     "eyebrow": "By the numbers",
-    "title": "Five years building stores that sell",
+    "title": "Five years building stores *that sell*",
     "items": [
-      { "value": "5", "suffix": "+", "label": "years of web experience" },
-      { "value": "200", "suffix": "+", "label": "Shopify stores launched" },
-      { "value": "200", "suffix": "+", "label": "behind-the-scenes videos" },
-      { "value": "3", "suffix": "d", "label": "average delivery time" },
-      { "value": "4.8", "suffix": "/5", "label": "average client rating" }
+      {
+        "value": "5",
+        "suffix": "+",
+        "label": "years of web experience"
+      },
+      {
+        "value": "200",
+        "suffix": "+",
+        "label": "Shopify stores launched"
+      },
+      {
+        "value": "200",
+        "suffix": "+",
+        "label": "behind-the-scenes videos"
+      },
+      {
+        "value": "3",
+        "suffix": "d",
+        "label": "average delivery time"
+      },
+      {
+        "value": "4.8",
+        "suffix": "/5",
+        "label": "average client rating"
+      }
     ]
   },
   "projects": {
     "eyebrow": "Work",
-    "title": "Stores built to sell",
-    "subtitle": "A selection from 200+ Shopify stores designed and built for beauty, wellness and lifestyle brands.",
+    "title": "Stores built to *sell*",
+    "subtitle": "A selection of live stores, each one checked by hand. Click any card to open the real store.",
     "viewLive": "Visit store",
     "viewLiveDisabled": "Private client access",
     "comingSoon": "Launching soon",
@@ -235,54 +265,110 @@
       "live": "Live",
       "password-protected": "Private",
       "coming-soon": "Coming soon"
-    }
+    },
+    "visit": "Visit",
+    "explore": "Explore all",
+    "liveStores": "live stores to visit",
+    "swipeHint": "Swipe to browse →"
   },
   "videoReels": {
     "eyebrow": "Behind the scenes",
-    "title": "My work, in vertical format",
+    "title": "My work, *on video*",
     "subtitle": "200+ videos showing Shopify stores being built from scratch — TikTok-style, but with the code behind it.",
-    "cta": "Watch all videos"
+    "cta": "Watch all videos",
+    "play": "Play"
   },
   "process": {
     "eyebrow": "How it works",
-    "title": "A clear process, from first message to launch",
+    "title": "A clear process, from first message *to launch*",
     "subtitle": "No surprises, no vague promises. Here's exactly how we'll work together.",
     "steps": [
-      { "title": "Discovery call", "description": "We talk about your project, your goals and your budget. Free, no commitment." },
-      { "title": "Proposal & quote", "description": "You get a clear proposal: scope, timeline, price. Nothing hidden." },
-      { "title": "Design & mockups", "description": "I design a custom interface, aligned with your brand identity." },
-      { "title": "Shopify development", "description": "Liquid integration, apps, payments, technical SEO — tested on mobile and desktop." },
-      { "title": "Testing & launch", "description": "Full checks before launch: speed, checkout flow, tracking." },
-      { "title": "Post-launch support", "description": "I stay available to tweak, fix and grow the store with you." }
+      {
+        "title": "Discovery call",
+        "description": "We talk about your project, your goals and your budget. Free, no commitment."
+      },
+      {
+        "title": "Proposal & quote",
+        "description": "You get a clear proposal: scope, timeline, price. Nothing hidden."
+      },
+      {
+        "title": "Design & mockups",
+        "description": "I design a custom interface, aligned with your brand identity."
+      },
+      {
+        "title": "Shopify development",
+        "description": "Liquid integration, apps, payments, technical SEO — tested on mobile and desktop."
+      },
+      {
+        "title": "Testing & launch",
+        "description": "Full checks before launch: speed, checkout flow, tracking."
+      },
+      {
+        "title": "Post-launch support",
+        "description": "I stay available to tweak, fix and grow the store with you."
+      }
     ]
   },
   "techStack": {
     "eyebrow": "Tech stack",
-    "title": "The tools I use every day"
+    "title": "The tools I use *every day*"
   },
   "trust": {
     "eyebrow": "Why work with me",
-    "title": "One simple guarantee: your store has to sell, not just look good",
+    "title": "One simple guarantee: your store has to *sell*, not just look good",
     "subtitle": "I still work with agencies alongside my direct clients — every project gets the same level of care.",
     "items": [
-      { "title": "Direct communication", "description": "You talk directly to the developer building your site, not a middleman project manager." },
-      { "title": "Deadlines set, deadlines kept", "description": "A clear timeline from the quote onward, with regular check-ins." },
-      { "title": "Clean code, delivered cleanly", "description": "You keep full ownership of your store and its code, with no hidden lock-in." },
-      { "title": "Full ownership, start to finish", "description": "Design, development, SEO and follow-up: one single point of contact from the first brief to launch, no middleman." }
+      {
+        "title": "Direct communication",
+        "description": "You talk directly to the developer building your site, not a middleman project manager."
+      },
+      {
+        "title": "Deadlines set, deadlines kept",
+        "description": "A clear timeline from the quote onward, with regular check-ins."
+      },
+      {
+        "title": "Clean code, delivered cleanly",
+        "description": "You keep full ownership of your store and its code, with no hidden lock-in."
+      },
+      {
+        "title": "Full ownership, start to finish",
+        "description": "Design, development, SEO and follow-up: one single point of contact from the first brief to launch, no middleman."
+      }
     ]
   },
   "faq": {
     "eyebrow": "FAQ",
-    "title": "Everything you're wondering before reaching out",
+    "title": "Everything you're wondering *before reaching out*",
     "subtitle": "Pricing, timelines, store ownership, working across borders: answers to the questions I get asked most before starting a Shopify project.",
     "items": [
-      { "q": "How much does a Shopify store cost?", "a": "It depends on the project's complexity (number of pages, features, custom design or not). After our discovery call, you'll get a clear, detailed quote — no surprises." },
-      { "q": "How long does a project take?", "a": "On average 3 days for a complete store, depending on complexity and how fast feedback comes back. You get a precise timeline upfront." },
-      { "q": "I don't have products or a logo yet, is that a problem?", "a": "Not at all. We can move in parallel: I build the structure while you finalize your branding, or I can help with that too." },
-      { "q": "Do you work with international clients?", "a": "Yes, I work remotely with clients worldwide, businesses and solo founders alike, in both French and English." },
-      { "q": "Do I fully own my store?", "a": "Completely. Your Shopify store is entirely yours, along with any custom code built for you." },
-      { "q": "What happens after launch?", "a": "I stay available for maintenance, improvements or urgent fixes, with or without an ongoing support plan depending on your needs." },
-      { "q": "Can you improve an existing store?", "a": "Yes, auditing and redesigning existing stores is one of my most requested services." }
+      {
+        "q": "How much does a Shopify store cost?",
+        "a": "It depends on the project's complexity (number of pages, features, custom design or not). After our discovery call, you'll get a clear, detailed quote — no surprises."
+      },
+      {
+        "q": "How long does a project take?",
+        "a": "On average 3 days for a complete store, depending on complexity and how fast feedback comes back. You get a precise timeline upfront."
+      },
+      {
+        "q": "I don't have products or a logo yet, is that a problem?",
+        "a": "Not at all. We can move in parallel: I build the structure while you finalize your branding, or I can help with that too."
+      },
+      {
+        "q": "Do you work with international clients?",
+        "a": "Yes, I work remotely with clients worldwide, businesses and solo founders alike, in both French and English."
+      },
+      {
+        "q": "Do I fully own my store?",
+        "a": "Completely. Your Shopify store is entirely yours, along with any custom code built for you."
+      },
+      {
+        "q": "What happens after launch?",
+        "a": "I stay available for maintenance, improvements or urgent fixes, with or without an ongoing support plan depending on your needs."
+      },
+      {
+        "q": "Can you improve an existing store?",
+        "a": "Yes, auditing and redesigning existing stores is one of my most requested services."
+      }
     ]
   },
   "contact": {
@@ -301,19 +387,30 @@
     "or": "or",
     "whatsappCta": "Chat on WhatsApp",
     "calendlyCta": "Book a free call",
-    "emailCta": "Send an email"
+    "emailCta": "Send an email",
+    "availability": "Available for new projects and agency work",
+    "bigTitle": "Let's talk about *your project*.",
+    "calendlyMeta": "Free 30-min discovery call"
   },
   "footer": {
-    "tagline": "Freelance Shopify developer, available worldwide.",
+    "tagline": "Freelance Shopify developer. Stores that build trust and sell, anywhere in the world.",
     "rights": "All rights reserved.",
-    "madeWith": "Designed and built with Next.js, Tailwind, GSAP & Framer Motion."
+    "madeWith": "Designed and built with Next.js, GSAP & Tailwind.",
+    "pages": "Pages",
+    "elsewhere": "Elsewhere",
+    "backToTop": "Back to top"
   },
   "realisationsPage": {
-    "title": "All my work",
-    "subtitle": "Shopify stores delivered and short-form videos of my builds.",
+    "title": "All my *work*",
+    "subtitle": "Every store below is live and has been checked. Hover a card to scroll through the page, click to visit the real store.",
     "backHome": "Back to home",
     "filterAll": "All",
-    "videoSectionTitle": "The video wall"
+    "videoSectionTitle": "The video *wall*",
+    "eyebrow": "Work",
+    "liveCount": "live stores",
+    "filterLabel": "Filter by category",
+    "videoEyebrow": "Behind the scenes",
+    "videoSubtitle": "Stores filmed in real conditions, on a phone. Click to play a video."
   },
   "cvPage": {
     "print": "Print / Save as PDF",
@@ -321,37 +418,98 @@
     "mobilityLabel": "Availability",
     "mobility": "Remote or on-site",
     "contacts": [
-      { "label": "Email", "value": "erferokam@gmail.com", "href": "mailto:erferokam@gmail.com" },
-      { "label": "Direct call", "value": "+229 0169272595", "href": "tel:+2290169272595" },
-      { "label": "WhatsApp", "value": "+229 69272595", "href": "https://wa.me/22969272595" },
-      { "label": "Portfolio", "value": "erfero-portfolio.vercel.app", "href": "https://erfero-portfolio.vercel.app" },
-      { "label": "LinkedIn", "value": "in/erfero-keoula", "href": "https://www.linkedin.com/in/erfero-keoula-905b72205" }
+      {
+        "label": "Email",
+        "value": "erferokam@gmail.com",
+        "href": "mailto:erferokam@gmail.com"
+      },
+      {
+        "label": "Direct call",
+        "value": "+229 0169272595",
+        "href": "tel:+2290169272595"
+      },
+      {
+        "label": "WhatsApp",
+        "value": "+229 69272595",
+        "href": "https://wa.me/22969272595"
+      },
+      {
+        "label": "Portfolio",
+        "value": "erfero-portfolio.vercel.app",
+        "href": "https://erfero-portfolio.vercel.app"
+      },
+      {
+        "label": "LinkedIn",
+        "value": "in/erfero-keoula",
+        "href": "https://www.linkedin.com/in/erfero-keoula-905b72205"
+      }
     ],
     "profileEyebrow": "Profile",
     "profile": "**Fullstack web developer specialized in Shopify**. I build fast, well-optimized stores and applications designed to **convert**. Autonomous, rigorous and results-driven, I turn a business need into a high-performing web product.",
     "stats": [
-      { "value": "200+", "label": "stores delivered" },
-      { "value": "5 yrs", "label": "of web experience" },
-      { "value": "4.8/5", "label": "client rating" }
+      {
+        "value": "200+",
+        "label": "stores delivered"
+      },
+      {
+        "value": "5 yrs",
+        "label": "of web experience"
+      },
+      {
+        "value": "4.8/5",
+        "label": "client rating"
+      }
     ],
     "skillsEyebrow": "Skills",
     "skillGroups": [
-      { "title": "Frontend", "items": [
-        { "name": "Shopify", "highlight": true },
-        { "name": "React.js" },
-        { "name": "Vue.js" },
-        { "name": "Angular" },
-        { "name": "WordPress" },
-        { "name": "Flutter" }
-      ] },
-      { "title": "Backend & SEO", "items": [
-        { "name": "Node.js" },
-        { "name": "Laravel" },
-        { "name": "PHP" },
-        { "name": "MongoDB" },
-        { "name": "Firebase" },
-        { "name": "SEO", "highlight": true }
-      ] }
+      {
+        "title": "Frontend",
+        "items": [
+          {
+            "name": "Shopify",
+            "highlight": true
+          },
+          {
+            "name": "React.js"
+          },
+          {
+            "name": "Vue.js"
+          },
+          {
+            "name": "Angular"
+          },
+          {
+            "name": "WordPress"
+          },
+          {
+            "name": "Flutter"
+          }
+        ]
+      },
+      {
+        "title": "Backend & SEO",
+        "items": [
+          {
+            "name": "Node.js"
+          },
+          {
+            "name": "Laravel"
+          },
+          {
+            "name": "PHP"
+          },
+          {
+            "name": "MongoDB"
+          },
+          {
+            "name": "Firebase"
+          },
+          {
+            "name": "SEO",
+            "highlight": true
+          }
+        ]
+      }
     ],
     "experienceEyebrow": "Experience",
     "experience": [
@@ -394,21 +552,63 @@
     ],
     "educationEyebrow": "Education",
     "education": [
-      { "title": "Fullstack Web Developer", "school": "High-Five University · France", "period": "Since Mar 2022 — 2 years teaching + 2 years in industry" },
-      { "title": "Associate Degree · Natural Sciences", "school": "FAST Benin", "period": "2019 – 2021 — Biology, chemistry, geology" }
+      {
+        "title": "Fullstack Web Developer",
+        "school": "High-Five University · France",
+        "period": "Since Mar 2022 — 2 years teaching + 2 years in industry"
+      },
+      {
+        "title": "Associate Degree · Natural Sciences",
+        "school": "FAST Benin",
+        "period": "2019 – 2021 — Biology, chemistry, geology"
+      }
     ],
     "languagesEyebrow": "Languages",
     "languages": [
-      { "name": "French", "level": "Native" },
-      { "name": "English", "level": "Professional" }
+      {
+        "name": "French",
+        "level": "Native"
+      },
+      {
+        "name": "English",
+        "level": "Professional"
+      }
     ],
     "interestsEyebrow": "Interests",
-    "interests": ["Technology", "AI & Programming", "Football", "Basketball", "Fitness"],
+    "interests": [
+      "Technology",
+      "AI & Programming",
+      "Football",
+      "Basketball",
+      "Fitness"
+    ],
     "strengthsEyebrow": "Strengths",
-    "strengths": ["Communication", "Project management", "Attention to detail"],
+    "strengths": [
+      "Communication",
+      "Project management",
+      "Attention to detail"
+    ],
     "referenceEyebrow": "Reference",
     "referenceName": "Tiburce Kouagou",
     "referenceRole": "Trainer — High-Five University / Viip Interstis",
     "referenceContact": "tiburcekouagou@gmail.com"
+  },
+  "manifesto": {
+    "eyebrow": "About",
+    "text": "I'm Erféro. Since 2021, I've been building Shopify stores for e-commerce brands and agencies — *200+ so far*. My obsession: fast, trustworthy stores designed to sell, delivered in *3 days on average*.",
+    "agenciesLabel": "Agencies and companies I've worked with",
+    "agencies": [
+      "Elite Agency",
+      "Viip Interstis",
+      "Omega Agency",
+      "Savage Note"
+    ],
+    "cta": "View my CV"
+  },
+  "experience": {
+    "eyebrow": "Experience",
+    "title": "Agency-trained, *independent* as a freelancer",
+    "subtitle": "Nearly four years of Shopify production in agencies, plus full-stack development and SEO: I fit into an agency team just as well as working directly with a brand.",
+    "ctaCv": "View full CV"
   }
 }

@@ -17,6 +17,16 @@ export default function VideoLightbox({
   const audioRef = useRef<HTMLAudioElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
 
+  // Fermeture au clavier (Échap) tant que la lightbox est ouverte.
+  useEffect(() => {
+    if (!video) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [video, onClose]);
+
   // Le navigateur évalue l'autorisation d'autoplay dès l'attachement de
   // l'élément, avant que React n'applique la prop `muted` comme propriété
   // DOM — avec `autoPlay` seul en JSX, la vidéo reste bloquée sur un cadre
@@ -28,13 +38,16 @@ export default function VideoLightbox({
       el.currentTime = 0;
       el.play().catch(() => {});
     }
+    // On garde la référence de l'élément audio qui joue réellement : c'est
+    // lui qu'il faut couper à la fermeture, même si la ref a changé entre-temps.
+    const audio = audioRef.current;
     if (video?.musicSrc) {
-      audioRef.current?.play().catch(() => {});
+      audio?.play().catch(() => {});
     }
     return () => {
-      if (audioRef.current) {
-        audioRef.current.pause();
-        audioRef.current.currentTime = 0;
+      if (audio) {
+        audio.pause();
+        audio.currentTime = 0;
       }
     };
   }, [video]);

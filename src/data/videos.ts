@@ -2,7 +2,7 @@ import type { LocalizedText } from "./projects";
 
 export interface VideoEntry {
   id: string;
-  /** Fichier dans /public/videos/, ou URL Vercel Blob une fois uploadé via l'admin. */
+  /** Fichier dans /public/videos/, ou URL Supabase une fois uploadé via l'admin. */
   src: string;
   poster?: string;
   caption: LocalizedText;
@@ -13,9 +13,15 @@ export interface VideoEntry {
   musicSrc?: string;
 }
 
-// Accroches vendeuses réutilisées en boucle sur les 27 vidéos (voir index
-// ci-dessous) — pas de nom de boutique ici car ces clips ne sont pas
-// rattachés à un projet précis (cf. resolveRelatedVideo).
+/** Nombre de vidéos `reel-XX.mp4` présentes dans /public/videos (et de leurs
+ * affiches dans /public/videos/posters). Chaque fichier a été vérifié unique :
+ * ni copie exacte, ni même vidéo ré-exportée (empreintes visuelles comparées
+ * sur 12 images par vidéo, le 25/11/2026). Pour en ajouter, voir
+ * videos-a-ajouter/LISEZ-MOI.md. */
+const REEL_COUNT = 48;
+
+// Accroches génériques (ces clips ne sont pas rattachés à une boutique précise
+// du portfolio), réparties en boucle sur les vidéos.
 const pitchLines: LocalizedText[] = [
   { fr: "De l'idée à la boutique en ligne", en: "From idea to online store" },
   { fr: "Chaque détail compte", en: "Every detail matters" },
@@ -27,33 +33,38 @@ const pitchLines: LocalizedText[] = [
   { fr: "Prête à vendre en quelques jours", en: "Ready to sell in days" },
   { fr: "Le détail qui fait la différence", en: "The detail that makes the difference" },
   { fr: "Une expérience d'achat fluide", en: "A seamless shopping experience" },
+  { fr: "Pensée d'abord pour le mobile", en: "Designed mobile-first" },
+  { fr: "La preuve sociale au bon endroit", en: "Social proof in the right place" },
+  { fr: "Une marque, pas juste un thème", en: "A brand, not just a theme" },
+  { fr: "Visite guidée d'une boutique livrée", en: "Walkthrough of a delivered store" },
+  { fr: "Des offres qui donnent envie", en: "Offers that make people buy" },
+  { fr: "Du premier écran au panier", en: "From first screen to checkout" },
 ];
 
 const accents = [
   "#E8B4B8", "#A8C8D8", "#D8A8C8", "#D8C8A8", "#B8D8C8", "#C8C8E8",
-  "#E8D8B8", "#E0D8E8", "#E8DCC0", "#D0D8E0", "#E8B4B8", "#A8C8D8",
-  "#D8A8C8", "#D8C8A8", "#B8D8C8", "#C8C8E8", "#E8D8B8", "#E0D8E8",
-  "#E8DCC0", "#D0D8E0", "#E8C8D0", "#D0D8C8", "#C8D0D8", "#D8D0C8",
-  "#D0C8D8", "#C8D8D0", "#D8C8C8",
+  "#E8D8B8", "#E0D8E8", "#E8DCC0", "#D0D8E0", "#E8C8D0", "#D0D8C8",
+  "#C8D0D8", "#D8D0C8", "#D0C8D8", "#C8D8D0",
 ];
 
-// 9 pistes qui tournent sur les 27 vidéos (3 vidéos par piste). Dépose les
-// fichiers correspondants dans /public/audio/ — dès qu'un fichier existe à
-// ce chemin, sa vidéo se met à jouer cette musique automatiquement, sans
-// autre changement de code. Tant qu'un fichier est absent, la vidéo reste
-// simplement muette (aucune erreur).
+// 9 pistes qui tournent sur les vidéos. Tant qu'un fichier est absent de
+// /public/audio/, la vidéo concernée reste simplement muette (aucune erreur).
 const musicTracks = Array.from(
   { length: 9 },
   (_, i) => `/audio/track-${String(i + 1).padStart(2, "0")}.mp3`
 );
 
-// Tes vraies vidéos de réalisations (uploadées dans /public/videos). Ajoute une
-// entrée ici pour chaque nouvelle vidéo, ou utilise l'admin (/admin/videos).
-export const videos: VideoEntry[] = accents.map((accent, i) => ({
-  id: `reel-${String(i + 1).padStart(2, "0")}`,
-  src: `/videos/reel-${String(i + 1).padStart(2, "0")}.mp4`,
-  poster: `/videos/posters/reel-${String(i + 1).padStart(2, "0")}.jpg`,
-  caption: pitchLines[i % pitchLines.length],
-  accent,
-  musicSrc: musicTracks[i % musicTracks.length],
-}));
+const pad = (n: number) => String(n).padStart(2, "0");
+
+// Les plus récentes d'abord : elles montrent les boutiques les plus actuelles.
+export const videos: VideoEntry[] = Array.from({ length: REEL_COUNT }, (_, i) => {
+  const n = REEL_COUNT - i;
+  return {
+    id: `reel-${pad(n)}`,
+    src: `/videos/reel-${pad(n)}.mp4`,
+    poster: `/videos/posters/reel-${pad(n)}.jpg`,
+    caption: pitchLines[(n - 1) % pitchLines.length],
+    accent: accents[(n - 1) % accents.length],
+    musicSrc: musicTracks[(n - 1) % musicTracks.length],
+  };
+});

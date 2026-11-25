@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { redirect } from "next/navigation";
 import { LogOut, ExternalLink } from "lucide-react";
 import { auth, signOut } from "@/auth";
@@ -15,9 +16,9 @@ export default async function AdminLayout({
     <div className="min-h-screen bg-bg text-ink">
       <div className="flex min-h-screen">
         <aside className="hidden w-64 shrink-0 flex-col border-r border-border p-6 sm:flex">
-          <a href="/admin" className="font-display text-lg font-semibold">
+          <Link href="/admin" className="font-display text-lg font-semibold">
             Admin<span className="text-lime">.</span>
-          </a>
+          </Link>
 
           <AdminNav />
 
@@ -46,12 +47,12 @@ export default async function AdminLayout({
         </aside>
 
         <main className="flex-1 p-6 sm:p-10">
-          <a
+          <Link
             href="/"
             className="mb-6 inline-block text-xs text-ink-muted hover:text-ink sm:hidden"
           >
             ← Voir le site
-          </a>
+          </Link>
           {children}
         </main>
       </div>

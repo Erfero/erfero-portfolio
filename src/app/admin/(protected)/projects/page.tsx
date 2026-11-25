@@ -1,9 +1,12 @@
-import { getProjects } from "@/lib/content";
+import { getBaseProjects } from "@/lib/content";
 import { listMedia } from "@/lib/blob";
 import ProjectsManager from "@/components/admin/ProjectsManager";
 
 export default async function ProjectsPage() {
-  const [projects, media] = await Promise.all([getProjects(), listMedia()]);
+  // Liste de référence SANS les corrections automatiques du vérificateur de
+  // liens : sinon, enregistrer n'importe quelle modification figerait une
+  // panne temporaire ("indisponible") comme statut définitif.
+  const [projects, media] = await Promise.all([getBaseProjects(), listMedia()]);
 
   return (
     <div>

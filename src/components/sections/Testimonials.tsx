@@ -1,26 +1,50 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { useTranslations } from "next-intl";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import Reveal from "@/components/ui/Reveal";
 import SectionHeading from "@/components/ui/SectionHeading";
 import TestimonialCard from "@/components/ui/TestimonialCard";
 import type { Testimonial } from "@/data/testimonials";
 
-const PER_PAGE = 9;
-
-export default function Testimonials({
-  testimonials,
+function Column({
+  items,
+  reverse,
+  duration,
+  className,
 }: {
-  testimonials: Testimonial[];
+  items: Testimonial[];
+  reverse?: boolean;
+  duration: number;
+  className?: string;
 }) {
+  if (items.length === 0) return null;
+  return (
+    <div className={`marquee-pause relative h-[640px] overflow-hidden mask-fade-y sm:h-[760px] ${className ?? ""}`}>
+      <div
+        className="marquee-track flex flex-col gap-4"
+        style={
+          {
+            "--marquee-name": reverse ? "scroll-col-down" : "scroll-col-up",
+            "--marquee-duration": `${duration}s`,
+          } as React.CSSProperties
+        }
+      >
+        {[...items, ...items].map((item, i) => (
+          <div key={`${item.id}-${i}`} aria-hidden={i >= items.length || undefined}>
+            <TestimonialCard testimonial={item} />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/** Avis clients/agences en colonnes défilantes (pause au survol). */
+export default function Testimonials({ testimonials, index }: { testimonials: Testimonial[]; index?: string }) {
   const t = useTranslations("testimonials");
-  const [page, setPage] = useState(0);
 
   // Les emplacements "screenshot"/"video" restent masqués tant qu'aucun média
-  // réel n'a été ajouté depuis /admin/testimonials (évite d'afficher une
-  // preuve vide ou fabriquée).
+  // réel n'a été ajouté depuis /admin/testimonials.
   const visible = useMemo(
     () =>
       testimonials.filter(
@@ -28,70 +52,24 @@ export default function Testimonials({
       ),
     [testimonials]
   );
+  const cols = [0, 1, 2].map((c) => visible.filter((_, i) => i % 3 === c));
 
-  const pageCount = Math.max(Math.ceil(visible.length / PER_PAGE), 1);
-  const current = Math.min(page, pageCount - 1);
-  const pageItems = visible.slice(current * PER_PAGE, current * PER_PAGE + PER_PAGE);
-
-  const goTo = (next: number) => {
-    setPage(Math.min(Math.max(next, 0), pageCount - 1));
-  };
+  if (visible.length === 0) return null;
 
   return (
-    <section className="relative py-16 sm:py-20">
+    <section className="relative py-24 sm:py-32">
       <div className="container-page">
-        <SectionHeading
-          eyebrow={t("eyebrow")}
-          title={t("title")}
-          subtitle={t("subtitle")}
-        />
-
-        <div className="mt-12 columns-1 gap-4 sm:columns-2 lg:columns-3">
-          {pageItems.map((testimonial, i) => (
-            <Reveal
-              key={testimonial.id}
-              delay={i * 0.05}
-              className="mb-4 break-inside-avoid"
-            >
-              <TestimonialCard testimonial={testimonial} />
-            </Reveal>
-          ))}
+        <SectionHeading eyebrow={t("eyebrow")} title={t("title")} subtitle={t("subtitle")} index={index} />
+        {/* Mobile / tablette : une seule colonne avec tous les avis */}
+        <div className="mx-auto mt-14 max-w-xl lg:hidden">
+          <Column items={visible} duration={Math.max(visible.length * 6, 60)} />
         </div>
-
-        {pageCount > 1 && (
-          <div className="mt-10 flex items-center justify-center gap-4">
-            <button
-              onClick={() => goTo(current - 1)}
-              disabled={current === 0}
-              aria-label={t("prevPage")}
-              className="grid size-10 place-items-center rounded-full border border-border text-ink-muted transition-colors hover:border-lime/40 hover:text-lime disabled:opacity-30 disabled:hover:border-border disabled:hover:text-ink-muted"
-            >
-              <ChevronLeft className="size-4" />
-            </button>
-
-            <div className="flex items-center gap-2">
-              {Array.from({ length: pageCount }).map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => goTo(i)}
-                  aria-label={`${t("page")} ${i + 1}`}
-                  className={`size-2 rounded-full transition-all ${
-                    i === current ? "w-6 bg-lime" : "bg-border hover:bg-ink-muted"
-                  }`}
-                />
-              ))}
-            </div>
-
-            <button
-              onClick={() => goTo(current + 1)}
-              disabled={current === pageCount - 1}
-              aria-label={t("nextPage")}
-              className="grid size-10 place-items-center rounded-full border border-border text-ink-muted transition-colors hover:border-lime/40 hover:text-lime disabled:opacity-30 disabled:hover:border-border disabled:hover:text-ink-muted"
-            >
-              <ChevronRight className="size-4" />
-            </button>
-          </div>
-        )}
+        {/* Desktop : trois colonnes en sens alternés */}
+        <div className="mt-14 hidden grid-cols-3 gap-4 lg:grid">
+          <Column items={cols[0]} duration={Math.max(cols[0].length * 7, 40)} />
+          <Column items={cols[1]} reverse duration={Math.max(cols[1].length * 8, 44)} />
+          <Column items={cols[2]} duration={Math.max(cols[2].length * 7.5, 42)} />
+        </div>
       </div>
     </section>
   );

@@ -18,9 +18,19 @@ const toggles: {
     warning: "La page démarrera directement sur la section suivante si désactivée.",
   },
   {
+    key: "manifestoEnabled",
+    label: "À propos (manifeste)",
+    description: "La phrase de présentation qui s'allume au scroll + les agences partenaires.",
+  },
+  {
     key: "featuredProjectsEnabled",
     label: "Réalisations en vedette",
-    description: "La grille de boutiques mises en avant sur l'accueil.",
+    description: "Le défilement horizontal des boutiques mises en avant sur l'accueil.",
+  },
+  {
+    key: "experienceEnabled",
+    label: "Parcours",
+    description: "La frise des expériences en agence (reprise du contenu du CV).",
   },
   {
     key: "videoReelsEnabled",

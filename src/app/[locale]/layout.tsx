@@ -10,6 +10,8 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import CustomCursor from "@/components/ui/CustomCursor";
 import FloatingCTA from "@/components/ui/FloatingCTA";
+import Preloader from "@/components/ui/Preloader";
+import { siteConfig } from "@/data/site.config";
 import { getCvSettings } from "@/lib/content";
 import { buildAlternates, SITE_URL } from "@/lib/seo";
 
@@ -88,8 +90,9 @@ export default async function LocaleLayout({
       jobTitle:
         locale === "fr" ? "Développeur Shopify freelance" : "Freelance Shopify Developer",
       sameAs: [
-        "https://www.linkedin.com/in/erfero-keoula-905b72205",
-        "https://www.instagram.com/erfero04",
+        siteConfig.socials.linkedin,
+        siteConfig.socials.instagram,
+        siteConfig.socials.github,
       ],
     },
   };
@@ -102,12 +105,13 @@ export default async function LocaleLayout({
       />
       <LocaleHtmlSync locale={locale} />
       <MotionPreferences>
+        <Preloader role={locale === "en" ? "Freelance Shopify developer — stores built to sell" : "Développeur Shopify freelance — des boutiques pensées pour vendre"} />
         <CustomCursor />
         <Navbar showCv={cvSettings.enabled} />
         <main>
           <PageTransition>{children}</PageTransition>
         </main>
-        <Footer />
+        <Footer showCv={cvSettings.enabled} />
         <FloatingCTA />
       </MotionPreferences>
     </NextIntlClientProvider>

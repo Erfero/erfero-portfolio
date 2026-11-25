@@ -15,8 +15,8 @@ export const siteConfig = {
   socials: {
     instagram: "https://www.instagram.com/erfero04",
     linkedin: "https://www.linkedin.com/in/erfero-keoula-905b72205",
-    // TODO(erfero): ajoute tes vraies URLs quand elles existent.
-    github: "https://github.com/Erfero",
+    github: "https://github.com/erfero",
+    // Profils freelance à renseigner quand ils existent (masqués tant qu'ils sont vides).
     upwork: "",
     fiverr: "",
     malt: "",

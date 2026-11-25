@@ -1,105 +1,145 @@
+"use client";
+
+import { useRef, useState } from "react";
 import { useTranslations } from "next-intl";
-import {
-  Sparkles,
-  Wand2,
-  HeartPulse,
-  Droplet,
-  Wind,
-  Moon,
-  Stethoscope,
-  PawPrint,
-  Plane,
-  Shirt,
-  Cpu,
-  Car,
-  LayoutGrid,
-  type LucideIcon,
-} from "lucide-react";
-import Reveal from "@/components/ui/Reveal";
-import TiltCard from "@/components/ui/TiltCard";
+import { ArrowUpRight } from "lucide-react";
+import { Link } from "@/i18n/navigation";
+import { gsap, useGSAP, MOTION_OK } from "@/lib/gsap";
+import { projectThumb } from "@/lib/projectMedia";
 import SectionHeading from "@/components/ui/SectionHeading";
-import type { Project } from "@/data/projects";
+import type { ProjectCard as Project } from "@/lib/projectMedia";
 
-const nicheIcons: Record<string, LucideIcon> = {
-  beauty: Sparkles,
-  "beauty-tech": Wand2,
-  wellness: HeartPulse,
-  "hair-care": Droplet,
-  "hair-tools": Wind,
-  "sleep-health": Moon,
-  health: Stethoscope,
-  pets: PawPrint,
-  travel: Plane,
-  fashion: Shirt,
-  tech: Cpu,
-  automotive: Car,
-};
-
+/**
+ * Univers dans lesquels des boutiques ont été livrées. Desktop : au survol
+ * d'une ligne, un aperçu d'une vraie boutique de cet univers suit le curseur.
+ * Chaque ligne ouvre la galerie filtrée sur cet univers.
+ */
 export default function ExpertiseCatalog({
   projects,
   nicheImages = {},
+  index,
 }: {
   projects: Project[];
   nicheImages?: Record<string, string>;
+  index?: string;
 }) {
   const t = useTranslations("catalog");
+  const root = useRef<HTMLElement>(null);
+  const preview = useRef<HTMLDivElement>(null);
+  const [active, setActive] = useState<string | null>(null);
 
-  const counts = new Map<string, number>();
+  const groups = new Map<string, Project[]>();
   for (const p of projects) {
-    if (p.niche === "unknown") continue;
-    counts.set(p.niche, (counts.get(p.niche) ?? 0) + 1);
+    if (!p.niche || p.niche === "unknown" || !t.has(`niches.${p.niche}`)) continue;
+    groups.set(p.niche, [...(groups.get(p.niche) ?? []), p]);
   }
-  const niches = Array.from(counts.entries()).sort((a, b) => b[1] - a[1]);
+  const niches = Array.from(groups.entries()).sort((a, b) => b[1].length - a[1].length);
+  const imageFor = (niche: string) => nicheImages[niche] || projectThumb(groups.get(niche)![0]);
+
+  useGSAP(
+    () => {
+      const section = root.current!;
+      const el = preview.current!;
+      const list = section.querySelector<HTMLElement>(".ec-list")!;
+      const rows = gsap.utils.toArray<HTMLElement>("[data-niche]", section);
+
+      const mm = gsap.matchMedia();
+      mm.add(MOTION_OK, () => {
+        gsap.from(".ec-row", {
+          y: 30,
+          autoAlpha: 0,
+          stagger: 0.05,
+          duration: 0.9,
+          ease: "expo.out",
+          scrollTrigger: { trigger: list, start: "top 85%", once: true },
+        });
+      });
+
+      // Aperçu flottant : écouteurs natifs (aucun accès aux refs pendant le rendu).
+      const xTo = gsap.quickTo(el, "x", { duration: 0.6, ease: "power3" });
+      const yTo = gsap.quickTo(el, "y", { duration: 0.6, ease: "power3" });
+      const onMove = (e: MouseEvent) => {
+        const box = section.getBoundingClientRect();
+        xTo(e.clientX - box.left);
+        yTo(e.clientY - box.top);
+      };
+      const show = (niche: string | null) => {
+        setActive(niche);
+        gsap.to(el, { autoAlpha: niche ? 1 : 0, scale: niche ? 1 : 0.85, duration: 0.4, ease: "power3.out" });
+      };
+      const onEnter = (e: Event) => show((e.currentTarget as HTMLElement).dataset.niche ?? null);
+      const onLeave = () => show(null);
+
+      section.addEventListener("mousemove", onMove);
+      list.addEventListener("mouseleave", onLeave);
+      rows.forEach((row) => row.addEventListener("mouseenter", onEnter));
+      return () => {
+        section.removeEventListener("mousemove", onMove);
+        list.removeEventListener("mouseleave", onLeave);
+        rows.forEach((row) => row.removeEventListener("mouseenter", onEnter));
+      };
+    },
+    { scope: root }
+  );
 
   return (
-    <section className="relative py-16 sm:py-20">
+    <section ref={root} className="relative py-24 sm:py-32">
       <div className="container-page">
-        <SectionHeading
-          eyebrow={t("eyebrow")}
-          title={t("title")}
-          subtitle={t("subtitle")}
-        />
+        <SectionHeading eyebrow={t("eyebrow")} title={t("title")} subtitle={t("subtitle")} index={index} />
 
-        <div className="mt-14 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-          {niches.map(([niche, count], i) => {
-            const Icon = nicheIcons[niche] ?? LayoutGrid;
-            const image = nicheImages[niche];
-            return (
-              <Reveal key={niche} delay={i * 0.05}>
-                <TiltCard strength={5}>
-                  <div className="flex h-full flex-col items-start gap-3 overflow-hidden rounded-2xl border border-border bg-white/[0.02] transition-colors hover:border-lime/30">
-                    {image ? (
-                      <div className="relative h-32 w-full overflow-hidden sm:h-44">
-                        <img
-                          src={image}
-                          alt={t(`niches.${niche}`)}
-                          loading="lazy"
-                          className="size-full object-cover"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-bg/80 via-transparent to-transparent" />
-                        <div className="absolute bottom-2 left-2 grid size-9 place-items-center rounded-lg bg-bg/70 text-lime backdrop-blur">
-                          <Icon className="size-4" />
-                        </div>
-                      </div>
-                    ) : (
-                      <div className="grid size-11 place-items-center rounded-xl bg-lime/10 text-lime mt-5 ml-5">
-                        <Icon className="size-5" />
-                      </div>
-                    )}
-                    <div className="px-5 pb-5">
-                      <p className="font-display text-base font-medium">
-                        {t(`niches.${niche}`)}
-                      </p>
-                      <p className="mt-0.5 text-xs text-ink-muted">
-                        {count} {t(count > 1 ? "storesPlural" : "storeSingular")}
-                      </p>
-                    </div>
-                  </div>
-                </TiltCard>
-              </Reveal>
-            );
-          })}
-        </div>
+        <ul className="ec-list mt-14 border-t border-white/10">
+          {niches.map(([niche, list]) => (
+            <li key={niche} className="ec-row border-b border-white/10">
+              <Link
+                href={`/realisations?niche=${niche}`}
+                data-niche={niche}
+                className="group flex items-center justify-between gap-6 py-5 sm:py-7"
+              >
+                <span className="flex min-w-0 items-center gap-4">
+                  {/* eslint-disable-next-line @next/next/no-img-element -- vignette WebP pré-optimisée */}
+                  <img
+                    src={imageFor(niche)}
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
+                    className="size-12 shrink-0 rounded-lg border border-white/10 object-cover object-top lg:hidden"
+                  />
+                  <span className="font-display truncate text-2xl font-medium tracking-tight text-ink/80 transition-[color,transform] duration-500 ease-[var(--ease-out-expo)] group-hover:translate-x-3 group-hover:text-ink sm:text-5xl lg:text-6xl">
+                    {t(`niches.${niche}`)}
+                  </span>
+                </span>
+                <span className="flex shrink-0 items-center gap-4">
+                  <span className="text-sm tabular-nums text-ink-muted">
+                    {list.length} {t(list.length > 1 ? "storesPlural" : "storeSingular")}
+                  </span>
+                  <span className="hidden size-10 place-items-center rounded-full border border-white/15 transition-all duration-500 group-hover:rotate-45 group-hover:border-lime group-hover:bg-lime group-hover:text-bg sm:grid">
+                    <ArrowUpRight className="size-4" />
+                  </span>
+                </span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Aperçu flottant (desktop uniquement) */}
+      <div
+        ref={preview}
+        aria-hidden
+        className="pointer-events-none absolute left-0 top-0 z-20 hidden h-64 w-52 -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-2xl border border-white/15 opacity-0 shadow-2xl lg:block"
+        style={{ visibility: "hidden" }}
+      >
+        {niches.map(([niche]) => (
+          // eslint-disable-next-line @next/next/no-img-element -- vignette WebP pré-optimisée
+          <img
+            key={niche}
+            src={imageFor(niche)}
+            alt=""
+            loading="lazy"
+            decoding="async"
+            className={`absolute inset-0 size-full object-cover object-top transition-opacity duration-300 ${active === niche ? "opacity-100" : "opacity-0"}`}
+          />
+        ))}
       </div>
     </section>
   );

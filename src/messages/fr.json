@@ -4,7 +4,7 @@
   },
   "meta": {
     "title": "Erféro Keoula — Développeur Shopify Freelance | Création de Boutique Shopify Sur-Mesure",
-    "description": "Développeur Shopify freelance expert (5+ ans d'expérience) : création de boutique Shopify sur-mesure, refonte, optimisation de la conversion (CRO) et SEO. Plus de 200 boutiques livrées, prêtes à vendre en quelques jours."
+    "description": "Développeur Shopify freelance (5+ ans, missions en agence et clients directs) : création de boutiques Shopify sur-mesure, refonte, optimisation de la conversion (CRO) et SEO. Plus de 200 boutiques livrées."
   },
   "floatingCta": {
     "label": "Lancer mon projet"
@@ -22,17 +22,26 @@
     "switchLocale": "EN"
   },
   "hero": {
-    "badge": "Développeur Shopify freelance · Disponible pour de nouveaux projets",
+    "badge": "Freelance & missions en agence · Disponible maintenant",
     "titleLine1": "Des boutiques Shopify",
     "titleHighlight": "qui donnent envie d'acheter.",
     "subtitle": "Plus de visiteurs, plus de ventes, un meilleur classement Google — je construis des boutiques Shopify pensées pour ce résultat précis, pas juste pour être jolies.",
     "ctaPrimary": "Discutons de ton projet",
     "ctaSecondary": "Voir mes réalisations",
-    "scrollHint": "Scroll",
+    "scrollHint": "Défiler",
     "stats": [
-      { "value": "200+", "label": "boutiques lancées" },
-      { "value": "5 ans", "label": "d'expérience web" },
-      { "value": "4.8/5", "label": "note moyenne clients" }
+      {
+        "value": "200+",
+        "label": "boutiques lancées"
+      },
+      {
+        "value": "5 ans",
+        "label": "d'expérience web"
+      },
+      {
+        "value": "4.8/5",
+        "label": "note moyenne clients"
+      }
     ],
     "mock": {
       "badge": "Nouvelle collection",
@@ -49,7 +58,7 @@
   },
   "painPoints": {
     "eyebrow": "Ça te parle ?",
-    "title": "Ta boutique mérite mieux qu'un thème générique",
+    "title": "Ta boutique mérite mieux qu'un *thème générique*",
     "subtitle": "La majorité des boutiques en ligne perdent des ventes à cause de problèmes invisibles à l'œil nu. Voici les plus fréquents.",
     "items": [
       {
@@ -84,7 +93,7 @@
   },
   "services": {
     "eyebrow": "Ma méthode",
-    "title": "Pas un thème gratuit. Une structure de vente qui a fait ses preuves.",
+    "title": "Pas un thème gratuit. *Une structure de vente* qui a fait ses preuves.",
     "subtitle": "Ma spécialité, c'est le thème premium Story — mais je construis aussi sur template par défaut ou en partant de zéro, selon ton budget et tes besoins. Et surtout, je reproduis les mécaniques exactes des marques DTC qui vendent vraiment : preuve sociale immédiate, tunnels d'urgence, FAQ anti-objections. Voici concrètement ce que ça change pour toi.",
     "items": [
       {
@@ -179,7 +188,7 @@
   },
   "catalog": {
     "eyebrow": "Mes domaines",
-    "title": "Des boutiques dans des dizaines d'univers différents",
+    "title": "Des boutiques dans des *dizaines d'univers*",
     "subtitle": "Beauté, bien-être, mode, tech, animaux... voici les domaines dans lesquels j'ai déjà construit des boutiques qui vendent.",
     "storeSingular": "boutique",
     "storesPlural": "boutiques",
@@ -198,12 +207,13 @@
       "maison": "Maison",
       "lifestyle": "Lifestyle",
       "automotive": "Automobile",
-      "kids": "Enfants"
+      "kids": "Enfants",
+      "food": "Épicerie"
     }
   },
   "testimonials": {
     "eyebrow": "Ils en parlent mieux que moi",
-    "title": "Ce que mes clients et partenaires en disent",
+    "title": "Ce que mes clients et partenaires *en disent*",
     "subtitle": "Retours WhatsApp, Instagram, confirmations de livraison et avis d'agences avec lesquelles je travaille.",
     "placeholderImage": "Capture à ajouter",
     "placeholderVideo": "Vidéo à ajouter",
@@ -213,19 +223,39 @@
   },
   "metrics": {
     "eyebrow": "En chiffres",
-    "title": "Cinq ans à construire des boutiques qui vendent",
+    "title": "Cinq ans à construire des boutiques *qui vendent*",
     "items": [
-      { "value": "5", "suffix": "+", "label": "années d'expérience web" },
-      { "value": "200", "suffix": "+", "label": "boutiques Shopify lancées" },
-      { "value": "200", "suffix": "+", "label": "vidéos de réalisations" },
-      { "value": "3", "suffix": "j", "label": "délai moyen de livraison" },
-      { "value": "4.8", "suffix": "/5", "label": "note moyenne clients" }
+      {
+        "value": "5",
+        "suffix": "+",
+        "label": "années d'expérience web"
+      },
+      {
+        "value": "200",
+        "suffix": "+",
+        "label": "boutiques Shopify lancées"
+      },
+      {
+        "value": "200",
+        "suffix": "+",
+        "label": "vidéos de réalisations"
+      },
+      {
+        "value": "3",
+        "suffix": "j",
+        "label": "délai moyen de livraison"
+      },
+      {
+        "value": "4.8",
+        "suffix": "/5",
+        "label": "note moyenne clients"
+      }
     ]
   },
   "projects": {
     "eyebrow": "Réalisations",
-    "title": "Des boutiques pensées pour vendre",
-    "subtitle": "Une sélection parmi plus de 200 boutiques Shopify conçues et développées pour des marques beauté, bien-être et lifestyle.",
+    "title": "Des boutiques pensées pour *vendre*",
+    "subtitle": "Une sélection de boutiques en ligne, vérifiées une à une. Cliquez sur une carte : elle s'ouvre sur la vraie boutique.",
     "viewLive": "Voir la boutique",
     "viewLiveDisabled": "Accès privé client",
     "comingSoon": "Bientôt en ligne",
@@ -235,54 +265,110 @@
       "live": "En ligne",
       "password-protected": "Accès privé",
       "coming-soon": "Bientôt"
-    }
+    },
+    "visit": "Visiter",
+    "explore": "Tout explorer",
+    "liveStores": "boutiques en ligne à visiter",
+    "swipeHint": "Faites glisser pour parcourir →"
   },
   "videoReels": {
     "eyebrow": "En coulisses",
-    "title": "Mes réalisations, format vertical",
+    "title": "Mes réalisations, *en vidéo*",
     "subtitle": "Plus de 200 vidéos qui montrent la construction de boutiques Shopify de A à Z — comme sur TikTok, mais avec le code derrière.",
-    "cta": "Voir toutes les vidéos"
+    "cta": "Voir toutes les vidéos",
+    "play": "Lire"
   },
   "process": {
     "eyebrow": "Comment ça se passe",
-    "title": "Un process clair, du premier message à la mise en ligne",
+    "title": "Un process clair, du premier message *à la mise en ligne*",
     "subtitle": "Pas de surprise, pas de flou. Voici exactement comment on travaille ensemble.",
     "steps": [
-      { "title": "Appel découverte", "description": "On discute de ton projet, tes objectifs et ton budget. Gratuit et sans engagement." },
-      { "title": "Proposition & devis", "description": "Tu reçois une proposition claire : périmètre, délai, prix. Rien de caché." },
-      { "title": "Design & maquettes", "description": "Je conçois une interface sur-mesure, alignée avec ton identité de marque." },
-      { "title": "Développement Shopify", "description": "Intégration Liquid, apps, paiement, SEO technique — testé sur mobile et desktop." },
-      { "title": "Tests & mise en ligne", "description": "Vérification complète avant le lancement : vitesse, tunnel d'achat, tracking." },
-      { "title": "Support post-lancement", "description": "Je reste disponible pour ajuster, corriger et faire évoluer la boutique." }
+      {
+        "title": "Appel découverte",
+        "description": "On discute de ton projet, tes objectifs et ton budget. Gratuit et sans engagement."
+      },
+      {
+        "title": "Proposition & devis",
+        "description": "Tu reçois une proposition claire : périmètre, délai, prix. Rien de caché."
+      },
+      {
+        "title": "Design & maquettes",
+        "description": "Je conçois une interface sur-mesure, alignée avec ton identité de marque."
+      },
+      {
+        "title": "Développement Shopify",
+        "description": "Intégration Liquid, apps, paiement, SEO technique — testé sur mobile et desktop."
+      },
+      {
+        "title": "Tests & mise en ligne",
+        "description": "Vérification complète avant le lancement : vitesse, tunnel d'achat, tracking."
+      },
+      {
+        "title": "Support post-lancement",
+        "description": "Je reste disponible pour ajuster, corriger et faire évoluer la boutique."
+      }
     ]
   },
   "techStack": {
     "eyebrow": "Stack technique",
-    "title": "Les outils que je maîtrise au quotidien"
+    "title": "Les outils que je maîtrise *au quotidien*"
   },
   "trust": {
     "eyebrow": "Pourquoi me faire confiance",
-    "title": "Une garantie simple : ta boutique doit vendre, pas juste être belle",
+    "title": "Une garantie simple : ta boutique doit *vendre*, pas juste être belle",
     "subtitle": "Je travaille encore avec des agences en parallèle de mes clients directs — chaque projet est traité avec la même rigueur.",
     "items": [
-      { "title": "Communication directe", "description": "Tu parles directement au développeur qui code ton site, pas à un chef de projet intermédiaire." },
-      { "title": "Délais annoncés, délais tenus", "description": "Un planning clair dès le devis, avec des points d'étape réguliers." },
-      { "title": "Code propre, livré proprement", "description": "Tu restes propriétaire de ta boutique et de son code, sans dépendance cachée." },
-      { "title": "Autonomie complète", "description": "Design, développement, SEO et suivi : un seul interlocuteur du premier brief jusqu'à la mise en ligne, sans intermédiaire." }
+      {
+        "title": "Communication directe",
+        "description": "Tu parles directement au développeur qui code ton site, pas à un chef de projet intermédiaire."
+      },
+      {
+        "title": "Délais annoncés, délais tenus",
+        "description": "Un planning clair dès le devis, avec des points d'étape réguliers."
+      },
+      {
+        "title": "Code propre, livré proprement",
+        "description": "Tu restes propriétaire de ta boutique et de son code, sans dépendance cachée."
+      },
+      {
+        "title": "Autonomie complète",
+        "description": "Design, développement, SEO et suivi : un seul interlocuteur du premier brief jusqu'à la mise en ligne, sans intermédiaire."
+      }
     ]
   },
   "faq": {
     "eyebrow": "Questions fréquentes",
-    "title": "Tout ce que tu te demandes avant de me contacter",
+    "title": "Tout ce que tu te demandes *avant de me contacter*",
     "subtitle": "Prix, délais, propriété de ta boutique, clients à l'étranger : les réponses aux questions les plus posées avant de démarrer un projet Shopify.",
     "items": [
-      { "q": "Combien coûte la création d'une boutique Shopify ?", "a": "Ça dépend de la complexité du projet (nombre de pages, fonctionnalités, design sur-mesure ou non). Après notre appel découverte, tu reçois un devis clair et détaillé, sans surprise." },
-      { "q": "Combien de temps prend un projet ?", "a": "En moyenne 3 jours pour une boutique complète, selon la complexité et la réactivité sur les retours. Tu reçois un planning précis dès le départ." },
-      { "q": "Je n'ai pas encore de produits ou de logo, c'est un problème ?", "a": "Non. On peut avancer en parallèle : je construis la structure pendant que tu finalises ton branding, ou je peux t'accompagner sur cette partie aussi." },
-      { "q": "Tu travailles avec des clients à l'étranger ?", "a": "Oui, je travaille à distance avec des clients partout dans le monde, entreprises comme indépendants, en français comme en anglais." },
-      { "q": "Est-ce que je reste propriétaire de ma boutique ?", "a": "Totalement. Ta boutique Shopify t'appartient entièrement, ainsi que le code personnalisé développé pour toi." },
-      { "q": "Que se passe-t-il après la mise en ligne ?", "a": "Je reste disponible pour la maintenance, les évolutions ou les urgences, avec ou sans forfait de suivi selon tes besoins." },
-      { "q": "Peux-tu améliorer une boutique déjà existante ?", "a": "Oui, l'audit et la refonte de boutiques existantes font partie de mes services les plus demandés." }
+      {
+        "q": "Combien coûte la création d'une boutique Shopify ?",
+        "a": "Ça dépend de la complexité du projet (nombre de pages, fonctionnalités, design sur-mesure ou non). Après notre appel découverte, tu reçois un devis clair et détaillé, sans surprise."
+      },
+      {
+        "q": "Combien de temps prend un projet ?",
+        "a": "En moyenne 3 jours pour une boutique complète, selon la complexité et la réactivité sur les retours. Tu reçois un planning précis dès le départ."
+      },
+      {
+        "q": "Je n'ai pas encore de produits ou de logo, c'est un problème ?",
+        "a": "Non. On peut avancer en parallèle : je construis la structure pendant que tu finalises ton branding, ou je peux t'accompagner sur cette partie aussi."
+      },
+      {
+        "q": "Tu travailles avec des clients à l'étranger ?",
+        "a": "Oui, je travaille à distance avec des clients partout dans le monde, entreprises comme indépendants, en français comme en anglais."
+      },
+      {
+        "q": "Est-ce que je reste propriétaire de ma boutique ?",
+        "a": "Totalement. Ta boutique Shopify t'appartient entièrement, ainsi que le code personnalisé développé pour toi."
+      },
+      {
+        "q": "Que se passe-t-il après la mise en ligne ?",
+        "a": "Je reste disponible pour la maintenance, les évolutions ou les urgences, avec ou sans forfait de suivi selon tes besoins."
+      },
+      {
+        "q": "Peux-tu améliorer une boutique déjà existante ?",
+        "a": "Oui, l'audit et la refonte de boutiques existantes font partie de mes services les plus demandés."
+      }
     ]
   },
   "contact": {
@@ -301,19 +387,30 @@
     "or": "ou",
     "whatsappCta": "Discuter sur WhatsApp",
     "calendlyCta": "Réserver un appel gratuit",
-    "emailCta": "Envoyer un email"
+    "emailCta": "Envoyer un email",
+    "availability": "Disponible pour de nouveaux projets et missions en agence",
+    "bigTitle": "Parlons de *ton projet*.",
+    "calendlyMeta": "Appel découverte gratuit de 30 min"
   },
   "footer": {
-    "tagline": "Développeur Shopify freelance, disponible partout dans le monde.",
+    "tagline": "Développeur Shopify freelance. Des boutiques qui inspirent confiance et qui vendent, partout dans le monde.",
     "rights": "Tous droits réservés.",
-    "madeWith": "Conçu et développé avec Next.js, Tailwind, GSAP & Framer Motion."
+    "madeWith": "Conçu et développé avec Next.js, GSAP & Tailwind.",
+    "pages": "Pages",
+    "elsewhere": "Ailleurs",
+    "backToTop": "Haut de page"
   },
   "realisationsPage": {
-    "title": "Toutes mes réalisations",
-    "subtitle": "Boutiques Shopify livrées et vidéos de mes constructions, format court.",
+    "title": "Toutes mes *réalisations*",
+    "subtitle": "Chaque boutique ci-dessous est en ligne et a été vérifiée. Survolez une carte pour parcourir la page, cliquez pour visiter la vraie boutique.",
     "backHome": "Retour à l'accueil",
     "filterAll": "Tout",
-    "videoSectionTitle": "Le mur des vidéos"
+    "videoSectionTitle": "Le mur des *vidéos*",
+    "eyebrow": "Réalisations",
+    "liveCount": "boutiques en ligne",
+    "filterLabel": "Filtrer par univers",
+    "videoEyebrow": "En coulisses",
+    "videoSubtitle": "Des boutiques filmées en conditions réelles, sur téléphone. Cliquez pour lancer une vidéo."
   },
   "cvPage": {
     "print": "Imprimer / Enregistrer en PDF",
@@ -321,37 +418,98 @@
     "mobilityLabel": "Mobilité",
     "mobility": "Télétravail ou présentiel",
     "contacts": [
-      { "label": "Email", "value": "erferokam@gmail.com", "href": "mailto:erferokam@gmail.com" },
-      { "label": "Appel direct", "value": "+229 0169272595", "href": "tel:+2290169272595" },
-      { "label": "WhatsApp", "value": "+229 69272595", "href": "https://wa.me/22969272595" },
-      { "label": "Portfolio", "value": "erfero-portfolio.vercel.app", "href": "https://erfero-portfolio.vercel.app" },
-      { "label": "LinkedIn", "value": "in/erfero-keoula", "href": "https://www.linkedin.com/in/erfero-keoula-905b72205" }
+      {
+        "label": "Email",
+        "value": "erferokam@gmail.com",
+        "href": "mailto:erferokam@gmail.com"
+      },
+      {
+        "label": "Appel direct",
+        "value": "+229 0169272595",
+        "href": "tel:+2290169272595"
+      },
+      {
+        "label": "WhatsApp",
+        "value": "+229 69272595",
+        "href": "https://wa.me/22969272595"
+      },
+      {
+        "label": "Portfolio",
+        "value": "erfero-portfolio.vercel.app",
+        "href": "https://erfero-portfolio.vercel.app"
+      },
+      {
+        "label": "LinkedIn",
+        "value": "in/erfero-keoula",
+        "href": "https://www.linkedin.com/in/erfero-keoula-905b72205"
+      }
     ],
     "profileEyebrow": "Profil",
     "profile": "Développeur web **Fullstack spécialisé Shopify**. Je conçois des boutiques et applications rapides, bien référencées et pensées pour **convertir**. Autonome, rigoureux et orienté résultat, je transforme un besoin métier en produit web performant.",
     "stats": [
-      { "value": "200+", "label": "boutiques livrées" },
-      { "value": "5 ans", "label": "d'expérience web" },
-      { "value": "4.8/5", "label": "note clients" }
+      {
+        "value": "200+",
+        "label": "boutiques livrées"
+      },
+      {
+        "value": "5 ans",
+        "label": "d'expérience web"
+      },
+      {
+        "value": "4.8/5",
+        "label": "note clients"
+      }
     ],
     "skillsEyebrow": "Compétences",
     "skillGroups": [
-      { "title": "Frontend", "items": [
-        { "name": "Shopify", "highlight": true },
-        { "name": "React.js" },
-        { "name": "Vue.js" },
-        { "name": "Angular" },
-        { "name": "WordPress" },
-        { "name": "Flutter" }
-      ] },
-      { "title": "Backend & SEO", "items": [
-        { "name": "Node.js" },
-        { "name": "Laravel" },
-        { "name": "PHP" },
-        { "name": "MongoDB" },
-        { "name": "Firebase" },
-        { "name": "SEO", "highlight": true }
-      ] }
+      {
+        "title": "Frontend",
+        "items": [
+          {
+            "name": "Shopify",
+            "highlight": true
+          },
+          {
+            "name": "React.js"
+          },
+          {
+            "name": "Vue.js"
+          },
+          {
+            "name": "Angular"
+          },
+          {
+            "name": "WordPress"
+          },
+          {
+            "name": "Flutter"
+          }
+        ]
+      },
+      {
+        "title": "Backend & SEO",
+        "items": [
+          {
+            "name": "Node.js"
+          },
+          {
+            "name": "Laravel"
+          },
+          {
+            "name": "PHP"
+          },
+          {
+            "name": "MongoDB"
+          },
+          {
+            "name": "Firebase"
+          },
+          {
+            "name": "SEO",
+            "highlight": true
+          }
+        ]
+      }
     ],
     "experienceEyebrow": "Expériences",
     "experience": [
@@ -394,21 +552,63 @@
     ],
     "educationEyebrow": "Formation",
     "education": [
-      { "title": "Développeur Web Fullstack", "school": "High-Five University · France", "period": "Depuis mars 2022 — 2 ans d'enseignement + 2 ans en entreprise" },
-      { "title": "Licence pro · Sciences Naturelles", "school": "FAST Bénin", "period": "2019 – 2021 — Biologie, chimie, géologie" }
+      {
+        "title": "Développeur Web Fullstack",
+        "school": "High-Five University · France",
+        "period": "Depuis mars 2022 — 2 ans d'enseignement + 2 ans en entreprise"
+      },
+      {
+        "title": "Licence pro · Sciences Naturelles",
+        "school": "FAST Bénin",
+        "period": "2019 – 2021 — Biologie, chimie, géologie"
+      }
     ],
     "languagesEyebrow": "Langues",
     "languages": [
-      { "name": "Français", "level": "Langue maternelle" },
-      { "name": "Anglais", "level": "Professionnel" }
+      {
+        "name": "Français",
+        "level": "Langue maternelle"
+      },
+      {
+        "name": "Anglais",
+        "level": "Professionnel"
+      }
     ],
     "interestsEyebrow": "Centres d'intérêt",
-    "interests": ["Technologie", "IA & Programmation", "Football", "Basketball", "Fitness"],
+    "interests": [
+      "Technologie",
+      "IA & Programmation",
+      "Football",
+      "Basketball",
+      "Fitness"
+    ],
     "strengthsEyebrow": "Atouts",
-    "strengths": ["Communication", "Gestion de projet", "Souci du détail"],
+    "strengths": [
+      "Communication",
+      "Gestion de projet",
+      "Souci du détail"
+    ],
     "referenceEyebrow": "Référence",
     "referenceName": "Tiburce Kouagou",
     "referenceRole": "Formateur — High-Five University / Viip Interstis",
     "referenceContact": "tiburcekouagou@gmail.com"
+  },
+  "manifesto": {
+    "eyebrow": "À propos",
+    "text": "Je m'appelle Erféro. Depuis 2021, je conçois des boutiques Shopify pour des marques e-commerce et des agences — *plus de 200 à ce jour*. Mon obsession : des boutiques rapides, rassurantes et pensées pour vendre, livrées en *3 jours en moyenne*.",
+    "agenciesLabel": "Agences et entreprises avec lesquelles j'ai travaillé",
+    "agencies": [
+      "Elite Agency",
+      "Viip Interstis",
+      "Omega Agency",
+      "Savage Note"
+    ],
+    "cta": "Voir mon CV"
+  },
+  "experience": {
+    "eyebrow": "Parcours",
+    "title": "Formé en agence, *autonome* en freelance",
+    "subtitle": "Près de quatre ans de production Shopify en agence, du développement fullstack et du SEO : je m'intègre aussi bien à une équipe d'agence qu'en direct avec une marque.",
+    "ctaCv": "Voir le CV complet"
   }
 }

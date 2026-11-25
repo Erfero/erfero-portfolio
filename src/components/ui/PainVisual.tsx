@@ -9,13 +9,13 @@ function MobileVisual() {
   return (
     <div className="relative flex h-16 w-10 items-center justify-center rounded-lg border-2 border-white/15">
       <motion.div
-        className="size-5 rounded-full border-2 border-lime border-t-transparent"
+        className="size-5 rounded-full border-2 border-brand border-t-transparent"
         animate={{ rotate: 360 }}
         transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
       />
       <div className="absolute inset-x-1.5 bottom-1.5 h-1 overflow-hidden rounded-full bg-white/10">
         <motion.div
-          className="h-full bg-lime/70"
+          className="h-full bg-brand/70"
           animate={{ x: ["-100%", "100%"] }}
           transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
         />
@@ -51,7 +51,7 @@ function AppsVisual() {
       {[0, 1, 2, 3].map((i) => (
         <motion.div
           key={i}
-          className="h-2.5 rounded bg-lime/60"
+          className="h-2.5 rounded bg-brand/60"
           style={{ width: 14 + i * 8 }}
           initial={{ opacity: 0, y: -6 }}
           animate={{ opacity: [0, 1 - i * 0.15, 1 - i * 0.15, 0] }}

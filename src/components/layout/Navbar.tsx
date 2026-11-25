@@ -90,14 +90,14 @@ export default function Navbar({ showCv }: { showCv?: boolean }) {
             className={cn(
               "flex items-center justify-between gap-x-6 rounded-full py-2.5 pl-5 pr-2.5 transition-all duration-500",
               scrolled || open
-                ? "border border-white/10 bg-[#0c0e11]/80 shadow-[0_10px_40px_-20px_rgba(0,0,0,0.8)] backdrop-blur-xl"
+                ? "border border-white/12 bg-[#0d0b26]/75 shadow-[0_10px_40px_-20px_rgba(0,0,0,0.8)] backdrop-blur-xl"
                 : "border border-transparent bg-transparent"
             )}
           >
             <a href={homeHref} className="flex items-center gap-3" aria-label={siteConfig.name}>
               <span className="font-display text-xl font-semibold tracking-tight">
                 {siteConfig.shortName}
-                <span className="text-lime">.</span>
+                <span className="text-gradient">.</span>
               </span>
               <span className="hidden h-4 w-px bg-white/15 xl:block" />
               <span className="hidden text-[11px] text-ink-muted xl:block">{siteConfig.role}</span>
@@ -113,13 +113,13 @@ export default function Navbar({ showCv }: { showCv?: boolean }) {
                     aria-current={active ? "page" : undefined}
                     className={cn(
                       "group relative text-sm transition-colors",
-                      active ? "text-ink" : "text-ink-muted hover:text-ink"
+                      active ? "font-semibold text-ink" : "text-ink-muted hover:text-ink"
                     )}
                   >
                     {link.label}
                     <span
                       className={cn(
-                        "absolute -bottom-1 left-0 h-px w-full origin-left bg-lime transition-transform duration-500",
+                        "bg-brand-gradient absolute -bottom-1 left-0 h-[2px] w-full origin-left rounded-full transition-transform duration-500",
                         active ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
                       )}
                     />
@@ -132,7 +132,7 @@ export default function Navbar({ showCv }: { showCv?: boolean }) {
               <LocaleSwitcher className="hidden sm:flex" />
               <Link
                 href="/contact"
-                className="group hidden items-center gap-1.5 rounded-full bg-lime px-4 py-2.5 text-sm font-semibold text-bg md:inline-flex"
+                className="btn-primary group hidden px-4 py-2.5 text-sm md:inline-flex"
               >
                 {t("cta")}
                 <ArrowUpRight className="size-4 transition-transform duration-300 group-hover:rotate-45" />
@@ -192,7 +192,7 @@ export default function Navbar({ showCv }: { showCv?: boolean }) {
             href="/contact"
             tabIndex={open ? 0 : -1}
             onClick={() => setOpen(false)}
-            className="inline-flex items-center gap-1.5 rounded-full bg-lime px-5 py-3 text-sm font-semibold text-bg"
+            className="btn-primary px-5 py-3 text-sm"
           >
             {t("cta")}
             <ArrowUpRight className="size-4" />

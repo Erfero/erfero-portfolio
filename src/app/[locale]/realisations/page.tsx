@@ -36,11 +36,16 @@ export default async function RealisationsPage({
   const [projects, videos] = await Promise.all([getVisibleProjects(), getVideos()]);
 
   return (
-    <div className="pb-24 pt-36 sm:pt-44">
+    <div className="relative isolate pb-24 pt-36 sm:pt-44">
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[46rem] overflow-hidden">
+        <div className="glow-orb -top-40 right-0 h-[34rem] w-[40rem] bg-brand-deep/45" />
+        <div className="glow-orb -top-20 left-1/4 h-[22rem] w-[30rem] bg-pink/20" />
+        <div className="bg-grid mask-radial absolute inset-0 opacity-60" />
+      </div>
       <div className="container-page">
         <Reveal y={12}>
-          <span className="inline-flex items-center gap-3 text-[11px] font-medium uppercase tracking-[0.22em] text-lime">
-            <span className="h-px w-8 bg-lime/70" />
+          <span className="glass inline-flex items-center gap-2.5 rounded-full py-1.5 pl-2 pr-4 text-xs font-semibold uppercase tracking-[0.18em]">
+            <span className="bg-brand-gradient ml-1 size-2 rounded-full" />
             {t("eyebrow")}
           </span>
         </Reveal>
@@ -48,14 +53,14 @@ export default async function RealisationsPage({
           <SplitHeading
             as="h1"
             text={t("title")}
-            className="font-display max-w-[16ch] text-[clamp(2.6rem,7vw,6.5rem)] font-semibold leading-[0.95] tracking-[-0.045em]"
+            className="font-display max-w-[16ch] text-[clamp(2.6rem,7vw,6.5rem)] font-extrabold leading-[0.95] tracking-[-0.045em]"
           />
           <Reveal delay={0.1}>
-            <p className="font-display text-6xl font-semibold tracking-tight sm:text-7xl">
-              {projects.length}
-              <span className="ml-2 align-top text-base font-medium tracking-normal text-ink-muted">
-                {t("liveCount")}
+            <p className="glass flex items-end gap-3 rounded-3xl px-6 py-4">
+              <span className="text-gradient font-display text-6xl font-extrabold leading-none tracking-tight sm:text-7xl">
+                {projects.length}
               </span>
+              <span className="pb-1 text-sm font-semibold text-ink-muted">{t("liveCount")}</span>
             </p>
           </Reveal>
         </div>

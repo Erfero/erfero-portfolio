@@ -2,17 +2,26 @@
 
 import { useRef } from "react";
 import { useTranslations } from "next-intl";
-import { ArrowUpRight } from "lucide-react";
+import {
+  ArrowUpRight,
+  LayoutTemplate,
+  BadgeCheck,
+  Timer,
+  Scale,
+  MessagesSquare,
+  Smartphone,
+  Palette,
+  Headset,
+} from "lucide-react";
 import { Link } from "@/i18n/navigation";
-import { gsap, ScrollTrigger, useGSAP, MOTION_OK } from "@/lib/gsap";
+import { gsap, useGSAP, MOTION_OK } from "@/lib/gsap";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Magnetic from "@/components/ui/MagneticButton";
 
-/**
- * Méthode / services : le titre reste épinglé à gauche (desktop) pendant que
- * la liste défile à droite ; l'élément qui passe au centre de l'écran
- * s'allume, les autres restent en retrait.
- */
+const ICONS = [LayoutTemplate, BadgeCheck, Timer, Scale, MessagesSquare, Smartphone, Palette, Headset];
+const COLORS = ["#a594ff", "#ff6fd0", "#ffbe6b", "#4fdcff", "#4ade80", "#ff8a65", "#c084fc", "#38bdf8"];
+
+/** Méthode / services : grille de cartes lumineuses, tout le texte visible. */
 export default function Services({ index }: { index?: string }) {
   const t = useTranslations("services");
   const nav = useTranslations("nav");
@@ -23,23 +32,13 @@ export default function Services({ index }: { index?: string }) {
     () => {
       const mm = gsap.matchMedia();
       mm.add(MOTION_OK, () => {
-        const rows = gsap.utils.toArray<HTMLElement>(".sv-item");
-        rows.forEach((row) => {
-          gsap.set(row, { opacity: 0.28 });
-          ScrollTrigger.create({
-            trigger: row,
-            start: "top 62%",
-            end: "bottom 38%",
-            onToggle: (self) =>
-              gsap.to(row, { opacity: self.isActive ? 1 : 0.28, duration: 0.5, ease: "power2.out", overwrite: true }),
-          });
-          gsap.from(row.querySelector(".sv-line"), {
-            scaleX: 0,
-            transformOrigin: "left center",
-            duration: 1.2,
-            ease: "expo.out",
-            scrollTrigger: { trigger: row, start: "top 90%", once: true },
-          });
+        gsap.from(".sv-card", {
+          y: 60,
+          autoAlpha: 0,
+          duration: 1,
+          ease: "expo.out",
+          stagger: { each: 0.07, grid: "auto", from: "start" },
+          scrollTrigger: { trigger: ".sv-grid", start: "top 85%", once: true },
         });
       });
     },
@@ -47,42 +46,45 @@ export default function Services({ index }: { index?: string }) {
   );
 
   return (
-    <section ref={root} id="services" className="relative scroll-mt-28 py-24 sm:py-32">
-      <div className="container-page grid gap-14 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-20">
-        <div className="lg:sticky lg:top-28 lg:h-fit">
+    <section ref={root} id="services" className="relative scroll-mt-24 py-20 sm:py-28">
+      <div aria-hidden className="glow-orb right-0 top-40 h-[30rem] w-[30rem] bg-brand-deep/30" />
+      <div className="container-page">
+        <div className="flex flex-wrap items-end justify-between gap-8">
           <SectionHeading eyebrow={t("eyebrow")} title={t("title")} subtitle={t("subtitle")} index={index} />
-          <div className="mt-10">
-            <Magnetic>
-              <Link
-                href="/contact"
-                className="group inline-flex items-center gap-2 rounded-full bg-lime px-6 py-3.5 text-sm font-semibold text-bg"
-              >
-                {nav("cta")}
-                <ArrowUpRight className="size-4 transition-transform duration-300 group-hover:rotate-45" />
-              </Link>
-            </Magnetic>
-          </div>
+          <Magnetic>
+            <Link href="/contact" className="btn-primary group px-6 py-3.5 text-sm">
+              {nav("cta")}
+              <ArrowUpRight className="size-4 transition-transform duration-300 group-hover:rotate-45" />
+            </Link>
+          </Magnetic>
         </div>
 
-        <ol className="flex flex-col">
-          {items.map((item, i) => (
-            <li key={item.title} className="sv-item relative py-8 sm:py-10">
-              <span className="sv-line absolute inset-x-0 top-0 h-px bg-white/15" />
-              <div className="grid grid-cols-[3rem_1fr] gap-4 sm:grid-cols-[4.5rem_1fr]">
-                <span className="font-display pt-1 text-sm tabular-nums text-lime">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <div>
-                  <h3 className="font-display text-xl font-medium leading-snug tracking-tight sm:text-3xl">
-                    {item.title}
-                  </h3>
-                  <p className="mt-3 max-w-xl text-sm leading-relaxed text-ink-muted sm:text-base">
-                    {item.description}
-                  </p>
+        <ol className="sv-grid mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {items.map((item, i) => {
+            const Icon = ICONS[i % ICONS.length];
+            const color = COLORS[i % COLORS.length];
+            return (
+              <li
+                key={item.title}
+                className="sv-card spotlight flex flex-col p-6 sm:p-7"
+                style={{ "--spot": color } as React.CSSProperties}
+              >
+                <div className="flex items-center justify-between">
+                  <span
+                    className="grid size-12 place-items-center rounded-2xl"
+                    style={{ background: `${color}22`, color, boxShadow: `0 0 30px -10px ${color}` }}
+                  >
+                    <Icon className="size-6" />
+                  </span>
+                  <span className="font-display text-3xl font-extrabold text-white/10">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
                 </div>
-              </div>
-            </li>
-          ))}
+                <h3 className="font-display mt-6 text-xl font-bold leading-snug tracking-tight">{item.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-ink-muted sm:text-[15px]">{item.description}</p>
+              </li>
+            );
+          })}
         </ol>
       </div>
     </section>

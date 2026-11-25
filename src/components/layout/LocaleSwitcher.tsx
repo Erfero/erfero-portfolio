@@ -27,14 +27,14 @@ export default function LocaleSwitcher({ className }: { className?: string }) {
             aria-current={active}
             className={cn(
               "relative isolate px-3 py-1 text-xs font-medium uppercase tracking-wide transition-colors duration-200",
-              active ? "text-bg" : "text-ink-muted hover:text-ink"
+              active ? "font-bold text-[#0b0920]" : "text-ink-muted hover:text-ink"
             )}
           >
             {active && (
               <motion.span
                 layoutId={pillId}
                 transition={{ type: "spring", stiffness: 380, damping: 32 }}
-                className="absolute inset-0 -z-10 rounded-full bg-lime"
+                className="bg-brand-gradient absolute inset-0 -z-10 rounded-full"
               />
             )}
             {loc}

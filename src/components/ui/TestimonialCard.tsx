@@ -66,7 +66,7 @@ export default function TestimonialCard({ testimonial }: { testimonial: Testimon
       <motion.div
         whileHover={{ y: -5, scale: 1.02 }}
         transition={{ type: "spring", stiffness: 300, damping: 22 }}
-        className="rounded-2xl border border-[#E1306C]/25 bg-bg-soft p-4 shadow-[0_10px_30px_-15px_rgba(225,48,108,0.35)]"
+        className="rounded-2xl border border-[#E1306C]/30 bg-[#170c27] p-4 shadow-[0_10px_30px_-15px_rgba(225,48,108,0.35)]"
       >
         <div className="flex items-center gap-2 border-b border-white/5 pb-3">
           <span
@@ -97,7 +97,7 @@ export default function TestimonialCard({ testimonial }: { testimonial: Testimon
       <motion.div
         whileHover={{ y: -5, scale: 1.02 }}
         transition={{ type: "spring", stiffness: 300, damping: 22 }}
-        className="flex items-center gap-3 rounded-2xl border border-border bg-bg-soft p-4"
+        className="flex items-center gap-3 rounded-2xl border border-white/10 bg-[#13103a] p-4"
       >
         <span
           className="grid size-10 shrink-0 place-items-center rounded-full"
@@ -109,7 +109,7 @@ export default function TestimonialCard({ testimonial }: { testimonial: Testimon
           <p className="text-sm font-medium text-ink">{testimonial.authorName}</p>
           <p className="text-xs text-ink-muted">{quote}</p>
         </div>
-        <Check className="ml-auto size-4 shrink-0 text-lime" />
+        <Check className="ml-auto size-4 shrink-0 text-success" />
       </motion.div>
     );
   }
@@ -187,16 +187,16 @@ export default function TestimonialCard({ testimonial }: { testimonial: Testimon
     <motion.div
       whileHover={{ y: -5, scale: 1.02 }}
       transition={{ type: "spring", stiffness: 300, damping: 22 }}
-      className="flex h-full flex-col rounded-2xl border border-border bg-bg-soft p-5"
+      className="flex h-full flex-col rounded-2xl border border-white/10 bg-[#13103a] p-5"
     >
       {testimonial.rating && (
-        <div className="flex gap-0.5 text-lime">
+        <div className="flex gap-0.5 text-amber">
           {Array.from({ length: testimonial.rating }).map((_, i) => (
             <Star key={i} className="size-3.5 fill-current" />
           ))}
         </div>
       )}
-      <p className="mt-3 flex-1 text-sm leading-relaxed text-ink-muted">
+      <p className="mt-3 flex-1 text-[15px] leading-relaxed text-ink/90">
         &ldquo;{quote}&rdquo;
       </p>
       <div className="mt-4 border-t border-border pt-3">

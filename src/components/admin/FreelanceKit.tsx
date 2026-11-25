@@ -6,7 +6,7 @@ import { saveFreelanceSettingsAction } from "@/lib/actions";
 import type { FreelanceSettings } from "@/lib/content";
 
 const inputClass =
-  "w-full rounded-lg border border-border bg-white/[0.02] px-3 py-2 text-sm outline-none focus:border-lime/50";
+  "w-full rounded-lg border border-border bg-white/[0.02] px-3 py-2 text-sm outline-none focus:border-brand/50";
 
 /** Contact / preuve sociale : reprend le CV et site.config.ts, à ajuster
  * ici si l'un des deux change (mieux vaut un seul endroit que de les
@@ -222,7 +222,7 @@ function GeneratorBlock({ block, settings }: { block: Block; settings: Freelance
           {variants.length > 1 && (
             <button
               onClick={() => setIndex((i) => (i + 1) % variants.length)}
-              className="inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-xs text-ink-muted hover:border-lime/50 hover:text-ink"
+              className="inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-xs text-ink-muted hover:border-brand/50 hover:text-ink"
             >
               <RefreshCw className="size-3.5" />
               Régénérer
@@ -230,7 +230,7 @@ function GeneratorBlock({ block, settings }: { block: Block; settings: Freelance
           )}
           <button
             onClick={handleCopy}
-            className="inline-flex items-center gap-1.5 rounded-full bg-lime px-3 py-1.5 text-xs font-medium text-bg"
+            className="inline-flex items-center gap-1.5 rounded-full bg-brand px-3 py-1.5 text-xs font-medium text-bg"
           >
             {copied ? <Check className="size-3.5" /> : <Copy className="size-3.5" />}
             {copied ? "Copié" : "Copier"}
@@ -239,7 +239,7 @@ function GeneratorBlock({ block, settings }: { block: Block; settings: Freelance
       </div>
 
       <p className="mt-3 flex items-start gap-1.5 text-xs text-ink-muted/80">
-        <Info className="mt-0.5 size-3.5 shrink-0 text-lime" />
+        <Info className="mt-0.5 size-3.5 shrink-0 text-brand" />
         {block.tip}
       </p>
 
@@ -306,7 +306,7 @@ function SettingsFormControlled({
   );
 
   return (
-    <div className="rounded-2xl border border-lime/30 bg-lime/[0.04] p-5">
+    <div className="rounded-2xl border border-brand/30 bg-brand/[0.04] p-5">
       <h2 className="font-display text-base font-medium">Tarif &amp; disponibilité</h2>
       <p className="mt-1 text-xs text-ink-muted">
         Ces informations ne sont pas sur le CV : renseigne-les une fois, elles
@@ -322,7 +322,7 @@ function SettingsFormControlled({
       <button
         onClick={handleSave}
         disabled={isPending}
-        className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-lime px-5 py-2.5 text-sm font-medium text-bg disabled:opacity-60"
+        className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-brand px-5 py-2.5 text-sm font-medium text-bg disabled:opacity-60"
       >
         {saved ? <Check className="size-4" /> : <Save className="size-4" />}
         {isPending ? "Enregistrement..." : saved ? "Enregistré" : "Enregistrer"}

@@ -51,41 +51,43 @@ export default async function HomePage({
   const num = (enabled: boolean) => (enabled ? String(++counter).padStart(2, "0") : undefined);
   const idx = {
     featured: num(sections.featuredProjectsEnabled),
+    stack: num(sections.techStackEnabled),
     videos: num(sections.videoReelsEnabled && videos.length > 0),
-    pain: num(sections.painPointsEnabled),
     services: num(sections.servicesEnabled),
-    catalog: num(sections.expertiseCatalogEnabled),
+    pain: num(sections.painPointsEnabled),
     experience: num(sections.experienceEnabled),
+    catalog: num(sections.expertiseCatalogEnabled),
     testimonials: num(sections.testimonialsEnabled),
     process: num(sections.processEnabled),
     trust: num(sections.trustEnabled),
     faq: num(sections.faqEnabled),
   };
 
-  // Ordre pensé comme un récit : qui je suis -> la preuve (boutiques,
-  // vidéos, chiffres) -> le problème et ma méthode -> mon parcours et les
-  // avis -> comment on travaille -> contact.
+  // Ordre pensé pour un recruteur comme pour un client : la preuve d'abord
+  // (boutiques en ligne, langages maîtrisés, vidéos), puis qui je suis et
+  // les chiffres, la méthode, le parcours et les avis, enfin comment on
+  // travaille ensemble et le contact.
   return (
     <>
       {sections.heroEnabled && <Hero projects={projects} />}
-      {sections.manifestoEnabled && <Manifesto showCv={cv.enabled} />}
       {sections.featuredProjectsEnabled && (
         <FeaturedProjects projects={projects} totalCount={projects.length} index={idx.featured} />
       )}
+      {sections.techStackEnabled && <TechStack index={idx.stack} />}
       {sections.videoReelsEnabled && <VideoReels videos={videos} index={idx.videos} />}
+      {sections.manifestoEnabled && <Manifesto showCv={cv.enabled} />}
       {sections.metricsEnabled && <Metrics />}
-      {sections.painPointsEnabled && <PainPoints index={idx.pain} />}
       {sections.servicesEnabled && <Services index={idx.services} />}
+      {sections.painPointsEnabled && <PainPoints index={idx.pain} />}
+      {sections.experienceEnabled && <Experience showCv={cv.enabled} index={idx.experience} />}
       {sections.expertiseCatalogEnabled && (
         <ExpertiseCatalog projects={projects} nicheImages={nicheImages} index={idx.catalog} />
       )}
-      {sections.experienceEnabled && <Experience showCv={cv.enabled} index={idx.experience} />}
       {sections.testimonialsEnabled && (
         <Testimonials testimonials={testimonials} index={idx.testimonials} />
       )}
       {sections.processEnabled && <Process index={idx.process} />}
       {sections.pricingEnabled && <Pricing />}
-      {sections.techStackEnabled && <TechStack />}
       {sections.trustEnabled && <Trust index={idx.trust} />}
       {sections.faqEnabled && <FAQ index={idx.faq} />}
       {sections.contactEnabled && <Contact />}

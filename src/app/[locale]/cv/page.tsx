@@ -114,7 +114,7 @@ export default async function CvPage({
               <h1 className="mt-6 font-display text-2xl font-semibold tracking-tight sm:text-3xl">
                 {siteConfig.name}
               </h1>
-              <p className="mt-2 inline-flex items-center gap-1.5 text-sm text-lime">
+              <p className="mt-2 inline-flex items-center gap-1.5 text-sm text-brand">
                 <Briefcase className="size-4" />
                 {siteConfig.role}
               </p>
@@ -134,7 +134,7 @@ export default async function CvPage({
                       href={c.href}
                       target={c.href.startsWith("http") ? "_blank" : undefined}
                       rel="noreferrer"
-                      className="break-words text-sm hover:text-lime"
+                      className="break-words text-sm hover:text-brand"
                     >
                       {c.value}
                     </a>
@@ -165,7 +165,7 @@ export default async function CvPage({
                           key={item.name}
                           className={
                             item.highlight
-                              ? "rounded-full border border-lime/40 bg-lime/10 px-3 py-1 text-xs text-lime"
+                              ? "rounded-full border border-brand/40 bg-brand/10 px-3 py-1 text-xs text-brand"
                               : "rounded-full border border-border px-3 py-1 text-xs text-ink-muted"
                           }
                         >
@@ -179,7 +179,7 @@ export default async function CvPage({
             </div>
 
             <div>
-              <span className="text-xs font-medium uppercase tracking-widest text-lime">
+              <span className="text-xs font-medium uppercase tracking-widest text-brand">
                 {cv.languagesEyebrow}
               </span>
               <div className="mt-3 flex flex-col gap-1.5 text-sm">
@@ -193,7 +193,7 @@ export default async function CvPage({
             </div>
 
             <div>
-              <span className="text-xs font-medium uppercase tracking-widest text-lime">
+              <span className="text-xs font-medium uppercase tracking-widest text-brand">
                 {cv.interestsEyebrow}
               </span>
               <p className="mt-3 text-sm text-ink-muted">{cv.interests.join(" · ")}</p>
@@ -201,8 +201,8 @@ export default async function CvPage({
           </Reveal>
 
           <div className="flex flex-col gap-12 lg:border-l lg:border-border lg:pl-12">
-            <Reveal delay={0.05} className="border-l-2 border-lime pl-4">
-              <span className="text-xs font-medium uppercase tracking-widest text-lime">
+            <Reveal delay={0.05} className="border-l-2 border-brand pl-4">
+              <span className="text-xs font-medium uppercase tracking-widest text-brand">
                 {cv.profileEyebrow}
               </span>
               <p className="mt-2 max-w-2xl text-base leading-relaxed text-ink-muted">
@@ -216,7 +216,7 @@ export default async function CvPage({
                   key={s.label}
                   className="rounded-2xl border border-border bg-white/[0.02] p-5 text-center print:bg-transparent"
                 >
-                  <div className="font-display text-2xl font-semibold text-lime sm:text-3xl">
+                  <div className="font-display text-2xl font-semibold text-brand sm:text-3xl">
                     {s.value}
                   </div>
                   <div className="mt-1 text-xs text-ink-muted">{s.label}</div>
@@ -234,12 +234,12 @@ export default async function CvPage({
               <div className="relative mt-6 flex flex-col gap-8 border-l border-border pl-6">
                 {cv.experience.map((exp, i) => (
                   <Reveal key={exp.title + exp.period} delay={i * 0.05} className="relative">
-                    <span className="absolute -left-[27px] top-1 size-3 rounded-full bg-lime ring-4 ring-bg" />
+                    <span className="absolute -left-[27px] top-1 size-3 rounded-full bg-brand ring-4 ring-bg" />
                     <div className="flex flex-wrap items-baseline justify-between gap-2">
                       <h3 className="font-display text-lg font-medium">{exp.title}</h3>
                       <span className="text-xs text-ink-muted">{exp.period}</span>
                     </div>
-                    <p className="mt-1 text-sm text-lime">{exp.company}</p>
+                    <p className="mt-1 text-sm text-brand">{exp.company}</p>
                     <ul className="mt-3 flex flex-col gap-1.5 text-sm text-ink-muted">
                       {exp.bullets.map((b) => (
                         <li key={b} className="flex gap-2">
@@ -264,7 +264,7 @@ export default async function CvPage({
                 {cv.education.map((ed) => (
                   <div key={ed.title}>
                     <p className="text-sm font-medium">{ed.title}</p>
-                    <p className="text-sm text-lime">{ed.school}</p>
+                    <p className="text-sm text-brand">{ed.school}</p>
                     <p className="text-xs text-ink-muted">{ed.period}</p>
                   </div>
                 ))}
@@ -288,7 +288,7 @@ export default async function CvPage({
                 </div>
               </div>
               <div>
-                <span className="text-xs font-medium uppercase tracking-widest text-lime">
+                <span className="text-xs font-medium uppercase tracking-widest text-brand">
                   {cv.referenceEyebrow}
                 </span>
                 {cv.referenceName ? (

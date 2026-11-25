@@ -17,7 +17,7 @@ export default async function AdminLayout({
       <div className="flex min-h-screen">
         <aside className="hidden w-64 shrink-0 flex-col border-r border-border p-6 sm:flex">
           <Link href="/admin" className="font-display text-lg font-semibold">
-            Admin<span className="text-lime">.</span>
+            Admin<span className="text-brand">.</span>
           </Link>
 
           <AdminNav />

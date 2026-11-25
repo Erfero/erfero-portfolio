@@ -54,7 +54,8 @@
       "growth": "+32% ventes",
       "growthSub": "après refonte",
       "rating": "4.8"
-    }
+    },
+    "stackLabel": "Langages et technologies que je maîtrise"
   },
   "painPoints": {
     "eyebrow": "Ça te parle ?",
@@ -269,14 +270,20 @@
     "visit": "Visiter",
     "explore": "Tout explorer",
     "liveStores": "boutiques en ligne à visiter",
-    "swipeHint": "Faites glisser pour parcourir →"
+    "swipeHint": "Faites glisser pour parcourir →",
+    "prev": "Boutique précédente",
+    "next": "Boutique suivante",
+    "scrollHint": "Continuez à défiler pour parcourir les boutiques"
   },
   "videoReels": {
     "eyebrow": "En coulisses",
     "title": "Mes réalisations, *en vidéo*",
     "subtitle": "Plus de 200 vidéos qui montrent la construction de boutiques Shopify de A à Z — comme sur TikTok, mais avec le code derrière.",
     "cta": "Voir toutes les vidéos",
-    "play": "Lire"
+    "play": "Lire",
+    "prev": "Vidéo précédente",
+    "next": "Vidéo suivante",
+    "hint": "Cliquez sur la vidéo du centre pour la voir en grand, avec la musique"
   },
   "process": {
     "eyebrow": "Comment ça se passe",
@@ -311,7 +318,41 @@
   },
   "techStack": {
     "eyebrow": "Stack technique",
-    "title": "Les outils que je maîtrise *au quotidien*"
+    "title": "Les langages et outils que je maîtrise *au quotidien*",
+    "subtitle": "Shopify et Liquid au cœur de chaque projet, et toute la stack web autour : du front-end sur mesure au back-end, jusqu'au SEO et à l'optimisation des conversions.",
+    "core": {
+      "badge": "Ma spécialité",
+      "title": "Shopify & Liquid",
+      "description": "Je développe les boutiques Shopify en Liquid, HTML, CSS et JavaScript : sections sur mesure, thème premium Story, Online Store 2.0, vitesse et SEO technique.",
+      "points": [
+        "Thèmes et sections sur mesure en Liquid",
+        "Thème premium Story et Online Store 2.0",
+        "Pages produit pensées pour convertir",
+        "Vitesse, mobile-first et SEO technique"
+      ]
+    },
+    "groups": {
+      "languages": {
+        "title": "Langages",
+        "description": "Le code que j'écris tous les jours, du template Liquid au script JavaScript."
+      },
+      "frontend": {
+        "title": "Front-end",
+        "description": "Interfaces modernes, rapides et animées."
+      },
+      "backend": {
+        "title": "Back-end & données",
+        "description": "API, bases de données et logique serveur."
+      },
+      "cms": {
+        "title": "CMS & mobile",
+        "description": "Les plateformes sur lesquelles je livre des projets."
+      },
+      "growth": {
+        "title": "Croissance",
+        "description": "Être trouvé sur Google, puis transformer les visites en ventes."
+      }
+    }
   },
   "trust": {
     "eyebrow": "Pourquoi me faire confiance",

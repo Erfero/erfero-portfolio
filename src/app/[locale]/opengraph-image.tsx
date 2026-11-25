@@ -25,13 +25,13 @@ export default async function OpengraphImage({
           justifyContent: "center",
           padding: "80px",
           background:
-            "radial-gradient(120% 120% at 15% 0%, rgba(185,255,92,0.25), transparent 55%), radial-gradient(100% 100% at 90% 100%, rgba(139,107,255,0.25), transparent 55%), #07080a",
+            "radial-gradient(120% 120% at 85% 0%, rgba(109,77,255,0.55), transparent 55%), radial-gradient(100% 100% at 10% 100%, rgba(255,111,208,0.35), transparent 55%), #07061a",
         }}
       >
         <span
           style={{
             fontSize: 28,
-            color: "#b9ff5c",
+            color: "#ff6fd0",
             letterSpacing: 2,
             textTransform: "uppercase",
             fontFamily: "sans-serif",
@@ -44,7 +44,7 @@ export default async function OpengraphImage({
             marginTop: 24,
             fontSize: 64,
             fontWeight: 600,
-            color: "#f5f5f7",
+            color: "#f8f7ff",
             fontFamily: "sans-serif",
             lineHeight: 1.15,
             maxWidth: 900,

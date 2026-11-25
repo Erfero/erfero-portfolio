@@ -2,7 +2,7 @@ import { Fragment } from "react";
 
 /**
  * Mini-balisage pour les textes éditables (messages FR/EN, admin) :
- * `*mot*` est rendu en serif italique (couleur d'accent). Tout le reste est
+ * `*mot*` est rendu en dégradé de marque (bien visible). Tout le reste est
  * du texte brut — aucun HTML n'est interprété.
  *
  * La ponctuation qui suit immédiatement un passage accentué (« *vendre*, »)
@@ -11,7 +11,7 @@ import { Fragment } from "react";
  */
 export default function RichText({
   text,
-  accentClassName = "font-serif-accent text-lime",
+  accentClassName = "text-gradient not-italic",
 }: {
   text: string;
   accentClassName?: string;

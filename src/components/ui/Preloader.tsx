@@ -98,7 +98,7 @@ export default function Preloader({ role }: { role: string }) {
     <div
       ref={root}
       aria-hidden
-      className="preloader fixed inset-0 z-[100] flex flex-col justify-between bg-bg p-5 text-ink sm:p-10 print:hidden"
+      className="preloader fixed inset-0 z-[100] flex flex-col justify-between bg-bg bg-[radial-gradient(ellipse_70%_50%_at_50%_45%,rgba(109,77,255,0.35),transparent_70%)] p-5 text-ink sm:p-10 print:hidden"
     >
       <div className="flex items-center justify-between text-[11px] uppercase tracking-[0.25em] text-ink-muted">
         <span className="overflow-hidden">
@@ -111,9 +111,9 @@ export default function Preloader({ role }: { role: string }) {
 
       <div className="flex items-center justify-center">
         <span className="overflow-hidden pb-2">
-          <span className="pl-word font-display inline-block text-[18vw] font-semibold leading-[0.85] tracking-[-0.05em] sm:text-[11vw]">
+          <span className="pl-word font-display inline-block text-[18vw] font-extrabold leading-[0.85] tracking-[-0.05em] sm:text-[11vw]">
             {siteConfig.shortName}
-            <span className="text-lime">.</span>
+            <span className="text-gradient">.</span>
           </span>
         </span>
       </div>
@@ -127,13 +127,13 @@ export default function Preloader({ role }: { role: string }) {
           </span>
           <span
             ref={counter}
-            className="font-display text-5xl font-medium tabular-nums tracking-tight sm:text-7xl"
+            className="text-gradient font-display text-5xl font-extrabold tabular-nums tracking-tight sm:text-7xl"
           >
             000
           </span>
         </div>
         <div className="mt-5 h-px w-full bg-border">
-          <div className="pl-bar h-full w-full origin-left scale-x-0 bg-lime" />
+          <div className="pl-bar bg-brand-gradient h-full w-full origin-left scale-x-0" />
         </div>
       </div>
     </div>

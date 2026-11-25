@@ -44,12 +44,12 @@ export default function ContactForm({ selectedPlan }: { selectedPlan?: string })
   };
 
   const inputClass =
-    "w-full rounded-2xl border border-white/10 bg-white/[0.03] px-5 py-4 text-sm text-ink placeholder:text-ink-muted/60 outline-none transition-colors focus:border-lime/60 focus:bg-white/[0.05]";
+    "w-full rounded-2xl border border-white/12 bg-white/[0.05] px-5 py-4 text-base text-ink placeholder:text-ink-dim outline-none transition-[border-color,background-color,box-shadow] focus:border-pink/70 focus:bg-white/[0.08] focus:shadow-[0_0_0_4px_rgba(255,111,208,0.15)] sm:text-sm";
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
       {selectedPlan && (
-        <div className="flex items-center gap-2 rounded-xl border border-lime/30 bg-lime/6 px-4 py-3 text-sm text-lime">
+        <div className="flex items-center gap-2 rounded-xl border border-brand/30 bg-brand/6 px-4 py-3 text-sm text-brand">
           <Sparkles className="size-4 shrink-0" />
           <span>
             {t("planBadge")} <strong>{selectedPlan}</strong>
@@ -91,7 +91,7 @@ export default function ContactForm({ selectedPlan }: { selectedPlan?: string })
       <button
         type="submit"
         disabled={status === "sending"}
-        className="group inline-flex w-fit items-center gap-2 rounded-full bg-lime px-8 py-4 text-sm font-semibold text-bg transition-transform hover:scale-[1.02] active:scale-[0.98] disabled:opacity-60"
+        className="btn-primary w-fit px-8 py-4 text-sm disabled:opacity-60"
       >
         {status === "sending" ? (
           <Loader2 className="size-4 animate-spin" />
@@ -102,7 +102,7 @@ export default function ContactForm({ selectedPlan }: { selectedPlan?: string })
       </button>
 
       {status === "success" && (
-        <p className="flex items-center gap-2 text-sm text-lime">
+        <p className="flex items-center gap-2 text-sm text-success">
           <CheckCircle2 className="size-4" /> {t("formSuccess")}
         </p>
       )}

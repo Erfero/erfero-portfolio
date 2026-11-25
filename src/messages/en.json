@@ -54,7 +54,8 @@
       "growth": "+32% sales",
       "growthSub": "after redesign",
       "rating": "4.8"
-    }
+    },
+    "stackLabel": "Languages and technologies I work with"
   },
   "painPoints": {
     "eyebrow": "Sound familiar?",
@@ -269,14 +270,20 @@
     "visit": "Visit",
     "explore": "Explore all",
     "liveStores": "live stores to visit",
-    "swipeHint": "Swipe to browse →"
+    "swipeHint": "Swipe to browse →",
+    "prev": "Previous store",
+    "next": "Next store",
+    "scrollHint": "Keep scrolling to browse the stores"
   },
   "videoReels": {
     "eyebrow": "Behind the scenes",
     "title": "My work, *on video*",
     "subtitle": "200+ videos showing Shopify stores being built from scratch — TikTok-style, but with the code behind it.",
     "cta": "Watch all videos",
-    "play": "Play"
+    "play": "Play",
+    "prev": "Previous video",
+    "next": "Next video",
+    "hint": "Click the centre video to watch it full size, with music"
   },
   "process": {
     "eyebrow": "How it works",
@@ -311,7 +318,41 @@
   },
   "techStack": {
     "eyebrow": "Tech stack",
-    "title": "The tools I use *every day*"
+    "title": "The languages and tools I use *every day*",
+    "subtitle": "Shopify and Liquid at the heart of every project, with the full web stack around them: custom front-end, back-end, SEO and conversion optimisation.",
+    "core": {
+      "badge": "My specialty",
+      "title": "Shopify & Liquid",
+      "description": "I build Shopify stores in Liquid, HTML, CSS and JavaScript: custom sections, the premium Story theme, Online Store 2.0, speed and technical SEO.",
+      "points": [
+        "Custom Liquid themes and sections",
+        "Premium Story theme and Online Store 2.0",
+        "Product pages designed to convert",
+        "Speed, mobile-first and technical SEO"
+      ]
+    },
+    "groups": {
+      "languages": {
+        "title": "Languages",
+        "description": "The code I write every day, from Liquid templates to JavaScript."
+      },
+      "frontend": {
+        "title": "Front-end",
+        "description": "Modern, fast, animated interfaces."
+      },
+      "backend": {
+        "title": "Back-end & data",
+        "description": "APIs, databases and server logic."
+      },
+      "cms": {
+        "title": "CMS & mobile",
+        "description": "The platforms I ship projects on."
+      },
+      "growth": {
+        "title": "Growth",
+        "description": "Getting found on Google, then turning visits into sales."
+      }
+    }
   },
   "trust": {
     "eyebrow": "Why work with me",

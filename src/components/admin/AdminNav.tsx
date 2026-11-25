@@ -44,7 +44,7 @@ export default function AdminNav() {
             className={cn(
               "flex items-center gap-2.5 rounded-xl px-3 py-2.5 text-sm transition-colors",
               active
-                ? "bg-lime/10 text-lime"
+                ? "bg-brand/10 text-brand"
                 : "text-ink-muted hover:bg-white/5 hover:text-ink"
             )}
           >

@@ -94,7 +94,7 @@ export default function CvManager({
           <div className="flex shrink-0 flex-col items-end gap-1.5">
             <span
               className={`text-xs font-semibold ${
-                settings.enabled ? "text-lime" : "text-ink-muted"
+                settings.enabled ? "text-brand" : "text-ink-muted"
               }`}
             >
               {settings.enabled ? "Activé" : "Désactivé"}
@@ -103,7 +103,7 @@ export default function CvManager({
               onClick={() => setSettings((s) => ({ ...s, enabled: !s.enabled }))}
               aria-pressed={settings.enabled}
               className={`relative h-7 w-12 rounded-full transition-colors ${
-                settings.enabled ? "bg-lime" : "bg-white/10"
+                settings.enabled ? "bg-brand" : "bg-white/10"
               }`}
             >
               <span
@@ -132,9 +132,9 @@ export default function CvManager({
             href={settings.fileUrl}
             target="_blank"
             rel="noreferrer"
-            className="mt-4 flex items-center gap-2 rounded-xl border border-lime/30 bg-lime/[0.04] px-4 py-3 text-sm text-ink hover:border-lime/50"
+            className="mt-4 flex items-center gap-2 rounded-xl border border-brand/30 bg-brand/[0.04] px-4 py-3 text-sm text-ink hover:border-brand/50"
           >
-            <FileText className="size-4 shrink-0 text-lime" />
+            <FileText className="size-4 shrink-0 text-brand" />
             <span className="truncate">{settings.fileName || settings.fileUrl}</span>
             <ExternalLink className="ml-auto size-3.5 shrink-0 text-ink-muted" />
           </a>
@@ -145,8 +145,8 @@ export default function CvManager({
           </p>
         )}
 
-        <label className="mt-4 flex cursor-pointer flex-col items-center justify-center gap-2 rounded-2xl border border-dashed border-border p-8 text-center transition-colors hover:border-lime/40">
-          <Upload className="size-6 text-lime" />
+        <label className="mt-4 flex cursor-pointer flex-col items-center justify-center gap-2 rounded-2xl border border-dashed border-border p-8 text-center transition-colors hover:border-brand/40">
+          <Upload className="size-6 text-brand" />
           <span className="text-sm font-medium">
             {uploading ? "Envoi en cours..." : "Clique pour envoyer ton CV (.pdf ou .html)"}
           </span>
@@ -165,7 +165,7 @@ export default function CvManager({
         <button
           onClick={handleSaveSettings}
           disabled={isPendingSettings || (!isSettingsDirty && !justSavedSettings)}
-          className="inline-flex w-fit items-center gap-1.5 rounded-full bg-lime px-5 py-2.5 text-sm font-medium text-bg disabled:opacity-40"
+          className="inline-flex w-fit items-center gap-1.5 rounded-full bg-brand px-5 py-2.5 text-sm font-medium text-bg disabled:opacity-40"
         >
           {justSavedSettings ? <Check className="size-4" /> : <Save className="size-4" />}
           {isPendingSettings
@@ -199,7 +199,7 @@ export default function CvManager({
               onClick={() => setLocale(l)}
               className={`rounded-full border px-4 py-1.5 text-sm font-medium uppercase ${
                 locale === l
-                  ? "border-lime bg-lime/10 text-lime"
+                  ? "border-brand bg-brand/10 text-brand"
                   : "border-border text-ink-muted"
               }`}
             >
@@ -219,7 +219,7 @@ export default function CvManager({
           <button
             onClick={handleSaveContent}
             disabled={isPendingContent}
-            className="inline-flex w-fit items-center gap-1.5 rounded-full bg-lime px-5 py-2.5 text-sm font-medium text-bg disabled:opacity-40"
+            className="inline-flex w-fit items-center gap-1.5 rounded-full bg-brand px-5 py-2.5 text-sm font-medium text-bg disabled:opacity-40"
           >
             {justSavedContent ? <Check className="size-4" /> : <Save className="size-4" />}
             {isPendingContent

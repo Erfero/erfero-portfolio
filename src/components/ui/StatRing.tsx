@@ -5,7 +5,7 @@ import { motion, useInView } from "framer-motion";
 
 export default function StatRing({
   value,
-  accent = "var(--color-lime)",
+  accent = "var(--color-brand)",
 }: {
   value: number;
   accent?: string;

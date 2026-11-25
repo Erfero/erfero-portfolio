@@ -133,7 +133,7 @@ export default function SectionsManager({ initial }: { initial: SectionsSettings
             <div className="flex shrink-0 flex-col items-end gap-1.5">
               <span
                 className={`text-xs font-semibold ${
-                  settings[item.key] ? "text-lime" : "text-ink-muted"
+                  settings[item.key] ? "text-brand" : "text-ink-muted"
                 }`}
               >
                 {settings[item.key] ? "Activée" : "Désactivée"}
@@ -144,7 +144,7 @@ export default function SectionsManager({ initial }: { initial: SectionsSettings
                 }
                 aria-pressed={settings[item.key]}
                 className={`relative h-7 w-12 rounded-full transition-colors ${
-                  settings[item.key] ? "bg-lime" : "bg-white/10"
+                  settings[item.key] ? "bg-brand" : "bg-white/10"
                 }`}
               >
                 <span
@@ -163,7 +163,7 @@ export default function SectionsManager({ initial }: { initial: SectionsSettings
           <button
             onClick={handleSave}
             disabled={isPending || (!isDirty && !justSaved)}
-            className="inline-flex w-fit items-center gap-1.5 rounded-full bg-lime px-5 py-2.5 text-sm font-medium text-bg disabled:opacity-40"
+            className="inline-flex w-fit items-center gap-1.5 rounded-full bg-brand px-5 py-2.5 text-sm font-medium text-bg disabled:opacity-40"
           >
             {justSaved ? <Check className="size-4" /> : <Save className="size-4" />}
             {isPending ? "Enregistrement..." : justSaved ? "Enregistré" : "Enregistrer"}

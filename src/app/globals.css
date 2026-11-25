@@ -1,23 +1,37 @@
 @import "tailwindcss";
 
+/* =====================================================================
+   Design system « Aurora » : nuit indigo profonde, dégradé violet → rose →
+   ambre pour tout ce qui doit attirer l'œil, textes clairs et bien lisibles.
+   ===================================================================== */
 @theme {
-  --color-bg: #07080a;
-  --color-bg-soft: #0c0e11;
-  --color-surface: #111418;
-  --color-border: rgba(255, 255, 255, 0.09);
-  --color-ink: #f4f4f1;
-  --color-ink-muted: #9a9ca6;
-  --color-lime: #b9ff5c;
-  --color-lime-soft: #d8ff9e;
-  --color-violet: #8b6bff;
+  --color-bg: #07061a;
+  --color-bg-soft: #0c0a25;
+  --color-surface: #121033;
+  --color-surface-2: #1b1846;
+  --color-border: rgba(255, 255, 255, 0.1);
+  --color-ink: #f8f7ff;
+  --color-ink-muted: #c6c3e6;
+  --color-ink-dim: #9693c2;
+
+  --color-brand: #9d8cff;
+  --color-brand-deep: #6d4dff;
+  --color-pink: #ff6fd0;
+  --color-amber: #ffbe6b;
+  --color-cyan: #4fdcff;
+  --color-success: #4ade80;
 
   --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-display), ui-sans-serif, system-ui, sans-serif;
-  --font-serif: var(--font-serif), ui-serif, Georgia, serif;
 
   --container-page: 1320px;
 
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+:root {
+  --grad-brand: linear-gradient(100deg, #a594ff 0%, #ff6fd0 48%, #ffbe6b 100%);
+  --grad-brand-soft: linear-gradient(100deg, rgba(157, 140, 255, 0.18), rgba(255, 111, 208, 0.14), rgba(255, 190, 107, 0.12));
 }
 
 @layer base {
@@ -44,21 +58,18 @@
   }
 
   ::selection {
-    background: var(--color-lime);
-    color: #07080a;
+    background: #ff6fd0;
+    color: #07061a;
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-lime);
+    outline: 2px solid var(--color-pink);
     outline-offset: 3px;
-    border-radius: 6px;
+    border-radius: 8px;
   }
 
-  /* Page CV imprimable : on réécrit les tokens de couleur pour un rendu
-   * clair (fond blanc, texte sombre) — tous les utilitaires bg et text
-   * du site reposant sur ces variables s'adaptent automatiquement, sans
-   * classes print à dupliquer partout. Le reste de l'UI (nav/footer/
-   * CTA/curseur) est masqué via print:hidden. */
+  /* Impression : tokens clairs (fond blanc, texte sombre) ; la page CV garde
+   * son thème sombre via .cv-print-dark. */
   @media print {
     html {
       --color-bg: #ffffff;
@@ -67,19 +78,19 @@
       --color-border: rgba(0, 0, 0, 0.12);
       --color-ink: #111111;
       --color-ink-muted: #444444;
+      --color-ink-dim: #666666;
       background: var(--color-bg);
       color: var(--color-ink);
     }
 
-    /* La page /cv fait exception : elle doit s'imprimer avec le même
-     * thème sombre que la maquette d'origine. */
     .cv-print-dark {
-      --color-bg: #07080a;
-      --color-bg-soft: #0c0e11;
-      --color-surface: #101317;
-      --color-border: rgba(255, 255, 255, 0.09);
-      --color-ink: #f5f5f7;
-      --color-ink-muted: #9a9ca6;
+      --color-bg: #07061a;
+      --color-bg-soft: #0c0a25;
+      --color-surface: #121033;
+      --color-border: rgba(255, 255, 255, 0.1);
+      --color-ink: #f8f7ff;
+      --color-ink-muted: #c6c3e6;
+      --color-ink-dim: #9693c2;
       background: var(--color-bg);
       color: var(--color-ink);
       -webkit-print-color-adjust: exact;
@@ -91,14 +102,6 @@
 @layer utilities {
   .font-display {
     font-family: var(--font-display);
-  }
-
-  /* Mot mis en valeur dans un grand titre : serif italique. */
-  .font-serif-accent {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-weight: 400;
-    letter-spacing: -0.01em;
   }
 
   .container-page {
@@ -114,23 +117,26 @@
     }
   }
 
-  .glass {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid var(--color-border);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-  }
-
+  /* Texte en dégradé de marque, qui ondule doucement. */
   .text-gradient {
-    background: linear-gradient(100deg, var(--color-lime) 0%, var(--color-lime-soft) 45%, var(--color-violet) 100%);
+    background-image: linear-gradient(100deg, #a594ff 0%, #ff6fd0 30%, #ffbe6b 55%, #ff6fd0 78%, #a594ff 100%);
+    background-size: 220% 100%;
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
+    -webkit-text-fill-color: transparent;
+    animation: gradient-pan 9s linear infinite;
   }
 
-  .text-outline {
-    color: transparent;
-    -webkit-text-stroke: 1px rgba(244, 244, 241, 0.28);
+  .bg-brand-gradient {
+    background-image: var(--grad-brand);
+  }
+
+  .glass {
+    background: rgba(255, 255, 255, 0.045);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
   }
 
   .grain::before {
@@ -139,17 +145,20 @@
     inset: 0;
     z-index: 60;
     pointer-events: none;
-    opacity: 0.045;
+    opacity: 0.05;
     mix-blend-mode: overlay;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
-  /* Fond quadrillé discret, utilisé derrière certaines sections. */
   .bg-grid {
     background-image:
-      linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
-    background-size: 72px 72px;
+      linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+
+  .mask-radial {
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 30%, transparent 75%);
   }
 
   .mask-fade-y {
@@ -168,9 +177,200 @@
   }
 }
 
+@keyframes gradient-pan {
+  from {
+    background-position: 0% 50%;
+  }
+  to {
+    background-position: 220% 50%;
+  }
+}
+
+/* ===== Boutons ========================================================
+   Dans la couche « components » : les utilitaires Tailwind (hidden, px-*,
+   rounded-*…) gardent toujours le dernier mot. */
+@layer components {
+.btn-primary {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  background-image: var(--grad-brand);
+  color: #0b0920;
+  font-weight: 650;
+  box-shadow:
+    0 10px 30px -10px rgba(255, 111, 208, 0.55),
+    0 0 0 1px rgba(255, 255, 255, 0.18) inset;
+  transition:
+    transform 0.4s var(--ease-out-expo),
+    box-shadow 0.4s var(--ease-out-expo);
+}
+.btn-primary::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, 0.65) 50%, transparent 70%);
+  transform: translateX(-120%);
+  transition: transform 0.9s var(--ease-out-expo);
+}
+.btn-primary:hover {
+  box-shadow:
+    0 18px 44px -12px rgba(255, 111, 208, 0.75),
+    0 0 0 1px rgba(255, 255, 255, 0.3) inset;
+}
+.btn-primary:hover::after {
+  transform: translateX(120%);
+}
+.btn-primary:active {
+  transform: scale(0.97);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--color-ink);
+  font-weight: 550;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition:
+    border-color 0.3s,
+    background-color 0.3s,
+    transform 0.4s var(--ease-out-expo);
+}
+.btn-ghost:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.09);
+}
+.btn-ghost:active {
+  transform: scale(0.97);
+}
+
+/* ===== Carte « spotlight » : un halo coloré et une bordure lumineuse
+   suivent la souris (variables --mx / --my posées par SpotlightTracker).
+   --spot permet de teinter chaque carte. */
+.spotlight {
+  --spot: #9d8cff;
+  position: relative;
+  isolation: isolate;
+  border-radius: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02)),
+    var(--color-bg-soft);
+}
+.spotlight::before,
+.spotlight::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.45s ease;
+}
+.spotlight::before {
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(
+    480px circle at var(--mx, 50%) var(--my, 0%),
+    color-mix(in srgb, var(--spot) 22%, transparent),
+    transparent 60%
+  );
+}
+.spotlight::after {
+  inset: -1px;
+  padding: 1px;
+  background: radial-gradient(
+    320px circle at var(--mx, 50%) var(--my, 0%),
+    var(--spot),
+    transparent 65%
+  );
+  mask:
+    linear-gradient(#000 0 0) content-box exclude,
+    linear-gradient(#000 0 0);
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+}
+.spotlight:hover::before,
+.spotlight:hover::after,
+.spotlight:focus-within::before {
+  opacity: 1;
+}
+}
+
+/* ===== Bordure animée (faisceau qui tourne) pour l'offre mise en avant. */
+@property --beam-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+@keyframes beam-spin {
+  to {
+    --beam-angle: 360deg;
+  }
+}
+@layer components {
+.beam-border {
+  position: relative;
+}
+.beam-border::before {
+  content: "";
+  position: absolute;
+  inset: -1.5px;
+  border-radius: inherit;
+  padding: 1.5px;
+  pointer-events: none;
+  background: conic-gradient(
+    from var(--beam-angle),
+    rgba(255, 255, 255, 0.08) 0deg,
+    rgba(255, 255, 255, 0.08) 200deg,
+    #a594ff 260deg,
+    #ff6fd0 300deg,
+    #ffbe6b 340deg,
+    rgba(255, 255, 255, 0.08) 360deg
+  );
+  mask:
+    linear-gradient(#000 0 0) content-box exclude,
+    linear-gradient(#000 0 0);
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  animation: beam-spin 5s linear infinite;
+}
+
+/* ===== Widgets flottants du Hero : opaques pour rester lisibles au-dessus
+   des captures de boutiques. */
+.hs-card {
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(21, 18, 58, 0.94);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+/* ===== Lueurs décoratives floues. */
+.glow-orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  pointer-events: none;
+  opacity: 0.55;
+}
+}
+
 /* ===== Captures de boutiques : au survol, la capture pleine page défile
-   lentement de haut en bas pour montrer toute la boutique. object-position
-   est animable en CSS, ce qui évite toute mesure en JS. */
+   lentement pour montrer toute la boutique. */
 .shot-scroll {
   object-fit: cover;
   object-position: 50% 0%;
@@ -179,13 +379,59 @@
 .shot-trigger:hover .shot-scroll,
 .shot-trigger:focus-visible .shot-scroll {
   object-position: 50% 100%;
-  transition: object-position 7s linear;
+  transition: object-position 8s linear;
 }
 
-/* ===== Défilements infinis (marquees, colonnes). Les propriétés passent par
-   des variables CSS plutôt que par le raccourci `animation` en inline : un
-   style inline l'emporterait sur `:hover` et la pause au survol ne
-   fonctionnerait jamais. */
+/* ===== Vitrine des boutiques (accueil). --fp-w = largeur d'une carte.
+   Mode « libre » (mobile, tablette, écran très bas, mouvement réduit) :
+   carrousel natif au doigt / aux flèches. Mode « épinglé » (desktop) : la
+   rangée défile horizontalement au scroll, et la taille des cartes est
+   calculée sur la HAUTEUR de l'écran pour qu'elles soient toujours le plus
+   grandes possible sans jamais être coupées. La même requête média est
+   utilisée côté GSAP (voir FeaturedProjects.tsx). */
+.fp {
+  --fp-w: 84vw;
+}
+@media (min-width: 640px) {
+  .fp {
+    --fp-w: 62vw;
+  }
+}
+@media (min-width: 1024px) {
+  .fp {
+    --fp-w: min(48vw, 680px);
+  }
+}
+.fp-when-pinned {
+  display: none;
+}
+@media (min-width: 1024px) and (min-height: 520px) and (prefers-reduced-motion: no-preference) {
+  html.js .fp {
+    --fp-w: clamp(400px, calc((100svh - 240px) * 16 / 9), min(58vw, 980px));
+  }
+  html.js .fp-panel {
+    height: 100svh;
+    display: flex;
+    flex-direction: column;
+    margin-top: 0;
+    padding-top: 76px;
+  }
+  html.js .fp-viewport {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    scroll-snap-type: none;
+  }
+  html.js .fp-when-free {
+    display: none;
+  }
+  html.js .fp-when-pinned {
+    display: flex;
+  }
+}
+
+/* ===== Défilements infinis (marquees, colonnes). */
 .marquee-track {
   animation-name: var(--marquee-name);
   animation-duration: var(--marquee-duration, 60s);
@@ -237,13 +483,41 @@
   }
 }
 
+/* Orbites de logos (section Stack). */
+@keyframes orbit {
+  from {
+    transform: rotate(var(--orbit-start, 0deg)) translateX(var(--orbit-r)) rotate(calc(-1 * var(--orbit-start, 0deg)));
+  }
+  to {
+    transform: rotate(calc(var(--orbit-start, 0deg) + 360deg)) translateX(var(--orbit-r))
+      rotate(calc(-1 * (var(--orbit-start, 0deg) + 360deg)));
+  }
+}
+.orbit-item {
+  animation: orbit var(--orbit-duration, 30s) linear infinite;
+  animation-direction: var(--orbit-direction, normal);
+}
+
+@keyframes float-y {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+.float-y {
+  animation: float-y 6s ease-in-out infinite;
+}
+
 @keyframes pulse-dot {
   0%,
   100% {
-    box-shadow: 0 0 0 0 rgba(185, 255, 92, 0.55);
+    box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.6);
   }
   70% {
-    box-shadow: 0 0 0 8px rgba(185, 255, 92, 0);
+    box-shadow: 0 0 0 9px rgba(74, 222, 128, 0);
   }
 }
 
@@ -266,21 +540,16 @@
 }
 
 /* Masques de lignes SplitText : un peu de marge pour ne pas rogner les
-   jambages et l'italique de la serif. */
+   jambages. */
 .split-line-mask {
-  padding-bottom: 0.12em;
-  margin-bottom: -0.12em;
-  padding-right: 0.08em;
+  padding-bottom: 0.14em;
+  margin-bottom: -0.14em;
+  padding-right: 0.06em;
 }
 
-/* ===== Mur 3D de boutiques (Hero). */
-.hero-wall {
-  transform-style: preserve-3d;
-}
-
-/* État initial des éléments animés par GSAP : masqués uniquement quand le JS
-   est actif ET que l'utilisateur accepte les animations — sans JS, ou en
-   "mouvement réduit", tout reste visible. */
+/* État initial des éléments animés à l'intro : masqués uniquement quand le
+   JS est actif ET que l'utilisateur accepte les animations. Filet de
+   sécurité : tout redevient visible après 6 s (voir layout racine). */
 @media (prefers-reduced-motion: no-preference) {
   html.js:not(.reveal-failsafe) [data-reveal] {
     opacity: 0;

@@ -51,18 +51,18 @@ export default async function AdminLoginPage({
             name="email"
             required
             placeholder="Email"
-            className="w-full rounded-xl border border-border bg-white/[0.02] px-4 py-3 text-sm outline-none focus:border-lime/50"
+            className="w-full rounded-xl border border-border bg-white/[0.02] px-4 py-3 text-sm outline-none focus:border-brand/50"
           />
           <input
             type="password"
             name="password"
             required
             placeholder="Mot de passe"
-            className="w-full rounded-xl border border-border bg-white/[0.02] px-4 py-3 text-sm outline-none focus:border-lime/50"
+            className="w-full rounded-xl border border-border bg-white/[0.02] px-4 py-3 text-sm outline-none focus:border-brand/50"
           />
           <button
             type="submit"
-            className="mt-2 rounded-full bg-lime px-6 py-3 text-sm font-medium text-bg"
+            className="mt-2 rounded-full bg-brand px-6 py-3 text-sm font-medium text-bg"
           >
             Se connecter
           </button>

@@ -8,7 +8,7 @@ export type Json = string | number | boolean | Json[] | { [key: string]: Json } 
 export type JsonObject = Record<string, Json>;
 
 const inputClass =
-  "w-full rounded-lg border border-border bg-white/[0.02] px-3 py-2 text-sm outline-none focus:border-lime/50";
+  "w-full rounded-lg border border-border bg-white/[0.02] px-3 py-2 text-sm outline-none focus:border-brand/50";
 
 function isObject(value: Json): value is JsonObject {
   return !!value && typeof value === "object" && !Array.isArray(value);
@@ -165,7 +165,7 @@ export default function ContentEditor({
             onClick={() => setLocale(l)}
             className={`rounded-full border px-4 py-1.5 text-sm font-medium uppercase ${
               locale === l
-                ? "border-lime bg-lime/10 text-lime"
+                ? "border-brand bg-brand/10 text-brand"
                 : "border-border text-ink-muted"
             }`}
           >
@@ -202,7 +202,7 @@ export default function ContentEditor({
         <button
           onClick={handleSave}
           disabled={isPending}
-          className="inline-flex items-center gap-1.5 rounded-full bg-lime px-6 py-3 text-sm font-medium text-bg shadow-xl shadow-black/30 disabled:opacity-60"
+          className="inline-flex items-center gap-1.5 rounded-full bg-brand px-6 py-3 text-sm font-medium text-bg shadow-xl shadow-black/30 disabled:opacity-60"
         >
           {saved ? <Check className="size-4" /> : <Save className="size-4" />}
           {isPending

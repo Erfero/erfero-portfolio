@@ -66,7 +66,7 @@ export default function NicheImagesManager({
               value={images[key] ?? ""}
               onChange={(e) => update(key, e.target.value)}
               placeholder="URL depuis la Médiathèque"
-              className="mt-3 w-full rounded-lg border border-border bg-white/[0.02] px-3 py-2 text-sm outline-none focus:border-lime/50"
+              className="mt-3 w-full rounded-lg border border-border bg-white/[0.02] px-3 py-2 text-sm outline-none focus:border-brand/50"
             />
             <datalist id={`niche-media-${key}`}>
               {mediaUrls.map((url) => (
@@ -80,7 +80,7 @@ export default function NicheImagesManager({
       <button
         onClick={handleSave}
         disabled={isPending}
-        className="mt-6 inline-flex items-center gap-1.5 rounded-full bg-lime px-5 py-2 text-sm font-medium text-bg disabled:opacity-60"
+        className="mt-6 inline-flex items-center gap-1.5 rounded-full bg-brand px-5 py-2 text-sm font-medium text-bg disabled:opacity-60"
       >
         {saved ? <Check className="size-4" /> : <Save className="size-4" />}
         {isPending ? "Enregistrement..." : saved ? "Enregistré" : "Enregistrer"}

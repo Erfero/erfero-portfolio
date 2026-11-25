@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { useTranslations } from "next-intl";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Briefcase } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { gsap, useGSAP, MOTION_OK } from "@/lib/gsap";
 import SectionHeading from "@/components/ui/SectionHeading";
@@ -10,11 +10,11 @@ import { LinkedinIcon } from "@/components/ui/BrandIcons";
 import { siteConfig } from "@/data/site.config";
 
 type Job = { title: string; company: string; period: string; bullets: string[] };
+const COLORS = ["#a594ff", "#ff6fd0", "#ffbe6b", "#4fdcff", "#4ade80"];
 
 /**
- * Parcours professionnel (agences et entreprises), repris du contenu du CV
- * pour rester toujours synchronisé avec lui. La ligne de la frise se dessine
- * au rythme du scroll.
+ * Parcours professionnel (agences et entreprises), repris du contenu du CV.
+ * La ligne de la frise se remplit en dégradé au rythme du scroll.
  */
 export default function Experience({ showCv, index }: { showCv?: boolean; index?: string }) {
   const t = useTranslations("experience");
@@ -37,11 +37,11 @@ export default function Experience({ showCv, index }: { showCv?: boolean; index?
         );
         gsap.utils.toArray<HTMLElement>(".xp-item").forEach((item) => {
           gsap.from(item, {
-            x: 40,
+            x: 50,
             autoAlpha: 0,
             duration: 1,
             ease: "expo.out",
-            scrollTrigger: { trigger: item, start: "top 85%", once: true },
+            scrollTrigger: { trigger: item, start: "top 88%", once: true },
           });
         });
       });
@@ -50,16 +50,13 @@ export default function Experience({ showCv, index }: { showCv?: boolean; index?
   );
 
   return (
-    <section ref={root} id="parcours" className="relative scroll-mt-28 py-24 sm:py-32">
-      <div className="container-page grid gap-14 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-20">
+    <section ref={root} id="parcours" className="relative scroll-mt-24 py-20 sm:py-28">
+      <div className="container-page grid gap-14 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-16">
         <div className="lg:sticky lg:top-28 lg:h-fit">
           <SectionHeading eyebrow={t("eyebrow")} title={t("title")} subtitle={t("subtitle")} index={index} />
           <div className="mt-10 flex flex-wrap gap-3">
             {showCv && (
-              <Link
-                href="/cv"
-                className="group inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 text-sm font-semibold text-bg transition-colors hover:bg-lime"
-              >
+              <Link href="/cv" className="btn-primary group px-6 py-3.5 text-sm">
                 {t("ctaCv")}
                 <ArrowUpRight className="size-4 transition-transform duration-300 group-hover:rotate-45" />
               </Link>
@@ -68,9 +65,9 @@ export default function Experience({ showCv, index }: { showCv?: boolean; index?
               href={siteConfig.socials.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-white/15 px-6 py-3.5 text-sm font-medium transition-colors hover:border-white/40"
+              className="btn-ghost px-6 py-3.5 text-sm"
             >
-              <LinkedinIcon className="size-4" />
+              <LinkedinIcon className="size-4 text-[#4fa3f7]" />
               LinkedIn
             </a>
           </div>
@@ -78,26 +75,45 @@ export default function Experience({ showCv, index }: { showCv?: boolean; index?
 
         {/* Les traits décoratifs vivent dans un conteneur à part : une <ol> ne
             doit contenir que des <li> (HTML valide, lecteurs d'écran). */}
-        <div className="xp-list relative pl-8 sm:pl-12">
-          <span className="absolute bottom-2 left-[3px] top-2 w-px bg-white/10" aria-hidden />
-          <span className="xp-progress absolute bottom-2 left-[3px] top-2 w-px origin-top bg-lime" aria-hidden />
-          <ol>
-          {jobs.map((job) => (
-            <li key={`${job.company}-${job.period}`} className="xp-item relative pb-14 last:pb-0">
-              <span className="absolute -left-8 top-2 size-[7px] rounded-full bg-lime ring-4 ring-bg sm:-left-12" aria-hidden />
-              <p className="text-xs font-medium uppercase tracking-[0.18em] text-ink-muted">{job.period}</p>
-              <h3 className="font-display mt-3 text-2xl font-medium tracking-tight sm:text-3xl">{job.title}</h3>
-              <p className="mt-1 text-base text-lime">{job.company}</p>
-              <ul className="mt-4 flex flex-col gap-2">
-                {job.bullets.map((b) => (
-                  <li key={b} className="flex gap-3 text-sm leading-relaxed text-ink-muted sm:text-base">
-                    <span className="mt-2.5 h-px w-3 shrink-0 bg-white/30" />
-                    {b}
-                  </li>
-                ))}
-              </ul>
-            </li>
-          ))}
+        <div className="xp-list relative pl-10 sm:pl-14">
+          <span className="absolute bottom-4 left-[15px] top-4 w-[2px] rounded-full bg-white/10" aria-hidden />
+          <span
+            className="xp-progress absolute bottom-4 left-[15px] top-4 w-[2px] origin-top rounded-full bg-gradient-to-b from-brand via-pink to-amber"
+            aria-hidden
+          />
+          <ol className="flex flex-col gap-5">
+            {jobs.map((job, i) => {
+              const color = COLORS[i % COLORS.length];
+              return (
+                <li key={`${job.company}-${job.period}`} className="xp-item relative">
+                  <span
+                    className="absolute -left-10 top-6 grid size-8 place-items-center rounded-full border-2 bg-bg sm:-left-14"
+                    style={{ borderColor: color, boxShadow: `0 0 20px -4px ${color}` }}
+                    aria-hidden
+                  >
+                    <Briefcase className="size-3.5" style={{ color }} />
+                  </span>
+                  <div className="spotlight p-6 sm:p-7" style={{ "--spot": color } as React.CSSProperties}>
+                    <span
+                      className="inline-block rounded-full px-3 py-1 text-xs font-bold"
+                      style={{ background: `${color}22`, color }}
+                    >
+                      {job.period}
+                    </span>
+                    <h3 className="font-display mt-4 text-2xl font-bold tracking-tight sm:text-[1.7rem]">{job.title}</h3>
+                    <p className="text-gradient mt-1 text-base font-semibold">{job.company}</p>
+                    <ul className="mt-4 flex flex-col gap-2">
+                      {job.bullets.map((b) => (
+                        <li key={b} className="flex gap-3 text-sm leading-relaxed text-ink-muted sm:text-base">
+                          <span className="mt-2.5 size-1.5 shrink-0 rounded-full" style={{ background: color }} />
+                          {b}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </li>
+              );
+            })}
           </ol>
         </div>
       </div>

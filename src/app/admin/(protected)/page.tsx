@@ -42,9 +42,9 @@ export default function AdminDashboard() {
           <a
             key={card.href}
             href={card.href}
-            className="group rounded-2xl border border-border bg-white/[0.02] p-6 transition-colors hover:border-lime/30"
+            className="group rounded-2xl border border-border bg-white/[0.02] p-6 transition-colors hover:border-brand/30"
           >
-            <card.icon className="size-6 text-lime" />
+            <card.icon className="size-6 text-brand" />
             <h2 className="mt-4 flex items-center gap-1.5 font-medium">
               {card.title}
               <ArrowUpRight className="size-3.5 opacity-0 transition-opacity group-hover:opacity-100" />

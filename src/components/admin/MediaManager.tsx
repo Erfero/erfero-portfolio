@@ -61,8 +61,8 @@ export default function MediaManager({
 
   return (
     <div className="mt-6">
-      <label className="flex cursor-pointer flex-col items-center justify-center gap-2 rounded-2xl border border-dashed border-border p-10 text-center transition-colors hover:border-lime/40">
-        <Upload className="size-6 text-lime" />
+      <label className="flex cursor-pointer flex-col items-center justify-center gap-2 rounded-2xl border border-dashed border-border p-10 text-center transition-colors hover:border-brand/40">
+        <Upload className="size-6 text-brand" />
         <span className="text-sm font-medium">
           Clique pour choisir un ou plusieurs fichiers
         </span>
@@ -80,7 +80,7 @@ export default function MediaManager({
       </label>
 
       {progress && (
-        <p className="mt-3 text-sm text-lime">{progress}</p>
+        <p className="mt-3 text-sm text-brand">{progress}</p>
       )}
 
       <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
@@ -96,7 +96,7 @@ export default function MediaManager({
                 <video src={item.url} muted className="aspect-square w-full object-cover" />
               ) : isAudio ? (
                 <div className="flex aspect-square w-full flex-col items-center justify-center gap-2 bg-white/[0.03] p-3">
-                  <Music className="size-6 text-lime" />
+                  <Music className="size-6 text-brand" />
                   <audio src={item.url} controls className="w-full" />
                 </div>
               ) : (

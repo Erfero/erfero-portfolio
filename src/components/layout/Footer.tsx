@@ -48,15 +48,16 @@ export default function Footer({ showCv }: { showCv?: boolean }) {
   ];
 
   return (
-    <footer ref={root} data-hide-cta className="relative overflow-hidden border-t border-white/10 print:hidden">
+    <footer ref={root} data-hide-cta className="relative isolate overflow-hidden border-t border-white/10 print:hidden">
+      <div aria-hidden className="glow-orb -bottom-40 left-1/2 -z-10 h-[30rem] w-[70rem] -translate-x-1/2 bg-brand-deep/35" />
       <div className="container-page grid gap-12 pb-10 pt-20 md:grid-cols-[1.3fr_1fr_1fr]">
         <div className="max-w-sm">
-          <p className="font-display text-2xl font-medium leading-snug tracking-tight sm:text-3xl">
+          <p className="font-display text-2xl font-semibold leading-snug tracking-tight sm:text-3xl">
             {t("tagline")}
           </p>
           <Link
             href="/contact"
-            className="group mt-8 inline-flex items-center gap-2 rounded-full bg-lime px-6 py-3.5 text-sm font-semibold text-bg"
+            className="btn-primary group mt-8 px-6 py-3.5 text-sm"
           >
             {nav("cta")}
             <ArrowUpRight className="size-4 transition-transform duration-300 group-hover:rotate-45" />
@@ -64,7 +65,7 @@ export default function Footer({ showCv }: { showCv?: boolean }) {
         </div>
 
         <div>
-          <p className="text-[11px] uppercase tracking-[0.22em] text-ink-muted/70">{t("pages")}</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-ink-dim">{t("pages")}</p>
           <ul className="mt-5 flex flex-col gap-3">
             {pages.map((p) => (
               <li key={p.href}>
@@ -77,7 +78,7 @@ export default function Footer({ showCv }: { showCv?: boolean }) {
         </div>
 
         <div>
-          <p className="text-[11px] uppercase tracking-[0.22em] text-ink-muted/70">{t("elsewhere")}</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-ink-dim">{t("elsewhere")}</p>
           <ul className="mt-5 flex flex-col gap-3">
             {socials.map(({ href, icon: Icon, label }) => (
               <li key={label}>
@@ -98,17 +99,26 @@ export default function Footer({ showCv }: { showCv?: boolean }) {
       </div>
 
       <div className="ft-mark container-page select-none overflow-hidden" aria-hidden>
-        <p className="font-display flex text-[25vw] font-semibold leading-[0.78] tracking-[-0.07em] lg:text-[21.5vw] 2xl:text-[290px]">
-          {siteConfig.shortName.split("").map((ch, i) => (
-            <span key={i} className="ft-letter inline-block">
+        <p className="font-display flex text-[25vw] font-extrabold leading-[0.8] tracking-[-0.07em] lg:text-[21.5vw] 2xl:text-[290px]">
+          {[...siteConfig.shortName.split(""), "."].map((ch, i, all) => (
+            // Chaque lettre porte sa tranche du dégradé de marque : le mot
+            // entier forme un seul dégradé continu, même lettre par lettre.
+            <span
+              key={i}
+              className="ft-letter inline-block bg-clip-text text-transparent"
+              style={{
+                backgroundImage: "var(--grad-brand)",
+                backgroundSize: `${all.length * 100}% 100%`,
+                backgroundPosition: `${(i / (all.length - 1)) * 100}% 50%`,
+              }}
+            >
               {ch}
             </span>
           ))}
-          <span className="ft-letter inline-block text-lime">.</span>
         </p>
       </div>
 
-      <div className="container-page flex flex-col gap-3 border-t border-white/10 py-6 text-xs text-ink-muted/70 sm:flex-row sm:items-center sm:justify-between">
+      <div className="container-page flex flex-col gap-3 border-t border-white/10 py-6 text-xs text-ink-dim sm:flex-row sm:items-center sm:justify-between">
         <span>
           © {year} {siteConfig.name}. {t("rights")}
         </span>

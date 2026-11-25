@@ -3,9 +3,11 @@
 import { useRef } from "react";
 import { useTranslations } from "next-intl";
 import { gsap, useGSAP, MOTION_OK } from "@/lib/gsap";
-import SplitHeading from "@/components/ui/SplitHeading";
+import SectionHeading from "@/components/ui/SectionHeading";
 
-/** Chiffres clés : chaque nombre compte jusqu'à sa valeur à l'apparition. */
+const COLORS = ["#a594ff", "#ff6fd0", "#ffbe6b", "#4fdcff", "#4ade80"];
+
+/** Chiffres clés : grands nombres en dégradé qui comptent jusqu'à leur valeur. */
 export default function Metrics() {
   const t = useTranslations("metrics");
   const items = t.raw("items") as { value: string; suffix: string; label: string }[];
@@ -16,27 +18,28 @@ export default function Metrics() {
       const mm = gsap.matchMedia();
       mm.add(MOTION_OK, () => {
         gsap.utils.toArray<HTMLElement>(".mt-num").forEach((el) => {
-          const target = parseFloat(el.dataset.value ?? "0");
-          const decimals = (el.dataset.value ?? "").split(".")[1]?.length ?? 0;
+          const raw = el.dataset.value ?? "0";
+          const target = parseFloat(raw);
+          const decimals = raw.split(".")[1]?.length ?? 0;
           const obj = { v: 0 };
           el.textContent = (0).toFixed(decimals);
           gsap.to(obj, {
             v: target,
-            duration: 2,
+            duration: 2.2,
             ease: "power3.out",
-            scrollTrigger: { trigger: el, start: "top 88%", once: true },
+            scrollTrigger: { trigger: el, start: "top 90%", once: true },
             onUpdate: () => {
               el.textContent = obj.v.toFixed(decimals);
             },
           });
         });
         gsap.from(".mt-cell", {
-          y: 40,
+          y: 50,
           autoAlpha: 0,
           stagger: 0.08,
           duration: 1,
           ease: "expo.out",
-          scrollTrigger: { trigger: root.current, start: "top 80%", once: true },
+          scrollTrigger: { trigger: ".mt-grid", start: "top 85%", once: true },
         });
       });
     },
@@ -44,32 +47,30 @@ export default function Metrics() {
   );
 
   return (
-    <section ref={root} className="relative border-y border-white/10 bg-white/[0.015] py-20 sm:py-28">
+    <section ref={root} className="relative py-16 sm:py-24">
       <div className="container-page">
-        <div className="flex flex-wrap items-end justify-between gap-6">
-          <div>
-            <span className="inline-flex items-center gap-3 text-[11px] font-medium uppercase tracking-[0.22em] text-lime">
-              <span className="h-px w-8 bg-lime/70" />
-              {t("eyebrow")}
-            </span>
-            <SplitHeading
-              text={t("title")}
-              className="font-display mt-5 max-w-2xl text-3xl font-medium leading-[1.05] tracking-[-0.03em] sm:text-5xl"
-            />
-          </div>
-        </div>
+        <SectionHeading eyebrow={t("eyebrow")} title={t("title")} />
 
-        <dl className="mt-14 grid grid-cols-2 border-l border-t border-white/10 sm:grid-cols-3 lg:grid-cols-5">
-          {items.map((item) => (
-            <div key={item.label} className="mt-cell border-b border-r border-white/10 p-6 sm:p-8">
+        <dl className="mt-grid mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+          {items.map((item, i) => (
+            <div
+              key={item.label}
+              className={`mt-cell spotlight p-6 sm:p-7 ${i === items.length - 1 ? "col-span-2 sm:col-span-1" : ""}`}
+              style={{ "--spot": COLORS[i % COLORS.length] } as React.CSSProperties}
+            >
+              <span
+                aria-hidden
+                className="absolute inset-x-6 top-0 h-[3px] rounded-b-full"
+                style={{ background: COLORS[i % COLORS.length], boxShadow: `0 0 20px ${COLORS[i % COLORS.length]}` }}
+              />
               <dt className="sr-only">{item.label}</dt>
-              <dd className="font-display text-5xl font-semibold tracking-[-0.04em] sm:text-6xl">
-                <span className="mt-num tabular-nums" data-value={item.value}>
+              <dd className="font-display flex items-baseline text-5xl font-extrabold tracking-[-0.04em] sm:text-6xl">
+                <span className="mt-num tabular-nums text-ink" data-value={item.value}>
                   {item.value}
                 </span>
-                <span className="text-lime">{item.suffix}</span>
+                <span className="text-gradient">{item.suffix}</span>
               </dd>
-              <dd className="mt-3 text-sm leading-snug text-ink-muted">{item.label}</dd>
+              <dd className="mt-3 text-sm font-medium leading-snug text-ink-muted sm:text-base">{item.label}</dd>
             </div>
           ))}
         </dl>

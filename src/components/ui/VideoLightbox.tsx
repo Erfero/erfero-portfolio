@@ -1,10 +1,16 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useSyncExternalStore } from "react";
+import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import { X } from "lucide-react";
+import { Music2, X } from "lucide-react";
 import type { VideoEntry } from "@/data/videos";
 
+const noopSubscribe = () => () => {};
+
+/** Vidéo en grand, dans un cadre de téléphone, avec sa musique de fond.
+ * Rendue directement dans <body> (portail) pour passer au-dessus de
+ * l'en-tête fixe, quel que soit le conteneur qui l'ouvre. */
 export default function VideoLightbox({
   video,
   caption,
@@ -16,6 +22,8 @@ export default function VideoLightbox({
 }) {
   const audioRef = useRef<HTMLAudioElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  // Vrai seulement côté navigateur (le portail a besoin de document.body).
+  const isClient = useSyncExternalStore(noopSubscribe, () => true, () => false);
 
   // Fermeture au clavier (Échap) tant que la lightbox est ouverte.
   useEffect(() => {
@@ -27,10 +35,8 @@ export default function VideoLightbox({
     return () => window.removeEventListener("keydown", onKey);
   }, [video, onClose]);
 
-  // Le navigateur évalue l'autorisation d'autoplay dès l'attachement de
-  // l'élément, avant que React n'applique la prop `muted` comme propriété
-  // DOM — avec `autoPlay` seul en JSX, la vidéo reste bloquée sur un cadre
-  // vide. On force donc `muted` puis `play()` explicitement ici.
+  // `muted` doit être posé comme propriété DOM avant play() (autoplay), puis
+  // la musique démarre ; à la fermeture on coupe l'élément audio qui jouait.
   useEffect(() => {
     const el = videoRef.current;
     if (el) {
@@ -38,8 +44,6 @@ export default function VideoLightbox({
       el.currentTime = 0;
       el.play().catch(() => {});
     }
-    // On garde la référence de l'élément audio qui joue réellement : c'est
-    // lui qu'il faut couper à la fermeture, même si la ref a changé entre-temps.
     const audio = audioRef.current;
     if (video?.musicSrc) {
       audio?.play().catch(() => {});
@@ -52,7 +56,9 @@ export default function VideoLightbox({
     };
   }, [video]);
 
-  return (
+  if (!isClient) return null;
+
+  return createPortal(
     <AnimatePresence>
       {video && (
         <motion.div
@@ -60,47 +66,62 @@ export default function VideoLightbox({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={onClose}
-          className="fixed inset-0 z-[80] flex items-center justify-center bg-black/85 p-6 backdrop-blur-sm"
+          role="dialog"
+          aria-modal="true"
+          aria-label={caption}
+          className="fixed inset-0 z-[80] flex items-center justify-center bg-[#05041a]/90 p-5 backdrop-blur-md"
         >
+          <div
+            aria-hidden
+            className="pointer-events-none absolute left-1/2 top-1/2 h-[40rem] w-[40rem] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-50 blur-[120px]"
+            style={{ background: video.accent }}
+          />
           <motion.div
-            initial={{ scale: 0.85, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.9, opacity: 0 }}
-            transition={{ type: "spring", stiffness: 260, damping: 26 }}
+            initial={{ scale: 0.85, opacity: 0, y: 30 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            exit={{ scale: 0.9, opacity: 0, y: 20 }}
+            transition={{ type: "spring", stiffness: 240, damping: 26 }}
             onClick={(e) => e.stopPropagation()}
-            className="relative aspect-[9/16] w-full max-w-sm overflow-hidden rounded-3xl border border-white/10 shadow-2xl"
+            className="relative w-full max-w-[min(24rem,calc((100svh-6rem)*9/16))] rounded-[2.6rem] border border-white/20 bg-[#0b0a1f] p-2 shadow-[0_60px_140px_-40px_rgba(0,0,0,1)]"
           >
-            <video
-              ref={videoRef}
-              key={video.id}
-              src={video.src}
-              poster={video.poster}
-              loop
-              muted
-              playsInline
-              preload="auto"
-              className="size-full object-cover"
-            />
-            {video.musicSrc && (
-              <audio ref={audioRef} src={video.musicSrc} loop />
-            )}
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-            {caption && (
-              <span className="pointer-events-none absolute bottom-4 left-4 right-4 text-sm font-semibold text-white drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]">
-                {caption}
-              </span>
-            )}
+            <span aria-hidden className="absolute left-1/2 top-4 z-10 h-1.5 w-16 -translate-x-1/2 rounded-full bg-black/80" />
+            <div className="relative aspect-[9/16] overflow-hidden rounded-[2.1rem]">
+              <video
+                ref={videoRef}
+                key={video.id}
+                src={video.src}
+                poster={video.poster}
+                loop
+                muted
+                playsInline
+                preload="auto"
+                className="size-full object-cover"
+              />
+              {video.musicSrc && <audio ref={audioRef} src={video.musicSrc} loop />}
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent" />
+              {caption && (
+                <span className="pointer-events-none absolute bottom-5 left-5 right-5 text-base font-semibold text-white drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]">
+                  {caption}
+                </span>
+              )}
+              {video.musicSrc && (
+                <span className="pointer-events-none absolute left-4 top-9 grid size-8 place-items-center rounded-full bg-black/45 text-white backdrop-blur">
+                  <Music2 className="size-4" />
+                </span>
+              )}
+            </div>
           </motion.div>
 
           <button
             onClick={onClose}
             aria-label="Fermer"
-            className="absolute right-6 top-6 grid size-10 place-items-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur"
+            className="btn-ghost absolute right-5 top-5 size-12 p-0 sm:right-8 sm:top-8"
           >
             <X className="size-5" />
           </button>
         </motion.div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 }

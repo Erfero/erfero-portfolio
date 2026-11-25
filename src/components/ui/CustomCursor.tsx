@@ -36,8 +36,8 @@ export default function CustomCursor() {
       gsap.to(el, {
         width: next === "label" ? 92 : next === "hover" ? 44 : 12,
         height: next === "label" ? 92 : next === "hover" ? 44 : 12,
-        backgroundColor: next === "hover" ? "rgba(185,255,92,0.12)" : "rgb(185,255,92)",
-        borderColor: next === "hover" ? "rgba(185,255,92,0.7)" : "rgba(185,255,92,0)",
+        backgroundColor: next === "hover" ? "rgba(255,111,208,0.12)" : next === "label" ? "rgb(255,255,255)" : "rgb(255,111,208)",
+        borderColor: next === "hover" ? "rgba(255,111,208,0.8)" : "rgba(255,111,208,0)",
         duration: 0.35,
         ease: "power3.out",
         overwrite: "auto",
@@ -83,11 +83,11 @@ export default function CustomCursor() {
     <div
       ref={dot}
       aria-hidden
-      className="pointer-events-none fixed left-0 top-0 z-[90] grid size-3 place-items-center rounded-full border border-transparent bg-lime print:hidden"
+      className="pointer-events-none fixed left-0 top-0 z-[90] grid size-3 place-items-center rounded-full border border-transparent bg-pink shadow-[0_10px_40px_-6px_rgba(255,111,208,0.7)] print:hidden"
     >
       <span
         ref={labelRef}
-        className="invisible text-[11px] font-semibold uppercase tracking-wider text-bg opacity-0"
+        className="invisible text-[11px] font-bold uppercase tracking-wider text-[#0b0920] opacity-0"
       />
     </div>
   );

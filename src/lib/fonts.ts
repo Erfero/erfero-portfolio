@@ -1,4 +1,4 @@
-import { Bricolage_Grotesque, Inter, Instrument_Serif } from "next/font/google";
+import { Bricolage_Grotesque, Inter } from "next/font/google";
 
 export const fontSans = Inter({
   subsets: ["latin"],
@@ -6,17 +6,9 @@ export const fontSans = Inter({
   display: "swap",
 });
 
+/** Titres : grotesque expressive, utilisée en graisse forte (600–800). */
 export const fontDisplay = Bricolage_Grotesque({
   subsets: ["latin"],
   variable: "--font-display",
-  display: "swap",
-});
-
-/** Serif italique réservée aux mots mis en valeur dans les grands titres. */
-export const fontSerif = Instrument_Serif({
-  subsets: ["latin"],
-  weight: "400",
-  style: ["normal", "italic"],
-  variable: "--font-serif",
   display: "swap",
 });

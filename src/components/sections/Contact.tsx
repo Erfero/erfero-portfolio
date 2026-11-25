@@ -10,58 +10,71 @@ export default function Contact({ selectedPlan }: { selectedPlan?: string }) {
   const t = useTranslations("contact");
 
   const links = [
-    { href: `https://wa.me/${siteConfig.whatsappNumber}`, icon: WhatsappIcon, label: t("whatsappCta"), meta: siteConfig.phone },
-    { href: siteConfig.calendlyUrl, icon: CalendarCheck2, label: t("calendlyCta"), meta: t("calendlyMeta") },
-    { href: `mailto:${siteConfig.email}`, icon: Mail, label: t("emailCta"), meta: siteConfig.email },
+    {
+      href: `https://wa.me/${siteConfig.whatsappNumber}`,
+      icon: WhatsappIcon,
+      label: t("whatsappCta"),
+      meta: siteConfig.phone,
+      color: "#25D366",
+    },
+    { href: siteConfig.calendlyUrl, icon: CalendarCheck2, label: t("calendlyCta"), meta: t("calendlyMeta"), color: "#4fdcff" },
+    { href: `mailto:${siteConfig.email}`, icon: Mail, label: t("emailCta"), meta: siteConfig.email, color: "#ff6fd0" },
   ];
 
   return (
-    <section id="contact" data-hide-cta className="relative scroll-mt-28 overflow-hidden py-24 sm:py-32">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute left-1/2 top-0 -z-10 h-[38rem] w-[60rem] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(185,255,92,0.10),transparent)] blur-2xl"
-      />
+    <section id="contact" data-hide-cta className="relative isolate scroll-mt-24 overflow-hidden py-20 sm:py-28">
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
+        <div className="glow-orb left-1/2 top-40 h-[30rem] w-[56rem] -translate-x-1/2 bg-brand-deep/35" />
+        <div className="glow-orb -right-20 bottom-0 h-[26rem] w-[26rem] bg-pink/25" />
+        <div className="bg-grid mask-radial absolute inset-0 opacity-50" />
+      </div>
       <div className="container-page">
         <Reveal y={12}>
-          <span className="inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-white/[0.03] py-1.5 pl-2.5 pr-4 text-xs text-ink/90">
-            <span className="pulse-dot size-2 rounded-full bg-lime" />
+          <span className="glass inline-flex items-center gap-2.5 rounded-full py-1.5 pl-3 pr-4 text-sm font-medium">
+            <span className="pulse-dot size-2 rounded-full bg-success" />
             {t("availability")}
           </span>
         </Reveal>
         <SplitHeading
           text={t("bigTitle")}
-          className="font-display mt-8 max-w-[14ch] text-[clamp(2.8rem,8vw,8rem)] font-semibold leading-[0.92] tracking-[-0.045em]"
+          className="font-display mt-7 max-w-[14ch] text-[clamp(2.8rem,7.5vw,7.5rem)] font-extrabold leading-[0.95] tracking-[-0.045em]"
         />
         <Reveal delay={0.1}>
           <p className="mt-6 max-w-xl text-base leading-relaxed text-ink-muted sm:text-lg">{t("subtitle")}</p>
         </Reveal>
 
-        <div className="mt-16 grid gap-10 lg:grid-cols-[1.15fr_1fr] lg:gap-16">
-          <Reveal className="rounded-3xl border border-white/10 bg-white/[0.02] p-6 sm:p-10">
-            <ContactForm selectedPlan={selectedPlan} />
+        <div className="mt-14 grid gap-6 lg:grid-cols-[1.15fr_1fr] lg:gap-10">
+          <Reveal>
+            <div className="spotlight p-6 sm:p-9">
+              <ContactForm selectedPlan={selectedPlan} />
+            </div>
           </Reveal>
 
-          <Reveal delay={0.1} className="flex flex-col border-t border-white/10">
-            {links.map(({ href, icon: Icon, label, meta }) => (
+          <Reveal delay={0.1} className="flex flex-col gap-3">
+            {links.map(({ href, icon: Icon, label, meta, color }) => (
               <a
                 key={label}
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-center justify-between gap-4 border-b border-white/10 py-6 sm:py-8"
+                className="spotlight group flex items-center justify-between gap-4 p-5 sm:p-6"
+                style={{ "--spot": color } as React.CSSProperties}
               >
                 <span className="flex min-w-0 items-center gap-4">
-                  <span className="grid size-12 shrink-0 place-items-center rounded-2xl bg-lime/10 text-lime transition-colors duration-500 group-hover:bg-lime group-hover:text-bg">
-                    <Icon className="size-5" />
+                  <span
+                    className="grid size-14 shrink-0 place-items-center rounded-2xl transition-transform duration-500 group-hover:scale-110"
+                    style={{ background: `${color}22`, color, boxShadow: `0 0 30px -10px ${color}` }}
+                  >
+                    <Icon className="size-6" />
                   </span>
                   <span className="min-w-0">
-                    <span className="font-display block text-xl font-medium tracking-tight transition-transform duration-500 group-hover:translate-x-1 sm:text-2xl">
-                      {label}
-                    </span>
+                    <span className="font-display block text-xl font-bold tracking-tight sm:text-2xl">{label}</span>
                     <span className="mt-0.5 block truncate text-sm text-ink-muted">{meta}</span>
                   </span>
                 </span>
-                <ArrowUpRight className="size-5 shrink-0 text-ink-muted transition-all duration-500 group-hover:rotate-45 group-hover:text-lime" />
+                <span className="grid size-10 shrink-0 place-items-center rounded-full bg-white/10 transition-all duration-500 group-hover:rotate-45 group-hover:bg-white group-hover:text-[#0b0920]">
+                  <ArrowUpRight className="size-4" />
+                </span>
               </a>
             ))}
           </Reveal>

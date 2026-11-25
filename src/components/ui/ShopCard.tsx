@@ -1,4 +1,4 @@
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Lock } from "lucide-react";
 import type { ProjectCard } from "@/lib/projectMedia";
 import { projectHost, projectShot } from "@/lib/projectMedia";
 import { cn } from "@/lib/utils";
@@ -40,19 +40,20 @@ export default function ShopCard({
       className={cn("shot-trigger group block", className)}
       style={{ "--accent": project.accent } as React.CSSProperties}
     >
-      <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-surface shadow-[0_30px_80px_-40px_rgba(0,0,0,0.9)] transition-[border-color,box-shadow,transform] duration-500 ease-[var(--ease-out-expo)] group-hover:-translate-y-1 group-hover:border-[color-mix(in_srgb,var(--accent)_55%,transparent)] group-hover:shadow-[0_40px_90px_-40px_var(--accent)]">
-        <div className="flex h-8 items-center gap-2 border-b border-white/[0.07] bg-[#0d0f12] px-3 sm:h-9">
+      <div className="relative overflow-hidden rounded-2xl border border-white/12 bg-surface shadow-[0_30px_80px_-45px_rgba(0,0,0,1)] transition-[border-color,box-shadow,transform] duration-500 ease-[var(--ease-out-expo)] group-hover:-translate-y-1.5 group-hover:border-[color-mix(in_srgb,var(--accent)_70%,transparent)] group-hover:shadow-[0_40px_100px_-40px_var(--accent)]">
+        <div className="flex h-9 items-center gap-2 border-b border-white/10 bg-[#100e2e] px-3.5">
           <span className="flex gap-1.5" aria-hidden>
-            <span className="size-2 rounded-full bg-white/15" />
-            <span className="size-2 rounded-full bg-white/15" />
-            <span className="size-2 rounded-full bg-white/15" />
+            <span className="size-2.5 rounded-full bg-[#ff5f57]" />
+            <span className="size-2.5 rounded-full bg-[#febc2e]" />
+            <span className="size-2.5 rounded-full bg-[#28c840]" />
           </span>
-          <span className="mx-auto max-w-[70%] truncate rounded-md bg-white/[0.05] px-3 py-0.5 text-[10px] text-ink-muted sm:text-[11px]">
-            {host}
+          <span className="mx-auto flex min-w-0 max-w-[62%] items-center gap-1.5 rounded-md bg-white/[0.07] px-3 py-0.5 text-[11px] text-ink-muted">
+            <Lock className="size-3 shrink-0 text-success" aria-hidden />
+            <span className="truncate">{host}</span>
           </span>
-          <ArrowUpRight className="size-3.5 text-ink-muted transition-colors group-hover:text-lime" aria-hidden />
+          <ArrowUpRight className="size-4 text-ink-muted transition-colors group-hover:text-ink" aria-hidden />
         </div>
-        <div className={cn("relative overflow-hidden bg-[#0d0f12]", size === "lg" ? "aspect-[16/10]" : "aspect-[4/3]")}>
+        <div className={cn("relative overflow-hidden bg-[#100e2e]", size === "lg" ? "aspect-video" : "aspect-[4/3]")}>
           {/* eslint-disable-next-line @next/next/no-img-element -- captures déjà optimisées (WebP) */}
           <img
             src={projectShot(project)}
@@ -61,7 +62,13 @@ export default function ShopCard({
             decoding="async"
             className="shot-scroll absolute inset-0 size-full"
           />
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/45 to-transparent opacity-100 transition-opacity duration-500 group-hover:opacity-0" />
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/50 to-transparent transition-opacity duration-500 group-hover:opacity-0" />
+          {nicheLabel && (
+            <span className="absolute left-3 top-3 rounded-full border border-white/15 bg-black/55 px-3 py-1 text-xs font-semibold text-white backdrop-blur-md">
+              <span className="mr-1.5 inline-block size-1.5 rounded-full align-middle" style={{ background: project.accent }} />
+              {nicheLabel}
+            </span>
+          )}
         </div>
       </div>
 
@@ -69,26 +76,22 @@ export default function ShopCard({
         <div className="min-w-0">
           <div className="flex items-baseline gap-3">
             {typeof index === "number" && (
-              <span className="font-display text-xs tabular-nums text-ink-muted/60">
+              <span className="text-gradient font-display text-sm font-bold tabular-nums">
                 {String(index + 1).padStart(2, "0")}
               </span>
             )}
             <h3
               className={cn(
-                "font-display truncate font-medium tracking-tight",
-                size === "lg" ? "text-2xl sm:text-3xl" : "text-lg sm:text-xl"
+                "font-display truncate font-bold tracking-tight",
+                size === "lg" ? "text-2xl sm:text-3xl" : "text-xl"
               )}
             >
               {name}
             </h3>
           </div>
-          <p className="mt-1 truncate text-sm text-ink-muted">
-            {nicheLabel ? <span className="text-ink/80">{nicheLabel}</span> : null}
-            {nicheLabel ? " · " : null}
-            {project.tagline[locale]}
-          </p>
+          <p className="mt-1 line-clamp-2 text-sm leading-relaxed text-ink-muted">{project.tagline[locale]}</p>
         </div>
-        <span className="grid size-10 shrink-0 place-items-center rounded-full border border-white/10 text-ink transition-all duration-500 group-hover:rotate-45 group-hover:border-lime group-hover:bg-lime group-hover:text-bg">
+        <span className="grid size-10 shrink-0 place-items-center rounded-full border border-white/15 transition-all duration-500 group-hover:rotate-45 group-hover:border-transparent group-hover:bg-white group-hover:text-[#0b0920]">
           <ArrowUpRight className="size-4" aria-hidden />
         </span>
       </div>

@@ -13,7 +13,7 @@ const emptyVideo = (): VideoEntry => ({
 });
 
 const inputClass =
-  "w-full rounded-lg border border-border bg-white/[0.02] px-3 py-2 text-sm outline-none focus:border-lime/50";
+  "w-full rounded-lg border border-border bg-white/[0.02] px-3 py-2 text-sm outline-none focus:border-brand/50";
 
 export default function VideosManager({
   initialVideos,
@@ -132,7 +132,7 @@ export default function VideosManager({
         <button
           onClick={handleSave}
           disabled={isPending}
-          className="inline-flex items-center gap-1.5 rounded-full bg-lime px-5 py-2 text-sm font-medium text-bg disabled:opacity-60"
+          className="inline-flex items-center gap-1.5 rounded-full bg-brand px-5 py-2 text-sm font-medium text-bg disabled:opacity-60"
         >
           {saved ? <Check className="size-4" /> : <Save className="size-4" />}
           {isPending ? "Enregistrement..." : saved ? "Enregistré" : "Enregistrer"}

@@ -5,7 +5,7 @@ import { motion, useInView } from "framer-motion";
 
 export default function StatRing({
   value,
-  accent = "var(--color-brand)",
+  accent = "var(--color-accent)",
 }: {
   value: number;
   accent?: string;
@@ -40,7 +40,7 @@ export default function StatRing({
         cy={size / 2}
         r={radius}
         fill="none"
-        stroke="rgba(255,255,255,0.08)"
+        stroke="color-mix(in srgb, var(--color-ink) 10%, transparent)"
         strokeWidth={stroke}
       />
       <motion.circle

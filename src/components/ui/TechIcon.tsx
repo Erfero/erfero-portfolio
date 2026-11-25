@@ -1,7 +1,7 @@
 import { techLogos, type TechKey } from "@/data/techLogos";
 import { cn } from "@/lib/utils";
 
-/** Logo officiel d'une technologie, dans sa couleur de marque. */
+/** Logo officiel d'une technologie (couleur de marque par défaut, ou forcée). */
 export default function TechIcon({
   name,
   className,
@@ -26,7 +26,8 @@ export default function TechIcon({
   );
 }
 
-/** Tuile de logo : fond teinté de la couleur de marque + halo au survol. */
+/** Tuile de logo, sobre : logo monochrome (couleur du texte) sur fond neutre.
+ * Shopify et Liquid — le cœur du métier — ressortent en vert. */
 export function TechTile({
   name,
   size = "md",
@@ -36,22 +37,19 @@ export function TechTile({
   size?: "sm" | "md" | "lg";
   className?: string;
 }) {
-  const logo = techLogos[name];
+  const core = name === "shopify" || name === "liquid";
   return (
     <span
       className={cn(
-        "grid shrink-0 place-items-center rounded-2xl border transition-[transform,box-shadow] duration-500 ease-[var(--ease-out-expo)]",
+        "grid shrink-0 place-items-center rounded-2xl border",
+        core ? "border-accent/30 bg-accent/10 text-accent" : "border-line bg-ink/[0.05] text-ink",
         size === "lg" ? "size-16 sm:size-20" : size === "sm" ? "size-10 rounded-xl" : "size-12 sm:size-14",
         className
       )}
-      style={{
-        background: `linear-gradient(145deg, ${logo.color}2e, ${logo.color}0d)`,
-        borderColor: `${logo.color}40`,
-        boxShadow: `0 10px 30px -14px ${logo.color}99`,
-      }}
     >
       <TechIcon
         name={name}
+        color="currentColor"
         className={size === "lg" ? "size-8 sm:size-10" : size === "sm" ? "size-5" : "size-6 sm:size-7"}
       />
     </span>

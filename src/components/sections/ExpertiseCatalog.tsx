@@ -53,7 +53,7 @@ export default function ExpertiseCatalog({
   );
 
   return (
-    <section ref={root} className="relative py-20 sm:py-28">
+    <section ref={root} className="tone-dark relative py-24 sm:py-32">
       <div className="container-page">
         <SectionHeading eyebrow={t("eyebrow")} title={t("title")} subtitle={t("subtitle")} index={index} />
 
@@ -62,8 +62,7 @@ export default function ExpertiseCatalog({
             <li key={niche} className={`ec-card ${i === 0 ? "col-span-2 row-span-2" : ""}`}>
               <Link
                 href={`/realisations?niche=${niche}`}
-                className="group relative block h-full min-h-44 overflow-hidden rounded-3xl border border-white/10 sm:min-h-56"
-                style={{ "--accent": list[0].accent } as React.CSSProperties}
+                className="group relative block h-full min-h-44 overflow-hidden rounded-3xl border border-line sm:min-h-56"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element -- vignette WebP pré-optimisée */}
                 <img
@@ -73,21 +72,20 @@ export default function ExpertiseCatalog({
                   decoding="async"
                   className="absolute inset-0 size-full object-cover object-top transition-transform duration-[1.2s] ease-[var(--ease-out-expo)] group-hover:scale-110"
                 />
-                <span className="absolute inset-0 bg-gradient-to-t from-[#07061a] via-[#07061a]/55 to-[#07061a]/5 transition-opacity duration-500 group-hover:opacity-80" />
-                <span className="absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 [background:radial-gradient(80%_60%_at_50%_100%,color-mix(in_srgb,var(--accent)_45%,transparent),transparent)]" />
+                <span className="absolute inset-0 bg-gradient-to-t from-[#0e1311] via-[#0e1311]/55 to-[#0e1311]/5 transition-opacity duration-500 group-hover:opacity-80" />
                 <span className="relative flex h-full flex-col justify-between p-5 sm:p-6">
-                  <span className="self-start rounded-full bg-black/65 px-3 py-1 text-xs font-bold tabular-nums text-white ring-1 ring-white/15 backdrop-blur-md">
+                  <span className="self-start rounded-full bg-[#0e1311]/70 px-3 py-1 text-xs font-semibold tabular-nums text-white ring-1 ring-white/15 backdrop-blur-md">
                     {list.length} {t(list.length > 1 ? "storesPlural" : "storeSingular")}
                   </span>
                   <span className="flex items-end justify-between gap-3">
                     <span
-                      className={`font-display font-bold leading-tight tracking-tight ${
+                      className={`font-display min-w-0 font-semibold leading-tight tracking-[-0.03em] text-white ${
                         i === 0 ? "text-3xl sm:text-5xl" : "text-xl sm:text-2xl"
                       }`}
                     >
                       {t(`niches.${niche}`)}
                     </span>
-                    <span className="grid size-10 shrink-0 place-items-center rounded-full bg-white text-[#0b0920] transition-transform duration-500 group-hover:rotate-45">
+                    <span className="hidden size-10 shrink-0 place-items-center rounded-full bg-white text-[#0e1311] transition-transform duration-500 group-hover:rotate-45 group-hover:bg-[#3cc896] sm:grid">
                       <ArrowUpRight className="size-4" />
                     </span>
                   </span>

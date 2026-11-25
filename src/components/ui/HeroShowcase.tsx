@@ -125,24 +125,24 @@ export default function HeroShowcase({ shops, mock }: { shops: Project[]; mock: 
         {/* Halo coloré derrière la fenêtre */}
         <div
           aria-hidden
-          className="absolute -inset-[12%] -z-10 rounded-full bg-[radial-gradient(closest-side,rgba(157,140,255,0.45),rgba(255,111,208,0.18)_55%,transparent)] blur-2xl"
+          className="absolute -inset-[10%] -z-10 rounded-full bg-[radial-gradient(closest-side,rgba(0,128,96,0.28),transparent)] blur-2xl"
         />
 
         {/* Fenêtre de navigateur : vraies boutiques en fondu enchaîné */}
-        <div className="hs-browser relative overflow-hidden rounded-2xl border border-white/15 bg-surface shadow-[0_50px_120px_-40px_rgba(109,77,255,0.75)]">
-          <div className="flex h-9 items-center gap-2 border-b border-white/10 bg-[#100e2e] px-3.5">
+        <div className="hs-browser relative overflow-hidden rounded-2xl border border-line bg-surface shadow-[0_50px_120px_-40px_rgba(0,0,0,0.9)]">
+          <div className="flex h-9 items-center gap-2 border-b border-line bg-bg-soft px-3.5">
             <span className="flex gap-1.5" aria-hidden>
-              <span className="size-2.5 rounded-full bg-[#ff5f57]" />
-              <span className="size-2.5 rounded-full bg-[#febc2e]" />
-              <span className="size-2.5 rounded-full bg-[#28c840]" />
+              <span className="size-2.5 rounded-full bg-ink/20" />
+              <span className="size-2.5 rounded-full bg-ink/20" />
+              <span className="size-2.5 rounded-full bg-ink/20" />
             </span>
-            <span className="mx-auto flex min-w-0 max-w-[65%] items-center gap-1.5 rounded-md bg-white/[0.07] px-3 py-1 text-[11px] text-ink-muted">
+            <span className="mx-auto flex min-w-0 max-w-[65%] items-center gap-1.5 rounded-md bg-ink/[0.07] px-3 py-1 font-mono text-[11px] text-ink-muted">
               <Lock className="size-3 shrink-0 text-success" aria-hidden />
               <span className="truncate">{current ? projectHost(current) : ""}</span>
             </span>
             <span className="w-10" aria-hidden />
           </div>
-          <div className="relative aspect-[16/10] bg-[#100e2e]">
+          <div className="relative aspect-[16/10] bg-bg-soft">
             {shops.map((shop, i) => (
               // eslint-disable-next-line @next/next/no-img-element -- captures WebP pré-optimisées
               <img
@@ -158,7 +158,7 @@ export default function HeroShowcase({ shops, mock }: { shops: Project[]; mock: 
             ))}
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
 
-            <span className="hs-cart absolute bottom-4 left-4 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-xs font-bold text-[#0b0920] shadow-[0_10px_30px_-8px_rgba(0,0,0,0.6)] sm:text-sm">
+            <span className="hs-cart absolute bottom-4 left-4 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-xs font-semibold text-[#0e1311] shadow-[0_10px_30px_-8px_rgba(0,0,0,0.6)] sm:text-sm">
               {mock.addToCart}
             </span>
             <svg
@@ -166,7 +166,7 @@ export default function HeroShowcase({ shops, mock }: { shops: Project[]; mock: 
               viewBox="0 0 24 24"
               className="hs-cursor absolute bottom-1 left-24 size-7 opacity-0 drop-shadow-[0_4px_8px_rgba(0,0,0,0.6)] sm:left-28"
             >
-              <path d="M4 2l15 9-6.5 1.6L9.6 19 4 2z" fill="#fff" stroke="#0b0920" strokeWidth="1.4" strokeLinejoin="round" />
+              <path d="M4 2l15 9-6.5 1.6L9.6 19 4 2z" fill="#fff" stroke="#0e1311" strokeWidth="1.4" strokeLinejoin="round" />
             </svg>
           </div>
         </div>
@@ -174,8 +174,8 @@ export default function HeroShowcase({ shops, mock }: { shops: Project[]; mock: 
         {/* Vente confirmée */}
         <div data-depth="34" className="absolute -left-3 top-[44%] sm:-left-10">
           <div className="hs-widget">
-            <div className="hs-toast hs-card flex items-center gap-3 rounded-2xl py-2.5 pl-2.5 pr-4 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.9)]">
-              <span className="grid size-9 place-items-center rounded-full bg-success/20 text-success">
+            <div className="hs-toast hs-card tone-light flex items-center gap-3 rounded-2xl py-2.5 pl-2.5 pr-4">
+              <span className="grid size-9 place-items-center rounded-full bg-[#008060] text-white">
                 <Check className="size-4" strokeWidth={3} />
               </span>
               <span>
@@ -188,26 +188,26 @@ export default function HeroShowcase({ shops, mock }: { shops: Project[]; mock: 
 
         {/* Note clients */}
         <div data-depth="22" className="absolute -right-2 -top-5 sm:-right-6">
-          <div className="hs-widget hs-card flex items-center gap-2 rounded-full px-3.5 py-2 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.9)]">
-            <span className="flex text-amber" aria-hidden>
+          <div className="hs-widget hs-card tone-light flex items-center gap-2 rounded-full px-3.5 py-2">
+            <span className="flex text-accent" aria-hidden>
               {Array.from({ length: 5 }).map((_, i) => (
                 <Star key={i} className="size-3.5 fill-current" />
               ))}
             </span>
-            <span className="font-display text-sm font-bold">{mock.rating}</span>
+            <span className="font-display text-sm font-semibold">{mock.rating}</span>
           </div>
         </div>
 
         {/* Hausse des ventes */}
         <div data-depth="58" className="absolute -right-2 top-[20%] sm:-right-8">
-          <div className="hs-widget hs-card w-40 rounded-2xl p-4 shadow-[0_30px_60px_-25px_rgba(0,0,0,0.95)] sm:w-48">
-            <p className="text-gradient font-display text-2xl font-extrabold leading-none sm:text-3xl">{mock.growth}</p>
+          <div className="hs-widget hs-card w-40 rounded-2xl p-4 sm:w-48">
+            <p className="font-display text-2xl font-semibold leading-none tracking-tight text-accent sm:text-3xl">{mock.growth}</p>
             <p className="mt-1 text-xs text-ink-muted">{mock.growthSub}</p>
             <div className="mt-3 flex h-10 items-end gap-1 sm:h-12" aria-hidden>
               {BARS.map((h, i) => (
                 <span
                   key={i}
-                  className="hs-bar flex-1 origin-bottom rounded-sm bg-gradient-to-t from-brand-deep to-pink"
+                  className="hs-bar flex-1 origin-bottom rounded-sm bg-accent"
                   style={{ height: `${h}%`, opacity: 0.45 + (i / BARS.length) * 0.55 }}
                 />
               ))}
@@ -217,16 +217,16 @@ export default function HeroShowcase({ shops, mock }: { shops: Project[]; mock: 
 
         {/* Fiche produit */}
         <div data-depth="46" className="absolute -bottom-10 -right-2 hidden sm:-right-6 sm:block">
-          <div className="hs-widget hs-card flex w-56 items-center gap-3 rounded-2xl p-3 shadow-[0_30px_60px_-25px_rgba(0,0,0,0.95)]">
-            <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-[#95BF47]/15 ring-1 ring-[#95BF47]/40">
-              <TechIcon name="shopify" className="size-6" />
+          <div className="hs-widget hs-card tone-light flex w-56 items-center gap-3 rounded-2xl p-3">
+            <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-[#008060]/10 ring-1 ring-[#008060]/25">
+              <TechIcon name="shopify" className="size-6" color="#008060" />
             </span>
             <span className="min-w-0">
-              <span className="block text-[10px] font-semibold uppercase tracking-[0.14em] text-pink">{mock.badge}</span>
-              <span className="font-display block text-sm font-bold leading-tight">
+              <span className="label-mono block text-[10px] font-semibold text-accent">{mock.badge}</span>
+              <span className="font-display block text-sm font-semibold leading-tight">
                 {mock.heading} {mock.headingLine2}
               </span>
-              <span className="mt-1 inline-block rounded-full bg-white/10 px-2 py-0.5 text-[10px] font-semibold text-ink">
+              <span className="mt-1 inline-block rounded-full bg-ink px-2 py-0.5 text-[10px] font-semibold text-bg">
                 {mock.cta}
               </span>
             </span>

@@ -1,37 +1,129 @@
 @import "tailwindcss";
 
 /* =====================================================================
-   Design system « Aurora » : nuit indigo profonde, dégradé violet → rose →
-   ambre pour tout ce qui doit attirer l'œil, textes clairs et bien lisibles.
+   Design system « Atelier » — 4 couleurs, pas une de plus :
+     · Nuit   #0e1311  (quasi-noir, une pointe de vert)
+     · Papier #f4f2ed  (blanc cassé chaud)
+     · Sable  #e5e0d6  (neutre chaud pour les sections secondaires)
+     · Vert Shopify #008060 (l'unique accent : boutons, mots clés)
+   Règle 60/30/10 : neutres pour les fonds, encre pour le texte, vert
+   réservé à ce qui doit attirer l'œil.
+
+   Chaque section choisit son ambiance avec une classe de ton :
+     .tone-dark (défaut), .tone-light, .tone-stone, .tone-green
+   Le ton redéfinit les rôles (--color-bg, --color-ink, --color-accent…),
+   donc les utilitaires Tailwind (bg-bg, text-ink, border-line…) suivent
+   automatiquement, sans dupliquer les composants.
    ===================================================================== */
 @theme {
-  --color-bg: #07061a;
-  --color-bg-soft: #0c0a25;
-  --color-surface: #121033;
-  --color-surface-2: #1b1846;
-  --color-border: rgba(255, 255, 255, 0.1);
-  --color-ink: #f8f7ff;
-  --color-ink-muted: #c6c3e6;
-  --color-ink-dim: #9693c2;
+  /* Palette fixe */
+  --color-night: #0e1311;
+  --color-paper: #f4f2ed;
+  --color-stone: #e5e0d6;
+  --color-green: #008060;
+  --color-green-light: #3cc896;
 
-  --color-brand: #9d8cff;
-  --color-brand-deep: #6d4dff;
-  --color-pink: #ff6fd0;
-  --color-amber: #ffbe6b;
-  --color-cyan: #4fdcff;
-  --color-success: #4ade80;
+  /* Rôles (valeurs du ton sombre ; voir .tone-* plus bas) */
+  --color-bg: #0e1311;
+  --color-bg-soft: #131a17;
+  --color-surface: #18201c;
+  --color-border: rgba(244, 242, 237, 0.12);
+  --color-line: rgba(244, 242, 237, 0.12);
+  --color-ink: #f4f2ed;
+  --color-ink-muted: #b9beba;
+  --color-ink-dim: #8c938f;
+  --color-accent: #3cc896;
+  --color-accent-fill: #3cc896;
+  --color-on-accent: #0e1311;
+  --color-success: #3cc896;
 
-  --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+  /* Alias utilisés par l'espace d'administration (thème sombre) : même vert. */
+  --color-brand: #3cc896;
+  --color-brand-deep: #008060;
+
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-instrument), "Times New Roman", Georgia, serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SFMono-Regular", Menlo, monospace;
 
   --container-page: 1320px;
 
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-:root {
-  --grad-brand: linear-gradient(100deg, #a594ff 0%, #ff6fd0 48%, #ffbe6b 100%);
-  --grad-brand-soft: linear-gradient(100deg, rgba(157, 140, 255, 0.18), rgba(255, 111, 208, 0.14), rgba(255, 190, 107, 0.12));
+/* Les rôles sont redéclarés ici en CSS « normal » : ils existent toujours,
+   même si Tailwind n'émet que les variables qu'il voit utilisées. */
+:root,
+.tone-dark {
+  --color-bg: #0e1311;
+  --color-bg-soft: #131a17;
+  --color-surface: #18201c;
+  --color-border: rgba(244, 242, 237, 0.12);
+  --color-line: rgba(244, 242, 237, 0.12);
+  --color-ink: #f4f2ed;
+  --color-ink-muted: #b9beba;
+  --color-ink-dim: #8c938f;
+  --color-accent: #3cc896;
+  --color-accent-fill: #3cc896;
+  --color-on-accent: #0e1311;
+  --color-success: #3cc896;
+  --grid-line: rgba(244, 242, 237, 0.05);
+}
+
+.tone-light {
+  --color-bg: #f4f2ed;
+  --color-bg-soft: #eeebe4;
+  --color-surface: #fbfaf7;
+  --color-border: rgba(14, 19, 17, 0.12);
+  --color-line: rgba(14, 19, 17, 0.12);
+  --color-ink: #0e1311;
+  --color-ink-muted: #4b544f;
+  --color-ink-dim: #646c67;
+  --color-accent: #007a5b;
+  --color-accent-fill: #008060;
+  --color-on-accent: #ffffff;
+  --color-success: #007a5b;
+  --grid-line: rgba(14, 19, 17, 0.06);
+}
+
+.tone-stone {
+  --color-bg: #e5e0d6;
+  --color-bg-soft: #ddd7cc;
+  --color-surface: #f1eee8;
+  --color-border: rgba(14, 19, 17, 0.13);
+  --color-line: rgba(14, 19, 17, 0.13);
+  --color-ink: #0e1311;
+  --color-ink-muted: #474f4b;
+  --color-ink-dim: #5e6661;
+  --color-accent: #007354;
+  --color-accent-fill: #008060;
+  --color-on-accent: #ffffff;
+  --color-success: #007354;
+  --grid-line: rgba(14, 19, 17, 0.06);
+}
+
+.tone-green {
+  --color-bg: #008060;
+  --color-bg-soft: #00745a;
+  --color-surface: #0a8a69;
+  --color-border: rgba(255, 255, 255, 0.22);
+  --color-line: rgba(255, 255, 255, 0.22);
+  --color-ink: #ffffff;
+  --color-ink-muted: rgba(255, 255, 255, 0.82);
+  --color-ink-dim: rgba(255, 255, 255, 0.7);
+  --color-accent: #f4f2ed;
+  --color-accent-fill: #f4f2ed;
+  --color-on-accent: #0e1311;
+  --color-success: #ffffff;
+  --grid-line: rgba(255, 255, 255, 0.08);
+}
+
+.tone-dark,
+.tone-light,
+.tone-stone,
+.tone-green {
+  background-color: var(--color-bg);
+  color: var(--color-ink);
 }
 
 @layer base {
@@ -40,7 +132,7 @@
   }
 
   html {
-    background: var(--color-bg);
+    background: #0e1311;
     color-scheme: dark;
     scroll-behavior: auto;
     overflow-x: clip;
@@ -55,46 +147,37 @@
     overflow-x: clip;
     overflow-y: visible;
     text-rendering: optimizeLegibility;
+    font-feature-settings: "ss01", "cv11";
   }
 
   ::selection {
-    background: #ff6fd0;
-    color: #07061a;
+    background: #008060;
+    color: #ffffff;
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-pink);
+    outline: 2px solid var(--color-accent);
     outline-offset: 3px;
     border-radius: 8px;
   }
 
-  /* Impression : tokens clairs (fond blanc, texte sombre) ; la page CV garde
-   * son thème sombre via .cv-print-dark. */
+  /* Impression : tout passe en clair (fond blanc, texte sombre). */
   @media print {
-    html {
+    html,
+    .tone-dark,
+    .tone-stone,
+    .tone-green {
       --color-bg: #ffffff;
       --color-bg-soft: #f3f3f3;
       --color-surface: #f7f7f7;
       --color-border: rgba(0, 0, 0, 0.12);
+      --color-line: rgba(0, 0, 0, 0.12);
       --color-ink: #111111;
       --color-ink-muted: #444444;
       --color-ink-dim: #666666;
-      background: var(--color-bg);
+      --color-accent: #007a5b;
+      background: #ffffff;
       color: var(--color-ink);
-    }
-
-    .cv-print-dark {
-      --color-bg: #07061a;
-      --color-bg-soft: #0c0a25;
-      --color-surface: #121033;
-      --color-border: rgba(255, 255, 255, 0.1);
-      --color-ink: #f8f7ff;
-      --color-ink-muted: #c6c3e6;
-      --color-ink-dim: #9693c2;
-      background: var(--color-bg);
-      color: var(--color-ink);
-      -webkit-print-color-adjust: exact;
-      print-color-adjust: exact;
     }
   }
 }
@@ -117,26 +200,28 @@
     }
   }
 
-  /* Texte en dégradé de marque, qui ondule doucement. */
-  .text-gradient {
-    background-image: linear-gradient(100deg, #a594ff 0%, #ff6fd0 30%, #ffbe6b 55%, #ff6fd0 78%, #a594ff 100%);
-    background-size: 220% 100%;
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
-    -webkit-text-fill-color: transparent;
-    animation: gradient-pan 9s linear infinite;
+  /* Mot mis en avant dans un titre : serif italique, en vert. */
+  .accent-word {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    color: var(--color-accent);
   }
 
-  .bg-brand-gradient {
-    background-image: var(--grad-brand);
+  /* Petite étiquette « code » (eyebrows, numéros de section). */
+  .label-mono {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
   }
 
   .glass {
-    background: rgba(255, 255, 255, 0.045);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(18px) saturate(140%);
-    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    background: color-mix(in srgb, var(--color-ink) 5%, transparent);
+    border: 1px solid var(--color-line);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
   }
 
   .grain::before {
@@ -145,16 +230,16 @@
     inset: 0;
     z-index: 60;
     pointer-events: none;
-    opacity: 0.05;
+    opacity: 0.035;
     mix-blend-mode: overlay;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
   .bg-grid {
     background-image:
-      linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-    background-size: 64px 64px;
+      linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+    background-size: 72px 72px;
   }
 
   .mask-radial {
@@ -177,196 +262,119 @@
   }
 }
 
-@keyframes gradient-pan {
-  from {
-    background-position: 0% 50%;
-  }
-  to {
-    background-position: 220% 50%;
-  }
-}
-
-/* ===== Boutons ========================================================
+/* ===== Boutons et cartes ==============================================
    Dans la couche « components » : les utilitaires Tailwind (hidden, px-*,
    rounded-*…) gardent toujours le dernier mot. */
 @layer components {
-.btn-primary {
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  border-radius: 9999px;
-  background-image: var(--grad-brand);
-  color: #0b0920;
-  font-weight: 650;
-  box-shadow:
-    0 10px 30px -10px rgba(255, 111, 208, 0.55),
-    0 0 0 1px rgba(255, 255, 255, 0.18) inset;
-  transition:
-    transform 0.4s var(--ease-out-expo),
-    box-shadow 0.4s var(--ease-out-expo);
-}
-.btn-primary::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, 0.65) 50%, transparent 70%);
-  transform: translateX(-120%);
-  transition: transform 0.9s var(--ease-out-expo);
-}
-.btn-primary:hover {
-  box-shadow:
-    0 18px 44px -12px rgba(255, 111, 208, 0.75),
-    0 0 0 1px rgba(255, 255, 255, 0.3) inset;
-}
-.btn-primary:hover::after {
-  transform: translateX(120%);
-}
-.btn-primary:active {
-  transform: scale(0.97);
-}
-
-.btn-ghost {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  border-radius: 9999px;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  background: rgba(255, 255, 255, 0.05);
-  color: var(--color-ink);
-  font-weight: 550;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  transition:
-    border-color 0.3s,
-    background-color 0.3s,
-    transform 0.4s var(--ease-out-expo);
-}
-.btn-ghost:hover {
-  border-color: rgba(255, 255, 255, 0.4);
-  background: rgba(255, 255, 255, 0.09);
-}
-.btn-ghost:active {
-  transform: scale(0.97);
-}
-
-/* ===== Carte « spotlight » : un halo coloré et une bordure lumineuse
-   suivent la souris (variables --mx / --my posées par SpotlightTracker).
-   --spot permet de teinter chaque carte. */
-.spotlight {
-  --spot: #9d8cff;
-  position: relative;
-  isolation: isolate;
-  border-radius: 1.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02)),
-    var(--color-bg-soft);
-}
-.spotlight::before,
-.spotlight::after {
-  content: "";
-  position: absolute;
-  pointer-events: none;
-  border-radius: inherit;
-  opacity: 0;
-  transition: opacity 0.45s ease;
-}
-.spotlight::before {
-  inset: 0;
-  z-index: -1;
-  background: radial-gradient(
-    480px circle at var(--mx, 50%) var(--my, 0%),
-    color-mix(in srgb, var(--spot) 22%, transparent),
-    transparent 60%
-  );
-}
-.spotlight::after {
-  inset: -1px;
-  padding: 1px;
-  background: radial-gradient(
-    320px circle at var(--mx, 50%) var(--my, 0%),
-    var(--spot),
-    transparent 65%
-  );
-  mask:
-    linear-gradient(#000 0 0) content-box exclude,
-    linear-gradient(#000 0 0);
-  -webkit-mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-}
-.spotlight:hover::before,
-.spotlight:hover::after,
-.spotlight:focus-within::before {
-  opacity: 1;
-}
-}
-
-/* ===== Bordure animée (faisceau qui tourne) pour l'offre mise en avant. */
-@property --beam-angle {
-  syntax: "<angle>";
-  initial-value: 0deg;
-  inherits: false;
-}
-@keyframes beam-spin {
-  to {
-    --beam-angle: 360deg;
+  .btn-primary {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    border-radius: 9999px;
+    background: var(--color-accent-fill);
+    color: var(--color-on-accent);
+    font-weight: 600;
+    transition:
+      transform 0.4s var(--ease-out-expo),
+      background-color 0.3s,
+      box-shadow 0.4s var(--ease-out-expo);
   }
-}
-@layer components {
-.beam-border {
-  position: relative;
-}
-.beam-border::before {
-  content: "";
-  position: absolute;
-  inset: -1.5px;
-  border-radius: inherit;
-  padding: 1.5px;
-  pointer-events: none;
-  background: conic-gradient(
-    from var(--beam-angle),
-    rgba(255, 255, 255, 0.08) 0deg,
-    rgba(255, 255, 255, 0.08) 200deg,
-    #a594ff 260deg,
-    #ff6fd0 300deg,
-    #ffbe6b 340deg,
-    rgba(255, 255, 255, 0.08) 360deg
-  );
-  mask:
-    linear-gradient(#000 0 0) content-box exclude,
-    linear-gradient(#000 0 0);
-  -webkit-mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  animation: beam-spin 5s linear infinite;
-}
+  /* Remplissage qui monte au survol (couleur d'encre du ton courant). */
+  .btn-primary::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background: var(--color-ink);
+    transform: translateY(101%);
+    transition: transform 0.55s var(--ease-out-expo);
+  }
+  .btn-primary:hover {
+    color: var(--color-bg);
+    box-shadow: 0 14px 34px -16px rgba(0, 0, 0, 0.5);
+  }
+  .btn-primary:hover::before {
+    transform: translateY(0);
+  }
+  .btn-primary:active {
+    transform: scale(0.97);
+  }
 
-/* ===== Widgets flottants du Hero : opaques pour rester lisibles au-dessus
-   des captures de boutiques. */
-.hs-card {
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  background: rgba(21, 18, 58, 0.94);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-}
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    border-radius: 9999px;
+    border: 1px solid color-mix(in srgb, var(--color-ink) 22%, transparent);
+    background: transparent;
+    color: var(--color-ink);
+    font-weight: 550;
+    transition:
+      border-color 0.3s,
+      background-color 0.3s,
+      color 0.3s,
+      transform 0.4s var(--ease-out-expo);
+  }
+  .btn-ghost:hover {
+    border-color: var(--color-ink);
+    background: var(--color-ink);
+    color: var(--color-bg);
+  }
+  .btn-ghost:active {
+    transform: scale(0.97);
+  }
 
-/* ===== Lueurs décoratives floues. */
-.glow-orb {
-  position: absolute;
-  border-radius: 9999px;
-  filter: blur(90px);
-  pointer-events: none;
-  opacity: 0.55;
-}
+  /* Carte de base. Au survol : la bordure s'éclaire en vert autour de la
+     souris (variables --mx / --my posées par SpotlightTracker). Rien ne
+     passe jamais PAR-DESSUS le contenu : le texte reste net. */
+  .spotlight {
+    position: relative;
+    border-radius: 1.5rem;
+    border: 1px solid var(--color-line);
+    background: var(--color-surface);
+    transition:
+      transform 0.5s var(--ease-out-expo),
+      box-shadow 0.5s var(--ease-out-expo);
+  }
+  .spotlight::after {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    padding: 1px;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.45s ease;
+    background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 0%), var(--color-accent), transparent 70%);
+    mask:
+      linear-gradient(#000 0 0) content-box exclude,
+      linear-gradient(#000 0 0);
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+  }
+  .spotlight:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 24px 50px -30px rgba(0, 0, 0, 0.45);
+  }
+  .spotlight:hover::after,
+  .spotlight:focus-within::after {
+    opacity: 1;
+  }
+
+  /* Widgets flottants du Hero : opaques pour rester lisibles. */
+  .hs-card {
+    border: 1px solid var(--color-line);
+    background: var(--color-surface);
+    box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.7);
+  }
 }
 
 /* ===== Captures de boutiques : au survol, la capture pleine page défile
@@ -483,41 +491,38 @@
   }
 }
 
-/* Orbites de logos (section Stack). */
-@keyframes orbit {
-  from {
-    transform: rotate(var(--orbit-start, 0deg)) translateX(var(--orbit-r)) rotate(calc(-1 * var(--orbit-start, 0deg)));
-  }
+/* Badge circulaire « Démarrer un projet » : le texte tourne lentement. */
+@keyframes spin-slow {
   to {
-    transform: rotate(calc(var(--orbit-start, 0deg) + 360deg)) translateX(var(--orbit-r))
-      rotate(calc(-1 * (var(--orbit-start, 0deg) + 360deg)));
+    transform: rotate(360deg);
   }
 }
-.orbit-item {
-  animation: orbit var(--orbit-duration, 30s) linear infinite;
-  animation-direction: var(--orbit-direction, normal);
+.spin-slow {
+  animation: spin-slow 14s linear infinite;
 }
 
-@keyframes float-y {
+/* Curseur clignotant de l'éditeur de code (section Shopify). */
+@keyframes caret-blink {
   0%,
-  100% {
-    transform: translateY(0);
-  }
   50% {
-    transform: translateY(-10px);
+    opacity: 1;
+  }
+  50.01%,
+  100% {
+    opacity: 0;
   }
 }
-.float-y {
-  animation: float-y 6s ease-in-out infinite;
+.caret-blink {
+  animation: caret-blink 1s step-end infinite;
 }
 
 @keyframes pulse-dot {
   0%,
   100% {
-    box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.6);
+    box-shadow: 0 0 0 0 rgba(60, 200, 150, 0.55);
   }
   70% {
-    box-shadow: 0 0 0 9px rgba(74, 222, 128, 0);
+    box-shadow: 0 0 0 9px rgba(60, 200, 150, 0);
   }
 }
 
@@ -525,26 +530,13 @@
   animation: pulse-dot 2.2s ease-out infinite;
 }
 
-@keyframes scroll-hint {
-  0% {
-    transform: translateY(-100%);
-  }
-  60%,
-  100% {
-    transform: translateY(220%);
-  }
-}
-
-.scroll-hint-bar {
-  animation: scroll-hint 1.8s var(--ease-out-expo) infinite;
-}
-
 /* Masques de lignes SplitText : un peu de marge pour ne pas rogner les
-   jambages. */
+   jambages ni les italiques. */
 .split-line-mask {
-  padding-bottom: 0.14em;
-  margin-bottom: -0.14em;
-  padding-right: 0.06em;
+  padding-bottom: 0.16em;
+  margin-bottom: -0.16em;
+  padding-right: 0.12em;
+  margin-right: -0.12em;
 }
 
 /* État initial des éléments animés à l'intro : masqués uniquement quand le
@@ -554,6 +546,15 @@
   html.js:not(.reveal-failsafe) [data-reveal] {
     opacity: 0;
   }
+}
+
+/* Défilement fluide (Lenis, voir SmoothScroll.tsx). */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
 }
 
 /* Préchargeur : invisible d'emblée si déjà vu dans cette session. */

@@ -11,6 +11,7 @@ import Footer from "@/components/layout/Footer";
 import CustomCursor from "@/components/ui/CustomCursor";
 import FloatingCTA from "@/components/ui/FloatingCTA";
 import SpotlightTracker from "@/components/providers/SpotlightTracker";
+import SmoothScroll from "@/components/providers/SmoothScroll";
 import Preloader from "@/components/ui/Preloader";
 import { siteConfig } from "@/data/site.config";
 import { getCvSettings } from "@/lib/content";
@@ -109,6 +110,7 @@ export default async function LocaleLayout({
         <Preloader role={locale === "en" ? "Freelance Shopify developer — stores built to sell" : "Développeur Shopify freelance — des boutiques pensées pour vendre"} />
         <CustomCursor />
         <SpotlightTracker />
+        <SmoothScroll />
         <Navbar showCv={cvSettings.enabled} />
         <main>
           <PageTransition>{children}</PageTransition>

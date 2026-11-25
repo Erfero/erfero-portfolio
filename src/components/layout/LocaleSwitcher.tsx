@@ -16,7 +16,7 @@ export default function LocaleSwitcher({ className }: { className?: string }) {
   const pillId = `locale-pill-${useId()}`;
 
   return (
-    <div className={cn("relative isolate flex items-center rounded-full border border-border p-1", className)}>
+    <div className={cn("relative isolate flex items-center rounded-full border border-line p-1", className)}>
       {routing.locales.map((loc) => {
         const active = loc === locale;
         return (
@@ -27,14 +27,14 @@ export default function LocaleSwitcher({ className }: { className?: string }) {
             aria-current={active}
             className={cn(
               "relative isolate px-3 py-1 text-xs font-medium uppercase tracking-wide transition-colors duration-200",
-              active ? "font-bold text-[#0b0920]" : "text-ink-muted hover:text-ink"
+              active ? "font-semibold text-bg" : "text-ink-muted hover:text-ink"
             )}
           >
             {active && (
               <motion.span
                 layoutId={pillId}
                 transition={{ type: "spring", stiffness: 380, damping: 32 }}
-                className="bg-brand-gradient absolute inset-0 -z-10 rounded-full"
+                className="absolute inset-0 -z-10 rounded-full bg-ink"
               />
             )}
             {loc}

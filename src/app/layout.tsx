@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { fontDisplay, fontSans } from "@/lib/fonts";
+import { fontMono, fontSans, fontSerif } from "@/lib/fonts";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#07061a",
+  themeColor: "#0e1311",
   colorScheme: "dark",
 };
 
@@ -30,7 +30,7 @@ export default function RootLayout({
     <html
       lang="fr"
       suppressHydrationWarning
-      className={`${fontSans.variable} ${fontDisplay.variable}`}
+      className={`${fontSans.variable} ${fontMono.variable} ${fontSerif.variable}`}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: bootScript }} />

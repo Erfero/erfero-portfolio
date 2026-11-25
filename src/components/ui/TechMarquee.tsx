@@ -22,7 +22,7 @@ export const MARQUEE_STACK: TechKey[] = [
   "flutter",
 ];
 
-/** Bandeau infini de technologies, logos officiels en couleur. */
+/** Bandeau infini de technologies (logos sobres, Shopify et Liquid en vert). */
 export default function TechMarquee({
   items = MARQUEE_STACK,
   reverse,
@@ -48,10 +48,10 @@ export default function TechMarquee({
         {[...items, ...items].map((key, i) => (
           <span
             key={`${key}-${i}`}
-            className="flex shrink-0 items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.05] py-2 pl-2 pr-5"
+            className="flex shrink-0 items-center gap-3 rounded-2xl border border-line bg-ink/[0.03] py-2 pl-2 pr-5"
           >
             <TechTile name={key} size="sm" />
-            <span className="font-display text-base font-semibold tracking-tight text-ink">
+            <span className="font-display text-base font-medium tracking-tight text-ink">
               {techLogos[key].title}
             </span>
           </span>

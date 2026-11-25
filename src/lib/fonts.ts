@@ -1,14 +1,24 @@
-import { Bricolage_Grotesque, Inter } from "next/font/google";
+import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
 
-export const fontSans = Inter({
+/** Texte et titres : grotesque nette et moderne. */
+export const fontSans = Geist({
   subsets: ["latin"],
-  variable: "--font-sans",
+  variable: "--font-geist",
   display: "swap",
 });
 
-/** Titres : grotesque expressive, utilisée en graisse forte (600–800). */
-export const fontDisplay = Bricolage_Grotesque({
+/** Petites étiquettes « code » (numéros de section, extraits Liquid). */
+export const fontMono = Geist_Mono({
   subsets: ["latin"],
-  variable: "--font-display",
+  variable: "--font-geist-mono",
+  display: "swap",
+});
+
+/** Mots mis en avant dans les titres, en italique. */
+export const fontSerif = Instrument_Serif({
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
+  variable: "--font-instrument",
   display: "swap",
 });

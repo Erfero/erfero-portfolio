@@ -72,6 +72,26 @@ export default function FeaturedProjects({
           },
         });
 
+        // Courbe 3D : chaque carte pivote doucement en traversant l'écran, comme
+        // posée sur un écran incurvé (elle fait face au visiteur au centre).
+        gsap.utils.toArray<HTMLElement>(".fp-card").forEach((card) => {
+          gsap.fromTo(
+            card,
+            { rotationY: -12, transformPerspective: 2200, transformOrigin: "50% 50%" },
+            {
+              rotationY: 12,
+              ease: "none",
+              scrollTrigger: {
+                trigger: card,
+                containerAnimation: tween,
+                start: "left right",
+                end: "right left",
+                scrub: true,
+              },
+            }
+          );
+        });
+
         // Profondeur : chaque capture glisse un peu à contre-sens de la rangée.
         gsap.utils.toArray<HTMLElement>(".fp-img").forEach((img) => {
           gsap.fromTo(
@@ -116,19 +136,18 @@ export default function FeaturedProjects({
   };
 
   return (
-    <section ref={root} id="realisations" data-hide-cta className="fp relative scroll-mt-24 pt-24 sm:pt-32">
-      <div aria-hidden className="glow-orb -left-40 top-10 h-[28rem] w-[28rem] bg-brand-deep/40" />
+    <section ref={root} id="realisations" data-hide-cta className="fp tone-light relative scroll-mt-24 pt-24 sm:pt-32">
       <div className="container-page flex flex-wrap items-end justify-between gap-8">
         <SectionHeading eyebrow={t("eyebrow")} title={t("title")} subtitle={t("subtitle")} index={index} />
         <Link
           href="/realisations"
-          className="glass group flex items-center gap-4 rounded-2xl py-3 pl-5 pr-3 transition-colors hover:border-white/30"
+          className="group flex items-center gap-5 rounded-2xl border border-line bg-surface py-3 pl-5 pr-3 transition-colors hover:border-ink/40"
         >
           <span>
-            <span className="text-gradient font-display block text-4xl font-extrabold leading-none">{totalCount}</span>
+            <span className="block font-serif text-5xl leading-none text-ink">{totalCount}</span>
             <span className="mt-1 block text-xs text-ink-muted">{t("liveStores")}</span>
           </span>
-          <span className="grid size-11 place-items-center rounded-full bg-white/10 transition-transform duration-500 group-hover:rotate-45">
+          <span className="grid size-11 place-items-center rounded-full bg-ink text-bg transition-transform duration-500 group-hover:rotate-45">
             <ArrowUpRight className="size-5" />
           </span>
         </Link>
@@ -149,22 +168,22 @@ export default function FeaturedProjects({
                   data-cursor={t("visit")}
                   aria-label={`${name} — ${t("visit")} (${projectHost(project)})`}
                   className="fp-card shot-trigger group block shrink-0 snap-center"
-                  style={{ width: "var(--fp-w)", "--accent": project.accent } as React.CSSProperties}
+                  style={{ width: "var(--fp-w)" }}
                 >
-                  <div className="relative overflow-hidden rounded-2xl border border-white/12 bg-surface shadow-[0_40px_90px_-50px_rgba(0,0,0,1)] transition-[border-color,box-shadow,transform] duration-500 ease-[var(--ease-out-expo)] group-hover:-translate-y-1.5 group-hover:border-[color-mix(in_srgb,var(--accent)_70%,transparent)] group-hover:shadow-[0_40px_110px_-40px_var(--accent)]">
-                    <div className="flex h-9 items-center gap-2 border-b border-white/10 bg-[#100e2e] px-3.5">
+                  <div className="relative overflow-hidden rounded-2xl border border-line bg-surface shadow-[0_30px_70px_-40px_rgba(14,19,17,0.45)] transition-[border-color,box-shadow,transform] duration-500 ease-[var(--ease-out-expo)] group-hover:-translate-y-1.5 group-hover:border-ink/30 group-hover:shadow-[0_45px_90px_-40px_rgba(14,19,17,0.55)]">
+                    <div className="flex h-9 items-center gap-2 border-b border-line bg-bg-soft px-3.5">
                       <span className="flex gap-1.5" aria-hidden>
-                        <span className="size-2.5 rounded-full bg-[#ff5f57]" />
-                        <span className="size-2.5 rounded-full bg-[#febc2e]" />
-                        <span className="size-2.5 rounded-full bg-[#28c840]" />
+                        <span className="size-2.5 rounded-full bg-ink/15" />
+                        <span className="size-2.5 rounded-full bg-ink/15" />
+                        <span className="size-2.5 rounded-full bg-ink/15" />
                       </span>
-                      <span className="mx-auto flex min-w-0 max-w-[60%] items-center gap-1.5 rounded-md bg-white/[0.07] px-3 py-0.5 text-[11px] text-ink-muted">
+                      <span className="mx-auto flex min-w-0 max-w-[60%] items-center gap-1.5 rounded-md bg-ink/[0.06] px-3 py-0.5 font-mono text-[11px] text-ink-muted">
                         <Lock className="size-3 shrink-0 text-success" aria-hidden />
                         <span className="truncate">{projectHost(project)}</span>
                       </span>
                       <ArrowUpRight className="size-4 text-ink-muted transition-colors group-hover:text-ink" aria-hidden />
                     </div>
-                    <div className="relative aspect-video overflow-hidden bg-[#100e2e]">
+                    <div className="relative aspect-video overflow-hidden bg-bg-soft">
                       {/* eslint-disable-next-line @next/next/no-img-element -- captures WebP pré-optimisées */}
                       <img
                         src={projectShot(project)}
@@ -173,10 +192,9 @@ export default function FeaturedProjects({
                         decoding="async"
                         className="fp-img shot-scroll absolute inset-0 size-full scale-[1.12]"
                       />
-                      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/55 to-transparent transition-opacity duration-500 group-hover:opacity-0" />
+                      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/35 to-transparent transition-opacity duration-500 group-hover:opacity-0" />
                       {niche && (
-                        <span className="absolute left-3 top-3 rounded-full border border-white/15 bg-black/55 px-3 py-1 text-xs font-semibold text-white backdrop-blur-md">
-                          <span className="mr-1.5 inline-block size-1.5 rounded-full align-middle" style={{ background: project.accent }} />
+                        <span className="absolute left-3 top-3 rounded-full bg-[#0e1311]/75 px-3 py-1 text-xs font-medium text-white backdrop-blur-md">
                           {niche}
                         </span>
                       )}
@@ -184,12 +202,12 @@ export default function FeaturedProjects({
                   </div>
                   <div className="mt-3 flex items-center justify-between gap-4">
                     <div className="flex min-w-0 items-baseline gap-3">
-                      <span className="text-gradient font-display text-sm font-bold tabular-nums">
+                      <span className="font-mono text-sm font-medium tabular-nums text-accent">
                         {String(i + 1).padStart(2, "0")}
                       </span>
-                      <h3 className="font-display truncate text-xl font-bold tracking-tight lg:text-2xl">{name}</h3>
+                      <h3 className="font-display truncate text-xl font-semibold tracking-[-0.03em] lg:text-2xl">{name}</h3>
                     </div>
-                    <span className="grid size-9 shrink-0 place-items-center rounded-full border border-white/15 transition-all duration-500 group-hover:rotate-45 group-hover:border-transparent group-hover:bg-white group-hover:text-bg">
+                    <span className="grid size-9 shrink-0 place-items-center rounded-full border border-line transition-all duration-500 group-hover:rotate-45 group-hover:border-transparent group-hover:bg-ink group-hover:text-bg">
                       <ArrowUpRight className="size-4" aria-hidden />
                     </span>
                   </div>
@@ -200,19 +218,19 @@ export default function FeaturedProjects({
             <Link
               href="/realisations"
               data-cursor={t("explore")}
-              className="fp-card bg-brand-gradient group relative flex shrink-0 snap-center flex-col justify-between overflow-hidden rounded-2xl p-5 text-[#0b0920] [container-type:inline-size] sm:p-7"
+              className="fp-card tone-green group relative flex shrink-0 snap-center flex-col justify-between overflow-hidden rounded-2xl p-5 [container-type:inline-size] sm:p-7"
               style={{ width: "calc(var(--fp-w) * 0.6)", height: "calc(var(--fp-w) * 9 / 16 + 2.25rem)" }}
             >
-              <span className="text-[11px] font-bold uppercase tracking-[0.18em] sm:text-xs">{t("viewAll")}</span>
+              <span className="label-mono">{t("viewAll")}</span>
               <span>
-                <span className="font-display block text-[28cqw] font-extrabold leading-[0.85] tracking-[-0.05em]">
+                <span className="block font-serif text-[32cqw] leading-[0.85] tracking-[-0.03em]">
                   {totalCount}
                 </span>
-                <span className="mt-2 block text-sm font-semibold sm:text-base">{t("liveStores")}</span>
+                <span className="mt-2 block text-sm font-medium text-ink-muted sm:text-base">{t("liveStores")}</span>
               </span>
-              <span className="inline-flex items-center gap-2 text-sm font-bold">
+              <span className="inline-flex items-center gap-3 text-sm font-semibold">
                 {t("explore")}
-                <span className="grid size-10 place-items-center rounded-full bg-[#0b0920] text-white transition-transform duration-500 group-hover:rotate-45">
+                <span className="grid size-10 place-items-center rounded-full bg-white text-[#0e1311] transition-transform duration-500 group-hover:rotate-45">
                   <ArrowUpRight className="size-4" />
                 </span>
               </span>
@@ -223,11 +241,11 @@ export default function FeaturedProjects({
         {/* Barre du mode épinglé : progression + lien */}
         <div className="fp-when-pinned container-page h-16 items-center justify-between gap-6 pb-4">
           <div className="flex items-center gap-4">
-            <span className="font-display text-sm font-semibold tabular-nums text-ink-muted">
+            <span className="font-mono text-sm font-medium tabular-nums text-ink-muted">
               <span ref={counter} className="text-ink">01</span> / {String(featured.length).padStart(2, "0")}
             </span>
-            <span className="relative h-[3px] w-40 overflow-hidden rounded-full bg-white/10">
-              <span className="fp-progress bg-brand-gradient absolute inset-0 origin-left scale-x-0" />
+            <span className="relative h-[2px] w-40 overflow-hidden rounded-full bg-ink/10">
+              <span className="fp-progress absolute inset-0 origin-left scale-x-0 bg-accent" />
             </span>
           </div>
           <span className="hidden items-center gap-2 text-xs text-ink-dim xl:flex">

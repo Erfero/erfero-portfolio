@@ -55,7 +55,7 @@
       "growthSub": "after redesign",
       "rating": "4.8"
     },
-    "stackLabel": "Languages and technologies I work with"
+    "stackLabel": "Shopify, Liquid and the technologies I master"
   },
   "painPoints": {
     "eyebrow": "Sound familiar?",
@@ -317,41 +317,80 @@
     ]
   },
   "techStack": {
-    "eyebrow": "Tech stack",
-    "title": "The languages and tools I use *every day*",
-    "subtitle": "Shopify and Liquid at the heart of every project, with the full web stack around them: custom front-end, back-end, SEO and conversion optimisation.",
-    "core": {
-      "badge": "My specialty",
-      "title": "Shopify & Liquid",
-      "description": "I build Shopify stores in Liquid, HTML, CSS and JavaScript: custom sections, the premium Story theme, Online Store 2.0, speed and technical SEO.",
-      "points": [
-        "Custom Liquid themes and sections",
-        "Premium Story theme and Online Store 2.0",
-        "Product pages designed to convert",
-        "Speed, mobile-first and technical SEO"
-      ]
-    },
-    "groups": {
-      "languages": {
-        "title": "Languages",
-        "description": "The code I write every day, from Liquid templates to JavaScript."
+    "eyebrow": "Shopify expertise",
+    "title": "Shopify developer, *from theme to checkout*",
+    "subtitle": "Liquid, Online Store 2.0, apps, payments, speed, SEO: I handle the whole chain of a Shopify store — and I build it to sell.",
+    "editorLabel": "Liquid code excerpt from a Shopify section",
+    "editorFile": "sections/featured-products.liquid",
+    "languagesTitle": "Shopify's languages, every day",
+    "skillsTitle": "My Shopify skills",
+    "skills": [
+      {
+        "title": "Custom Liquid themes",
+        "description": "Sections, blocks and JSON templates (Online Store 2.0), all editable from the theme editor."
       },
-      "frontend": {
-        "title": "Front-end",
-        "description": "Modern, fast, animated interfaces."
+      {
+        "title": "Customized premium themes",
+        "description": "Story, Dawn and other themes adapted to your brand, cleanly, without rewriting everything."
       },
-      "backend": {
-        "title": "Back-end & data",
-        "description": "APIs, databases and server logic."
+      {
+        "title": "Product pages that convert",
+        "description": "Galleries, variants, customer reviews, bundles and upsells."
       },
-      "cms": {
-        "title": "CMS & mobile",
-        "description": "The platforms I ship projects on."
+      {
+        "title": "Metafields & metaobjects",
+        "description": "Dynamic content (size guides, ingredients, FAQ) you manage yourself from the admin."
       },
-      "growth": {
-        "title": "Growth",
-        "description": "Getting found on Google, then turning visits into sales."
+      {
+        "title": "Apps & integrations",
+        "description": "Reviews, email marketing, translation, payments: the right apps, well integrated, without slowing the store."
+      },
+      {
+        "title": "Payments, checkout & Markets",
+        "description": "Shopify Payments, multi-currency and multi-language to sell internationally too."
+      },
+      {
+        "title": "Speed & technical SEO",
+        "description": "Core Web Vitals, lightweight code, clean markup and structured data for Google."
+      },
+      {
+        "title": "Tracking & analytics",
+        "description": "GA4, Meta pixel and conversion events to measure every sale."
       }
+    ],
+    "qualitiesTitle": "What makes a *great Shopify developer*",
+    "qualities": [
+      {
+        "title": "Clean, maintainable code",
+        "description": "Modular, reusable sections: your store stays easy to evolve."
+      },
+      {
+        "title": "Mobile first",
+        "description": "Most purchases happen on a phone: every section is designed for mobile first."
+      },
+      {
+        "title": "Conversion-driven",
+        "description": "Product page, cart, reassurance: every choice aims at one thing, more sales."
+      },
+      {
+        "title": "Fast and reliable",
+        "description": "A store delivered in 3 days on average, tested on mobile and desktop before launch."
+      },
+      {
+        "title": "Clear communication",
+        "description": "Regular check-ins, simple explanations, no grey areas on progress."
+      },
+      {
+        "title": "Autonomous and rigorous",
+        "description": "Agency-trained: I know how to scope a project, hit a deadline and check every detail."
+      }
+    ],
+    "othersTitle": "And beyond Shopify",
+    "othersSubtitle": "A solid web developer foundation, useful for custom integrations, internal tools and side projects.",
+    "groups": {
+      "frontend": "Front-end",
+      "backend": "Back-end & data",
+      "cms": "CMS & mobile"
     }
   },
   "trust": {
@@ -486,7 +525,7 @@
       }
     ],
     "profileEyebrow": "Profile",
-    "profile": "**Fullstack web developer specialized in Shopify**. I build fast, well-optimized stores and applications designed to **convert**. Autonomous, rigorous and results-driven, I turn a business need into a high-performing web product.",
+    "profile": "**Shopify developer**. I build fast, well-optimized Shopify stores designed to **convert**: custom Liquid themes and sections, product pages, apps, speed and SEO. Autonomous, rigorous and results-driven, I turn a business need into a store that sells.",
     "stats": [
       {
         "value": "200+",
@@ -504,12 +543,57 @@
     "skillsEyebrow": "Skills",
     "skillGroups": [
       {
-        "title": "Frontend",
+        "title": "Shopify",
         "items": [
           {
             "name": "Shopify",
             "highlight": true
           },
+          {
+            "name": "Liquid",
+            "highlight": true
+          },
+          {
+            "name": "Online Store 2.0"
+          },
+          {
+            "name": "Story & Dawn themes"
+          },
+          {
+            "name": "Metafields"
+          },
+          {
+            "name": "Apps & integrations"
+          }
+        ]
+      },
+      {
+        "title": "Languages & growth",
+        "items": [
+          {
+            "name": "HTML5"
+          },
+          {
+            "name": "CSS3"
+          },
+          {
+            "name": "JavaScript"
+          },
+          {
+            "name": "SEO",
+            "highlight": true
+          },
+          {
+            "name": "CRO"
+          },
+          {
+            "name": "GA4 & Meta pixel"
+          }
+        ]
+      },
+      {
+        "title": "Other technologies",
+        "items": [
           {
             "name": "React.js"
           },
@@ -519,17 +603,6 @@
           {
             "name": "Angular"
           },
-          {
-            "name": "WordPress"
-          },
-          {
-            "name": "Flutter"
-          }
-        ]
-      },
-      {
-        "title": "Backend & SEO",
-        "items": [
           {
             "name": "Node.js"
           },
@@ -546,8 +619,10 @@
             "name": "Firebase"
           },
           {
-            "name": "SEO",
-            "highlight": true
+            "name": "WordPress"
+          },
+          {
+            "name": "Flutter"
           }
         ]
       }
@@ -555,22 +630,22 @@
     "experienceEyebrow": "Experience",
     "experience": [
       {
-        "title": "Fullstack Web Developer",
-        "company": "Viip Interstis · France",
-        "period": "Feb 2023 – Mar 2025",
-        "bullets": [
-          "Omnichannel application centralizing the company's social media accounts.",
-          "Monitoring site + app for managing internal data.",
-          "Management tool dedicated to customer service and developer teams."
-        ]
-      },
-      {
         "title": "Shopify Developer",
         "company": "Elite Agency · Bordeaux",
         "period": "May 2021 – Jan 2025",
         "bullets": [
           "Built custom Shopify stores optimized for conversion.",
           "SEO strategies for visibility on Google and social media."
+        ]
+      },
+      {
+        "title": "Web Developer",
+        "company": "Viip Interstis · France",
+        "period": "Feb 2023 – Mar 2025",
+        "bullets": [
+          "Omnichannel application centralizing the company's social media accounts.",
+          "Monitoring site + app for managing internal data.",
+          "Management tool dedicated to customer service and developer teams."
         ]
       },
       {
@@ -594,7 +669,7 @@
     "educationEyebrow": "Education",
     "education": [
       {
-        "title": "Fullstack Web Developer",
+        "title": "Web Developer",
         "school": "High-Five University · France",
         "period": "Since Mar 2022 — 2 years teaching + 2 years in industry"
       },
@@ -649,7 +724,7 @@
   "experience": {
     "eyebrow": "Experience",
     "title": "Agency-trained, *independent* as a freelancer",
-    "subtitle": "Nearly four years of Shopify production in agencies, plus full-stack development and SEO: I fit into an agency team just as well as working directly with a brand.",
+    "subtitle": "Nearly four years of Shopify production in agencies, plus web development and SEO: I fit into an agency team just as well as working directly with a brand.",
     "ctaCv": "View full CV"
   }
 }

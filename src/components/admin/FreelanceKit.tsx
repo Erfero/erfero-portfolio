@@ -13,7 +13,7 @@ const inputClass =
  * dupliquer dans chaque texte généré). */
 const PROFILE = {
   name: "Erféro Keoula",
-  role: "Développeur Shopify & Web Fullstack",
+  role: "Développeur Shopify",
   email: "erferokam@gmail.com",
   phone: "01 69 27 25 95",
   portfolio: "erfero-portfolio.vercel.app",
@@ -50,7 +50,7 @@ const BLOCKS: Block[] = [
     tip: "Sur Malt, vise ~10 mots avec des mots-clés précis : le titre doit correspondre à ce que tapent les clients dans la barre de recherche, pas à une formule poétique.",
     variants: () => [
       "Développeur Shopify Freelance — Boutiques e-commerce qui convertissent (200+ projets)",
-      "Développeur Web Fullstack & Shopify — Sites rapides, référencés, pensés pour vendre",
+      "Développeur Shopify freelance — Boutiques rapides, référencées, pensées pour vendre",
     ],
   },
   {
@@ -59,7 +59,7 @@ const BLOCKS: Block[] = [
     platforms: ["Comet", "Fiverr", "LinkedIn"],
     tip: "Sur Comet, la bio démarre en général par « Je suis [métier] freelance avec [X] ans d'expérience » — direct, sans détour.",
     variants: () => [
-      "Je suis Développeur Shopify & Web Fullstack freelance avec 5 ans d'expérience. Je conçois des boutiques e-commerce rapides, bien référencées et pensées pour convertir, du design à la mise en ligne.",
+      "Je suis Développeur Shopify freelance avec 5 ans d'expérience. Je conçois des boutiques e-commerce rapides, bien référencées et pensées pour convertir, du design à la mise en ligne.",
       "Développeur Shopify freelance depuis 5 ans, j'ai livré plus de 200 boutiques en France et à l'international. Autonome et orienté résultat, je transforme un besoin métier en boutique qui vend.",
     ],
   },
@@ -69,7 +69,7 @@ const BLOCKS: Block[] = [
     platforms: ["Malt", "Upwork"],
     tip: "Malt recommande une description d'au moins 200 caractères : une intro engageante, des résultats mesurables, ce qui te différencie, et un appel à échanger.",
     variants: (s) => [
-      `Développeur web Fullstack spécialisé Shopify, j'aide les marques e-commerce à lancer et à faire grandir des boutiques qui vendent réellement — pas seulement de belles vitrines.
+      `Développeur Shopify freelance, j'aide les marques e-commerce à lancer et à faire grandir des boutiques qui vendent réellement — pas seulement de belles vitrines.
 
 En ${PROFILE.stats.years}, j'ai conçu et livré plus de ${PROFILE.stats.stores} boutiques Shopify pour des marques beauté, bien-être, mode et lifestyle en France, en Europe et à l'international. Mes clients me notent en moyenne ${PROFILE.stats.rating} et je livre en ${PROFILE.stats.delivery} en moyenne sur un projet de boutique standard.
 
@@ -79,10 +79,10 @@ Ce que j'apporte concrètement :
 — SEO technique et éditorial pour être visible sur Google dès le lancement
 — Une stack complémentaire si besoin : React, Vue, Node.js, Laravel, WordPress
 
-J'ai travaillé en agence (Shopify, SEO) comme sur des applications internes plus complexes en méthode fullstack, ce qui me permet de m'adapter aussi bien à une boutique Shopify qu'à un outil métier.
+J'ai travaillé en agence (Shopify, SEO) et sur des applications web plus complexes : je sais aussi relier une boutique Shopify à des outils sur mesure.
 
 Autonome, rigoureux et orienté résultat : je préfère un échange de 15 minutes pour cadrer précisément votre besoin plutôt qu'un devis à l'aveugle. ${fmtAvailability(s.availability)}, ${fmtRate(s.dailyRate)}. Parlons de votre projet.`,
-      `Boutiques Shopify qui vendent, sites rapides, référencement qui suit : voilà ce que je livre depuis ${PROFILE.stats.years} en tant que développeur web Fullstack freelance.
+      `Boutiques Shopify qui vendent, sites rapides, référencement qui suit : voilà ce que je livre depuis ${PROFILE.stats.years} en tant que développeur Shopify freelance.
 
 ${PROFILE.stats.stores} boutiques livrées, note client moyenne de ${PROFILE.stats.rating}, délai moyen de ${PROFILE.stats.delivery} sur les projets de boutique standard. J'interviens sur l'ensemble de la chaîne : design orienté conversion, développement Shopify (Liquid, apps, sections sur-mesure), SEO technique, et intégration avec React, Vue, Node.js ou WordPress quand le projet le demande.
 
@@ -99,7 +99,7 @@ ${fmtAvailability(s.availability)}, TJM ${fmtRate(s.dailyRate)}. Discutons de vo
     variants: (s) => [
       `Bonjour [Prénom],
 
-Je me permets de vous contacter suite à votre annonce pour [intitulé de la mission]. Développeur web Fullstack freelance spécialisé Shopify, j'ai conçu et livré plus de ${PROFILE.stats.stores} boutiques e-commerce en ${PROFILE.stats.years}, avec une note client moyenne de ${PROFILE.stats.rating}.
+Je me permets de vous contacter suite à votre annonce pour [intitulé de la mission]. Développeur Shopify freelance, j'ai conçu et livré plus de ${PROFILE.stats.stores} boutiques e-commerce en ${PROFILE.stats.years}, avec une note client moyenne de ${PROFILE.stats.rating}.
 
 Ce qui me semble pertinent pour votre projet :
 — [Point 1 : une expérience proche de leur niche ou de leur problème]
@@ -146,7 +146,7 @@ ${PROFILE.name}`,
       `— ${PROFILE.stats.stores} boutiques Shopify livrées en ${PROFILE.stats.years}, pour des marques en France, en Europe et à l'international
 — Note client moyenne de ${PROFILE.stats.rating} et délai moyen de ${PROFILE.stats.delivery} sur un projet de boutique standard
 — Une double casquette design + développement + SEO : pas besoin de coordonner plusieurs prestataires
-— Expérience agence et fullstack : je m'adapte aussi bien à une boutique Shopify qu'à un outil métier plus complexe
+— Expérience agence : je m'intègre aussi bien à une équipe qu'en direct avec une marque, des petites boutiques aux intégrations sur mesure
 — Autonome et orienté résultat : je cadre précisément le besoin avant de développer, pour éviter les mauvaises surprises de délai ou de budget`,
     ],
   },

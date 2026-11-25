@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { ArrowUpRight, Building2 } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { gsap, useGSAP, MOTION_OK } from "@/lib/gsap";
@@ -16,6 +16,7 @@ import TechIcon from "@/components/ui/TechIcon";
 export default function Manifesto({ showCv }: { showCv?: boolean }) {
   const t = useTranslations("manifesto");
   const tc = useTranslations("contact");
+  const locale = useLocale();
   const agencies = t.raw("agencies") as string[];
   const root = useRef<HTMLElement>(null);
 
@@ -60,13 +61,12 @@ export default function Manifesto({ showCv }: { showCv?: boolean }) {
   );
 
   return (
-    <section ref={root} id="about" className="relative scroll-mt-24 py-20 sm:py-28">
+    <section ref={root} id="about" className="tone-light relative scroll-mt-24 py-24 sm:py-32">
       <div className="container-page grid items-center gap-16 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-20">
         <div className="mf-photo relative mx-auto w-full max-w-[400px]">
-          <div aria-hidden className="bg-brand-gradient absolute -inset-6 rounded-[3rem] opacity-50 blur-3xl" />
           <div className="mf-photo-inner relative">
-            <div className="bg-brand-gradient rounded-[2.2rem] p-[3px] shadow-[0_50px_100px_-40px_rgba(255,111,208,0.6)]">
-              <div className="overflow-hidden rounded-[2.05rem] bg-bg">
+            <div className="rounded-[2.2rem] border border-line bg-surface p-2 shadow-[0_50px_100px_-50px_rgba(14,19,17,0.55)]">
+              <div className="overflow-hidden rounded-[1.7rem] bg-bg-soft">
                 {/* eslint-disable-next-line @next/next/no-img-element -- photo de profil locale */}
                 <img
                   src="/cv-photo.jpg"
@@ -80,13 +80,13 @@ export default function Manifesto({ showCv }: { showCv?: boolean }) {
               </div>
             </div>
 
-            <div className="mf-badge hs-card absolute -left-4 top-8 flex items-center gap-2.5 rounded-2xl py-2 pl-2 pr-4 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.9)] sm:-left-10">
-              <span className="grid size-9 place-items-center rounded-xl bg-[#95BF47]/15 ring-1 ring-[#95BF47]/40">
-                <TechIcon name="shopify" className="size-5" />
+            <div className="mf-badge hs-card tone-dark absolute -left-4 top-8 flex items-center gap-2.5 rounded-2xl py-2 pl-2 pr-4 sm:-left-10">
+              <span className="grid size-9 place-items-center rounded-xl bg-[#008060] text-white">
+                <TechIcon name="shopify" color="currentColor" className="size-5" />
               </span>
-              <span className="text-sm font-semibold">{siteConfig.role}</span>
+              <span className="text-sm font-semibold">{locale === "en" ? siteConfig.roleEn : siteConfig.role}</span>
             </div>
-            <div className="mf-badge hs-card absolute -bottom-7 left-4 right-4 flex items-center gap-3 rounded-2xl px-4 py-3 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.9)] sm:-right-8">
+            <div className="mf-badge hs-card absolute -bottom-7 left-4 right-4 flex items-center gap-3 rounded-2xl px-4 py-3 sm:-right-8">
               <span className="pulse-dot size-2.5 shrink-0 rounded-full bg-success" />
               <span className="text-sm font-semibold leading-snug">{tc("availability")}</span>
             </div>
@@ -94,10 +94,10 @@ export default function Manifesto({ showCv }: { showCv?: boolean }) {
         </div>
 
         <div>
-          <span className="glass inline-flex items-center gap-2.5 rounded-full py-1.5 pl-2 pr-4 text-[11px] font-semibold uppercase tracking-[0.18em] sm:text-xs">
-            <span className="bg-brand-gradient ml-1 size-2 rounded-full" />
-            {t("eyebrow")}
-          </span>
+          <p className="label-mono flex items-center gap-3">
+            <span aria-hidden className="h-px w-8 bg-ink/30" />
+            <span className="text-ink-muted">{t("eyebrow")}</span>
+          </p>
           <SplitHeading
             as="p"
             text={t("text")}
@@ -107,14 +107,14 @@ export default function Manifesto({ showCv }: { showCv?: boolean }) {
 
           <div className="mf-agencies mt-12">
             <p className="flex items-center gap-2 text-sm font-medium text-ink-muted">
-              <Building2 className="size-4 text-brand" aria-hidden />
+              <Building2 className="size-4 text-accent" aria-hidden />
               {t("agenciesLabel")}
             </p>
             <ul className="mt-4 flex flex-wrap gap-3">
               {agencies.map((name) => (
                 <li
                   key={name}
-                  className="mf-agency glass font-display rounded-2xl px-5 py-3 text-lg font-bold tracking-tight sm:text-xl"
+                  className="mf-agency font-display rounded-2xl border border-line bg-surface px-5 py-3 text-lg font-semibold tracking-[-0.02em] sm:text-xl"
                 >
                   {name}
                 </li>

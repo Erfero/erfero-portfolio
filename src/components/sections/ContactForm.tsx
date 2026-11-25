@@ -44,12 +44,12 @@ export default function ContactForm({ selectedPlan }: { selectedPlan?: string })
   };
 
   const inputClass =
-    "w-full rounded-2xl border border-white/12 bg-white/[0.05] px-5 py-4 text-base text-ink placeholder:text-ink-dim outline-none transition-[border-color,background-color,box-shadow] focus:border-pink/70 focus:bg-white/[0.08] focus:shadow-[0_0_0_4px_rgba(255,111,208,0.15)] sm:text-sm";
+    "w-full rounded-2xl border border-line bg-ink/[0.04] px-5 py-4 text-base text-ink placeholder:text-ink-dim outline-none transition-[border-color,background-color,box-shadow] focus:border-accent focus:bg-ink/[0.06] focus:shadow-[0_0_0_4px_rgba(60,200,150,0.15)] sm:text-sm";
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
       {selectedPlan && (
-        <div className="flex items-center gap-2 rounded-xl border border-brand/30 bg-brand/6 px-4 py-3 text-sm text-brand">
+        <div className="flex items-center gap-2 rounded-xl border border-accent/30 bg-accent/10 px-4 py-3 text-sm text-accent">
           <Sparkles className="size-4 shrink-0" />
           <span>
             {t("planBadge")} <strong>{selectedPlan}</strong>

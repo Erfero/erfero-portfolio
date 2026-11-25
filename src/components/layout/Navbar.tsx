@@ -8,6 +8,7 @@ import { gsap, useGSAP } from "@/lib/gsap";
 import { cn } from "@/lib/utils";
 import { siteConfig } from "@/data/site.config";
 import LocaleSwitcher from "./LocaleSwitcher";
+import Wordmark from "@/components/ui/Wordmark";
 
 export default function Navbar({ showCv }: { showCv?: boolean }) {
   const t = useTranslations("nav");
@@ -82,25 +83,25 @@ export default function Navbar({ showCv }: { showCv?: boolean }) {
       <header
         className={cn(
           "fixed inset-x-0 top-0 z-50 transition-transform duration-500 ease-[var(--ease-out-expo)] print:hidden",
-          hidden && !open ? "-translate-y-full" : "translate-y-0"
+          hidden && !open ? "-translate-y-[calc(100%+4rem)]" : "translate-y-0"
         )}
       >
         <div className="container-page pt-4">
           <div
             className={cn(
-              "flex items-center justify-between gap-x-6 rounded-full py-2.5 pl-5 pr-2.5 transition-all duration-500",
+              "tone-dark flex items-center justify-between gap-x-6 rounded-full border py-2.5 pl-5 pr-2.5 transition-all duration-500",
+              // Pastille toujours sombre : lisible sur les sections claires comme sombres.
               scrolled || open
-                ? "border border-white/12 bg-[#0d0b26]/75 shadow-[0_10px_40px_-20px_rgba(0,0,0,0.8)] backdrop-blur-xl"
-                : "border border-transparent bg-transparent"
+                ? "border-line !bg-night/85 shadow-[0_14px_40px_-20px_rgba(0,0,0,0.6)] backdrop-blur-xl"
+                : "border-line !bg-night/85 backdrop-blur-xl"
             )}
           >
             <a href={homeHref} className="flex items-center gap-3" aria-label={siteConfig.name}>
-              <span className="font-display text-xl font-semibold tracking-tight">
-                {siteConfig.shortName}
-                <span className="text-gradient">.</span>
+              <Wordmark className="font-display text-xl font-semibold tracking-[-0.03em]" />
+              <span className="hidden h-4 w-px bg-line lg:block" />
+              <span className="label-mono hidden text-[10px] text-ink-muted lg:block">
+                {locale === "en" ? siteConfig.roleEn : siteConfig.role}
               </span>
-              <span className="hidden h-4 w-px bg-white/15 xl:block" />
-              <span className="hidden text-[11px] text-ink-muted xl:block">{siteConfig.role}</span>
             </a>
 
             <nav className="hidden items-center gap-7 md:flex" aria-label="Navigation principale">
@@ -119,7 +120,7 @@ export default function Navbar({ showCv }: { showCv?: boolean }) {
                     {link.label}
                     <span
                       className={cn(
-                        "bg-brand-gradient absolute -bottom-1 left-0 h-[2px] w-full origin-left rounded-full transition-transform duration-500",
+                        "absolute -bottom-1 left-0 h-px w-full origin-left bg-accent transition-transform duration-500",
                         active ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
                       )}
                     />
@@ -142,7 +143,7 @@ export default function Navbar({ showCv }: { showCv?: boolean }) {
                 aria-label="Menu"
                 aria-expanded={open}
                 onClick={() => setOpen((v) => !v)}
-                className="relative grid size-11 place-items-center rounded-full border border-white/10 bg-white/[0.04] md:hidden"
+                className="relative grid size-11 place-items-center rounded-full border border-line bg-ink/[0.04] md:hidden"
               >
                 <span
                   className={cn(
@@ -166,14 +167,14 @@ export default function Navbar({ showCv }: { showCv?: boolean }) {
       <div
         ref={menu}
         className={cn(
-          "fixed inset-0 z-40 flex flex-col justify-between bg-bg px-5 pb-8 pt-28 transition-[clip-path] duration-700 ease-[var(--ease-out-expo)] md:hidden print:hidden",
+          "tone-dark fixed inset-0 z-40 flex flex-col justify-between px-5 pb-8 pt-28 transition-[clip-path] duration-700 ease-[var(--ease-out-expo)] md:hidden print:hidden",
           open ? "[clip-path:inset(0_0_0_0)]" : "pointer-events-none [clip-path:inset(0_0_100%_0)]"
         )}
         aria-hidden={!open}
       >
         <nav className="flex flex-col" aria-label="Menu mobile">
           {links.map((link, i) => (
-            <span key={link.href} className="overflow-hidden border-b border-white/10">
+            <span key={link.href} className="overflow-hidden border-b border-line">
               <Link
                 href={link.href}
                 tabIndex={open ? 0 : -1}
@@ -181,7 +182,7 @@ export default function Navbar({ showCv }: { showCv?: boolean }) {
                 className="mm-link font-display flex items-baseline justify-between py-4 text-4xl font-medium tracking-tight"
               >
                 {link.label}
-                <span className="text-xs tabular-nums text-ink-muted">{String(i + 1).padStart(2, "0")}</span>
+                <span className="font-mono text-xs tabular-nums text-accent">{String(i + 1).padStart(2, "0")}</span>
               </Link>
             </span>
           ))}

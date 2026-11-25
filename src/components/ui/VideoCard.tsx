@@ -39,13 +39,11 @@ export default function VideoCard({
       onMouseLeave={() => setPreview(false)}
       data-cursor={cursorLabel}
       aria-label={`${caption} — ${cursorLabel}`}
-      className="group relative block w-full rounded-[2rem] border border-white/12 bg-[#0b0a1f] p-1.5 text-left shadow-[0_30px_60px_-30px_rgba(0,0,0,0.95)] transition-[transform,box-shadow,border-color] duration-500 ease-[var(--ease-out-expo)] hover:-translate-y-2 hover:border-white/30"
-      style={{ "--accent": video.accent } as React.CSSProperties}
+      className="group relative block w-full rounded-[2rem] border border-black/10 bg-[#0e1311] p-1.5 text-left shadow-[0_30px_60px_-34px_rgba(14,19,17,0.75)] transition-[transform,box-shadow] duration-500 ease-[var(--ease-out-expo)] hover:-translate-y-2 hover:shadow-[0_40px_70px_-30px_rgba(14,19,17,0.8)]"
     >
       <span aria-hidden className="absolute left-1/2 top-3 z-10 h-1 w-10 -translate-x-1/2 rounded-full bg-black/80" />
       <span
-        className="relative block aspect-[9/16] overflow-hidden rounded-[1.6rem]"
-        style={{ background: `linear-gradient(160deg, ${video.accent}55, #0d0b26 70%)` }}
+        className="relative block aspect-[9/16] overflow-hidden rounded-[1.6rem] bg-[#18201c]"
       >
         {video.poster && (
           // eslint-disable-next-line @next/next/no-img-element -- affiches JPEG légères
@@ -70,7 +68,7 @@ export default function VideoCard({
           />
         )}
         <span className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-        <span className="absolute left-1/2 top-1/2 grid size-14 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-white/30 bg-white/15 text-white backdrop-blur-md transition-all duration-500 group-hover:scale-110 group-hover:bg-white group-hover:text-[#0b0920]">
+        <span className="absolute left-1/2 top-1/2 grid size-14 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-white/30 bg-white/15 text-white backdrop-blur-md transition-all duration-500 group-hover:scale-110 group-hover:bg-white group-hover:text-[#0e1311]">
           <Play className="size-5 translate-x-px fill-current" />
         </span>
         <span className="absolute inset-x-3 bottom-3 line-clamp-2 text-sm font-semibold leading-snug text-white drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]">

@@ -10,7 +10,6 @@ import { LinkedinIcon } from "@/components/ui/BrandIcons";
 import { siteConfig } from "@/data/site.config";
 
 type Job = { title: string; company: string; period: string; bullets: string[] };
-const COLORS = ["#a594ff", "#ff6fd0", "#ffbe6b", "#4fdcff", "#4ade80"];
 
 /**
  * Parcours professionnel (agences et entreprises), repris du contenu du CV.
@@ -50,7 +49,7 @@ export default function Experience({ showCv, index }: { showCv?: boolean; index?
   );
 
   return (
-    <section ref={root} id="parcours" className="relative scroll-mt-24 py-20 sm:py-28">
+    <section ref={root} id="parcours" className="tone-light relative scroll-mt-24 py-24 sm:py-32">
       <div className="container-page grid gap-14 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-16">
         <div className="lg:sticky lg:top-28 lg:h-fit">
           <SectionHeading eyebrow={t("eyebrow")} title={t("title")} subtitle={t("subtitle")} index={index} />
@@ -67,7 +66,7 @@ export default function Experience({ showCv, index }: { showCv?: boolean; index?
               rel="noopener noreferrer"
               className="btn-ghost px-6 py-3.5 text-sm"
             >
-              <LinkedinIcon className="size-4 text-[#4fa3f7]" />
+              <LinkedinIcon className="size-4" />
               LinkedIn
             </a>
           </div>
@@ -76,36 +75,31 @@ export default function Experience({ showCv, index }: { showCv?: boolean; index?
         {/* Les traits décoratifs vivent dans un conteneur à part : une <ol> ne
             doit contenir que des <li> (HTML valide, lecteurs d'écran). */}
         <div className="xp-list relative pl-10 sm:pl-14">
-          <span className="absolute bottom-4 left-[15px] top-4 w-[2px] rounded-full bg-white/10" aria-hidden />
+          <span className="absolute bottom-4 left-[15px] top-4 w-[2px] rounded-full bg-ink/10" aria-hidden />
           <span
-            className="xp-progress absolute bottom-4 left-[15px] top-4 w-[2px] origin-top rounded-full bg-gradient-to-b from-brand via-pink to-amber"
+            className="xp-progress absolute bottom-4 left-[15px] top-4 w-[2px] origin-top rounded-full bg-accent"
             aria-hidden
           />
           <ol className="flex flex-col gap-5">
-            {jobs.map((job, i) => {
-              const color = COLORS[i % COLORS.length];
+            {jobs.map((job) => {
               return (
                 <li key={`${job.company}-${job.period}`} className="xp-item relative">
                   <span
-                    className="absolute -left-10 top-6 grid size-8 place-items-center rounded-full border-2 bg-bg sm:-left-14"
-                    style={{ borderColor: color, boxShadow: `0 0 20px -4px ${color}` }}
+                    className="absolute -left-10 top-6 grid size-8 place-items-center rounded-full border-2 border-accent bg-bg text-accent sm:-left-14"
                     aria-hidden
                   >
-                    <Briefcase className="size-3.5" style={{ color }} />
+                    <Briefcase className="size-3.5" />
                   </span>
-                  <div className="spotlight p-6 sm:p-7" style={{ "--spot": color } as React.CSSProperties}>
-                    <span
-                      className="inline-block rounded-full px-3 py-1 text-xs font-bold"
-                      style={{ background: `${color}22`, color }}
-                    >
+                  <div className="spotlight p-6 sm:p-7">
+                    <span className="inline-block rounded-full bg-ink/[0.06] px-3 py-1 font-mono text-xs font-medium text-ink-muted">
                       {job.period}
                     </span>
-                    <h3 className="font-display mt-4 text-2xl font-bold tracking-tight sm:text-[1.7rem]">{job.title}</h3>
-                    <p className="text-gradient mt-1 text-base font-semibold">{job.company}</p>
+                    <h3 className="font-display mt-4 text-2xl font-semibold tracking-[-0.03em] sm:text-[1.7rem]">{job.title}</h3>
+                    <p className="mt-1 text-base font-medium text-accent">{job.company}</p>
                     <ul className="mt-4 flex flex-col gap-2">
                       {job.bullets.map((b) => (
                         <li key={b} className="flex gap-3 text-sm leading-relaxed text-ink-muted sm:text-base">
-                          <span className="mt-2.5 size-1.5 shrink-0 rounded-full" style={{ background: color }} />
+                          <span className="mt-2.5 size-1.5 shrink-0 rounded-full bg-accent" />
                           {b}
                         </li>
                       ))}

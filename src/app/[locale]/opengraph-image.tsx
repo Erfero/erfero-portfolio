@@ -25,26 +25,26 @@ export default async function OpengraphImage({
           justifyContent: "center",
           padding: "80px",
           background:
-            "radial-gradient(120% 120% at 85% 0%, rgba(109,77,255,0.55), transparent 55%), radial-gradient(100% 100% at 10% 100%, rgba(255,111,208,0.35), transparent 55%), #07061a",
+            "radial-gradient(90% 90% at 90% 0%, rgba(0,128,96,0.35), transparent 60%), #0e1311",
         }}
       >
         <span
           style={{
             fontSize: 28,
-            color: "#ff6fd0",
+            color: "#3cc896",
             letterSpacing: 2,
             textTransform: "uppercase",
             fontFamily: "sans-serif",
           }}
         >
-          Erféro Keoula
+          Erféro Keoula · Développeur Shopify
         </span>
         <span
           style={{
             marginTop: 24,
             fontSize: 64,
             fontWeight: 600,
-            color: "#f8f7ff",
+            color: "#f4f2ed",
             fontFamily: "sans-serif",
             lineHeight: 1.15,
             maxWidth: 900,

@@ -28,8 +28,7 @@ function Screen({ video, playing }: { video: VideoEntry; playing: boolean }) {
 
   return (
     <div
-      className="relative aspect-[9/16] overflow-hidden rounded-[1.9rem] bg-[#0d0b26]"
-      style={{ background: `linear-gradient(160deg, ${video.accent}55, #0d0b26 70%)` }}
+      className="relative aspect-[9/16] overflow-hidden rounded-[1.9rem] bg-[#18201c]"
     >
       {video.poster && (
         // eslint-disable-next-line @next/next/no-img-element -- affiches JPEG légères
@@ -107,7 +106,6 @@ export default function VideoReels({ videos, index }: { videos: VideoEntry[]; in
   );
 
   if (count === 0) return null;
-  const current = videos[active];
 
   const onPointerDown = (e: React.PointerEvent) => {
     drag.current = { x: e.clientX, moved: false };
@@ -132,13 +130,7 @@ export default function VideoReels({ videos, index }: { videos: VideoEntry[]; in
   };
 
   return (
-    <section ref={root} id="videos" className="relative scroll-mt-24 overflow-hidden py-20 sm:py-28">
-      {/* Halo aux couleurs de la vidéo en cours */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[46rem] w-[46rem] -translate-x-1/2 rounded-full opacity-60 blur-[110px] transition-[background-color] duration-1000"
-        style={{ backgroundColor: `${current.accent}55` }}
-      />
+    <section ref={root} id="videos" className="tone-stone relative scroll-mt-24 overflow-hidden py-24 sm:py-32">
 
       <div className="container-page flex flex-wrap items-end justify-between gap-6">
         <SectionHeading eyebrow={t("eyebrow")} title={t("title")} subtitle={t("subtitle")} index={index} />
@@ -181,14 +173,14 @@ export default function VideoReels({ videos, index }: { videos: VideoEntry[]; in
                 aria-hidden={abs === VISIBLE_RANGE || undefined}
                 aria-label={`${video.caption[locale]}${isActive ? ` — ${t("play")}` : ""}`}
                 data-cursor={isActive ? t("play") : undefined}
-                className="absolute left-1/2 top-0 rounded-[2.4rem] border border-white/15 bg-[#0b0a1f] p-1.5 text-left shadow-[0_40px_80px_-30px_rgba(0,0,0,0.95)] transition-[transform,opacity,filter] duration-[900ms] ease-[var(--ease-out-expo)]"
+                className="absolute left-1/2 top-0 rounded-[2.4rem] border border-black/10 bg-[#0e1311] p-1.5 text-left shadow-[0_40px_80px_-35px_rgba(14,19,17,0.7)] transition-[transform,opacity,filter] duration-[900ms] ease-[var(--ease-out-expo)]"
                 style={{
                   width: "var(--ph)",
                   transform: `translateX(calc(-50% + ${k} * var(--ph) * 0.72)) translateZ(${-abs * 140}px) rotateY(${k * -20}deg) scale(${1 - abs * 0.05})`,
                   zIndex: 20 - abs,
                   opacity: abs === VISIBLE_RANGE ? 0 : 1 - abs * 0.14,
                   filter: isActive ? "none" : `brightness(${1 - abs * 0.2}) saturate(${1 - abs * 0.15})`,
-                  boxShadow: isActive ? `0 40px 100px -30px ${video.accent}` : undefined,
+                  boxShadow: isActive ? "0 50px 100px -35px rgba(14,19,17,0.75)" : undefined,
                 }}
               >
                 <span aria-hidden className="absolute left-1/2 top-3 z-10 h-1.5 w-14 -translate-x-1/2 rounded-full bg-black/80" />
@@ -198,7 +190,7 @@ export default function VideoReels({ videos, index }: { videos: VideoEntry[]; in
                     <span className="line-clamp-2 text-sm font-semibold leading-snug text-white drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)] sm:text-base">
                       {video.caption[locale]}
                     </span>
-                    <span className="grid size-11 shrink-0 place-items-center rounded-full bg-white text-[#0b0920] shadow-lg">
+                    <span className="grid size-11 shrink-0 place-items-center rounded-full bg-white text-[#0e1311] shadow-lg">
                       <Play className="size-4 translate-x-px fill-current" />
                     </span>
                   </span>
@@ -214,8 +206,8 @@ export default function VideoReels({ videos, index }: { videos: VideoEntry[]; in
           <button type="button" onClick={() => go(-1)} aria-label={t("prev")} className="btn-ghost size-12 p-0">
             <ArrowLeft className="size-5" />
           </button>
-          <span className="font-display min-w-24 text-center text-lg font-bold tabular-nums">
-            <span className="text-gradient">{String(active + 1).padStart(2, "0")}</span>
+          <span className="min-w-24 text-center font-mono text-lg font-medium tabular-nums">
+            <span className="text-accent">{String(active + 1).padStart(2, "0")}</span>
             <span className="text-ink-dim"> / {String(count).padStart(2, "0")}</span>
           </span>
           <button type="button" onClick={() => go(1)} aria-label={t("next")} className="btn-ghost size-12 p-0">
@@ -223,7 +215,7 @@ export default function VideoReels({ videos, index }: { videos: VideoEntry[]; in
           </button>
         </div>
         <p className="flex items-center gap-2 text-sm text-ink-muted">
-          <Volume2 className="size-4 text-pink" aria-hidden />
+          <Volume2 className="size-4 text-accent" aria-hidden />
           {t("hint")}
         </p>
       </div>

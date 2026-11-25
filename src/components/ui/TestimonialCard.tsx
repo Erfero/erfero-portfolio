@@ -36,25 +36,22 @@ export default function TestimonialCard({ testimonial }: { testimonial: Testimon
       <motion.div
         whileHover={{ y: -5, scale: 1.02 }}
         transition={{ type: "spring", stiffness: 300, damping: 22 }}
-        className="rounded-2xl border border-[#25D366]/25 bg-[#0b1410] p-4 shadow-[0_10px_30px_-15px_rgba(37,211,102,0.4)]"
+        className="rounded-2xl border border-line bg-surface p-4 shadow-[0_14px_34px_-24px_rgba(14,19,17,0.5)]"
       >
-        <div className="flex items-center gap-2 border-b border-white/5 pb-3">
-          <span
-            className="grid size-9 place-items-center rounded-full text-xs font-semibold text-bg"
-            style={{ background: testimonial.accent }}
-          >
+        <div className="flex items-center gap-2 border-b border-line pb-3">
+          <span className="grid size-9 place-items-center rounded-full bg-ink text-xs font-semibold text-bg">
             {initials(testimonial.authorName)}
           </span>
           <div>
             <p className="text-sm font-medium text-ink">{testimonial.authorName}</p>
             {role && <p className="text-[11px] text-ink-muted">{role}</p>}
           </div>
-          <WhatsappIcon className="ml-auto size-4 text-[#25D366]" />
+          <WhatsappIcon className="ml-auto size-4 text-accent" />
         </div>
-        <div className="relative mt-3 max-w-[92%] rounded-xl rounded-tl-sm bg-[#1f2c26] px-3 py-2.5 text-sm leading-relaxed text-ink/95">
+        <div className="relative mt-3 max-w-[92%] rounded-xl rounded-tl-sm bg-[#dcf3d0] px-3 py-2.5 text-sm leading-relaxed text-[#0e1311]">
           {quote}
-          <span className="mt-1.5 flex items-center justify-end gap-1 text-[10px] text-ink-muted">
-            21:42 <CheckCheck className="size-3 text-[#53bdeb]" />
+          <span className="mt-1.5 flex items-center justify-end gap-1 text-[10px] text-[#0e1311]/55">
+            21:42 <CheckCheck className="size-3 text-[#007a5b]" />
           </span>
         </div>
       </motion.div>
@@ -66,25 +63,19 @@ export default function TestimonialCard({ testimonial }: { testimonial: Testimon
       <motion.div
         whileHover={{ y: -5, scale: 1.02 }}
         transition={{ type: "spring", stiffness: 300, damping: 22 }}
-        className="rounded-2xl border border-[#E1306C]/30 bg-[#170c27] p-4 shadow-[0_10px_30px_-15px_rgba(225,48,108,0.35)]"
+        className="rounded-2xl border border-line bg-surface p-4 shadow-[0_14px_34px_-24px_rgba(14,19,17,0.5)]"
       >
-        <div className="flex items-center gap-2 border-b border-white/5 pb-3">
-          <span
-            className="grid size-9 place-items-center rounded-full p-[2px] text-xs font-semibold text-white"
-            style={{
-              background:
-                "linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)",
-            }}
-          >
+        <div className="flex items-center gap-2 border-b border-line pb-3">
+          <span className="grid size-9 place-items-center rounded-full bg-ink p-[2px] text-xs font-semibold">
             <span className="grid size-full place-items-center rounded-full bg-bg-soft text-ink">
               {initials(testimonial.authorName)}
             </span>
           </span>
           <p className="text-sm font-medium text-ink">{testimonial.authorName}</p>
-          <InstagramIcon className="ml-auto size-4 text-[#E1306C]" />
+          <InstagramIcon className="ml-auto size-4 text-ink" />
         </div>
         <p className="mt-3 text-sm leading-relaxed text-ink-muted">{quote}</p>
-        <div className="mt-3 flex items-center gap-1 text-[#E1306C]">
+        <div className="mt-3 flex items-center gap-1 text-ink">
           <Heart className="size-4 fill-current" />
           <span className="text-xs text-ink-muted">Envoyé</span>
         </div>
@@ -97,12 +88,9 @@ export default function TestimonialCard({ testimonial }: { testimonial: Testimon
       <motion.div
         whileHover={{ y: -5, scale: 1.02 }}
         transition={{ type: "spring", stiffness: 300, damping: 22 }}
-        className="flex items-center gap-3 rounded-2xl border border-white/10 bg-[#13103a] p-4"
+        className="flex items-center gap-3 rounded-2xl border border-line bg-surface p-4"
       >
-        <span
-          className="grid size-10 shrink-0 place-items-center rounded-full"
-          style={{ background: `${testimonial.accent}22`, color: testimonial.accent }}
-        >
+        <span className="grid size-10 shrink-0 place-items-center rounded-full bg-accent/10 text-accent">
           <PackageCheck className="size-5" />
         </span>
         <div>
@@ -129,8 +117,7 @@ export default function TestimonialCard({ testimonial }: { testimonial: Testimon
           />
         ) : (
           <div
-            className="flex aspect-[4/5] flex-col items-center justify-center gap-2 border-b border-dashed border-white/15 p-4 text-center"
-            style={{ background: `${testimonial.accent}11` }}
+            className="flex aspect-[4/5] flex-col items-center justify-center gap-2 border-b border-dashed border-line bg-ink/[0.03] p-4 text-center"
           >
             <ImagePlus className="size-7 text-ink-muted/50" />
             <span className="text-xs text-ink-muted/70">
@@ -166,8 +153,7 @@ export default function TestimonialCard({ testimonial }: { testimonial: Testimon
           </div>
         ) : (
           <div
-            className="flex aspect-[4/5] flex-col items-center justify-center gap-2 border-b border-dashed border-white/15 p-4 text-center"
-            style={{ background: `${testimonial.accent}11` }}
+            className="flex aspect-[4/5] flex-col items-center justify-center gap-2 border-b border-dashed border-line bg-ink/[0.03] p-4 text-center"
           >
             <VideoIcon className="size-7 text-ink-muted/50" />
             <span className="text-xs text-ink-muted/70">
@@ -187,10 +173,10 @@ export default function TestimonialCard({ testimonial }: { testimonial: Testimon
     <motion.div
       whileHover={{ y: -5, scale: 1.02 }}
       transition={{ type: "spring", stiffness: 300, damping: 22 }}
-      className="flex h-full flex-col rounded-2xl border border-white/10 bg-[#13103a] p-5"
+      className="flex h-full flex-col rounded-2xl border border-line bg-surface p-5"
     >
       {testimonial.rating && (
-        <div className="flex gap-0.5 text-amber">
+        <div className="flex gap-0.5 text-accent">
           {Array.from({ length: testimonial.rating }).map((_, i) => (
             <Star key={i} className="size-3.5 fill-current" />
           ))}

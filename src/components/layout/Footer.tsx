@@ -1,16 +1,18 @@
 "use client";
 
 import { useRef } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { ArrowUp, ArrowUpRight, Mail } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { gsap, useGSAP, MOTION_OK } from "@/lib/gsap";
 import { siteConfig } from "@/data/site.config";
 import { GithubIcon, InstagramIcon, LinkedinIcon, WhatsappIcon } from "@/components/ui/BrandIcons";
+import Wordmark from "@/components/ui/Wordmark";
 
 export default function Footer({ showCv }: { showCv?: boolean }) {
   const t = useTranslations("footer");
   const nav = useTranslations("nav");
+  const locale = useLocale();
   const root = useRef<HTMLElement>(null);
   const year = new Date().getFullYear();
 
@@ -19,7 +21,7 @@ export default function Footer({ showCv }: { showCv?: boolean }) {
       const mm = gsap.matchMedia();
       mm.add(MOTION_OK, () => {
         gsap.from(".ft-letter", {
-          yPercent: 100,
+          yPercent: 105,
           duration: 1.2,
           ease: "expo.out",
           stagger: 0.05,
@@ -48,24 +50,21 @@ export default function Footer({ showCv }: { showCv?: boolean }) {
   ];
 
   return (
-    <footer ref={root} data-hide-cta className="relative isolate overflow-hidden border-t border-white/10 print:hidden">
-      <div aria-hidden className="glow-orb -bottom-40 left-1/2 -z-10 h-[30rem] w-[70rem] -translate-x-1/2 bg-brand-deep/35" />
-      <div className="container-page grid gap-12 pb-10 pt-20 md:grid-cols-[1.3fr_1fr_1fr]">
-        <div className="max-w-sm">
-          <p className="font-display text-2xl font-semibold leading-snug tracking-tight sm:text-3xl">
+    <footer ref={root} data-hide-cta className="tone-dark relative isolate overflow-hidden print:hidden">
+      <div className="container-page grid gap-12 pb-12 pt-24 md:grid-cols-[1.4fr_1fr_1fr]">
+        <div className="max-w-md">
+          <p className="label-mono text-accent">{locale === "en" ? siteConfig.roleEn : siteConfig.role}</p>
+          <p className="font-display mt-4 text-3xl font-semibold leading-[1.1] tracking-[-0.03em] sm:text-4xl">
             {t("tagline")}
           </p>
-          <Link
-            href="/contact"
-            className="btn-primary group mt-8 px-6 py-3.5 text-sm"
-          >
+          <Link href="/contact" className="btn-primary group mt-8 px-6 py-3.5 text-sm">
             {nav("cta")}
             <ArrowUpRight className="size-4 transition-transform duration-300 group-hover:rotate-45" />
           </Link>
         </div>
 
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-ink-dim">{t("pages")}</p>
+          <p className="label-mono text-ink-dim">{t("pages")}</p>
           <ul className="mt-5 flex flex-col gap-3">
             {pages.map((p) => (
               <li key={p.href}>
@@ -78,7 +77,7 @@ export default function Footer({ showCv }: { showCv?: boolean }) {
         </div>
 
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-ink-dim">{t("elsewhere")}</p>
+          <p className="label-mono text-ink-dim">{t("elsewhere")}</p>
           <ul className="mt-5 flex flex-col gap-3">
             {socials.map(({ href, icon: Icon, label }) => (
               <li key={label}>
@@ -98,27 +97,19 @@ export default function Footer({ showCv }: { showCv?: boolean }) {
         </div>
       </div>
 
-      <div className="ft-mark container-page select-none overflow-hidden" aria-hidden>
-        <p className="font-display flex text-[25vw] font-extrabold leading-[0.8] tracking-[-0.07em] lg:text-[21.5vw] 2xl:text-[290px]">
-          {[...siteConfig.shortName.split(""), "."].map((ch, i, all) => (
-            // Chaque lettre porte sa tranche du dégradé de marque : le mot
-            // entier forme un seul dégradé continu, même lettre par lettre.
-            <span
-              key={i}
-              className="ft-letter inline-block bg-clip-text text-transparent"
-              style={{
-                backgroundImage: "var(--grad-brand)",
-                backgroundSize: `${all.length * 100}% 100%`,
-                backgroundPosition: `${(i / (all.length - 1)) * 100}% 50%`,
-              }}
-            >
-              {ch}
-            </span>
-          ))}
-        </p>
+      {/* Grand logo : marges internes pour que rien ne soit rogné par le
+          masque de l'animation (ni les lettres, ni le point). */}
+      <div className="ft-mark container-page select-none" aria-hidden>
+        <div className="overflow-hidden pb-[0.06em] pr-[0.1em] text-[24vw] lg:text-[21vw] 2xl:text-[280px]">
+          <Wordmark
+            split
+            letterClassName="ft-letter"
+            className="font-display font-semibold leading-[0.9] tracking-[-0.05em] text-ink"
+          />
+        </div>
       </div>
 
-      <div className="container-page flex flex-col gap-3 border-t border-white/10 py-6 text-xs text-ink-dim sm:flex-row sm:items-center sm:justify-between">
+      <div className="container-page flex flex-col gap-3 border-t border-line py-6 text-xs text-ink-dim sm:flex-row sm:items-center sm:justify-between">
         <span>
           © {year} {siteConfig.name}. {t("rights")}
         </span>

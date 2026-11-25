@@ -15,7 +15,7 @@ export default function FAQ({ index }: { index?: string }) {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="relative scroll-mt-24 py-20 sm:py-28">
+    <section id="faq" className="tone-light relative scroll-mt-24 py-24 sm:py-32">
       <div className="container-page grid gap-12 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-16">
         <div className="lg:sticky lg:top-28 lg:h-fit">
           <SectionHeading eyebrow={t("eyebrow")} title={t("title")} subtitle={t("subtitle")} index={index} />
@@ -30,7 +30,7 @@ export default function FAQ({ index }: { index?: string }) {
                 <div
                   className={cn(
                     "rounded-2xl border transition-colors duration-500",
-                    isOpen ? "border-white/20 bg-white/[0.07]" : "border-white/10 bg-white/[0.03] hover:border-white/20"
+                    isOpen ? "border-ink/25 bg-surface" : "border-line bg-surface/60 hover:border-ink/25"
                   )}
                 >
                   <h3>
@@ -44,7 +44,7 @@ export default function FAQ({ index }: { index?: string }) {
                       <span
                         className={cn(
                           "grid size-9 shrink-0 place-items-center rounded-full transition-all duration-500",
-                          isOpen ? "bg-brand-gradient rotate-45 text-[#0b0920]" : "bg-white/10 text-ink"
+                          isOpen ? "rotate-45 bg-accent-fill text-on-accent" : "bg-ink/[0.07] text-ink"
                         )}
                       >
                         <Plus className="size-4" />

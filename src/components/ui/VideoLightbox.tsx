@@ -69,20 +69,15 @@ export default function VideoLightbox({
           role="dialog"
           aria-modal="true"
           aria-label={caption}
-          className="fixed inset-0 z-[80] flex items-center justify-center bg-[#05041a]/90 p-5 backdrop-blur-md"
+          className="tone-dark fixed inset-0 z-[80] flex items-center justify-center !bg-[#0e1311]/92 p-5 backdrop-blur-md"
         >
-          <div
-            aria-hidden
-            className="pointer-events-none absolute left-1/2 top-1/2 h-[40rem] w-[40rem] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-50 blur-[120px]"
-            style={{ background: video.accent }}
-          />
           <motion.div
             initial={{ scale: 0.85, opacity: 0, y: 30 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.9, opacity: 0, y: 20 }}
             transition={{ type: "spring", stiffness: 240, damping: 26 }}
             onClick={(e) => e.stopPropagation()}
-            className="relative w-full max-w-[min(24rem,calc((100svh-6rem)*9/16))] rounded-[2.6rem] border border-white/20 bg-[#0b0a1f] p-2 shadow-[0_60px_140px_-40px_rgba(0,0,0,1)]"
+            className="relative w-full max-w-[min(24rem,calc((100svh-6rem)*9/16))] rounded-[2.6rem] border border-white/15 bg-[#0e1311] p-2 shadow-[0_60px_140px_-40px_rgba(0,0,0,1)]"
           >
             <span aria-hidden className="absolute left-1/2 top-4 z-10 h-1.5 w-16 -translate-x-1/2 rounded-full bg-black/80" />
             <div className="relative aspect-[9/16] overflow-hidden rounded-[2.1rem]">

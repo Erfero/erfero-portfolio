@@ -54,18 +54,18 @@ export default function ShopGallery({ projects }: { projects: Project[] }) {
               onClick={() => setFilter(key)}
               className={cn(
                 "relative isolate shrink-0 rounded-full border px-4 py-2 text-sm transition-colors",
-                active ? "border-transparent font-semibold text-[#0b0920]" : "border-white/12 bg-white/[0.04] text-ink-muted hover:border-white/30 hover:text-ink"
+                active ? "border-transparent font-medium text-bg" : "border-line bg-surface text-ink-muted hover:border-ink/30 hover:text-ink"
               )}
             >
               {active && (
                 <motion.span
                   layoutId="gallery-chip"
-                  className="bg-brand-gradient absolute inset-0 -z-10 rounded-full"
+                  className="absolute inset-0 -z-10 rounded-full bg-ink"
                   transition={{ type: "spring", stiffness: 380, damping: 32 }}
                 />
               )}
               {text}
-              <span className={cn("ml-1.5 tabular-nums", active ? "text-[#0b0920]/60" : "text-ink-dim")}>{count}</span>
+              <span className={cn("ml-1.5 tabular-nums", active ? "text-bg/60" : "text-ink-dim")}>{count}</span>
             </button>
           );
         })}

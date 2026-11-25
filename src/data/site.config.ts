@@ -2,7 +2,8 @@ export const siteConfig = {
   name: "Erfero Keoula",
   shortName: "Erfero",
   studioName: "Erfero Studio",
-  role: "Développeur Shopify & Web FullStack",
+  role: "Développeur Shopify",
+  roleEn: "Shopify Developer",
   tagline: {
     fr: "Boutiques Shopify qui vendent",
     en: "Shopify stores that sell",

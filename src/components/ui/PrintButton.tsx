@@ -7,7 +7,7 @@ export default function PrintButton({ label }: { label: string }) {
     <button
       type="button"
       onClick={() => window.print()}
-      className="print:hidden inline-flex items-center gap-1.5 rounded-full border border-border px-4 py-2 text-sm font-medium hover:border-brand/50"
+      className="print:hidden inline-flex items-center gap-1.5 rounded-full border border-border px-4 py-2 text-sm font-medium hover:border-accent/50"
     >
       <Printer className="size-4" />
       {label}

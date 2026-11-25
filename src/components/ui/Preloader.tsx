@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
 import { signalIntroDone } from "@/lib/intro";
 import { siteConfig } from "@/data/site.config";
+import Wordmark from "./Wordmark";
 
 const STORAGE_KEY = "erfero-preloaded";
 
@@ -98,9 +99,9 @@ export default function Preloader({ role }: { role: string }) {
     <div
       ref={root}
       aria-hidden
-      className="preloader fixed inset-0 z-[100] flex flex-col justify-between bg-bg bg-[radial-gradient(ellipse_70%_50%_at_50%_45%,rgba(109,77,255,0.35),transparent_70%)] p-5 text-ink sm:p-10 print:hidden"
+      className="preloader tone-dark fixed inset-0 z-[100] flex flex-col justify-between p-5 sm:p-10 print:hidden"
     >
-      <div className="flex items-center justify-between text-[11px] uppercase tracking-[0.25em] text-ink-muted">
+      <div className="label-mono flex items-center justify-between text-ink-muted">
         <span className="overflow-hidden">
           <span className="pl-word inline-block">{siteConfig.name}</span>
         </span>
@@ -110,10 +111,10 @@ export default function Preloader({ role }: { role: string }) {
       </div>
 
       <div className="flex items-center justify-center">
-        <span className="overflow-hidden pb-2">
-          <span className="pl-word font-display inline-block text-[18vw] font-extrabold leading-[0.85] tracking-[-0.05em] sm:text-[11vw]">
-            {siteConfig.shortName}
-            <span className="text-gradient">.</span>
+        {/* Marges internes : rien n'est rogné (ni le point, ni les lettres). */}
+        <span className="overflow-hidden px-[0.08em] pb-[0.12em] pt-[0.04em] text-[18vw] sm:text-[11vw]">
+          <span className="pl-word inline-block">
+            <Wordmark className="font-display font-semibold leading-[0.95] tracking-[-0.045em]" />
           </span>
         </span>
       </div>
@@ -121,19 +122,19 @@ export default function Preloader({ role }: { role: string }) {
       <div>
         <div className="flex items-end justify-between gap-6">
           <span className="overflow-hidden">
-            <span className="pl-word inline-block max-w-[14rem] text-xs leading-relaxed text-ink-muted sm:text-sm">
+            <span className="pl-word inline-block max-w-[16rem] text-xs leading-relaxed text-ink-muted sm:text-sm">
               {role}
             </span>
           </span>
           <span
             ref={counter}
-            className="text-gradient font-display text-5xl font-extrabold tabular-nums tracking-tight sm:text-7xl"
+            className="font-mono text-4xl font-medium tabular-nums tracking-tight text-ink sm:text-6xl"
           >
             000
           </span>
         </div>
-        <div className="mt-5 h-px w-full bg-border">
-          <div className="pl-bar bg-brand-gradient h-full w-full origin-left scale-x-0" />
+        <div className="mt-5 h-px w-full bg-line">
+          <div className="pl-bar h-full w-full origin-left scale-x-0 bg-accent" />
         </div>
       </div>
     </div>

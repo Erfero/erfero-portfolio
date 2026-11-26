@@ -18,7 +18,7 @@ export default function Pricing() {
   const plans = t.raw("plans") as Plan[];
 
   return (
-    <section id="tarifs" className="tone-stone relative scroll-mt-24 py-24 sm:py-32">
+    <section id="tarifs" className="tone-light relative scroll-mt-24 py-28 sm:py-40">
       <div className="container-page">
         <SectionHeading eyebrow={t("eyebrow")} title={t("title")} subtitle={t("subtitle")} />
 

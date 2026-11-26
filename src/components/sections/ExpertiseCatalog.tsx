@@ -53,7 +53,7 @@ export default function ExpertiseCatalog({
   );
 
   return (
-    <section ref={root} className="tone-dark relative py-24 sm:py-32">
+    <section ref={root} className="tone-dark relative py-28 sm:py-40">
       <div className="container-page">
         <SectionHeading eyebrow={t("eyebrow")} title={t("title")} subtitle={t("subtitle")} index={index} />
 

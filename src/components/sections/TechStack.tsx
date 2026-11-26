@@ -15,7 +15,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { gsap, useGSAP, MOTION_OK } from "@/lib/gsap";
-import { techLogos, type TechKey } from "@/data/techLogos";
+import { type TechKey } from "@/data/techLogos";
 import SectionHeading from "@/components/ui/SectionHeading";
 import TechIcon from "@/components/ui/TechIcon";
 import RichText from "@/components/ui/RichText";
@@ -61,13 +61,6 @@ const SHOPIFY_LANGS: { label: string; icon: TechKey | LucideIcon }[] = [
   { label: "Git & GitHub", icon: "github" },
 ];
 
-/* ---------- Le reste de la stack (secondaire) ---------- */
-const OTHERS: { key: "frontend" | "backend" | "cms"; items: TechKey[] }[] = [
-  { key: "frontend", items: ["react", "nextjs", "vue", "angular", "tailwind", "gsap"] },
-  { key: "backend", items: ["node", "php", "laravel", "mongodb", "firebase"] },
-  { key: "cms", items: ["wordpress", "flutter"] },
-];
-
 const QUALITY_ICONS: LucideIcon[] = [Wrench, Smartphone, TrendingUp, Gauge, MessagesSquare, ShieldCheck];
 
 function Glyph({ icon, className }: { icon: TechKey | LucideIcon; className?: string }) {
@@ -82,7 +75,6 @@ function Glyph({ icon, className }: { icon: TechKey | LucideIcon; className?: st
  *    ligne à l'arrivée) + les langages de Shopify ;
  * 2. la liste des compétences Shopify, de la théorie au checkout ;
  * 3. les qualités d'un bon développeur Shopify ;
- * 4. en second plan seulement : le reste de la stack web.
  */
 export default function TechStack({ index }: { index?: string }) {
   const t = useTranslations("techStack");
@@ -143,7 +135,7 @@ export default function TechStack({ index }: { index?: string }) {
   );
 
   return (
-    <section ref={root} id="expertise" className="tone-dark relative scroll-mt-24 overflow-hidden py-24 sm:py-32">
+    <section ref={root} id="expertise" className="tone-dark relative scroll-mt-24 overflow-hidden py-28 sm:py-40">
       <div aria-hidden className="bg-grid mask-radial pointer-events-none absolute inset-0 -z-0 opacity-60" />
 
       <div className="container-page relative">
@@ -256,31 +248,6 @@ export default function TechStack({ index }: { index?: string }) {
           </ul>
         </div>
 
-        {/* 4 : le reste de la stack, en second plan */}
-        <div className="ts-others mt-16 rounded-3xl border border-line p-6 sm:p-8">
-          <div className="flex flex-col gap-2 lg:flex-row lg:items-end lg:justify-between lg:gap-10">
-            <p className="font-serif text-3xl leading-none">{t("othersTitle")}</p>
-            <p className="max-w-xl text-sm leading-relaxed text-ink-muted">{t("othersSubtitle")}</p>
-          </div>
-          <div className="mt-6 grid gap-6 border-t border-line pt-6 md:grid-cols-3">
-            {OTHERS.map((group) => (
-              <div key={group.key}>
-                <p className="label-mono text-ink-dim">{t(`groups.${group.key}`)}</p>
-                <ul className="mt-3 flex flex-wrap gap-2">
-                  {group.items.map((key) => (
-                    <li
-                      key={key}
-                      className="inline-flex items-center gap-2 rounded-full border border-line px-3 py-1.5 text-[13px] text-ink-muted"
-                    >
-                      <TechIcon name={key} color="currentColor" className="size-3.5" />
-                      {techLogos[key].title}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
       </div>
     </section>
   );

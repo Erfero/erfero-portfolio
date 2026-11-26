@@ -49,7 +49,7 @@ export default function Experience({ showCv, index }: { showCv?: boolean; index?
   );
 
   return (
-    <section ref={root} id="parcours" className="tone-stone relative scroll-mt-24 py-24 sm:py-32">
+    <section ref={root} id="parcours" className="tone-stone relative scroll-mt-24 py-28 sm:py-40">
       <div className="container-page grid gap-14 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-16">
         <div className="lg:sticky lg:top-28 lg:h-fit">
           <SectionHeading eyebrow={t("eyebrow")} title={t("title")} subtitle={t("subtitle")} index={index} />

@@ -15,7 +15,7 @@ export default function FAQ({ index }: { index?: string }) {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="tone-light relative scroll-mt-24 py-24 sm:py-36">
+    <section id="faq" className="tone-stone relative scroll-mt-24 py-28 sm:py-40">
       <div className="container-page grid gap-12 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-16">
         <div className="lg:sticky lg:top-28 lg:h-fit">
           <SectionHeading eyebrow={t("eyebrow")} title={t("title")} subtitle={t("subtitle")} index={index} />

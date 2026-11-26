@@ -41,7 +41,7 @@ function Row({ items, reverse, size }: { items: string[]; reverse?: boolean; siz
 export default function Toolbox() {
   const t = useTranslations("toolbox");
   return (
-    <section className="tone-light relative overflow-hidden py-20 sm:py-28">
+    <section className="tone-stone relative overflow-hidden py-20 sm:py-28">
       <h2 className="sr-only">{t("title").replace(/\*/g, "")}</h2>
       <div className="flex flex-col gap-2 sm:gap-4">
         <Row items={SHOPIFY} size="text-[3.4rem] sm:text-[5.5rem] lg:text-[7.5rem]" />

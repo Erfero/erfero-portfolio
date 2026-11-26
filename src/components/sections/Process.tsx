@@ -50,7 +50,7 @@ export default function Process({ index }: { index?: string }) {
   );
 
   return (
-    <section ref={root} id="process" className="tone-dark relative scroll-mt-24 py-24 sm:py-32">
+    <section ref={root} id="process" className="tone-dark relative scroll-mt-24 py-28 sm:py-40">
       <div className="container-page">
         <SectionHeading eyebrow={t("eyebrow")} title={t("title")} subtitle={t("subtitle")} index={index} />
 

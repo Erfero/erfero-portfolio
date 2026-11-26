@@ -2,18 +2,14 @@ import { setRequestLocale } from "next-intl/server";
 import Hero from "@/components/sections/Hero";
 import Manifesto from "@/components/sections/Manifesto";
 import ProjectShowcase, { type ShowcaseProject } from "@/components/sections/ProjectShowcase";
-import Toolbox from "@/components/sections/Toolbox";
 import VideoReels from "@/components/sections/VideoReels";
 import Metrics from "@/components/sections/Metrics";
-import PainPoints from "@/components/sections/PainPoints";
-import Services from "@/components/sections/Services";
 import ExpertiseCatalog from "@/components/sections/ExpertiseCatalog";
 import Experience from "@/components/sections/Experience";
 import Testimonials from "@/components/sections/Testimonials";
 import Process from "@/components/sections/Process";
 import Pricing from "@/components/sections/Pricing";
 import TechStack from "@/components/sections/TechStack";
-import Trust from "@/components/sections/Trust";
 import FAQ from "@/components/sections/FAQ";
 import Contact from "@/components/sections/Contact";
 import {
@@ -46,8 +42,8 @@ export default async function HomePage({
   // Seuls les champs affichés par les cartes partent vers le navigateur.
   const projects = allProjects.map(toProjectCard);
   // Jamais deux fois la même boutique sur l'accueil : les 8 premières sont
-  // présentées en détail (vitrine), les 20 suivantes flottent dans la
-  // galerie 3D du hero.
+  // présentées en détail (vitrine), les 6 suivantes défilent dans la
+  // fenêtre de navigateur du hero.
   const SHOWCASE = 8;
   const showcase: ShowcaseProject[] = allProjects.slice(0, SHOWCASE).map((p) => ({
     ...toProjectCard(p),
@@ -55,7 +51,7 @@ export default async function HomePage({
     tags: p.tags,
     year: p.year,
   }));
-  const galleryProjects = projects.slice(SHOWCASE, SHOWCASE + 20);
+  const heroProjects = projects.slice(SHOWCASE, SHOWCASE + 6);
 
   // Numérotation éditoriale (01, 02...) calculée sur les seules sections
   // activées dans l'admin, pour ne jamais afficher de trou dans la suite.
@@ -66,24 +62,20 @@ export default async function HomePage({
     stack: num(sections.techStackEnabled),
     videos: num(sections.videoReelsEnabled && videos.length > 0),
     testimonials: num(sections.testimonialsEnabled),
-    services: num(sections.servicesEnabled),
-    pain: num(sections.painPointsEnabled),
     catalog: num(sections.expertiseCatalogEnabled),
     experience: num(sections.experienceEnabled),
     process: num(sections.processEnabled),
-    trust: num(sections.trustEnabled),
     faq: num(sections.faqEnabled),
   };
 
-  // Ordre : galerie de boutiques et présentation, les boutiques en détail,
-  // puis les compétences Shopify (avec le code Liquid), ENSUITE les vidéos,
-  // les chiffres et les avis, la boîte à outils et les services, et plus bas
-  // les domaines (boutiques par secteur), le parcours, le process, les
-  // tarifs, les garanties, la FAQ et le contact.
+  // Accueil volontairement resserré (ce qu'un recruteur ou un client doit
+  // voir pour faire confiance, sans répétition) : bannière, boutiques en
+  // détail, compétences Shopify (code Liquid) puis les vidéos, chiffres et
+  // avis, boutiques par domaine, présentation, parcours, process, tarifs,
+  // FAQ et contact. Services et garanties restent sur leurs propres pages.
   return (
     <>
-      {sections.heroEnabled && <Hero projects={galleryProjects} />}
-      {sections.manifestoEnabled && <Manifesto showCv={cv.enabled} />}
+      {sections.heroEnabled && <Hero projects={heroProjects} />}
       {sections.featuredProjectsEnabled && (
         <ProjectShowcase projects={showcase} totalCount={projects.length} index={idx.featured} />
       )}
@@ -93,16 +85,13 @@ export default async function HomePage({
       {sections.testimonialsEnabled && (
         <Testimonials testimonials={testimonials} index={idx.testimonials} />
       )}
-      {sections.techStackEnabled && <Toolbox />}
-      {sections.servicesEnabled && <Services index={idx.services} />}
-      {sections.painPointsEnabled && <PainPoints index={idx.pain} />}
       {sections.expertiseCatalogEnabled && (
         <ExpertiseCatalog projects={projects} nicheImages={nicheImages} index={idx.catalog} />
       )}
+      {sections.manifestoEnabled && <Manifesto showCv={cv.enabled} />}
       {sections.experienceEnabled && <Experience showCv={cv.enabled} index={idx.experience} />}
       {sections.processEnabled && <Process index={idx.process} />}
       {sections.pricingEnabled && <Pricing />}
-      {sections.trustEnabled && <Trust index={idx.trust} />}
       {sections.faqEnabled && <FAQ index={idx.faq} />}
       {sections.contactEnabled && <Contact />}
     </>

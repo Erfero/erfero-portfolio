@@ -62,7 +62,7 @@ export default function ProjectShowcase({
           scrollTrigger: {
             trigger: view,
             start: "top top",
-            end: () => `+=${distance()}`,
+            end: () => `+=${distance() * 0.6}`,
             pin: true,
             scrub: 0.7,
             anticipatePin: 1,
@@ -135,7 +135,7 @@ export default function ProjectShowcase({
           index={index}
           eyebrow={t("eyebrow")}
           title={t("title")}
-          subtitle={t("showcaseSubtitle", { count: totalCount })}
+          subtitle={t("subtitle")}
         />
       </div>
 

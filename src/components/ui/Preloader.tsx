@@ -28,7 +28,15 @@ export default function Preloader({ role }: { role: string }) {
       } catch {
         // stockage indisponible (navigation privée stricte) : on l'affiche
       }
-      if (seen || html.hasAttribute("data-preloaded")) {
+      // Déjà effacé par le filet de sécurité CSS (JS arrivé tard sur une
+      // connexion lente) : on ne rejoue pas l'animation, le site s'affiche.
+      const hiddenByCss = !!root.current && getComputedStyle(root.current).visibility === "hidden";
+      if (seen || hiddenByCss || html.hasAttribute("data-preloaded")) {
+        if (hiddenByCss) {
+          try {
+            sessionStorage.setItem(STORAGE_KEY, "1");
+          } catch {}
+        }
         setGone(true);
         signalIntroDone();
         return;
@@ -69,12 +77,13 @@ export default function Preloader({ role }: { role: string }) {
 
       const progress = { v: 0 };
       const tl = gsap.timeline({ onComplete: finish });
-      tl.from(".pl-word", { yPercent: 110, duration: 0.8, ease: "expo.out", stagger: 0.06 })
+      // Court (~1,3 s) : on montre le site au plus vite.
+      tl.from(".pl-word", { yPercent: 110, duration: 0.5, ease: "expo.out", stagger: 0.05 })
         .to(
           progress,
           {
             v: 100,
-            duration: 1.1,
+            duration: 0.65,
             ease: "power2.inOut",
             onUpdate: () => {
               if (counter.current) {
@@ -84,10 +93,10 @@ export default function Preloader({ role }: { role: string }) {
           },
           0
         )
-        .to(".pl-bar", { scaleX: 1, duration: 1.1, ease: "power2.inOut" }, 0)
-        .to(".pl-word", { yPercent: -110, duration: 0.5, ease: "expo.in", stagger: 0.03 }, ">-0.05")
-        .add(signalIntroDone, ">-0.15")
-        .to(root.current, { yPercent: -100, duration: 0.9, ease: "expo.inOut" }, "<");
+        .to(".pl-bar", { scaleX: 1, duration: 0.65, ease: "power2.inOut" }, 0)
+        .to(".pl-word", { yPercent: -110, duration: 0.3, ease: "expo.in", stagger: 0.03 }, ">-0.05")
+        .add(signalIntroDone, ">-0.1")
+        .to(root.current, { yPercent: -100, duration: 0.6, ease: "expo.inOut" }, "<");
       return release;
     },
     { scope: root }

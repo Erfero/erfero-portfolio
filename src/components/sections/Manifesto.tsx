@@ -69,10 +69,10 @@ export default function Manifesto({ showCv }: { showCv?: boolean }) {
               <div className="overflow-hidden rounded-[1.7rem] bg-bg-soft">
                 {/* eslint-disable-next-line @next/next/no-img-element -- photo de profil locale */}
                 <img
-                  src="/portrait.jpg"
+                  src="/portrait.webp"
                   alt={siteConfig.name}
-                  width={955}
-                  height={1280}
+                  width={840}
+                  height={1126}
                   loading="lazy"
                   decoding="async"
                   className="aspect-[955/1280] w-full object-cover"

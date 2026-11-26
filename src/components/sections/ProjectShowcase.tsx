@@ -6,7 +6,8 @@ import { ArrowUpRight } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { gsap, useGSAP } from "@/lib/gsap";
 import SectionHeading from "@/components/ui/SectionHeading";
-import { projectHost, projectShot, type ProjectCard } from "@/lib/projectMedia";
+import { projectHost, projectShot, projectTop, type ProjectCard } from "@/lib/projectMedia";
+import ShotImage from "@/components/ui/ShotImage";
 
 export type ShowcaseProject = ProjectCard & {
   description: { fr: string; en: string };
@@ -160,16 +161,15 @@ export default function ProjectShowcase({
                     aria-label={`${name} — ${t("visit")} (${projectHost(p)})`}
                     className="ps-media shot-trigger group relative block overflow-hidden rounded-2xl bg-surface shadow-[0_50px_90px_-45px_rgba(14,19,17,0.6)] ring-1 ring-black/5"
                   >
-                    {/* Format paysage 16:10 : les captures « écran » (900×563) s'affichent
-                        entières, les captures pleine page montrent leur haut sur toute la
-                        largeur — aucune boutique n'est coupée sur les côtés. */}
+                    {/* Format paysage 16:10 : la capture pleine page (900×2250) montre
+                        son haut sur toute la largeur, puis défile au survol — aucune
+                        boutique n'est coupée sur les côtés. */}
                     <div className="relative aspect-[16/10] w-full">
-                      {/* eslint-disable-next-line @next/next/no-img-element -- captures WebP pré-optimisées */}
-                      <img
-                        src={projectShot(p)}
+                      <ShotImage
+                        preview={projectTop(p)}
+                        full={projectShot(p)}
                         alt={`${name} — boutique Shopify`}
-                        loading={i < 2 ? "eager" : "lazy"}
-                        decoding="async"
+                        eager={i < 2}
                         className="shot-scroll absolute inset-0 size-full"
                       />
                     </div>

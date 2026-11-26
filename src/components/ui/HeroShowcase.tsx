@@ -5,7 +5,7 @@ import { Check, Lock, Star } from "lucide-react";
 import { gsap, useGSAP, MOTION_OK } from "@/lib/gsap";
 import { onIntroReady } from "@/lib/intro";
 import { useMediaQuery } from "@/lib/useMediaQuery";
-import { projectHost, projectShot, type ProjectCard as Project } from "@/lib/projectMedia";
+import { projectHost, projectTop, type ProjectCard as Project } from "@/lib/projectMedia";
 import TechIcon from "./TechIcon";
 
 export interface HeroMock {
@@ -147,7 +147,7 @@ export default function HeroShowcase({ shops, mock }: { shops: Project[]; mock: 
               // eslint-disable-next-line @next/next/no-img-element -- captures WebP pré-optimisées
               <img
                 key={shop.id}
-                src={projectShot(shop)}
+                src={projectTop(shop)}
                 alt=""
                 loading={i === 0 ? "eager" : "lazy"}
                 decoding="async"

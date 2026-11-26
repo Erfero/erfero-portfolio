@@ -6,7 +6,7 @@ import { WhatsappIcon } from "@/components/ui/BrandIcons";
 import ContactForm from "./ContactForm";
 import { siteConfig } from "@/data/site.config";
 
-export default function Contact({ selectedPlan }: { selectedPlan?: string }) {
+export default function Contact() {
   const t = useTranslations("contact");
 
   const links = [
@@ -44,7 +44,7 @@ export default function Contact({ selectedPlan }: { selectedPlan?: string }) {
 
           <div className="mt-14 grid grid-cols-[minmax(0,1fr)] gap-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:gap-10">
             <Reveal>
-              <ContactForm selectedPlan={selectedPlan} />
+              <ContactForm />
             </Reveal>
 
             <Reveal delay={0.1} className="flex flex-col">

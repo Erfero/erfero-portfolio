@@ -19,7 +19,7 @@ export const viewport: Viewport = {
 //   l'afficher qu'à la toute première visite ;
 // - filet de sécurité : si une animation n'a pas pu se lancer, tout est
 //   rendu visible après 6 s.
-const bootScript = `(function(){var d=document.documentElement;d.classList.add('js');try{if(sessionStorage.getItem('erfero-preloaded')){d.setAttribute('data-preloaded','1')}}catch(e){}setTimeout(function(){d.classList.add('reveal-failsafe')},6000)})();`;
+const bootScript = `(function(){var d=document.documentElement;d.classList.add('js');try{if(sessionStorage.getItem('erfero-preloaded')){d.setAttribute('data-preloaded','1')}}catch(e){}setTimeout(function(){d.classList.add('reveal-failsafe')},3000)})();`;
 
 export default function RootLayout({
   children,

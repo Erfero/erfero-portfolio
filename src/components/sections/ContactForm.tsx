@@ -1,12 +1,27 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { Suspense, useState, type FormEvent } from "react";
+import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { Loader2, Send, CheckCircle2, AlertCircle, Sparkles } from "lucide-react";
 
 type Status = "idle" | "sending" | "success" | "error";
 
-export default function ContactForm({ selectedPlan }: { selectedPlan?: string }) {
+function SelectedPlan({ label }: { label: string }) {
+  const plan = useSearchParams().get("plan");
+  if (!plan) return null;
+  return (
+    <div className="flex items-center gap-2 rounded-xl border border-accent/30 bg-accent/10 px-4 py-3 text-sm text-accent">
+      <Sparkles className="size-4 shrink-0" />
+      <span>
+        {label} <strong>{plan}</strong>
+      </span>
+      <input type="hidden" name="offre_demandee" value={plan} />
+    </div>
+  );
+}
+
+export default function ContactForm() {
   const t = useTranslations("contact");
   const [status, setStatus] = useState<Status>("idle");
   const formEndpoint = process.env.NEXT_PUBLIC_FORMSPREE_ID
@@ -48,15 +63,11 @@ export default function ContactForm({ selectedPlan }: { selectedPlan?: string })
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-      {selectedPlan && (
-        <div className="flex items-center gap-2 rounded-xl border border-accent/30 bg-accent/10 px-4 py-3 text-sm text-accent">
-          <Sparkles className="size-4 shrink-0" />
-          <span>
-            {t("planBadge")} <strong>{selectedPlan}</strong>
-          </span>
-          <input type="hidden" name="offre_demandee" value={selectedPlan} />
-        </div>
-      )}
+      {/* L'offre choisie (?plan=…) est lue dans le navigateur : la page de
+          contact reste ainsi pré-générée (chargement instantané). */}
+      <Suspense fallback={null}>
+        <SelectedPlan label={t("planBadge")} />
+      </Suspense>
 
       <div className="grid gap-4 sm:grid-cols-2">
         <input

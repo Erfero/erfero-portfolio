@@ -1,6 +1,7 @@
 import { ArrowUpRight, Lock } from "lucide-react";
 import type { ProjectCard } from "@/lib/projectMedia";
-import { projectHost, projectShot } from "@/lib/projectMedia";
+import { projectHost, projectShot, projectTop } from "@/lib/projectMedia";
+import ShotImage from "./ShotImage";
 import { cn } from "@/lib/utils";
 
 /**
@@ -53,12 +54,11 @@ export default function ShopCard({
           <ArrowUpRight className="size-4 text-ink-muted transition-colors group-hover:text-ink" aria-hidden />
         </div>
         <div className={"relative aspect-[16/10] overflow-hidden bg-bg-soft"}>
-          {/* eslint-disable-next-line @next/next/no-img-element -- captures déjà optimisées (WebP) */}
-          <img
-            src={projectShot(project)}
+          <ShotImage
+            preview={projectTop(project)}
+            full={projectShot(project)}
             alt={`${name} — boutique Shopify`}
-            loading={eager ? "eager" : "lazy"}
-            decoding="async"
+            eager={eager}
             className="shot-scroll absolute inset-0 size-full"
           />
           <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/35 to-transparent transition-opacity duration-500 group-hover:opacity-0" />

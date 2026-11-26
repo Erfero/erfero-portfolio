@@ -19,22 +19,21 @@ export async function generateMetadata({
   };
 }
 
+// Page pré-générée : l'offre choisie (?plan=…) est lue côté navigateur par le
+// formulaire, pour ne pas recalculer la page à chaque visite.
 export default async function ContactPage({
   params,
-  searchParams,
 }: {
   params: Promise<{ locale: string }>;
-  searchParams: Promise<{ plan?: string }>;
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("nav");
-  const { plan } = await searchParams;
 
   return (
     <div>
       <PageHeader backLabel={t("home")} title={t("contact")} />
-      <Contact selectedPlan={plan} />
+      <Contact />
     </div>
   );
 }

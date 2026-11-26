@@ -68,7 +68,8 @@ export default async function LocaleLayout({
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
-    name: "Erféro Keoula — Développeur Shopify Freelance",
+    // Le prénom garde son accent en français, pas en anglais.
+    name: locale === "fr" ? "Erféro Keoula — Développeur Shopify Freelance" : "Erfero Keoula — Développeur Shopify Freelance",
     description:
       locale === "fr"
         ? "Développeur Shopify freelance : création de boutique Shopify sur-mesure, refonte, optimisation de conversion (CRO) et SEO."
@@ -87,7 +88,7 @@ export default async function LocaleLayout({
     ],
     founder: {
       "@type": "Person",
-      name: "Erféro Keoula",
+      name: locale === "fr" ? "Erféro Keoula" : "Erfero Keoula",
       jobTitle:
         locale === "fr" ? "Développeur Shopify freelance" : "Freelance Shopify Developer",
       sameAs: [

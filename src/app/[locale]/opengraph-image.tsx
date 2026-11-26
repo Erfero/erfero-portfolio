@@ -7,12 +7,13 @@ export const contentType = "image/png";
 export default async function OpengraphImage({
   params,
 }: {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }) {
-  const t = await getTranslations({
-    locale: params.locale,
-    namespace: "hero",
-  });
+  // Next 16 : params est une promesse.
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "hero" });
+  // Le prénom garde son accent en français, pas en anglais.
+  const name = locale === "en" ? "Erfero" : "Erféro";
 
   return new ImageResponse(
     (
@@ -37,7 +38,7 @@ export default async function OpengraphImage({
             fontFamily: "sans-serif",
           }}
         >
-          Erféro Keoula · Développeur Shopify
+          {name} Keoula · Développeur Shopify
         </span>
         <span
           style={{

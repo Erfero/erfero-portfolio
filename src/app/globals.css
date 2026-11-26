@@ -546,7 +546,7 @@
 
 /* État initial des éléments animés à l'intro : masqués uniquement quand le
    JS est actif ET que l'utilisateur accepte les animations. Filet de
-   sécurité : tout redevient visible après 6 s (voir layout racine). */
+   sécurité : tout redevient visible après 3 s (voir layout racine). */
 @media (prefers-reduced-motion: no-preference) {
   html.js:not(.reveal-failsafe) [data-reveal] {
     opacity: 0;
@@ -608,6 +608,17 @@ html.lenis body {
 /* Préchargeur : invisible d'emblée si déjà vu dans cette session. */
 html[data-preloaded] .preloader {
   display: none;
+}
+/* Filet de sécurité : si le JS tarde (connexion lente), le rideau s'efface
+   de lui-même au bout de ~2 s au lieu de cacher le site. */
+.preloader {
+  animation: preloader-failsafe 0.4s ease 1.6s forwards;
+}
+@keyframes preloader-failsafe {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

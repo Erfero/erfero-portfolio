@@ -34,6 +34,14 @@ export function projectShot(project: ProjectCard): string {
   );
 }
 
+/** Aperçu léger 16:10 (haut de la boutique, 900×563) : ce qu'une carte montre
+ * au repos. La capture pleine page (≈3× plus lourde) ne se charge qu'au survol,
+ * pour le défilement. Repli sur la capture complète si l'aperçu n'existe pas. */
+export function projectTop(project: ProjectCard): string {
+  const m = project.screenshot?.match(/^\/shots\/([^/]+)\.webp$/);
+  return m ? `/shots/top/${m[1]}.webp` : projectShot(project);
+}
+
 /** Vignette légère (haut de page) pour les petits formats. */
 export function projectThumb(project: ProjectCard): string {
   return (

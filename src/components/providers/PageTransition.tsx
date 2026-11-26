@@ -22,7 +22,8 @@ export default function PageTransition({ children }: { children: React.ReactNode
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+        // Court : la page suivante apparaît sans temps mort.
+        transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
         // Nouvelle page affichée : toutes les positions des animations au
         // scroll sont recalculées (la hauteur de page a changé).
         onAnimationComplete={() => ScrollTrigger.refresh()}

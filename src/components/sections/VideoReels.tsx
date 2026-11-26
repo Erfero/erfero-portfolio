@@ -200,7 +200,7 @@ export default function VideoReels({ videos, index }: { videos: VideoEntry[]; in
           role="region"
           aria-roledescription="carousel"
           aria-label={t("eyebrow")}
-          className="vr-stage relative mt-14 h-[24rem] cursor-grab touch-pan-y select-none [perspective:1700px] active:cursor-grabbing sm:mt-16 sm:h-[30rem]"
+          className="vr-stage relative mt-14 h-[27rem] cursor-grab touch-pan-y select-none [perspective:2200px] active:cursor-grabbing sm:mt-16 sm:h-[36rem]"
         >
           <div ref={ring} className="absolute left-1/2 top-1/2 size-0 [transform-style:preserve-3d]">
             {videos.map((video, i) => {
@@ -212,7 +212,7 @@ export default function VideoReels({ videos, index }: { videos: VideoEntry[]; in
                   onClick={() => setLightbox(video)}
                   aria-label={`${video.caption[locale]} — ${t("play")}`}
                   data-cursor={t("play")}
-                  className="vr-card absolute left-0 top-0 -ml-[4.25rem] -mt-[7.55rem] block w-[8.5rem] overflow-hidden rounded-[1.1rem] bg-[#15291f] text-left shadow-[0_30px_60px_-30px_rgba(0,0,0,0.9)] ring-1 ring-white/10 [backface-visibility:hidden] sm:-ml-[5.6rem] sm:-mt-[9.95rem] sm:w-[11.2rem] sm:rounded-[1.3rem]"
+                  className="vr-card absolute left-0 top-0 -ml-[5.25rem] -mt-[9.33rem] block w-[10.5rem] overflow-hidden rounded-[1.1rem] bg-[#15291f] text-left shadow-[0_30px_60px_-30px_rgba(0,0,0,0.9)] ring-1 ring-white/10 [backface-visibility:hidden] sm:-ml-[7.5rem] sm:-mt-[13.33rem] sm:w-[15rem] sm:rounded-[1.5rem]"
                   style={{ opacity: 0 }}
                 >
                   <span className="relative block aspect-[9/16]">
@@ -229,7 +229,7 @@ export default function VideoReels({ videos, index }: { videos: VideoEntry[]; in
                     )}
                     {isFront && inView && !lightbox && <FrontPreview video={video} />}
                     <span className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/5 to-transparent" />
-                    <span className="pointer-events-none absolute inset-x-2.5 bottom-2.5 line-clamp-2 text-[11px] font-medium leading-snug text-white sm:inset-x-3 sm:bottom-3 sm:text-xs">
+                    <span className="pointer-events-none absolute inset-x-2.5 bottom-2.5 line-clamp-2 text-xs font-medium leading-snug text-white sm:inset-x-4 sm:bottom-4 sm:text-sm">
                       {video.caption[locale]}
                     </span>
                     {isFront && (

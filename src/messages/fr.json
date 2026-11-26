@@ -229,7 +229,7 @@
   },
   "metrics": {
     "eyebrow": "En chiffres",
-    "title": "Développeur web depuis 2021, *Shopify depuis 2022*",
+    "title": "Des boutiques Shopify *qui vendent*, depuis 2022",
     "items": [
       {
         "value": "5",
@@ -531,7 +531,7 @@
       }
     ],
     "profileEyebrow": "Profil",
-    "profile": "**Développeur Shopify** et développeur web full stack : full stack depuis 2021, Shopify depuis 2022. Je conçois des boutiques rapides, bien référencées et pensées pour **convertir** — thèmes et sections sur mesure en Liquid, pages produit, apps, vitesse et SEO. Autonome, rigoureux et orienté résultat.",
+    "profile": "**Développeur Shopify** depuis 2022. Je conçois des boutiques rapides, bien référencées et pensées pour **convertir** : thèmes et sections sur mesure en Liquid, pages produit, apps, vitesse et SEO. Également développeur web full stack depuis 2021. Autonome, rigoureux et orienté résultat.",
     "stats": [
       {
         "value": "200+",
@@ -638,7 +638,7 @@
       {
         "title": "Développeur Shopify",
         "company": "Elite Agency · Bordeaux",
-        "period": "Mai 2021 – Janv. 2025",
+        "period": "Depuis 2022",
         "bullets": [
           "Création de boutiques Shopify sur-mesure, optimisées pour la conversion.",
           "Stratégies SEO pour la visibilité sur Google et les réseaux sociaux."
@@ -647,7 +647,7 @@
       {
         "title": "Développeur Web Full Stack",
         "company": "Viip Interstis · France",
-        "period": "Févr. 2023 – Mars 2025",
+        "period": "Depuis 2021",
         "bullets": [
           "Application omnicanale centralisant les réseaux sociaux de l'entreprise.",
           "Site + application de monitoring pour la gestion des données internes.",
@@ -717,7 +717,7 @@
   },
   "manifesto": {
     "eyebrow": "À propos",
-    "text": "Je m'appelle Erféro. Développeur web full stack depuis 2021 et développeur Shopify depuis 2022, je conçois des boutiques pour des marques e-commerce et des agences — *plus de 200 à ce jour*. Mon obsession : des boutiques rapides, rassurantes et pensées pour vendre, livrées en *3 jours en moyenne*.",
+    "text": "Je m'appelle Erféro, développeur Shopify depuis 2022. Je conçois des boutiques pour des marques e-commerce et des agences — *plus de 200 à ce jour*. Mon obsession : des boutiques rapides, rassurantes et pensées pour vendre, livrées en *3 jours en moyenne*. Développeur web full stack depuis 2021, je vais au-delà du thème quand un projet le demande.",
     "agenciesLabel": "Agences et entreprises avec lesquelles j'ai travaillé",
     "agencies": [
       "Elite Agency",
@@ -730,7 +730,7 @@
   "experience": {
     "eyebrow": "Parcours",
     "title": "Formé en agence, *autonome* en freelance",
-    "subtitle": "Développeur web full stack depuis 2021 et développeur Shopify depuis 2022 : du code sur mesure, du SEO et des boutiques qui vendent — en équipe d'agence comme en direct avec une marque.",
+    "subtitle": "Développeur Shopify depuis 2022, en équipe d'agence comme en direct avec une marque — avec, en appui, un socle de développeur web full stack depuis 2021 pour le code sur mesure.",
     "ctaCv": "Voir le CV complet"
   },
   "toolbox": {

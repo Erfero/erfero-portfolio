@@ -51,6 +51,12 @@ export default function Process({ index }: { index?: string }) {
 
   return (
     <section ref={root} id="process" className="tone-dark relative scroll-mt-24 py-28 sm:py-40">
+      {/* Filet discret : sépare le process des boutiques par domaine (même fond). */}
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0">
+        <div className="container-page">
+          <div className="h-px bg-line" />
+        </div>
+      </div>
       <div className="container-page">
         <SectionHeading eyebrow={t("eyebrow")} title={t("title")} subtitle={t("subtitle")} index={index} />
 

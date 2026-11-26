@@ -61,9 +61,9 @@ export default function Manifesto({ showCv }: { showCv?: boolean }) {
   );
 
   return (
-    <section ref={root} id="about" className="tone-light relative scroll-mt-24 py-28 sm:py-40">
+    <section ref={root} id="about" className="tone-stone relative scroll-mt-24 py-28 sm:py-40">
       <div className="container-page grid items-center gap-16 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-24">
-        <div className="mf-photo relative mx-auto w-full max-w-[540px]">
+        <div className="mf-photo relative mx-auto w-full max-w-[460px]">
           <div className="mf-photo-inner relative">
             <div className="rounded-[2.2rem] border border-line bg-surface p-2 shadow-[0_50px_100px_-50px_rgba(14,19,17,0.55)]">
               <div className="overflow-hidden rounded-[1.7rem] bg-bg-soft">
@@ -87,7 +87,7 @@ export default function Manifesto({ showCv }: { showCv?: boolean }) {
                 <span className="grid size-9 place-items-center rounded-xl bg-[#008060] text-white">
                   <TechIcon name="shopify" color="currentColor" className="size-5" />
                 </span>
-                <span className="text-base font-semibold">{locale === "en" ? siteConfig.roleEn : siteConfig.role}</span>
+                <span className="text-sm font-semibold">{locale === "en" ? siteConfig.roleEn : siteConfig.role}</span>
               </div>
               <div className="mf-badge hs-card flex items-center gap-3 rounded-2xl px-4 py-3">
                 <span className="pulse-dot size-2.5 shrink-0 rounded-full bg-success" />
@@ -106,7 +106,7 @@ export default function Manifesto({ showCv }: { showCv?: boolean }) {
             as="p"
             text={t("text")}
             stagger={0.05}
-            className="font-display mt-8 text-[clamp(2rem,3.7vw,3.6rem)] font-semibold leading-[1.15] tracking-[-0.03em]"
+            className="mt-7 font-serif text-[clamp(1.85rem,3.1vw,3rem)] font-normal leading-[1.18] tracking-[-0.01em] text-ink"
           />
 
           <div className="mf-agencies mt-12">
@@ -118,7 +118,7 @@ export default function Manifesto({ showCv }: { showCv?: boolean }) {
               {agencies.map((name) => (
                 <li
                   key={name}
-                  className="mf-agency font-display rounded-2xl border border-line bg-surface px-6 py-4 text-xl font-semibold tracking-[-0.02em] sm:text-2xl"
+                  className="mf-agency rounded-2xl border border-line bg-surface px-5 py-3 font-serif text-xl sm:text-2xl"
                 >
                   {name}
                 </li>

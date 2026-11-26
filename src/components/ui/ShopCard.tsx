@@ -52,7 +52,7 @@ export default function ShopCard({
           </span>
           <ArrowUpRight className="size-4 text-ink-muted transition-colors group-hover:text-ink" aria-hidden />
         </div>
-        <div className={cn("relative overflow-hidden bg-bg-soft", size === "lg" ? "aspect-video" : "aspect-[4/3]")}>
+        <div className={"relative aspect-[16/10] overflow-hidden bg-bg-soft"}>
           {/* eslint-disable-next-line @next/next/no-img-element -- captures déjà optimisées (WebP) */}
           <img
             src={projectShot(project)}

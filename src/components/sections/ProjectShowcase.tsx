@@ -151,7 +151,7 @@ export default function ProjectShowcase({
                 className="ps-panel px-5 py-14 sm:px-8 lg:px-0 lg:py-0"
                 style={{ "--panel-bg": BG[i % BG.length] } as React.CSSProperties}
               >
-                <div className="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1fr)] lg:gap-[5vw]">
+                <div className="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)] lg:gap-[4vw]">
                   <a
                     href={p.url}
                     target="_blank"
@@ -160,7 +160,10 @@ export default function ProjectShowcase({
                     aria-label={`${name} — ${t("visit")} (${projectHost(p)})`}
                     className="ps-media shot-trigger group relative block overflow-hidden rounded-2xl bg-surface shadow-[0_50px_90px_-45px_rgba(14,19,17,0.6)] ring-1 ring-black/5"
                   >
-                    <div className="relative aspect-[4/5] w-full lg:aspect-auto lg:h-[min(70svh,640px)]">
+                    {/* Format paysage 16:10 : les captures « écran » (900×563) s'affichent
+                        entières, les captures pleine page montrent leur haut sur toute la
+                        largeur — aucune boutique n'est coupée sur les côtés. */}
+                    <div className="relative aspect-[16/10] w-full">
                       {/* eslint-disable-next-line @next/next/no-img-element -- captures WebP pré-optimisées */}
                       <img
                         src={projectShot(p)}

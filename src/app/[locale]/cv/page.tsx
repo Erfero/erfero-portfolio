@@ -106,9 +106,9 @@ export default async function CvPage({
             <div>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/cv-photo.jpg"
+                src="/portrait.jpg"
                 alt={siteConfig.name}
-                className="size-36 rounded-2xl border border-border object-cover sm:size-40"
+                className="size-36 rounded-2xl border border-border object-cover object-top sm:size-40"
               />
               <h1 className="mt-6 font-display text-2xl font-semibold tracking-tight sm:text-3xl">
                 {siteConfig.name}

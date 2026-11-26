@@ -63,19 +63,19 @@ export default function Manifesto({ showCv }: { showCv?: boolean }) {
   return (
     <section ref={root} id="about" className="tone-stone relative scroll-mt-24 py-28 sm:py-40">
       <div className="container-page grid items-center gap-16 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-24">
-        <div className="mf-photo relative mx-auto w-full max-w-[460px]">
+        <div className="mf-photo relative mx-auto w-full max-w-[420px]">
           <div className="mf-photo-inner relative">
             <div className="rounded-[2.2rem] border border-line bg-surface p-2 shadow-[0_50px_100px_-50px_rgba(14,19,17,0.55)]">
               <div className="overflow-hidden rounded-[1.7rem] bg-bg-soft">
                 {/* eslint-disable-next-line @next/next/no-img-element -- photo de profil locale */}
                 <img
-                  src="/cv-photo.jpg"
+                  src="/portrait.jpg"
                   alt={siteConfig.name}
-                  width={451}
-                  height={433}
+                  width={955}
+                  height={1280}
                   loading="lazy"
                   decoding="async"
-                  className="aspect-[451/433] w-full object-cover"
+                  className="aspect-[955/1280] w-full object-cover"
                 />
               </div>
             </div>

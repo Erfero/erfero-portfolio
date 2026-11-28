@@ -1,12 +1,17 @@
 import { getBaseProjects } from "@/lib/content";
 import { listMedia } from "@/lib/blob";
+import { getLinkCheckState } from "@/lib/linkChecker";
 import ProjectsManager from "@/components/admin/ProjectsManager";
 
 export default async function ProjectsPage() {
   // Liste de référence SANS les corrections automatiques du vérificateur de
   // liens : sinon, enregistrer n'importe quelle modification figerait une
   // panne temporaire ("indisponible") comme statut définitif.
-  const [projects, media] = await Promise.all([getBaseProjects(), listMedia()]);
+  const [projects, media, linkCheck] = await Promise.all([
+    getBaseProjects(),
+    listMedia(),
+    getLinkCheckState(),
+  ]);
 
   return (
     <div>
@@ -19,6 +24,7 @@ export default async function ProjectsPage() {
       <ProjectsManager
         initialProjects={projects}
         mediaUrls={media.map((m) => m.url)}
+        lastCheck={linkCheck.lastRun}
       />
     </div>
   );

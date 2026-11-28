@@ -43,10 +43,18 @@ pas de page bleue « Votre licence n'est pas activée » (thème Story), pas de 
 domaine fonctionnel (ni parqué, ni à vendre, ni erreur SSL), et **jamais deux fois la même boutique**
 (une boutique servie sur son `.myshopify.com` et sur son domaine perso ne compte qu'une fois).
 
-Le vérificateur automatique (`/api/check-links`, toutes les 20 min via GitHub Actions) peut seulement
-**masquer** une boutique qui tombe en panne ; il ne peut pas en ré-afficher une, car un simple appel HTTP ne
-voit pas la page de licence (affichée en JavaScript). Les boutiques ne réapparaissent qu'après une nouvelle
-vérification complète reportée dans `projects.ts`.
+Le vérificateur automatique (`/api/check-links`, chaque matin via Vercel Cron, voir `vercel.json`)
+interroge une par une les boutiques au statut `live` de `projects.ts` :
+
+- boutique fermée, suspendue (402), supprimée (404), sous mot de passe ou domaine mort → **masquée** du site ;
+- boutique masquée qui fonctionne de nouveau → **ré-affichée** automatiquement ;
+- pas de réponse claire (Shopify qui limite les requêtes, lenteur) → rien ne change.
+
+Une boutique n'est masquée que si deux essais à quelques secondes d'intervalle concordent. Les boutiques
+marquées autrement que `live` dans `projects.ts` ne sont jamais ré-affichées automatiquement, car un simple
+appel HTTP ne voit pas la page de licence du thème Story (affichée en JavaScript) : elles ne reviennent
+qu'après une vérification complète dans un vrai navigateur. Le bilan du dernier passage est visible dans
+`/admin/projects`, avec un bouton pour lancer un contrôle immédiat.
 
 ## Ajouter des vidéos
 

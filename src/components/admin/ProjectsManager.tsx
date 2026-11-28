@@ -4,11 +4,32 @@ import { useState, useTransition } from "react";
 import { Plus, Trash2, Save, Check, RefreshCw, Link2 } from "lucide-react";
 import { saveProjectsAction, quickAddProjectsAction } from "@/lib/actions";
 import type { Project, ProjectStatus } from "@/data/projects";
+import type { LinkCheckSummary } from "@/lib/linkChecker";
 
-interface CheckResult {
-  id: string;
-  newStatus: ProjectStatus;
-  changed: boolean;
+const STATUS_LABEL: Partial<Record<ProjectStatus, string>> = {
+  unavailable: "indisponible",
+  "password-protected": "mot de passe",
+};
+
+/** Bilan lisible du dernier passage du vérificateur de liens. */
+function describeCheck(run: LinkCheckSummary) {
+  const when = new Date(run.finishedAt).toLocaleString("fr-FR", {
+    timeZone: "Europe/Paris",
+    dateStyle: "short",
+    timeStyle: "short",
+  });
+  const parts = [`${run.live} en ligne sur ${run.total}`];
+  if (run.hidden.length > 0) {
+    parts.push(
+      `masquée(s) : ${run.hidden
+        .map((h) => `${h.name} (${STATUS_LABEL[h.status] ?? h.status}, ${h.reason})`)
+        .join(", ")}`
+    );
+  }
+  const unsure = run.inconclusive + run.notReached;
+  if (unsure > 0) parts.push(`${unsure} sans réponse claire, statut inchangé`);
+  if (run.stoppedEarly) parts.push(run.stoppedEarly);
+  return `Dernière vérification : ${when} (heure de Paris) · ${parts.join(" · ")}`;
 }
 
 const emptyProject = (): Project => ({
@@ -46,11 +67,14 @@ function Field({
 export default function ProjectsManager({
   initialProjects,
   mediaUrls,
+  lastCheck,
 }: {
   initialProjects: Project[];
   mediaUrls: string[];
+  lastCheck: LinkCheckSummary | null;
 }) {
   const [projects, setProjects] = useState(initialProjects);
+  const [lastRun, setLastRun] = useState(lastCheck);
   const [isPending, startTransition] = useTransition();
   const [saved, setSaved] = useState(false);
   const [checking, setChecking] = useState(false);
@@ -98,18 +122,16 @@ export default function ProjectsManager({
     setCheckSummary(null);
     try {
       const res = await fetch("/api/check-links", { method: "POST" });
-      const data = (await res.json()) as { results: CheckResult[] };
-      setProjects((prev) =>
-        prev.map((p) => {
-          const result = data.results.find((r) => r.id === p.id);
-          return result ? { ...p, status: result.newStatus } : p;
-        })
-      );
-      const changedCount = data.results.filter((r) => r.changed).length;
+      if (!res.ok) throw new Error(String(res.status));
+      const data = (await res.json()) as { updated: boolean; summary: LinkCheckSummary };
+      // On n'écrit PAS les statuts trouvés dans la liste ci-dessous : ils
+      // s'appliquent seuls sur le site, et les enregistrer ici figerait une
+      // panne passagère en statut définitif.
+      setLastRun(data.summary);
       setCheckSummary(
-        changedCount > 0
-          ? `${changedCount} statut(s) mis à jour.`
-          : "Tous les statuts étaient déjà à jour."
+        data.updated
+          ? "Site mis à jour : les boutiques masquées ou revenues le sont aussi en ligne."
+          : "Aucun changement sur le site."
       );
     } catch {
       setCheckSummary("Échec de la vérification, réessaie.");
@@ -407,16 +429,20 @@ export default function ProjectsManager({
           className="inline-flex items-center gap-1.5 rounded-full border border-border px-4 py-2 text-sm disabled:opacity-60"
         >
           <RefreshCw className={`size-4 ${checking ? "animate-spin" : ""}`} />
-          {checking ? "Vérification en cours..." : "Vérifier les liens maintenant"}
+          {checking ? "Vérification en cours (2 à 3 min)..." : "Vérifier les liens maintenant"}
         </button>
         {checkSummary && (
           <span className="text-xs text-ink-muted">{checkSummary}</span>
         )}
       </div>
+      {lastRun && (
+        <p className="mt-3 text-xs text-ink-muted">{describeCheck(lastRun)}</p>
+      )}
       <p className="mt-3 text-xs text-ink-muted/70">
-        Une vérification automatique tourne aussi toutes les ~20 minutes en
-        arrière-plan (GitHub Actions) : les statuts se corrigent seuls, ce
-        bouton sert juste à forcer un contrôle immédiat avant d&apos;envoyer
+        Une vérification automatique tourne aussi chaque matin entre 6 h et
+        8 h, heure de Paris (Vercel Cron) : une boutique fermée, supprimée ou sous mot de
+        passe disparaît du site, et réapparaît seule dès qu&apos;elle remarche.
+        Ce bouton sert juste à forcer un contrôle immédiat avant d&apos;envoyer
         ton lien à un client. Les captures d&apos;écran sont aussi rafraîchies
         automatiquement en haute résolution, à raison d&apos;une quinzaine
         par jour (quota du service de capture) — le catalogue entier monte en

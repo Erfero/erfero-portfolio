@@ -59,9 +59,10 @@ export async function getProjects(): Promise<Project[]> {
 }
 
 /**
- * Le vérificateur automatique (HTTP simple, toutes les 20 min) peut seulement
- * MASQUER une boutique (live -> indisponible / mot de passe), jamais en
- * ré-afficher une : il ne voit pas la page bleue "Votre licence n'est pas
+ * Le vérificateur automatique (HTTP simple, chaque matin, voir
+ * linkChecker.ts) peut seulement MASQUER une boutique marquée "live" dans la
+ * liste, puis la ré-afficher quand elle remarche ; il ne rend jamais visible
+ * une boutique marquée autrement : il ne voit pas la page bleue "Votre licence n'est pas
  * activée" du thème Story (affichée en JavaScript), ni certains domaines
  * parqués. Seule la vérification complète en navigateur réel, reportée dans
  * le code (champ status), peut rendre une boutique visible.

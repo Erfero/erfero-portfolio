@@ -14,7 +14,7 @@ import type { Project, ProjectStatus } from "@/data/projects";
 import type { VideoEntry } from "@/data/videos";
 import type { Testimonial } from "@/data/testimonials";
 import type { FreelanceSettings, SectionsSettings, CvSettings } from "@/lib/content";
-import { checkOne } from "@/lib/linkChecker";
+import { checkShop } from "@/lib/shopCheck";
 import { fetchSiteMeta } from "@/lib/siteMeta";
 import { captureThumbnail } from "@/lib/captureThumbnail";
 
@@ -139,10 +139,10 @@ export async function quickAddProjectsAction(
       // retente une fois, puis on considère la boutique en ligne (comme le
       // vérificateur automatique), plutôt que de l'enterrer en "indisponible"
       // — statut qu'aucun passage automatique ne corrigerait ensuite.
-      let outcome = await checkOne(url);
+      let outcome = (await checkShop(url)).status;
       if (outcome === "unknown") {
         await new Promise((r) => setTimeout(r, 3000));
-        outcome = await checkOne(url);
+        outcome = (await checkShop(url)).status;
       }
       status = outcome === "unknown" ? "live" : outcome;
     } catch {

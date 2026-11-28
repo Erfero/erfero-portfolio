@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
 import { siteConfig } from "@/data/site.config";
 import LocaleSwitcher from "./LocaleSwitcher";
 import Wordmark from "@/components/ui/Wordmark";
+import BrandMark from "@/components/ui/BrandMark";
 
 export default function Navbar({ showCv }: { showCv?: boolean }) {
   const t = useTranslations("nav");
@@ -97,7 +98,10 @@ export default function Navbar({ showCv }: { showCv?: boolean }) {
             )}
           >
             <a href={homeHref} className="flex items-center gap-3" aria-label={siteConfig.name}>
-              <Wordmark className="text-[1.65rem] leading-none tracking-[-0.01em]" />
+              <span className="flex items-center gap-2.5">
+                <BrandMark className="h-[1.3rem] text-ink" />
+                <Wordmark className="text-[1.65rem] leading-none tracking-[-0.01em]" />
+              </span>
               <span className="hidden h-4 w-px bg-line lg:block" />
               <span className="label-mono hidden text-[10px] text-ink-muted lg:block">
                 {locale === "en" ? siteConfig.roleEn : siteConfig.role}

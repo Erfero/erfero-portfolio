@@ -5,6 +5,7 @@ import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
 import { signalIntroDone } from "@/lib/intro";
 import { siteConfig } from "@/data/site.config";
 import Wordmark from "./Wordmark";
+import BrandMark from "./BrandMark";
 
 const STORAGE_KEY = "erfero-preloaded";
 
@@ -112,7 +113,10 @@ export default function Preloader({ role }: { role: string }) {
     >
       <div className="label-mono flex items-center justify-between text-ink-muted">
         <span className="overflow-hidden">
-          <span className="pl-word inline-block">{siteConfig.name}</span>
+          <span className="pl-word inline-flex items-center gap-2">
+            <BrandMark className="h-[1.15em] text-ink" />
+            {siteConfig.name}
+          </span>
         </span>
         <span className="overflow-hidden">
           <span className="pl-word inline-block">Portfolio — {new Date().getFullYear()}</span>

@@ -506,6 +506,12 @@
   animation: spin-slow 14s linear infinite;
 }
 
+/* Sceau du logo (pied de page) : l'anneau de texte tourne très lentement. */
+.spin-seal {
+  transform-origin: center;
+  animation: spin-slow 40s linear infinite;
+}
+
 /* Curseur clignotant de l'éditeur de code (section Shopify). */
 @keyframes caret-blink {
   0%,

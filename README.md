@@ -56,6 +56,20 @@ appel HTTP ne voit pas la page de licence du thème Story (affichée en JavaScri
 qu'après une vérification complète dans un vrai navigateur. Le bilan du dernier passage est visible dans
 `/admin/projects`, avec un bouton pour lancer un contrôle immédiat.
 
+## Logo
+
+Deux éléments, aux couleurs du site :
+
+- **la balise** (symbole) : le E et les branches du K qui forment le chevron « < » du code. Onglet
+  (`src/app/icon.svg`), icône iPhone (`src/app/apple-icon.png`), barre de navigation, écran d'ouverture
+  (composant `BrandMark`) ;
+- **le sceau** (emblème) : nom et métier en cercle autour de « EK. ». Pied de page (l'anneau tourne
+  lentement) et CV (composant `Seal`, texte traduit), image d'aperçu des liens partagés.
+
+Fichiers prêts à l'emploi (SVG + PNG 1024 px, versions sombre / claire / verte, bloc horizontal pour les
+devis) dans `public/brand/`, en ligne sur `/brand/<nom-du-fichier>`. Les tracés vectoriels utilisés par
+l'image de partage sont dans `src/lib/brandArt.ts` (fichier généré).
+
 ## Ajouter des vidéos
 
 Dépose les fichiers bruts dans `videos-a-ajouter/` (voir le `LISEZ-MOI.md` du dossier) : ils sont

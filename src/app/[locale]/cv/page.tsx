@@ -7,6 +7,7 @@ import { siteConfig } from "@/data/site.config";
 import { getCvSettings } from "@/lib/content";
 import Reveal from "@/components/ui/Reveal";
 import PrintButton from "@/components/ui/PrintButton";
+import Seal, { sealLabel } from "@/components/ui/Seal";
 
 type SkillItem = { name: string; highlight?: boolean };
 type SkillGroup = { title: string; items: SkillItem[] };
@@ -104,12 +105,20 @@ export default async function CvPage({
         <div className="mt-8 grid gap-10 lg:grid-cols-[300px_1fr] lg:gap-12 print:grid-cols-[260px_1fr] print:gap-8">
           <Reveal className="flex flex-col gap-8 lg:sticky lg:top-28 lg:self-start">
             <div>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/portrait-sm.webp"
-                alt={siteConfig.name}
-                className="size-36 rounded-2xl border border-border object-cover object-top sm:size-40"
-              />
+              {/* Photo + sceau posé en tampon sur le coin bas droit (loin du visage). */}
+              <div className="relative inline-block">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/portrait-sm.webp"
+                  alt={siteConfig.name}
+                  className="size-36 rounded-2xl border border-border object-cover object-top sm:size-40"
+                />
+                <Seal
+                  label={sealLabel(siteConfig.name, locale === "en" ? siteConfig.roleEn : siteConfig.role)}
+                  dotClassName="bg-[#3cc896]"
+                  className="absolute -bottom-4 -right-8 size-[4.75rem] rounded-full bg-[#0c1a15] text-[#f4f2ed] shadow-[0_10px_24px_-12px_rgba(0,0,0,0.55)] sm:size-20"
+                />
+              </div>
               <h1 className="mt-6 font-display text-2xl font-semibold tracking-tight sm:text-3xl">
                 {siteConfig.name}
               </h1>

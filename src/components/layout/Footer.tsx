@@ -1,18 +1,20 @@
 "use client";
 
 import { useRef } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { ArrowUp, ArrowUpRight, Mail } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { gsap, useGSAP, MOTION_OK } from "@/lib/gsap";
 import { siteConfig } from "@/data/site.config";
 import { GithubIcon, InstagramIcon, LinkedinIcon, WhatsappIcon } from "@/components/ui/BrandIcons";
 import Wordmark from "@/components/ui/Wordmark";
+import Seal, { sealLabel } from "@/components/ui/Seal";
 import ShareLinks from "@/components/ui/ShareLinks";
 
 export default function Footer({ showCv }: { showCv?: boolean }) {
   const t = useTranslations("footer");
   const nav = useTranslations("nav");
+  const locale = useLocale();
   const root = useRef<HTMLElement>(null);
   const year = new Date().getFullYear();
 
@@ -67,7 +69,7 @@ export default function Footer({ showCv }: { showCv?: boolean }) {
   return (
     <footer ref={root} data-hide-cta className="tone-light px-2 pt-2 sm:px-3 print:hidden">
       <div className="tone-green relative isolate overflow-hidden rounded-t-[2rem] sm:rounded-t-[3rem]">
-        <div className="container-page grid gap-12 pb-10 pt-20 md:grid-cols-[1.5fr_1fr_1fr] md:pt-24">
+        <div className="container-page grid gap-12 pb-10 pt-20 md:grid-cols-[1.5fr_1fr_1fr_auto] md:pt-24">
           <div className="max-w-md">
             <p className="font-serif text-[2rem] leading-[1.08] sm:text-[2.6rem]">{t("tagline")}</p>
             <Link
@@ -111,6 +113,14 @@ export default function Footer({ showCv }: { showCv?: boolean }) {
               ))}
             </ul>
           </div>
+
+          {/* Sceau : signature de la marque, l'anneau de texte tourne lentement. */}
+          <Seal
+            label={sealLabel(siteConfig.name, locale === "en" ? siteConfig.roleEn : siteConfig.role)}
+            spin
+            dotClassName="bg-[#0c1a15]"
+            className="size-40 text-ink md:size-44 md:justify-self-end lg:size-48"
+          />
         </div>
 
         {/* Grand logo sur toute la largeur du contenu : taille calculée sur la
